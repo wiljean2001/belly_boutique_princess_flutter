@@ -34,56 +34,58 @@ class _LoginScreenState extends State<LoginScreen> {
     //   elevation: 0,
     //   backgroundColor: Colors.transparent,
     // ),
-    // body: Container(
-    //   decoration: const BoxDecoration(
-    //     gradient: LinearGradient(
-    //       begin: Alignment.topCenter,
-    //       end: Alignment.bottomCenter,
-    //       colors: [
-    //         Color.fromARGB(225, 242, 203, 208),
-    //         Color(0xfff4ced9),
-    //       ],
-    //     ),
-    //   ),
-    //   height: double.infinity,
-    return SingleChildScrollView(
-      child: Stack(
-        children: <Widget>[
-          CurvedWidget(
-            mode: 2,
-            //curved widget with logo
-            chield: Container(
-              padding: const EdgeInsets.only(top: 40),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.white,
-                      Colors.white.withOpacity(0.5),
-                    ]),
+    // body:
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color.fromARGB(225, 242, 203, 208),
+            Color(0xfff4ced9),
+          ],
+        ),
+      ),
+      height: double.infinity,
+      child: SingleChildScrollView(
+        child: Stack(
+          children: <Widget>[
+            CurvedWidget(
+              mode: 2,
+              //curved widget with logo
+              chield: Container(
+                padding: const EdgeInsets.only(top: 40),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.white,
+                        Colors.white.withOpacity(0.5),
+                      ]),
+                ),
+                width: double.infinity,
+                height: 300,
+                child: const Image(
+                  image: AssetImage('graphics/images/LOGO4-small.png'),
+                  alignment: Alignment.topCenter,
+                ),
+                // Text("Login",
+                // style: primaryTextStyle.copyWith(
+                // color: Colors.black, fontSize: 40)),
               ),
-              width: double.infinity,
-              height: 300,
-              child: const Image(
-                image: AssetImage('graphics/images/LOGO4-small.png'),
-                alignment: Alignment.topCenter,
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 280),
+              // constraints: BoxConstraints(ma),
+              child: LoginForm(
+                tabController: tabController,
               ),
-              // Text("Login",
-              // style: primaryTextStyle.copyWith(
-              // color: Colors.black, fontSize: 40)),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 280),
-            // constraints: BoxConstraints(ma),
-            child: LoginForm(
-              tabController: tabController,
-            ),
-          ),
-        ],
-        // ),
-        //     ),
+          ],
+          // ),
+          //     ),
+        ),
       ),
     );
   }

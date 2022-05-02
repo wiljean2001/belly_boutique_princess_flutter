@@ -1,3 +1,5 @@
+import 'package:belly_boutique_princess/config/routers.dart';
+import 'package:belly_boutique_princess/screens/screens.dart';
 import 'package:flutter/material.dart';
 
 import 'blocs/home/home_page_bloc.dart';
@@ -99,7 +101,9 @@ class MyApp extends StatelessWidget {
           //   primarySwatch: Colors.pink,
           // ),
           theme: theme(),
-          home: SplashScreen(),
+          // home: SplashScreen(),
+          onGenerateRoute: Routers.onGenerateRoute,
+          initialRoute: SplashScreen.routeName,
         ),
       ),
     );

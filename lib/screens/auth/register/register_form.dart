@@ -75,6 +75,7 @@ class RegisterForm extends StatelessWidget {
                   print(_contextRegister.state.password);
 
                   User user = User(
+                    // error campos vacios
                     id: _contextRegister.state.user!.uid,
                     name: '',
                     age: 0,
@@ -91,7 +92,7 @@ class RegisterForm extends StatelessWidget {
                           user: user,
                         ),
                       );
-
+                  tabController.animateTo(tabController.index + 1);
                   // await Navigator.push(
                   //   context,
                   //   MaterialPageRoute(

@@ -30,8 +30,8 @@ class ProductScreenState extends State<ProductScreen> {
               BoxConstraints(minHeight: MediaQuery.of(context).size.height),
           child: Column(
             children: <Widget>[
-              CustomInfoProduct(),
-              CustomInfoMiniProduct(),
+              const CustomInfoProduct(),
+              const CustomInfoMiniProduct(),
               const Divider(
                 height: 10,
                 color: Colors.black,
