@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "394573783744",
+    "project_id": "belyapp-87679",
+    "storage_bucket": "belyapp-87679.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394573783744:android:0e8dbcd1cc29cbd6ec4325",
+        "android_client_info": {
+          "package_name": "com.belyboutique.belly_boutique_princess"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "394573783744-8kmbnnbbh9j6cuqnkd4qkcf2400apbj2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.belyboutique.belly_boutique_princess",
+            "certificate_hash": "94d2cd21ca04d8258f55687d802e67994d7391b1"
+          }
+        },
+        {
+          "client_id": "394573783744-sv5sarvst7konsd5a6g7n8ot825kvbeb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3ZOzSwd4Bu5Mdq4faAB2FpzgIiymL4MI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "394573783744-sv5sarvst7konsd5a6g7n8ot825kvbeb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
