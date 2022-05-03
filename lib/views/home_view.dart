@@ -1,4 +1,5 @@
 import 'package:belly_boutique_princess/blocs/auth/auth_bloc.dart';
+import 'package:belly_boutique_princess/views/profile_user.dart';
 
 import '/blocs/home/home_page_bloc.dart';
 import '/screens/product_screen.dart';
@@ -19,7 +20,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final views = [
-      const ShoppingCartView(),
+      const UserProfileView(),
       const HomeProductsView(),
       const ShoppingCartView(),
     ];
