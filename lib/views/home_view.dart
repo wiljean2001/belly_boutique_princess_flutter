@@ -38,6 +38,7 @@ class HomeView extends StatelessWidget {
             image: AssetImage("graphics/images/bely_logo-edit.png"),
             width: 55,
           ),
+          SizedBox(width: 35),
           Text("Bely Boutique Princess")
         ]),
         elevation: 10,

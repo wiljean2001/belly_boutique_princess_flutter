@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-ThemeData theme() {
+ThemeData themedark() {
   return ThemeData(
-    primaryColor: Colors.pink,
-    primarySwatch: Colors.pink,
-    // primaryColorDark: Color(0xFFFC0028),
-    // primaryColorLight: Color(0xFFFE9AAA),
-    accentColor: Color(0xFFE84545),
+    primaryColorDark: Colors.black,
+    primarySwatch: Colors.blueGrey,
+    //primaryColor: Colors.black,
+    //primaryColorLight: Color(0xFFFE9AAA),
+    accentColor: Color.fromARGB(255, 27, 26, 26),
     scaffoldBackgroundColor: Colors.white,
     backgroundColor: Color(0xFFF4F4F4),
 

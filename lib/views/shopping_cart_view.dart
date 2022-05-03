@@ -1,3 +1,4 @@
+import 'package:belly_boutique_princess/config/theme_dark.dart';
 import 'package:flutter/material.dart';
 
 class ShoppingCartView extends StatefulWidget {
@@ -14,12 +15,10 @@ class _ShoppingCartPageState extends State<ShoppingCartView> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const <Widget>[
+          children: <Widget>[
             Text(
               "Hola",
-              style: TextStyle(
-                fontSize: 20,
-              ),
+              style: themedark().textTheme.headline3?.copyWith(color: Colors.black),
             ),
           ],
         ),
