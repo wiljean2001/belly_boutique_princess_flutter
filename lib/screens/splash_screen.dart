@@ -59,8 +59,8 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Image(
+                  children: const [
+                    Image(
                       image: AssetImage('graphics/images/LOGO4.png'),
                       width: 270,
                     ),
@@ -68,11 +68,11 @@ class _SplashScreenState extends State<SplashScreen> {
                     //   'assets/logo.svg',
                     //   height: 100,
                     // ),
-                    SizedBox(height: 20),
-                    Text(
-                      'ARROW',
-                      style: Theme.of(context).textTheme.headline1,
-                    )
+                    // SizedBox(height: 20),
+                    // Text(
+                    //   'ARROW',
+                    //   style: Theme.of(context).textTheme.headline1,
+                    // )
                   ],
                 ),
               ),

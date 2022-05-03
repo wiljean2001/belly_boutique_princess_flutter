@@ -1,3 +1,8 @@
+import 'package:belly_boutique_princess/blocs/blocs.dart';
+import 'package:belly_boutique_princess/repositories/auth/auth_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../widget/custom_button_gradiant_onboarding.dart';
 import '/cubit/cubits.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +12,7 @@ import '../register/register_screen.dart';
 
 class LoginForm extends StatelessWidget {
   final TabController tabController;
+
   const LoginForm({Key? key, required this.tabController}) : super(key: key);
 
   @override
@@ -52,15 +58,18 @@ class LoginForm extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 10),
-              CustomButtonGradiant(
+              CustomButtonGradiantOnboarding(
                 height: 45,
                 icon: const Icon(Icons.check, color: Colors.white),
                 text: const Text(
                   'Ingresar',
                   style: TextStyle(color: Colors.white),
                 ),
-                onPressed: () {},
+                /*onPressed: () async {
+
+                },*/
                 width: 150,
+                tabController: tabController,
               ),
               const SizedBox(height: 10),
               CustomButtonGradiant(

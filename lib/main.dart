@@ -10,7 +10,6 @@ import 'repositories/repositories.dart';
 import 'blocs/blocs.dart';
 import 'cubit/cubits.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'screens/splash_screen.dart';
 
 // import 'package:bely_boutique/widgets/onboarding_screen.dart';
@@ -24,8 +23,16 @@ import 'screens/splash_screen.dart';
 /// Metodo main de la aplicacion flutter
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyApp());
+  await Firebase.initializeApp(
+    // options: const FirebaseOptions(
+    //   apiKey: "XXX",
+    //   appId: "XXX",
+    //   messagingSenderId: "XXX",
+    //   projectId: "XXX",
+    // ),
+    // options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

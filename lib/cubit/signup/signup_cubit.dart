@@ -10,17 +10,18 @@ part 'signup_state.dart';
 class SignupCubit extends Cubit<SignupState> {
   // preparamos la inyeccion del repositorio -> AuthRepository
   final AuthRepository _authRepository;
+
   //Constructor recibe obligatoriamente un objeto de la clase AuthRepository
   SignupCubit({required AuthRepository authRepository})
-      : _authRepository = authRepository, // Inyeccion de dependencias
+      : _authRepository = authRepository,
+        // Inyeccion de dependencias
         super(SignupState.initial());
 
   /// funcion emailChangend
   /// emitirá un nuevo estado de email,
   void emailChanged(String value) {
-    emit(state.copyWith(
-        email: value,
-        status: SignupStatus.initial)); // emite nuevo estado initial
+    // emite nuevo estado continuamente inicial mientras escriba el gmail
+    emit(state.copyWith(email: value, status: SignupStatus.initial));
   }
 
   void passwordChanged(String value) {
