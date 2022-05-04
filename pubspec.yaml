@@ -42,4 +42,7 @@ flutter:
   assets:
     - graphics/images/
     - graphics/videos/
+    - graphics/images/fondo_user.jpg
+    - graphics/images/user.jpg
+ 
 
