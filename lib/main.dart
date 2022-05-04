@@ -97,7 +97,7 @@ class MyApp extends StatelessWidget {
             create: (_) => HomePageBloc()
               ..add(
                 const HomeTabChangeEvent(
-                    newIndex: 0), //newIndex = 0 is the first screen
+                    newIndex: 1), //newIndex = 0 is the first screen
               ),
           ),
         ],

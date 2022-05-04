@@ -53,6 +53,7 @@ class HomeView extends StatelessWidget {
               switch (index) {
                 case 'Cerrar sesión':
                   RepositoryProvider.of<AuthRepository>(context).signOut();
+                  Navigator.pushNamed(context, '/');
                   break;
                 default:
               }
