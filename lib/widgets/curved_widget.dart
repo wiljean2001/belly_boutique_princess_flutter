@@ -79,6 +79,7 @@ class CurveWidgetBackgroundClipper extends CustomClipper<Path> {
       clippedpath.lineTo(size.width, 0);
       clippedpath.lineTo(0, 0);
     }
+    if (mode == 3) {}
 
     return clippedpath;
   }

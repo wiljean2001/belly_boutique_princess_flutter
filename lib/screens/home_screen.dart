@@ -38,9 +38,11 @@ class _MyHomePageState extends State<HomeScreen> {
   // Seteo del bottom navigation opcions del sistema operativo
   static const SystemUiOverlayStyle overlayStyle = SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.pink,
+    // systemNavigationBarColor: Colors.transparent,
     systemNavigationBarIconBrightness: Brightness.light,
     systemNavigationBarDividerColor: Colors.pink,
   );
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(overlayStyle);

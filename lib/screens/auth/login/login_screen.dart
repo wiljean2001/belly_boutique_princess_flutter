@@ -7,6 +7,7 @@ import 'login_form.dart';
 
 class LoginScreen extends StatefulWidget {
   final TabController tabController;
+
   const LoginScreen({Key? key, required this.tabController}) : super(key: key);
 
   @override
@@ -16,17 +17,11 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final TabController tabController;
-  // Seteo del bottom navigation opcions del sistema operativo
-  static const SystemUiOverlayStyle overlayStyle = SystemUiOverlayStyle(
-    systemNavigationBarColor: Color(0xfff4ced9),
-    systemNavigationBarIconBrightness: Brightness.dark,
-    systemNavigationBarDividerColor: Color(0xfff4ced9),
-  );
 
   _LoginScreenState({required this.tabController});
+
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(overlayStyle);
     // return Scaffold(
     // extendBodyBehindAppBar: true,
     // appBar: AppBar(
