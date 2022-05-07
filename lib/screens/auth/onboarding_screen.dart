@@ -1,4 +1,5 @@
 import 'package:belly_boutique_princess/screens/auth/start_screen.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -53,12 +54,13 @@ class OnboardingScreen extends StatelessWidget {
             elevation: 0,
             backgroundColor: Colors.transparent,
             actions: [
-              TextButton(onPressed: () {}, child: Text("Skip")),
+              TextButton(onPressed: () {}, child: Text("Saltar")),
             ],
           ),
           body: TabBarView(
-            // physics: const NeverScrollableScrollPhysics(), // never scroll
-            controller: tabController,
+            physics: const NeverScrollableScrollPhysics(), // never scroll
+            // controller: tabController,
+            dragStartBehavior: DragStartBehavior.down,
             children: [
               StartScreen(tabController: tabController),
               LoginScreen(tabController: tabController),

@@ -5,16 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../widgets/curved_widget.dart';
 import 'register_user_form.dart';
 
-class RegisterUserScreen extends StatefulWidget {
+class RegisterUserScreen extends StatelessWidget {
   final TabController tabController;
+
   const RegisterUserScreen({Key? key, required this.tabController})
       : super(key: key);
 
-  @override
-  State<RegisterUserScreen> createState() => _RegisterUserScreenState();
-}
-
-class _RegisterUserScreenState extends State<RegisterUserScreen> {
   @override
   Widget build(BuildContext context) {
     // return Scaffold(
@@ -72,7 +68,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                   Container(
                     margin: const EdgeInsets.only(top: 220),
                     // constraints: BoxConstraints(ma),
-                    child: const RegisterUserForm(),
+                    child: RegisterUserForm(tabController: tabController),
                   ),
                 ],
                 //     ),

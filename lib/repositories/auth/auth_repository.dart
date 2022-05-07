@@ -8,6 +8,7 @@ class AuthRepository extends BaseAuthRepository {
       : _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance;
 
 // Crear nuevo usuario
+
   @override
   Future<auth.User?> signUp({
     required String email,
@@ -21,6 +22,15 @@ class AuthRepository extends BaseAuthRepository {
 
       final user = credential.user;
       return user();
+    } catch (_) {}
+  }
+
+  Future<auth.User?> signIn(
+      {required String email, required String password}) async {
+    try {
+      final credentials = await _firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
+      return credentials.user();
     } catch (_) {}
   }
 

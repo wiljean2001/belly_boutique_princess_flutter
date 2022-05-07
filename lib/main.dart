@@ -1,3 +1,4 @@
+import 'package:belly_boutique_princess/blocs/sinple_bloc_observer.dart';
 import 'package:belly_boutique_princess/config/routers.dart';
 import 'package:belly_boutique_princess/screens/screens.dart';
 import 'package:flutter/material.dart';
@@ -12,27 +13,20 @@ import 'cubit/cubits.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'screens/splash_screen.dart';
 
-// import 'package:bely_boutique/widgets/onboarding_screen.dart';
-
-// import 'dart:async';
-// import 'package:animated_splash_screen/animated_splash_screen.dart';
-
-// import 'package:bely_boutique/screens/home_screen.dart';
-// import 'screens/auth/login/login_screen.dart';
-
 /// Metodo main de la aplicacion flutter
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    // options: const FirebaseOptions(
-    //   apiKey: "XXX",
-    //   appId: "XXX",
-    //   messagingSenderId: "XXX",
-    //   projectId: "XXX",
-    // ),
-    // options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(const MyApp());
+      // options: const FirebaseOptions(
+      //   apiKey: "XXX",
+      //   appId: "XXX",
+      //   messagingSenderId: "XXX",
+      //   projectId: "XXX",
+      // ),
+      // options: DefaultFirebaseOptions.currentPlatform,
+      );
+  BlocOverrides.runZoned(() => {runApp(const MyApp())},
+      blocObserver: SimpleBlocObserver());
 }
 
 class MyApp extends StatelessWidget {
@@ -76,13 +70,6 @@ class MyApp extends StatelessWidget {
               storageRepository: context.read<StorageRepository>(),
             ),
           ),
-          BlocProvider(
-              create: (context) => SwipeBloc(
-                    authBloc: BlocProvider.of<AuthBloc>(context),
-                    databaseRepository: context.read<DatabaseRepository>(),
-                  )
-              //BlocProvider.of<AuthBloc>(context).state.user!.uid),
-              ),
           BlocProvider(
             create: (context) => ProfileBloc(
               authBloc: BlocProvider.of<AuthBloc>(context),

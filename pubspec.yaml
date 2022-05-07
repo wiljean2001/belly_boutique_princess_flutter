@@ -25,7 +25,7 @@ dependencies:
   flutter_services_binding: ^0.1.0
   image_picker: ^0.8.4+9
   firebase_storage: ^10.0.3
-  cloud_firestore: ^2.5.3
+  cloud_firestore: ^3.1.14
   uuid: ^3.0.5
   animated_splash_screen: ^1.2.0
   smooth_page_indicator: ^1.0.0+2

@@ -34,25 +34,25 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Scaffold(
           body: BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
-              print("State on Splash:->>>");
-              print(state.status);
+              print("Listener");
+              print("State on Splash:-> $state.status");
               if (state.status == AuthStatus.authenticated) {
-                Timer(const Duration(seconds: 2), () {
-                  print("Authenticate");
-                  print(state.status);
-                  // Navigator.of(context).pus
-                  Navigator.of(context).pushNamed(HomeScreen.routeName);
-                });
+                Timer(
+                  const Duration(seconds: 1),
+                  () => Navigator.of(context).pushNamedAndRemoveUntil(
+                    HomeScreen.routeName,
+                    (route) => false,
+                  ),
+                );
               }
               if (state.status == AuthStatus.unauthenticated) {
-                Timer(const Duration(seconds: 2), () {
-                  print("UnAuthenticate");
-                  print(state.status);
-                  Navigator.of(context).pushNamedAndRemoveUntil(
+                Timer(
+                  const Duration(seconds: 1),
+                  () => Navigator.of(context).pushNamedAndRemoveUntil(
                     OnboardingScreen.routeName,
-                    ModalRoute.withName('/onboarding'),
-                  );
-                });
+                    (route) => false,
+                  ),
+                );
               }
             },
             child: Container(
@@ -79,47 +79,47 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
         ));
-
-    // return AnimatedSplashScreen(
-    //   splash: const Image(
-    //     image: AssetImage('graphics/images/LOGO4.png'),
-    //   ),
-    //   splashIconSize: 200,
-    //   duration: 2500,
-    //   splashTransition: SplashTransition.scaleTransition,
-    //   nextScreen: BlocListener<AuthBloc, AuthState>(
-    //     listener: (context, state) {
-    //       print("State on Splash:->>>");
-    //       print(state.status);
-    //       if (state.status == AuthStatus.authenticated) {
-    //         Timer(const Duration(seconds: 1), () {
-    //           print("Authenticate");
-    //           print(state.status);
-    //           // Navigator.of(context).pus
-    //           Navigator.of(context).pushNamed(HomeScreen.routeName);
-    //         });
-    //       }
-    //       if (state.status == AuthStatus.unauthenticated) {
-    //         Timer(const Duration(seconds: 1), () {
-    //           print("UnAuthenticate");
-    //           print(state.status);
-    //           Navigator.of(context).pushNamedAndRemoveUntil(
-    //             OnboardingScreen.routeName,
-    //             ModalRoute.withName('/onboarding'),
-    //           );
-    //         });
-    //       }
-    //     },
-    //     child: Container(
-    //       color: Colors.white,
-    //       child: const Center(
-    //         child: CircularProgressIndicator(
-    //           color: Colors.pink,
-    //         ),
-    //       ),
-    //     ),
-    //     // child: const LoginScreen(), // implementar un screen start
-    //   ),
-    // );
   }
 }
+
+// return AnimatedSplashScreen(
+//   splash: const Image(
+//     image: AssetImage('graphics/images/LOGO4.png'),
+//   ),
+//   splashIconSize: 200,
+//   duration: 2500,
+//   splashTransition: SplashTransition.scaleTransition,
+//   nextScreen: BlocListener<AuthBloc, AuthState>(
+//     listener: (context, state) {
+//       print("State on Splash:->>>");
+//       print(state.status);
+//       if (state.status == AuthStatus.authenticated) {
+//         Timer(const Duration(seconds: 1), () {
+//           print("Authenticate");
+//           print(state.status);
+//           // Navigator.of(context).pus
+//           Navigator.of(context).pushNamed(HomeScreen.routeName);
+//         });
+//       }
+//       if (state.status == AuthStatus.unauthenticated) {
+//         Timer(const Duration(seconds: 1), () {
+//           print("UnAuthenticate");
+//           print(state.status);
+//           Navigator.of(context).pushNamedAndRemoveUntil(
+//             OnboardingScreen.routeName,
+//             ModalRoute.withName('/onboarding'),
+//           );
+//         });
+//       }
+//     },
+//     child: Container(
+//       color: Colors.white,
+//       child: const Center(
+//         child: CircularProgressIndicator(
+//           color: Colors.pink,
+//         ),
+//       ),
+//     ),
+//     // child: const LoginScreen(), // implementar un screen start
+//   ),
+// );

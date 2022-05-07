@@ -11,9 +11,10 @@ class CustomDropDownCategories extends StatefulWidget {
 }
 
 class _CustomDropDownCategoriesState extends State<CustomDropDownCategories> {
+  String dropdownValue = 'Categorias';
+
   @override
   Widget build(BuildContext context) {
-    String dropdownValue = 'Categorias';
     return SizedBox(
       width: 300,
       height: 55,

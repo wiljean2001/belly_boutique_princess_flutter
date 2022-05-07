@@ -1,17 +1,17 @@
-// import 'package:belly_boutique_princess/blocs/blocs.dart';
-// import 'package:belly_boutique_princess/repositories/auth/auth_repository.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:belly_boutique_princess/repositories/repositories.dart';
+import 'package:belly_boutique_princess/screens/screens.dart';
 import 'package:belly_boutique_princess/utils/validators.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../blocs/auth/auth_bloc.dart';
+import '../../../blocs/auth/auth_bloc.dart';
+import '../../../blocs/blocs.dart';
 import '../../../blocs/blocs.dart';
 import '/cubit/cubits.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../widgets/custom_button_gradiant.dart';
-// import '../register/register_screen.dart';
 
 class LoginForm extends StatelessWidget {
   final TabController tabController;
@@ -43,15 +43,13 @@ class LoginForm extends StatelessWidget {
                   ),
                   validator: (email) => !Validators.isValidEmail(email!)
                       ? 'Correo no valido'
-                      : 'Correo valido',
+                      : null,
                   onChanged: (value) {
                     _contextSignUp.emailChanged(value);
                     // print("Pass> " + state.email);
                   },
                 ),
                 TextFormField(
-                  // controller: _passwordController,
-                  restorationId: 'txt_pass_user',
                   textInputAction: TextInputAction.next,
                   obscureText: true,
                   decoration: const InputDecoration(
@@ -59,9 +57,7 @@ class LoginForm extends StatelessWidget {
                     labelText: 'Contraseña',
                     icon: Icon(Icons.lock),
                   ),
-                  validator: (pass) => !Validators.isValidPassword(pass!)
-                      ? 'Contraseña no valida'
-                      : 'Contraseña valida',
+                  validator: (pass) => Validators.ispasswordValidator(pass!),
                   onChanged: (value) {
                     _contextSignUp.passwordChanged(value);
                     // print("Pass> " + state.password);
@@ -80,10 +76,32 @@ class LoginForm extends StatelessWidget {
                   onPressed: () async {
                     if (!_formKey.currentState!.validate()) {
                       return;
-                    } else if (_contextSignUp.state.isFormValid) {
-                      await _contextSignUp.signUpWithCredentials();
-                      print(_contextSignUp.state);
                     }
+                    await _contextSignUp.signInWithCredentials().then(
+                      (value) {
+                        print("AL FIN EL USUARIO XD");
+                        print(_contextSignUp.state.user);
+                        context.read<AuthBloc>().add(
+                            AuthUserChanged(user: _contextSignUp.state.user));
+                        if (_contextSignUp.state.status ==
+                            SignupStatus.success) {
+                          print("STATE SUCCESS");
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, '/', (route) => false);
+                        }
+                      },
+                    ).catchError(
+                      (e) async {
+                        await showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Error'),
+                            content:
+                                Text("Correo o contraseña incorrectos: $e"),
+                          ),
+                        );
+                      },
+                    );
                   },
                 ),
                 // const SizedBox(height: 30),

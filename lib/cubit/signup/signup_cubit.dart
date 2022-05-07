@@ -46,4 +46,24 @@ class SignupCubit extends Cubit<SignupState> {
           user: user)); // emite nuevo estado user success
     } catch (_) {}
   }
+
+  Future<void> signInWithCredentials() async {
+    //validacion de campos
+    if (!state.isFormValid || state.status == SignupStatus.submitting) return;
+
+    // Caso contrario
+    emit(state.copyWith(
+        status: SignupStatus.submitting)); // emite nuevo estado submitting
+    // Intenta crear nuevo usuario
+    try {
+      var user = await _authRepository.signIn(
+        email: state.email,
+        password: state.password,
+      );
+      emit(state.copyWith(
+          status: SignupStatus.success,
+          user: user)); // emite nuevo estado user success
+    } catch (_) {}
+  }
+
 }

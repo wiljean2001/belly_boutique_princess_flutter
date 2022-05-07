@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // import '/models/models.dart';
+import '../blocs/blocs.dart';
 import '/screens/screens.dart';
 
 class Routers {
@@ -12,8 +15,6 @@ class Routers {
     switch (settings.name) {
       // switch the name route on screens
       case '/':
-        return HomeScreen.route();
-      case HomeScreen.routeName:
         return HomeScreen.route();
       case SplashScreen.routeName:
         return SplashScreen.route();

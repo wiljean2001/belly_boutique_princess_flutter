@@ -1,3 +1,4 @@
+import '../../../blocs/blocs.dart';
 import '../../../utils/validators.dart';
 import '/cubit/signup/signup_cubit.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class RegisterForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _contextRegister = context.read<SignupCubit>();
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> _formKeyReg = GlobalKey<FormState>();
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: BlocBuilder<SignupCubit, SignupState>(
@@ -25,13 +26,12 @@ class RegisterForm extends StatelessWidget {
             alignment: Alignment.center,
             padding: const EdgeInsets.all(20.0),
             child: Form(
-              key: _formKey,
+              key: _formKeyReg,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   //campo formulario CORREO
                   TextFormField(
-                    restorationId: 'txt_email_user',
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
@@ -41,28 +41,26 @@ class RegisterForm extends StatelessWidget {
                     ),
                     validator: (email) => !Validators.isValidEmail(email!)
                         ? 'Correo no valido'
-                        : 'Correo valido',
+                        : null,
                     onChanged: (text) {
                       _contextRegister.emailChanged(text);
-                      print(state.email);
+                      // print(state.email);
                     },
                   ),
                   //campo formulario CONTRASENA
                   TextFormField(
-                    restorationId: 'txt_pass_user',
                     textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.text,
                     obscureText: true,
                     decoration: const InputDecoration(
                       // border: OutlineInputBorder(),
                       labelText: 'Constraseña',
                       icon: Icon(Icons.lock),
                     ),
-                    validator: (pass) => !Validators.isValidPassword(pass!)
-                        ? 'Contraseña no valida'
-                        : 'Contraseña valida',
+                    validator: (pass) => Validators.ispasswordValidator(pass!),
                     onChanged: (text) {
                       _contextRegister.passwordChanged(text);
-                      print(state.password);
+                      // print(state.password);
                     },
                   ),
                   // const SizedBox(height: 10),
@@ -80,64 +78,44 @@ class RegisterForm extends StatelessWidget {
                       ),
                     ),
                     onPressed: () async {
-                      if (!_formKey.currentState!.validate()) {
+                      print(!_formKeyReg.currentState!.validate());
+                      if (!_formKeyReg.currentState!.validate()) {
+                        return;
+                      }
+
+                      // if (_contextRegister.state.isFormValid) {
+                      await _contextRegister.signUpWithCredentials();
+                      print(_contextRegister.state);
+                      try {
+                        User user = User(
+                          // created a empty user
+                          id: _contextRegister.state.user!.uid,
+                          name: '',
+                          dateOfBirth: null,
+                          gender: '',
+                          imageUrls: const [],
+                          interests: const [],
+                          location: '',
+                        );
+                        context.read<OnboardingBloc>().add(
+                              StartOnboarding(
+                                user: user,
+                              ),
+                            );
+                        return tabController.animateTo(tabController.index + 1);
+                      } catch (e) {
                         await showDialog(
                           context: context,
                           builder: (BuildContext context) => const AlertDialog(
                             title: Text('Error de registro'),
-                            content: Text("Al menos 8 caracteres"
-                                "Contiene al menos un dígito Contiene al menos un carácter alfa inferior y un carácter alfa superior"
-                                "Contiene al menos un carácter dentro de un conjunto de caracteres especiales"
-                                "No contiene espacio, tabulador, etc."),
+                            content: Text("Usuario existente"),
                           ),
                         );
 
-                        return;
-                      } else if (_contextRegister.state.isFormValid) {
-                        await _contextRegister.signUpWithCredentials();
-                        print(_contextRegister.state);
-                        try {
-                          User user = User(
-                            // created a empty user
-                            id: _contextRegister.state.user!.uid,
-                            name: '',
-                            age: 0,
-                            gender: '',
-                            imageUrls: const [],
-                            // jobTitle: '',
-                            interests: const [],
-                            // bio: '',
-                            location: '',
-                          );
-                          context.read<OnboardingBloc>().add(
-                                StartOnboarding(
-                                  user: user,
-                                ),
-                              );
-                          tabController.animateTo(tabController.index + 1);
-                        } catch (e) {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) =>
-                                const AlertDialog(
-                              title: Text('Error de registro'),
-                              content: Text("Al menos 8 caracteres"
-                                  "Contiene al menos un dígito Contiene al menos un carácter alfa inferior y un carácter alfa superior"
-                                  "Contiene al menos un carácter dentro de un conjunto de caracteres especiales"
-                                  "No contiene espacio, tabulador, etc."),
-                            ),
-                          );
-                        }
-                      } else {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => const AlertDialog(
-                            title: Text('Error de registro'),
-                            content: Text("Al menos 8 caracteres"
-                                "Contiene al menos un dígito Contiene al menos un carácter alfa inferior y un carácter alfa superior"
-                                "Contiene al menos un carácter dentro de un conjunto de caracteres especiales"
-                                "No contiene espacio, tabulador, etc."),
-                          ),
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          '/',
+                              (route) => false,
                         );
                       }
                     },
@@ -154,9 +132,6 @@ class RegisterForm extends StatelessWidget {
                     ),
                     onPressed: () {
                       tabController.animateTo(tabController.index - 1);
-                      // Navigator.push(context, MaterialPageRoute(builder: (_) {
-                      //   return const RegisterScreen();
-                      // }));
                     },
                   ),
                 ],

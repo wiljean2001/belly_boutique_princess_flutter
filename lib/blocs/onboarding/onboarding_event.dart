@@ -14,7 +14,7 @@ class StartOnboarding extends OnboardingEvent {
     this.user = const User(
       id: '',
       name: '',
-      age: 0,
+      dateOfBirth: null,
       gender: '',
       imageUrls: [],
       // jobTitle: '',

@@ -79,7 +79,7 @@ class StartScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 50),
                     child: Text(
-                      "Esta es una tienda que se dedica vender vestidos para las princesas de casa.",
+                      "Esta es una tienda que se dedica a vender vestidos para las princesas de casa.",
                       style: theme().textTheme.bodyText1,
                       textAlign: TextAlign.center,
                     ),
