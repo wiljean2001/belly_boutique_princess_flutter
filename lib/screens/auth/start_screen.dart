@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../config/theme_default.dart';
+import '../../generated/l10n.dart';
 import '../../widgets/curved_widget.dart';
 import '../../widgets/custom_button_gradiant.dart';
 
@@ -48,16 +49,13 @@ class StartScreen extends StatelessWidget {
                   children: [
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 20),
-                      child: const Image(
-                        image: AssetImage('graphics/images/LOGO4-small.png'),
+                      child: Image(
+                        image: AssetImage(S.of(context).logo),
                         // alignment: Alignment.topCenter,
                       ),
                     ),
                   ],
                 ),
-                // Text("Login",
-                // style: primaryTextStyle.copyWith(
-                // color: Colors.black, fontSize: 40)),
               ),
             ),
             Container(
@@ -69,21 +67,21 @@ class StartScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    "Bienvenido",
+                    S.of(context).title_app,
                     style: Theme.of(context).textTheme.headline3,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 50),
                     child: Text(
-                      "Esta es una tienda que se dedica a vender vestidos para las princesas de casa.",
+                      S.of(context).description_app,
                       style: Theme.of(context).textTheme.bodyText2,
                       textAlign: TextAlign.center,
                     ),
                   ),
                   CustomButtonGradiant(
-                    text: const Text(
-                      "    Empezar",
-                      style: TextStyle(color: Colors.white),
+                    text: Text(
+                      S.of(context).bttn_start,
+                      style: const TextStyle(color: Colors.white),
                     ),
                     icon: const Icon(
                       Icons.start,
@@ -98,8 +96,6 @@ class StartScreen extends StatelessWidget {
               ),
             ),
           ],
-          // ),
-          //     ),
         ),
       ),
     );

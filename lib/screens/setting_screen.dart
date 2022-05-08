@@ -11,6 +11,8 @@ import 'package:provider/provider.dart';
 
 enum themesAll { dark, light, deffault, otro }
 
+// falta cambiar los textos a dinamicos
+
 class SettingScreen extends StatefulWidget {
   static const String routeName = '/settings'; //route
 

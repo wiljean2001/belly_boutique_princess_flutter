@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// falta cambiar los textos a dinamicos
+
 class ProductScreen extends StatefulWidget {
   const ProductScreen({
     Key? key,

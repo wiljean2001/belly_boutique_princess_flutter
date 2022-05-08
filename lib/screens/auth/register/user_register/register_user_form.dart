@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../blocs/blocs.dart';
+import '../../../../generated/l10n.dart';
 import '/cubit/signup/signup_cubit.dart';
 import '/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -35,9 +36,15 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
   final GlobalKey<FormState> _formKeyUser = GlobalKey<FormState>();
 
   String? name;
+
   @override
   Widget build(BuildContext context) {
-  final _contextRegister = context.read<SignupCubit>();
+    final _contextRegister = context.read<SignupCubit>();
+    final listGender = <String>[
+      S.of(context).gender, // gender
+      S.of(context).gender_male, // male
+      S.of(context).gender_female, // female
+    ];
     return BlocBuilder<OnboardingBloc, OnboardingState>(
       builder: (context, state) {
         if (state is OnboardingLoaded) {
@@ -47,14 +54,17 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
               initialDate: DateTime((DateTime.now().year - 18)),
               firstDate: DateTime(1900),
               lastDate: DateTime(DateTime.now().year - 18),
+              locale: const Locale("ar", "AR"),
               // (2101)
             );
             if (picked != null) {
               // Date ->
-              context.read<OnboardingBloc>().add(UpdateUser(
-                  user: state.user
-                      .copyWith(dateOfBirth: Timestamp.fromDate(picked))));
-              print(DateFormat("yyyy-MM-dd").format(picked));
+              context.read<OnboardingBloc>().add(
+                    UpdateUser(
+                      user: state.user
+                          .copyWith(dateOfBirth: Timestamp.fromDate(picked)),
+                    ),
+                  );
             }
           }
 
@@ -69,10 +79,10 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                   TextFormField(
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.name,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       // border: OutlineInputBorder(),
-                      labelText: 'Usuario',
-                      icon: Icon(Icons.person),
+                      labelText: S.of(context).title_user_screen,
+                      icon: const Icon(Icons.person),
                     ),
                     // validator: (name) => Validators.isNameValidator(name!),
                     onChanged: (value) {
@@ -87,7 +97,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                     child: DropdownButton<String>(
                       isExpanded: true,
                       focusColor: Colors.pink,
-                      value: dropdownValue,
+                      value: listGender[0],
                       icon: const Icon(
                         Icons.keyboard_arrow_down_outlined,
                         size: 45,
@@ -100,23 +110,26 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                         height: 2,
                         color: Colors.black12,
                       ),
-
                       // cambiar por tipo Categorias
-                      items: <String>['Sexo', 'Masculino', 'Femenino']
-                          .map<DropdownMenuItem<String>>(
+                      items: listGender.map<DropdownMenuItem<String>>(
                         (String value) {
                           return DropdownMenuItem<String>(
-                              value: value, child: Text(value));
+                            value: value,
+                            child: Text(value),
+                          );
                         },
                       ).toList(),
 
                       onChanged: (index) {
                         setState(
                           () {
-                            if (index != 'Sexo') {
+                            if (index != listGender[0]) {
                               dropdownValue = index!;
-                              context.read<OnboardingBloc>().add(UpdateUser(
-                                  user: state.user.copyWith(gender: index)));
+                              context.read<OnboardingBloc>().add(
+                                    UpdateUser(
+                                        user:
+                                            state.user.copyWith(gender: index)),
+                                  );
                             }
                           },
                         );
@@ -138,7 +151,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                         flex: 3,
                         child: MaterialButton(
                           elevation: 10,
-                          child: const Text('Seleccionar fecha de nacimiento'),
+                          child: Text(S.of(context).bttn_date_birth),
                           onPressed: _showDatePicker,
                           color: Colors.white.withOpacity(0.8),
                         ),
@@ -154,9 +167,9 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       Icons.check,
                       color: Colors.white,
                     ),
-                    text: const Text(
-                      'Registrarse',
-                      style: TextStyle(
+                    text: Text(
+                      S.of(context).bttn_register,
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                     ),
@@ -172,25 +185,6 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                         '/',
                         (route) => false,
                       );
-
-                      // return const RegisterUserScreen();
-                      // await _contextRegister.signUpWithCredentials();
-                      // User user = User(
-                      //   id: _contextRegister.state.user!.uid,
-                      //   name: '',
-                      //   age: 0,
-                      //   gender: '',
-                      //   imageUrls: [],
-                      //   // jobTitle: '',
-                      //   interests: [],
-                      //   // bio: '',
-                      //   location: '',
-                      // );
-                      // context.read<OnboardingBloc>().add(
-                      //       StartOnboarding(
-                      //         user: user,
-                      //       ),
-                      //     );
                     },
                   ),
                 ],
@@ -198,7 +192,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
             ),
           );
         } else {
-          return const Text('Algo salió mal');
+          return Text(S.of(context).error_desc);
         }
       },
     );

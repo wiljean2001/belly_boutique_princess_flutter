@@ -1,4 +1,5 @@
 import '../../../blocs/blocs.dart';
+import '../../../generated/l10n.dart';
 import '../../../utils/validators.dart';
 import '/cubit/signup/signup_cubit.dart';
 import 'package:flutter/material.dart';
@@ -34,17 +35,16 @@ class RegisterForm extends StatelessWidget {
                   TextFormField(
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       // border: OutlineInputBorder(),
-                      labelText: 'Correo electrónico',
-                      icon: Icon(Icons.email),
+                      labelText: S.of(context).email,
+                      icon: const Icon(Icons.email),
                     ),
                     validator: (email) => !Validators.isValidEmail(email!)
-                        ? 'Correo no valido'
+                        ? S.of(context).validator_email_error
                         : null,
                     onChanged: (text) {
                       _contextRegister.emailChanged(text);
-                      // print(state.email);
                     },
                   ),
                   //campo formulario CONTRASENA
@@ -52,15 +52,15 @@ class RegisterForm extends StatelessWidget {
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.text,
                     obscureText: true,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       // border: OutlineInputBorder(),
-                      labelText: 'Constraseña',
-                      icon: Icon(Icons.lock),
+                      labelText: S.of(context).password,
+                      icon: const Icon(Icons.lock),
                     ),
-                    validator: (pass) => Validators.ispasswordValidator(pass!),
+                    validator: (pass) =>
+                        Validators.ispasswordValidator(pass!, context),
                     onChanged: (text) {
                       _contextRegister.passwordChanged(text);
-                      // print(state.password);
                     },
                   ),
                   // const SizedBox(height: 10),
@@ -71,19 +71,19 @@ class RegisterForm extends StatelessWidget {
                       Icons.check,
                       color: Colors.white,
                     ),
-                    text: const Text(
-                      'Registrarse',
-                      style: TextStyle(
+                    text: Text(
+                      S.of(context).bttn_register,
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                     ),
                     onPressed: () async {
-                      print(!_formKeyReg.currentState!.validate());
+                      // validator form
                       if (!_formKeyReg.currentState!.validate()) {
                         return;
                       }
 
-                      // if (_contextRegister.state.isFormValid) {
+                      // SignUp
                       await _contextRegister.signUpWithCredentials();
                       print(_contextRegister.state);
                       try {
@@ -106,16 +106,15 @@ class RegisterForm extends StatelessWidget {
                       } catch (e) {
                         await showDialog(
                           context: context,
-                          builder: (BuildContext context) => const AlertDialog(
-                            title: Text('Error de registro'),
-                            content: Text("Usuario existente"),
+                          builder: (BuildContext context) => AlertDialog(
+                            title: Text(S.of(context).register_error_title),
+                            content: Text(S.of(context).register_error_desc),
                           ),
                         );
-
                         Navigator.pushNamedAndRemoveUntil(
                           context,
                           '/',
-                              (route) => false,
+                          (route) => false,
                         );
                       }
                     },
@@ -126,9 +125,9 @@ class RegisterForm extends StatelessWidget {
                     height: 45,
                     width: 150,
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    text: const Text(
-                      'Regresar',
-                      style: TextStyle(color: Colors.white),
+                    text: Text(
+                      S.of(context).bttn_go_back,
+                      style: const TextStyle(color: Colors.white),
                     ),
                     onPressed: () {
                       tabController.animateTo(tabController.index - 1);

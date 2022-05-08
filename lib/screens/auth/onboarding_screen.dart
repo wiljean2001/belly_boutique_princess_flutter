@@ -24,7 +24,6 @@ class OnboardingScreen extends StatelessWidget {
     Tab(text: 'Login'),
     Tab(text: 'Register'),
     Tab(text: 'User'),
-    // Tab(text: 'Ending')
   ];
 
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -53,9 +52,9 @@ class OnboardingScreen extends StatelessWidget {
             automaticallyImplyLeading: false,
             elevation: 0,
             backgroundColor: Colors.transparent,
-            actions: [
-              TextButton(onPressed: () {}, child: Text("Saltar")),
-            ],
+            // actions: [
+            //   TextButton(onPressed: () {}, child: Text("Saltar")),
+            // ],
           ),
           body: TabBarView(
             physics: const NeverScrollableScrollPhysics(), // never scroll
