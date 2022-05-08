@@ -49,6 +49,7 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
   /// `Bely Boutique Princess`
   String get AppTitle {
     return Intl.message(
@@ -359,6 +360,8 @@ class S {
     );
   }
 }
+
+class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   const AppLocalizationDelegate();
 
   List<Locale> get supportedLocales {
