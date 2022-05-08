@@ -31,6 +31,7 @@ dependencies:
   uuid: ^3.0.5
   animated_splash_screen: ^1.2.0
   smooth_page_indicator: ^1.0.0+2
+  animations: ^2.0.2
 
 dev_dependencies:
   flutter_test:

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/blocs.dart';
+import '../generated/l10n.dart';
 import 'auth/onboarding_screen.dart';
 import 'home_screen.dart';
 
@@ -59,9 +60,9 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Image(
-                      image: AssetImage('graphics/images/LOGO4.png'),
+                      image: AssetImage(S.of(context).logo),
                       width: 270,
                     ),
                     // SvgPicture.asset(

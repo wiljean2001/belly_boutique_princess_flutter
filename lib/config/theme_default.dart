@@ -12,6 +12,11 @@ ThemeData themeDefault() {
     iconTheme: const IconThemeData(color: Colors.pink),
     bottomAppBarColor: Colors.grey,
 
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: <TargetPlatform, PageTransitionsBuilder>{
+        TargetPlatform.android: ZoomPageTransitionsBuilder(),
+      },
+    ),
 
     fontFamily: 'Optima',
 /*

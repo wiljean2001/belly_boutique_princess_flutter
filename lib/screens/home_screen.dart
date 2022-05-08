@@ -43,16 +43,16 @@ class _MyHomePageState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     // Seteo del bottom navigation opcions del sistema operativo
-    if (BlocProvider.of<AuthBloc>(context).state.status ==
-        AuthStatus.authenticated) {
-      const SystemUiOverlayStyle overlayStyle = SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.pink,
-        // systemNavigationBarColor: Colors.transparent,
-        systemNavigationBarIconBrightness: Brightness.light,
-        systemNavigationBarDividerColor: Colors.pink,
-      );
-      SystemChrome.setSystemUIOverlayStyle(overlayStyle);
-    }
+    // if (BlocProvider.of<AuthBloc>(context).state.status ==
+    //     AuthStatus.authenticated) {
+    //   const SystemUiOverlayStyle overlayStyle = SystemUiOverlayStyle(
+    //     systemNavigationBarColor: Colors.pink,
+    //     // systemNavigationBarColor: Colors.transparent,
+    //     systemNavigationBarIconBrightness: Brightness.light,
+    //     systemNavigationBarDividerColor: Colors.pink,
+    //   );
+    //   SystemChrome.setSystemUIOverlayStyle(overlayStyle);
+    // }
     // pages
     final views = [
       const UserProfileView(),
@@ -72,21 +72,22 @@ class _MyHomePageState extends State<HomeScreen> {
       S.of(context).menu_appbar_item3,
       S.of(context).menu_appbar_item4
     ];
-    final opcion1 = Text(itemsAppbar[3]);
     return Scaffold(
       extendBody: true,
       // backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: Row(children: [
-          const Image(
-            image: AssetImage("graphics/images/bely_logo-edit.png"),
+          Image(
+            image: AssetImage(S.of(context).logo_home),
             width: 55,
           ),
-          Text(S.of(context).AppTitle,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline6
-                  ?.copyWith(color: Colors.white)),
+          Text(
+            S.of(context).AppTitle,
+            style: Theme.of(context)
+                .textTheme
+                .headline6
+                ?.copyWith(color: Colors.white),
+          ),
         ]),
         elevation: 10,
         actions: <Widget>[

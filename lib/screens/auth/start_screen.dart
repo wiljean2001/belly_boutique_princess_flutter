@@ -78,6 +78,7 @@ class StartScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
+
                   CustomButtonGradiant(
                     text: Text(
                       S.of(context).bttn_start,

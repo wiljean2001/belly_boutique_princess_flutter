@@ -70,6 +70,16 @@ class S {
     );
   }
 
+  /// `graphics/images/bely_logo-edit.png`
+  String get logo_home {
+    return Intl.message(
+      'graphics/images/bely_logo-edit.png',
+      name: 'logo_home',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Error`
   String get error_title {
     return Intl.message(

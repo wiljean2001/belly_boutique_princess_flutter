@@ -27,7 +27,7 @@ void main() async {
       //   messagingSenderId: "XXX",
       //   projectId: "XXX",
       // ),
-      // options: DefaultFirebaseOptions.currentPlatform,
+      // options: defaultF
       );
   BlocOverrides.runZoned(
       () => {
