@@ -11,6 +11,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   }) : super(key: key);
 
   final List<Widget> items;
+
   @override
   Widget build(BuildContext context) {
     final homePageBloc = context.read<HomePageBloc>();
@@ -27,7 +28,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               backgroundColor: Colors.transparent,
               animationCurve: Curves.easeInOut,
               animationDuration: const Duration(milliseconds: 400),
-              color: Colors.pink,
+              color: Theme.of(context).primaryColor,
               items: items,
               onTap: (index) =>
                   homePageBloc.add(HomeTabChangeEvent(newIndex: index)),

@@ -105,7 +105,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Bely boutique princess',
           theme: theme.getTheme(),
-          localizationsDelegates: const [
+          localizationsDelegates: const [ // translate
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,

@@ -1,19 +1,16 @@
-import 'package:belly_boutique_princess/config/theme_default.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../blocs/blocs.dart';
 import '../blocs/home/home_page_bloc.dart';
-import '../blocs/theme.dart';
 import '../generated/l10n.dart';
 import '../repositories/repositories.dart';
 import '../views/user_views.dart';
 import '../widgets/custom_bottom_navigation.dart';
 import 'auth/onboarding_screen.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
-import '../../config/theme_default.dart';
 import 'setting_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -43,10 +40,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomeScreen> {
-  // Seteo del bottom navigation opcions del sistema operativo
-
   @override
   Widget build(BuildContext context) {
+    // Seteo del bottom navigation opcions del sistema operativo
     if (BlocProvider.of<AuthBloc>(context).state.status ==
         AuthStatus.authenticated) {
       const SystemUiOverlayStyle overlayStyle = SystemUiOverlayStyle(
@@ -57,25 +53,26 @@ class _MyHomePageState extends State<HomeScreen> {
       );
       SystemChrome.setSystemUIOverlayStyle(overlayStyle);
     }
+    // pages
     final views = [
       const UserProfileView(),
       const HomeView(),
       const ShoppingCartView(),
     ];
-    // Items from navigati on bar
+    // Items from navigation bar
     const items = <Widget>[
       Icon(Icons.account_circle, size: 30),
       Icon(Icons.home, size: 30),
       Icon(Icons.shopping_cart, size: 30),
     ];
 
-    final items_appbar = <String>[
+    final itemsAppbar = <String>[
       S.of(context).menu_appbar_item1,
       S.of(context).menu_appbar_item2,
       S.of(context).menu_appbar_item3,
       S.of(context).menu_appbar_item4
     ];
-
+    final opcion1 = Text(itemsAppbar[3]);
     return Scaffold(
       extendBody: true,
       // backgroundColor: Theme.of(context).backgroundColor,
@@ -101,24 +98,42 @@ class _MyHomePageState extends State<HomeScreen> {
           PopupMenuButton<String>(
             tooltip: S.of(context).tooltip_bttn_options,
             onSelected: (index) {
-              switch (index) {
-                case 'Cerrar sesión':
-                  RepositoryProvider.of<AuthRepository>(context).signOut();
-                  context
-                      .read<AuthBloc>()
-                      .add(const AuthUserChanged(user: null));
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, '/', (route) => false);
-                  break;
-                case 'Configuracion':
-                  // setting screen
-                  Navigator.pushNamed(context, SettingScreen.routeName);
-                  break;
-                default:
+              // Visitanos
+              if (index == S.of(context).menu_appbar_item1) {
+                Fluttertoast.showToast(
+                    msg: "Tab a visitanos",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.grey,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              }
+              // setting screen
+              if (index == S.of(context).menu_appbar_item2) {
+                Navigator.pushNamed(context, SettingScreen.routeName);
+              }
+              // Ayuda
+              if (index == S.of(context).menu_appbar_item3) {
+                Fluttertoast.showToast(
+                    msg: "Tap a ayuda",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.grey,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              }
+              // SignOut session
+              if (index == S.of(context).menu_appbar_item4) {
+                RepositoryProvider.of<AuthRepository>(context).signOut();
+                context.read<AuthBloc>().add(const AuthUserChanged(user: null));
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/', (route) => false);
               }
             },
             itemBuilder: (BuildContext context) {
-              return items_appbar.map(
+              return itemsAppbar.map(
                 (String choice) {
                   return PopupMenuItem<String>(
                     value: choice,
@@ -133,16 +148,15 @@ class _MyHomePageState extends State<HomeScreen> {
       body: BlocBuilder<HomePageBloc, HomePageState>(
         builder: (context, state) {
           if (state is HomePageInitial) {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
           if (state is BottomNavigationInitial) {
             return views[state.indexBottomNav];
           }
-          return const Text("Error al cargar las interfaces");
+          return Text(S.of(context).Error_displaying_interaces);
         },
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(items: items),
     );
-// return const HomeView();
   }
 }

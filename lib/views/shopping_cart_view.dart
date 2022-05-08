@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// falta cambiar los textos a dinamicos
+
 class ShoppingCartView extends StatefulWidget {
   const ShoppingCartView({Key? key}) : super(key: key);
 

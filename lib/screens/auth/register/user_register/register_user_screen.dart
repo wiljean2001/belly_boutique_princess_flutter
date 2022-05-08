@@ -2,6 +2,7 @@ import 'package:belly_boutique_princess/blocs/blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../generated/l10n.dart';
 import '../../../../widgets/curved_widget.dart';
 import 'register_user_form.dart';
 
@@ -13,13 +14,6 @@ class RegisterUserScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   extendBodyBehindAppBar: true,
-    //   appBar: AppBar(
-    //     iconTheme: const IconThemeData(color: Colors.black),
-    //     elevation: 0,
-    //     backgroundColor: Colors.transparent,
-    //   ),
     return BlocBuilder<OnboardingBloc, OnboardingState>(
       builder: (context, state) {
         if (state is OnboardingLoading) {
@@ -61,8 +55,13 @@ class RegisterUserScreen extends StatelessWidget {
                       ),
                       width: double.infinity,
                       height: 300,
-                      child: const Text("Usuario",
-                          style: TextStyle(color: Colors.black, fontSize: 40)),
+                      child: Text(
+                        S.of(context).title_user_screen,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 40,
+                        ),
+                      ),
                     ),
                   ),
                   Container(
@@ -77,7 +76,7 @@ class RegisterUserScreen extends StatelessWidget {
             ),
           );
         } else {
-          return const Text('Algo salió mal.');
+          return Text(S.of(context).error_desc);
         }
       },
     );

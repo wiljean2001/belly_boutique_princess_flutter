@@ -1,3 +1,7 @@
+// import 'package:flutter/material.dart';
+
+import '../generated/l10n.dart';
+
 class Validators {
   static final RegExp _emailRegExp = RegExp(
     r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
@@ -35,11 +39,11 @@ class Validators {
     return _passwordRegExp.hasMatch(password);
   }
 
-  static ispasswordValidator(String password){
+  static ispasswordValidator(String password, context){
     if(password.isEmpty){
-      return 'Contraseña no valida';
+      return S.of(context).validator_password_error;
     }else if(password.length < 8){
-      return 'Contraseña no valida';
+      return S.of(context).validator_password_error;
     }
     return null;
   }

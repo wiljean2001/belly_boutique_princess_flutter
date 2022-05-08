@@ -8,6 +8,8 @@ class UserProfileView extends StatefulWidget {
   _UserProfilePageState createState() => _UserProfilePageState();
 }
 
+// falta cambiar los textos a dinamicos
+
 class _UserProfilePageState extends State<UserProfileView> {
   final User usuario = User.users.last;
 
