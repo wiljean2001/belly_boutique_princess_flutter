@@ -1,3 +1,4 @@
+import 'package:belly_boutique_princess/screens/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,8 +23,8 @@ class Routers {
       //   return UsersScreen.route(user: settings.arguments as User);
       case OnboardingScreen.routeName:
         return OnboardingScreen.route();
-      // case MatchesScreen.routeName:
-      //   return MatchesScreen.route();
+      case SettingScreen.routeName:
+        return SettingScreen.route();
       // case ProfileScreen.routeName:
       //   return ProfileScreen.route();
       // case ChatScreen.routeName:

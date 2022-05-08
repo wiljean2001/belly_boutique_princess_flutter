@@ -1,3 +1,4 @@
+import 'package:belly_boutique_princess/config/theme_default.dart';
 import 'package:flutter/material.dart';
 
 class CustomDropDownCategories extends StatefulWidget {
@@ -16,7 +17,7 @@ class _CustomDropDownCategoriesState extends State<CustomDropDownCategories> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 300,
+      width: 250,
       height: 55,
       child: DropdownButton<String>(
         isExpanded: true,
@@ -27,11 +28,11 @@ class _CustomDropDownCategoriesState extends State<CustomDropDownCategories> {
           size: 45,
         ),
         elevation: 16,
-        style: const TextStyle(color: Colors.deepPurple, fontSize: 18),
+        style: Theme.of(context).textTheme.titleMedium,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         underline: Container(
           height: 2,
-          color: Colors.black12,
+          color: Theme.of(context).primaryColorLight,
         ),
 
         // cambiar por tipo Categorias

@@ -21,7 +21,7 @@ class AuthRepository extends BaseAuthRepository {
       );
 
       final user = credential.user;
-      return user();
+      return user;
     } catch (_) {}
   }
 
@@ -30,7 +30,7 @@ class AuthRepository extends BaseAuthRepository {
     try {
       final credentials = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      return credentials.user();
+      return credentials.user;
     } catch (_) {}
   }
 

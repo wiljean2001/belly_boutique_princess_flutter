@@ -4,14 +4,18 @@ import 'package:belly_boutique_princess/screens/screens.dart';
 import 'package:flutter/material.dart';
 
 import 'blocs/home/home_page_bloc.dart';
-import 'config/theme.dart';
+import 'blocs/theme.dart';
+import 'config/theme_default.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'generated/l10n.dart';
 import 'repositories/repositories.dart';
 
 import 'blocs/blocs.dart';
 import 'cubit/cubits.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'screens/splash_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 /// Metodo main de la aplicacion flutter
 void main() async {
@@ -25,7 +29,15 @@ void main() async {
       // ),
       // options: DefaultFirebaseOptions.currentPlatform,
       );
-  BlocOverrides.runZoned(() => {runApp(const MyApp())},
+  BlocOverrides.runZoned(
+      () => {
+            runApp(
+              ChangeNotifierProvider(
+                create: (_) => ThemeChanger( themeDefault() ),
+                child: const MyApp(),
+              ),
+            ),
+          },
       blocObserver: SimpleBlocObserver());
 }
 
@@ -37,6 +49,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeChanger>(context);
     /**
      * MultiRepositoryProvider
      */
@@ -91,11 +104,14 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Bely boutique princess',
-          // theme: ThemeData(
-          //   primarySwatch: Colors.pink,
-          // ),
-          theme: theme(),
-          // home: SplashScreen(),
+          theme: theme.getTheme(),
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            S.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
           onGenerateRoute: Routers.onGenerateRoute,
           initialRoute: SplashScreen.routeName,
         ),

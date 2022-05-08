@@ -1,15 +1,20 @@
+import 'package:belly_boutique_princess/config/theme_default.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/blocs.dart';
 import '../blocs/home/home_page_bloc.dart';
+import '../blocs/theme.dart';
+import '../generated/l10n.dart';
 import '../repositories/repositories.dart';
 import '../views/user_views.dart';
 import '../widgets/custom_bottom_navigation.dart';
 import 'auth/onboarding_screen.dart';
-import '/views/home_view.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
+import '../../config/theme_default.dart';
+import 'setting_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/'; //route
@@ -64,25 +69,37 @@ class _MyHomePageState extends State<HomeScreen> {
       Icon(Icons.shopping_cart, size: 30),
     ];
 
+    final items_appbar = <String>[
+      S.of(context).menu_appbar_item1,
+      S.of(context).menu_appbar_item2,
+      S.of(context).menu_appbar_item3,
+      S.of(context).menu_appbar_item4
+    ];
+
     return Scaffold(
       extendBody: true,
+      // backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: Row(children: const [
-          Image(
+        title: Row(children: [
+          const Image(
             image: AssetImage("graphics/images/bely_logo-edit.png"),
             width: 55,
           ),
-          Text("Bely Boutique Princess")
+          Text(S.of(context).AppTitle,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  ?.copyWith(color: Colors.white)),
         ]),
         elevation: 10,
         actions: <Widget>[
           IconButton(
-            tooltip: "Carrito",
+            tooltip: S.of(context).tooltip_bttn_shopping_card,
             icon: const Icon(Icons.shopping_cart),
             onPressed: () {},
           ),
           PopupMenuButton<String>(
-            tooltip: "Opciones",
+            tooltip: S.of(context).tooltip_bttn_options,
             onSelected: (index) {
               switch (index) {
                 case 'Cerrar sesión':
@@ -93,12 +110,15 @@ class _MyHomePageState extends State<HomeScreen> {
                   Navigator.pushNamedAndRemoveUntil(
                       context, '/', (route) => false);
                   break;
+                case 'Configuracion':
+                  // setting screen
+                  Navigator.pushNamed(context, SettingScreen.routeName);
+                  break;
                 default:
               }
             },
             itemBuilder: (BuildContext context) {
-              return {'Visitanos', 'Configuracion', 'Ayuda', 'Cerrar sesión'}
-                  .map(
+              return items_appbar.map(
                 (String choice) {
                   return PopupMenuItem<String>(
                     value: choice,

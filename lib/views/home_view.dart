@@ -12,7 +12,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../repositories/repositories.dart';
 import '../widgets/custom_bottom_navigation.dart';
-import 'home_products_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({

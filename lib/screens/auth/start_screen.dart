@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../config/theme.dart';
+import '../../config/theme_default.dart';
 import '../../widgets/curved_widget.dart';
 import '../../widgets/custom_button_gradiant.dart';
 
@@ -47,14 +47,10 @@ class StartScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 20),
-                      child: const Card(
-                        shadowColor: Colors.grey,
-                        elevation: 8,
-                        child: Image(
-                          image: AssetImage('graphics/images/LOGO4-small.png'),
-                          // alignment: Alignment.topCenter,
-                        ),
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      child: const Image(
+                        image: AssetImage('graphics/images/LOGO4-small.png'),
+                        // alignment: Alignment.topCenter,
                       ),
                     ),
                   ],
@@ -74,13 +70,13 @@ class StartScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Bienvenido",
-                    style: theme().textTheme.headline2,
+                    style: Theme.of(context).textTheme.headline3,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 50),
                     child: Text(
                       "Esta es una tienda que se dedica a vender vestidos para las princesas de casa.",
-                      style: theme().textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       textAlign: TextAlign.center,
                     ),
                   ),
