@@ -8,8 +8,6 @@ class UserProfileView extends StatefulWidget {
   _UserProfilePageState createState() => _UserProfilePageState();
 }
 
-// falta cambiar los textos a dinamicos
-
 class _UserProfilePageState extends State<UserProfileView> {
   final User usuario = User.users.last;
 
@@ -18,7 +16,7 @@ class _UserProfilePageState extends State<UserProfileView> {
     return Scaffold(
       body: Center(
         child: Column(
-//          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Header(
@@ -26,50 +24,53 @@ class _UserProfilePageState extends State<UserProfileView> {
               height: 190,
             ),
             Container(
-              color: Colors.blueAccent,
-              height: 500,
+              color: Colors.pink,
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      Text('Edad'),
+                      Text(
+                        'Edad',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline3
+                            ?.copyWith(color: Colors.black),
+                      ),
+                      Text(
+                        usuario.dateOfBirth.toString(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline3
+                            ?.copyWith(color: Colors.black),
+                      ),
                     ],
                   ),
                   Column(
                     children: <Widget>[
                       Text(
                         "Sexo",
-                      ),
-                    ],
-                  ),
-                  /*Column(
-                    children: <Widget>[
-                      Text(
-                        usuario.age.toString(),
-                        style: themedark()
+                        style: Theme.of(context)
                             .textTheme
                             .headline3
                             ?.copyWith(color: Colors.black),
                       ),
-                      Column(
-                        children: <Widget>[
-                          Text(
-                            usuario.gender,
-                            style: themedark()
-                                .textTheme
-                                .headline3
-                                ?.copyWith(color: Colors.black),
-                          ),
-                        ],
-                      ),*/
+                      Text(
+                        usuario.gender,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline3
+                            ?.copyWith(color: Colors.black),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
           ],
         ),
-        //],
       ),
-      //),
     );
   }
 }
@@ -101,6 +102,8 @@ class Header extends StatelessWidget {
           UserPhoto(usuario: usuario, size: 120),
           Text(
             "@" + (usuario.name), //nombre de usuario
+            style:
+            Theme.of(context).textTheme.headline3?.copyWith(color: Colors.white),
           ),
         ],
       ),
