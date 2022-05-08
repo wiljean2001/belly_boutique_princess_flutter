@@ -1,0 +1,43 @@
+{
+  "AppTitle": "Bely Boutique Princess",
+  "logo": "graphics/images/LOGO4-small.png",
+  "logo_home": "graphics/images/bely_logo-edit.png",
+  "error_title": "Error",
+  "error_desc": "Algo salió mal",
+
+  "COMMENT1": " // HOME SCREENS ",
+
+  "tooltip_bttn_shopping_card": "Carrito",
+
+  "tooltip_bttn_options": "Opciones",
+  "menu_appbar_item1": "Visitanos",
+  "menu_appbar_item2": "Configuracion",
+  "menu_appbar_item3": "Ayuda",
+  "menu_appbar_item4": "Cerrar sesión",
+
+  "Error_displaying_interaces": "Error al cargar las interfaces",
+
+  "COMMENT2": " // ONBOARDING SCREENS ",
+  "title_app": "Bienvenido",
+  "description_app": "Esta es una tienda que se dedica a vender vestidos para las princesas de casa.",
+  "bttn_start": "Empezar",
+
+  "email": "Correo electrónico",
+  "validator_email_error": "Correo no válido",
+  "password": "Contraseña",
+  "validator_password_error": "Contraseña no válida",
+
+  "bttn_register": "Registrarse",
+  "register_error_title": "Error de registro",
+  "register_error_desc": "Usuario existente",
+
+  "bttn_login": "Ingresar",
+  "bttn_go_back": "Regresar",
+
+  "title_user_screen": "Usuario",
+  "gender": "Sexo",
+  "gender_male": "Masculino",
+  "gender_female": "Femenino",
+  "bttn_date_birth": "Seleccionar fecha de nacimiento"
+
+}
