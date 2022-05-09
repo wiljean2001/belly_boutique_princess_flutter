@@ -13,6 +13,7 @@ class _UserProfilePageState extends State<UserProfileView> {
 
   @override
   Widget build(BuildContext context) {
+    final edad = DateTime.now().year - usuario.dateOfBirth!.toDate().year;
     return Scaffold(
       body: Center(
         child: Column(
@@ -31,38 +32,14 @@ class _UserProfilePageState extends State<UserProfileView> {
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      Text(
-                        'Edad',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline3
-                            ?.copyWith(color: Colors.black),
-                      ),
-                      Text(
-                        usuario.dateOfBirth.toString(),
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline3
-                            ?.copyWith(color: Colors.black),
-                      ),
+                      Text('Edad'),
+                      Text(edad.toString()),
                     ],
                   ),
                   Column(
                     children: <Widget>[
-                      Text(
-                        "Sexo",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline3
-                            ?.copyWith(color: Colors.black),
-                      ),
-                      Text(
-                        usuario.gender,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline3
-                            ?.copyWith(color: Colors.black),
-                      ),
+                      Text("Sexo"),
+                      Text(usuario.gender),
                     ],
                   ),
                 ],
@@ -92,7 +69,7 @@ class Header extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("graphics/images/fondo_user.jpg"),
+          image: AssetImage("graphics/images/fond_user.jpg"),
           fit: BoxFit.cover,
         ),
       ),
@@ -102,8 +79,10 @@ class Header extends StatelessWidget {
           UserPhoto(usuario: usuario, size: 120),
           Text(
             "@" + (usuario.name), //nombre de usuario
-            style:
-            Theme.of(context).textTheme.headline3?.copyWith(color: Colors.white),
+            style: Theme.of(context)
+                .textTheme
+                .headline3
+                ?.copyWith(color: Colors.white),
           ),
         ],
       ),

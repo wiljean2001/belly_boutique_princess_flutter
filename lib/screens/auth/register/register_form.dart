@@ -23,7 +23,7 @@ class RegisterForm extends StatelessWidget {
       child: BlocBuilder<SignupCubit, SignupState>(
         builder: (context, state) {
           return Container(
-            height: 350,
+            height: MediaQuery.of(context).size.height/1.6,
             alignment: Alignment.center,
             padding: const EdgeInsets.all(20.0),
             child: Form(
@@ -119,20 +119,30 @@ class RegisterForm extends StatelessWidget {
                       }
                     },
                   ),
-                  // const SizedBox(height: 10),
-                  CustomButtonGradiant(
-                    //BUtton Registrar
-                    height: 45,
-                    width: 150,
-                    icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    text: Text(
-                      S.of(context).bttn_go_back,
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () {
-                      tabController.animateTo(tabController.index - 1);
-                    },
+                  const Divider(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      TextButton(
+                        onPressed: () =>
+                            tabController.animateTo(tabController.index - 1),
+                        child: Text(S.of(context).bttn_go_back),
+                      ),
+                    ],
                   ),
+                  // CustomButtonGradiant(
+                  //   //BUtton Registrar
+                  //   height: 45,
+                  //   width: 150,
+                  //   icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  //   text: Text(
+                  //     S.of(context).bttn_go_back,
+                  //     style: const TextStyle(color: Colors.white),
+                  //   ),
+                  //   onPressed: () {
+                  //     tabController.animateTo(tabController.index - 1);
+                  //   },
+                  // ),
                 ],
               ),
             ),

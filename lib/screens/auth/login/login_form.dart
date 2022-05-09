@@ -26,7 +26,7 @@ class LoginForm extends StatelessWidget {
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
         return Container(
-          height: 350,
+          height: MediaQuery.of(context).size.height / 1.7,
           alignment: Alignment.center,
           padding: const EdgeInsets.all(20.0),
           child: Form(
@@ -100,33 +100,29 @@ class LoginForm extends StatelessWidget {
                     );
                   },
                 ),
-                // const SizedBox(height: 30),
+                const Divider(height: 10),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    CustomButtonGradiant(
-                      height: 45,
-                      icon: const Icon(Icons.backspace, color: Colors.white),
-                      text: Text(
-                        S.of(context).bttn_go_back,
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () =>
-                          tabController.animateTo(tabController.index - 1),
-                      width: 150,
-                    ),
-                    CustomButtonGradiant(
-                      height: 45,
-                      width: 150,
-                      icon:
-                          const Icon(Icons.arrow_forward, color: Colors.white),
-                      text: Text(
-                        S.of(context).bttn_register,
-                        style: const TextStyle(color: Colors.white),
-                      ),
+                    // CustomButtonGradiant(
+                    //   height: 45,
+                    //   icon: const Icon(Icons.backspace, color: Colors.white),
+                    //   text: Text(
+                    //     S.of(context).bttn_go_back,
+                    //     style: const TextStyle(color: Colors.white),
+                    //   ),
+                    //   onPressed: () =>
+                    //       tabController.animateTo(tabController.index - 1),
+                    //   width: 150,
+                    // ),
+                    TextButton(
                       onPressed: () =>
                           tabController.animateTo(tabController.index + 1),
+                      child: Text(S.of(context).bttn_register),
                     ),
+                    //icon:
+                    // const Icon(Icons.arrow_forward, color: Colors.white),
+                    //  tabController.animateTo(tabController.index + 1),
                   ],
                 ),
               ],
