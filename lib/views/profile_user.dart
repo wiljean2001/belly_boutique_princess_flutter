@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:belly_boutique_princess/models/user_model.dart';
 import 'package:flutter/material.dart';
 
@@ -32,19 +34,41 @@ class _UserProfilePageState extends State<UserProfileView> {
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      Text('Edad'),
+                      const Text('Edad'),
                       Text(edad.toString()),
                     ],
                   ),
                   Column(
                     children: <Widget>[
-                      Text("Sexo"),
+                      const Text("Sexo"),
                       Text(usuario.gender),
                     ],
                   ),
                 ],
               ),
             ),
+            Column(
+                children: [
+                 const Divider(height: 20, thickness: 1),
+                  const SizedBox(height: 10,),
+                  TextButton(
+                    onPressed:() {},
+                    child: const Text('Visitanos')
+                  ),
+                  TextButton(
+                    onPressed:() {},
+                    child: const Text('Configuraciones')
+                  ),
+                  TextButton(
+                    onPressed:() {},
+                    child: const Text('Ayuda')
+                  ),
+                  TextButton(
+                    onPressed:() {},
+                    child: const Text('Cerrar Sesión')
+                  ),
+                ],
+              )
           ],
         ),
       ),
@@ -69,7 +93,7 @@ class Header extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("graphics/images/fond_user.jpg"),
+          image: AssetImage("graphics/images/fondo_user.jpg"),
           fit: BoxFit.cover,
         ),
       ),
