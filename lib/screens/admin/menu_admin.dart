@@ -1,7 +1,25 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../blocs/blocs.dart';
+import '../screens.dart';
 import '/screens/admin/new_product_screen.dart';
 import 'package:flutter/material.dart';
 
 class MenuAdmintration extends StatelessWidget {
+  static const String routeName = '/admin'; //route
+  static Route route() {
+    return MaterialPageRoute(
+        settings: const RouteSettings(name: routeName),
+        builder: (context) {
+          // print the status user with the authbloc
+          print(BlocProvider.of<AuthBloc>(context).state.status);
+
+          return BlocProvider.of<AuthBloc>(context).state.status ==
+              AuthStatus.unauthenticated
+              ? const OnboardingScreen()
+              : const MenuAdmintration();
+        });
+  }
   const MenuAdmintration({Key? key}) : super(key: key);
 
   @override

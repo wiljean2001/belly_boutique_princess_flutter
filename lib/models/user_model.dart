@@ -6,23 +6,25 @@ class User extends Equatable {
   final String name;
   final Timestamp? dateOfBirth;
   final String gender;
+  final String role;
   final List<dynamic> imageUrls;
   final List<dynamic> interests;
+  final String location;
 
   // final String bio;
   // final String jobTitle;
-  final String location;
 
   const User({
     this.id,
     required this.name,
     required this.dateOfBirth,
     required this.gender,
+    required this.role,
     required this.imageUrls,
     required this.interests,
+    required this.location,
     // required this.bio,
     // required this.jobTitle,
-    required this.location,
   });
 
   @override
@@ -31,11 +33,12 @@ class User extends Equatable {
         name,
         dateOfBirth,
         gender,
+        role,
         imageUrls,
         interests,
+        location,
         // bio,
         // jobTitle,
-        location,
       ];
 
 // Base de datos
@@ -45,11 +48,12 @@ class User extends Equatable {
       name: snap['name'],
       dateOfBirth: snap['dateOfBirth'],
       gender: snap['gender'],
+      role: snap['role'],
       imageUrls: snap['imageUrls'],
       interests: snap['interests'],
+      location: snap['location'],
       // bio: snap['bio'],
       // jobTitle: snap['jobTitle'],
-      location: snap['location'],
     );
     return user;
   }
@@ -59,11 +63,12 @@ class User extends Equatable {
       'name': name,
       'date_of_birth': dateOfBirth,
       'gender': gender,
+      'role': role,
       'imageUrls': imageUrls,
       'interests': interests,
+      'location': location,
       // 'bio': bio,
       // 'jobTitle': jobTitle,
-      'location': location,
     };
   }
 
@@ -72,22 +77,24 @@ class User extends Equatable {
     String? name,
     Timestamp? dateOfBirth,
     String? gender,
+    String? role,
     List<dynamic>? imageUrls,
     List<dynamic>? interests,
-    String? bio,
-    String? jobTitle,
     String? location,
+    // String? bio,
+    // String? jobTitle,
   }) {
     return User(
       id: id ?? this.id,
       name: name ?? this.name,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       gender: gender ?? this.gender,
+      role: role ?? this.role,
       imageUrls: imageUrls ?? this.imageUrls,
       interests: interests ?? this.interests,
+      location: location ?? this.location,
       // bio: bio ?? this.bio,
       // jobTitle: jobTitle ?? this.jobTitle,
-      location: location ?? this.location,
     );
   }
 
@@ -97,6 +104,7 @@ class User extends Equatable {
       name: 'John',
       dateOfBirth: Timestamp.fromDate(DateTime.now()),
       gender: 'Male',
+      role: 'admin',
       imageUrls: [
         'https://images.unsplash.com/photo-1595623238469-fc58b3839cf6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=755&q=80',
         'https://images.unsplash.com/photo-1595623238469-fc58b3839cf6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=755&q=80',
@@ -115,6 +123,7 @@ class User extends Equatable {
       name: 'Tamara',
       dateOfBirth: Timestamp.fromDate(DateTime.now()),
       gender: 'Female',
+      role: 'admin',
       imageUrls: [
         'https://images.unsplash.com/photo-1622023459113-9b195477d9c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=671&q=80',
         'https://images.unsplash.com/photo-1622023459113-9b195477d9c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=671&q=80',
@@ -133,6 +142,7 @@ class User extends Equatable {
       name: 'Marta',
       dateOfBirth: Timestamp.fromDate(DateTime.now()),
       gender: 'Female',
+      role: 'user',
       imageUrls: [
         'https://images.unsplash.com/photo-1622244099803-75318348305a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
         'https://images.unsplash.com/photo-1622244099803-75318348305a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
@@ -151,6 +161,7 @@ class User extends Equatable {
       name: 'Sara',
       dateOfBirth: Timestamp.fromDate(DateTime.now()),
       gender: 'Female',
+      role: 'user',
       imageUrls: [
         'https://images.unsplash.com/photo-1622023459113-9b195477d9c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=671&q=80',
         'https://images.unsplash.com/photo-1622023459113-9b195477d9c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=671&q=80',

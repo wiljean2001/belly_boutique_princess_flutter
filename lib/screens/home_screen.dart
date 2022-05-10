@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../blocs/blocs.dart';
 import '../blocs/home/home_page_bloc.dart';
 import '../generated/l10n.dart';
+import '../models/models.dart';
 import '../repositories/repositories.dart';
 import '../views/user_views.dart';
 import '../widgets/custom_bottom_navigation.dart';
@@ -60,11 +59,6 @@ class _MyHomePageState extends State<HomeScreen> {
       const ShoppingCartView(),
     ];
     // Items from navigation bar
-    const items = <Widget>[
-      Icon(Icons.account_circle, size: 30),
-      Icon(Icons.home, size: 30),
-      Icon(Icons.shopping_cart, size: 30),
-    ];
 
     final itemsAppbar = <String>[
       S.of(context).menu_appbar_item1,
@@ -72,6 +66,7 @@ class _MyHomePageState extends State<HomeScreen> {
       S.of(context).menu_appbar_item3,
       S.of(context).menu_appbar_item4
     ];
+    // print(context.read<ProfileBloc>());
     return Scaffold(
       extendBody: true,
       // backgroundColor: Theme.of(context).backgroundColor,
@@ -83,10 +78,6 @@ class _MyHomePageState extends State<HomeScreen> {
           ),
           Text(
             S.of(context).AppTitle,
-            style: Theme.of(context)
-                .textTheme
-                .headline6
-                ?.copyWith(color: Colors.white),
           ),
         ]),
         elevation: 10,
@@ -96,54 +87,54 @@ class _MyHomePageState extends State<HomeScreen> {
             icon: const Icon(Icons.shopping_cart),
             onPressed: () {},
           ),
-          PopupMenuButton<String>(
-            tooltip: S.of(context).tooltip_bttn_options,
-            onSelected: (index) {
-              // Visitanos
-              if (index == S.of(context).menu_appbar_item1) {
-                Fluttertoast.showToast(
-                    msg: "Tab a visitanos",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.grey,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
-              }
-              // setting screen
-              if (index == S.of(context).menu_appbar_item2) {
-                Navigator.pushNamed(context, SettingScreen.routeName);
-              }
-              // Ayuda
-              if (index == S.of(context).menu_appbar_item3) {
-                Fluttertoast.showToast(
-                    msg: "Tap a ayuda",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.grey,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
-              }
-              // SignOut session
-              if (index == S.of(context).menu_appbar_item4) {
-                RepositoryProvider.of<AuthRepository>(context).signOut();
-                context.read<AuthBloc>().add(const AuthUserChanged(user: null));
-                Navigator.pushNamedAndRemoveUntil(
-                    context, '/', (route) => false);
-              }
-            },
-            itemBuilder: (BuildContext context) {
-              return itemsAppbar.map(
-                (String choice) {
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice),
-                  );
-                },
-              ).toList();
-            },
-          ),
+          // PopupMenuButton<String>(
+          //   tooltip: S.of(context).tooltip_bttn_options,
+          //   onSelected: (index) {
+          //     // Visitanos
+          //     if (index == S.of(context).menu_appbar_item1) {
+          //       Fluttertoast.showToast(
+          //           msg: "Tab a visitanos",
+          //           toastLength: Toast.LENGTH_SHORT,
+          //           gravity: ToastGravity.BOTTOM,
+          //           timeInSecForIosWeb: 1,
+          //           backgroundColor: Colors.grey,
+          //           textColor: Colors.white,
+          //           fontSize: 16.0);
+          //     }
+          //     // setting screen
+          //     if (index == S.of(context).menu_appbar_item2) {
+          //       Navigator.pushNamed(context, SettingScreen.routeName);
+          //     }
+          //     // Ayuda
+          //     if (index == S.of(context).menu_appbar_item3) {
+          //       Fluttertoast.showToast(
+          //           msg: "Tap a ayuda",
+          //           toastLength: Toast.LENGTH_SHORT,
+          //           gravity: ToastGravity.BOTTOM,
+          //           timeInSecForIosWeb: 1,
+          //           backgroundColor: Colors.grey,
+          //           textColor: Colors.white,
+          //           fontSize: 16.0);
+          //     }
+          //     // SignOut session
+          //     if (index == S.of(context).menu_appbar_item4) {
+          //       RepositoryProvider.of<AuthRepository>(context).signOut();
+          //       context.read<AuthBloc>().add(const AuthUserChanged(user: null));
+          //       Navigator.pushNamedAndRemoveUntil(
+          //           context, '/', (route) => false);
+          //     }
+          //   },
+          //   itemBuilder: (BuildContext context) {
+          //     return itemsAppbar.map(
+          //       (String choice) {
+          //         return PopupMenuItem<String>(
+          //           value: choice,
+          //           child: Text(choice),
+          //         );
+          //       },
+          //     ).toList();
+          //   },
+          // ),
         ],
       ),
       body: BlocBuilder<HomePageBloc, HomePageState>(
@@ -157,7 +148,7 @@ class _MyHomePageState extends State<HomeScreen> {
           return Text(S.of(context).Error_displaying_interaces);
         },
       ),
-      bottomNavigationBar: const CustomBottomNavigationBar(items: items),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }

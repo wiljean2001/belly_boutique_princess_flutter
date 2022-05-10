@@ -15,6 +15,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final DatabaseRepository _databaseRepository;
   StreamSubscription? _authSubscription;
 
+
   ProfileBloc({
     required AuthBloc authBloc,
     required DatabaseRepository databaseRepository,
@@ -27,6 +28,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     _authSubscription = _authBloc.stream.listen((state) {
       if (state.user is AuthUserChanged) {
         if (state.user != null) {
+          print('SE CARGÓ EL LOADPROFILE OBTENIDO DEL AUTHBLOC');
           add(LoadProfile(userId: state.user!.uid));
         }
       }

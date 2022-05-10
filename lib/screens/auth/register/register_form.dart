@@ -93,6 +93,7 @@ class RegisterForm extends StatelessWidget {
                           name: '',
                           dateOfBirth: null,
                           gender: '',
+                          role: 'user',
                           imageUrls: const [],
                           interests: const [],
                           location: '',

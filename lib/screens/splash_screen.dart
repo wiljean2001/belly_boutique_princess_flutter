@@ -1,6 +1,10 @@
 import 'dart:async';
 
-import 'package:animated_splash_screen/animated_splash_screen.dart';
+// import 'package:animated_splash_screen/animated_splash_screen.dart';
+// import 'package:belly_boutique_princess/models/user_model.dart';
+// import 'package:belly_boutique_princess/repositories/repositories.dart';
+// import 'package:belly_boutique_princess/screens/admin/menu_admin.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,6 +32,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -35,11 +40,9 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Scaffold(
           body: BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
-              print("Listener");
-              print("State on Splash:-> $state.status");
               if (state.status == AuthStatus.authenticated) {
                 Timer(
-                  const Duration(seconds: 1),
+                  const Duration(seconds: 2),
                   () => Navigator.of(context).pushNamedAndRemoveUntil(
                     HomeScreen.routeName,
                     (route) => false,
@@ -48,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
               }
               if (state.status == AuthStatus.unauthenticated) {
                 Timer(
-                  const Duration(seconds: 1),
+                  const Duration(seconds: 2),
                   () => Navigator.of(context).pushNamedAndRemoveUntil(
                     OnboardingScreen.routeName,
                     (route) => false,

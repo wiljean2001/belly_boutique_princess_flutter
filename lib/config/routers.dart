@@ -1,10 +1,8 @@
 import 'package:belly_boutique_princess/screens/setting_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-// import '/models/models.dart';
-import '../blocs/blocs.dart';
+import '../models/models.dart';
+import '../screens/admin/admin_screens.dart';
 import '/screens/screens.dart';
 
 class Routers {
@@ -19,16 +17,12 @@ class Routers {
         return HomeScreen.route();
       case SplashScreen.routeName:
         return SplashScreen.route();
-      // case UsersScreen.routeName:
-      //   return UsersScreen.route(user: settings.arguments as User);
+      case MenuAdmintration.routeName:
+        return MenuAdmintration.route();
       case OnboardingScreen.routeName:
         return OnboardingScreen.route();
       case SettingScreen.routeName:
         return SettingScreen.route();
-      // case ProfileScreen.routeName:
-      //   return ProfileScreen.route();
-      // case ChatScreen.routeName:
-      //   return ChatScreen.route(userMatch: settings.arguments as UserMatch);
       default:
         return _errorRoute();
     }
