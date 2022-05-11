@@ -2,6 +2,10 @@
 
 import 'package:belly_boutique_princess/models/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../blocs/blocs.dart';
+import '../generated/l10n.dart';
 
 class UserProfileView extends StatefulWidget {
   const UserProfileView({Key? key}) : super(key: key);
@@ -47,28 +51,32 @@ class _UserProfilePageState extends State<UserProfileView> {
                 ],
               ),
             ),
-            Column(
+            Container(
+              child: Column(
                 children: [
-                 const Divider(height: 20, thickness: 1),
-                  const SizedBox(height: 10,),
-                  TextButton(
-                    onPressed:() {},
-                    child: const Text('Visitanos')
+                  SizedBox(
+                    height: 10,
                   ),
-                  TextButton(
-                    onPressed:() {},
-                    child: const Text('Configuraciones')
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 50),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 50,
+                      child: MaterialButton(
+                          onPressed: () {}, child: const Text('Visitanos')),
+                    ),
                   ),
+                  const Divider(height: 20, thickness: 1),
                   TextButton(
-                    onPressed:() {},
-                    child: const Text('Ayuda')
-                  ),
+                      onPressed: () {}, child: const Text('Configuraciones')),
+                  const Divider(height: 20, thickness: 1),
+                  TextButton(onPressed: () {}, child: const Text('Ayuda')),
+                  const Divider(height: 20, thickness: 1),
                   TextButton(
-                    onPressed:() {},
-                    child: const Text('Cerrar Sesión')
-                  ),
+                      onPressed: () {}, child: const Text('Cerrar Sesión')),
                 ],
-              )
+              ),
+            )
           ],
         ),
       ),

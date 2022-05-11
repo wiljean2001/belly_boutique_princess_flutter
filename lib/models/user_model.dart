@@ -46,7 +46,7 @@ class User extends Equatable {
     User user = User(
       id: snap.id,
       name: snap['name'],
-      dateOfBirth: snap['dateOfBirth'],
+      dateOfBirth: snap['date_of_birth'],
       gender: snap['gender'],
       role: snap['role'],
       imageUrls: snap['imageUrls'],

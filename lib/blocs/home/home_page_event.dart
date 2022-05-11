@@ -17,3 +17,22 @@ class HomeTabChangeEvent extends HomePageEvent {
   // TODO: implement props
   List<Object> get props => [newIndex];
 }
+
+
+class LoadRoleUser extends HomePageEvent {
+  final String userId;
+
+  const LoadRoleUser({required this.userId});
+
+  @override
+  List<Object> get props => [userId];
+}
+
+class UpdateRoleUser extends HomePageEvent {
+  final User user;
+
+  const UpdateRoleUser({required this.user});
+
+  @override
+  List<Object> get props => [user];
+}

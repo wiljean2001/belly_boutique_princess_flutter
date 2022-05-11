@@ -29,16 +29,19 @@ void main() async {
       // ),
       // options: defaultF
       );
+
+  // simple bloc observer
   BlocOverrides.runZoned(
-      () => {
-            runApp(
-              ChangeNotifierProvider(
-                create: (_) => ThemeChanger( themeDefault() ),
-                child: const MyApp(),
-              ),
-            ),
-          },
-      blocObserver: SimpleBlocObserver());
+    () => {
+      runApp(
+        ChangeNotifierProvider(
+          create: (_) => ThemeChanger(themeDefault()),
+          child: const MyApp(),
+        ),
+      ),
+    },
+    blocObserver: SimpleBlocObserver(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -94,8 +97,10 @@ class MyApp extends StatelessWidget {
               ),
           ),
           BlocProvider(
-            create: (_) => HomePageBloc()
-              ..add(
+            create: (context) => HomePageBloc(
+              authBloc: BlocProvider.of<AuthBloc>(context),
+              databaseRepository: context.read<DatabaseRepository>(),
+            )..add(
                 const HomeTabChangeEvent(
                     newIndex: 1), //newIndex = 0 is the first screen
               ),
@@ -105,7 +110,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Bely boutique princess',
           theme: theme.getTheme(),
-          localizationsDelegates: const [ // translate
+          localizationsDelegates: const [
+            // translate
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,

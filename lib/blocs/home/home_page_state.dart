@@ -18,3 +18,14 @@ class BottomNavigationInitial extends HomePageState {
   @override
   List<Object> get props => [indexBottomNav];
 }
+
+class RoleUserLoading extends HomePageState {}
+
+class RoleUserLoaded extends HomePageState {
+  final User user;
+
+  const RoleUserLoaded({required this.user});
+
+  @override
+  List<Object> get props => [user];
+}

@@ -15,7 +15,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final DatabaseRepository _databaseRepository;
   StreamSubscription? _authSubscription;
 
-
   ProfileBloc({
     required AuthBloc authBloc,
     required DatabaseRepository databaseRepository,

@@ -15,27 +15,28 @@ class MenuAdmintration extends StatelessWidget {
           print(BlocProvider.of<AuthBloc>(context).state.status);
 
           return BlocProvider.of<AuthBloc>(context).state.status ==
-              AuthStatus.unauthenticated
+                  AuthStatus.unauthenticated
               ? const OnboardingScreen()
               : const MenuAdmintration();
         });
   }
+
   const MenuAdmintration({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(children: const [
-          Image(
-            image: AssetImage("graphics/images/bely_logo-edit.png"),
-            width: 55,
-          ),
-          Text("Bely Boutique Princess")
-        ]),
-        elevation: 8,
-        actions: [],
-      ),
+      // appBar: AppBar(
+      //   title: Row(children: const [
+      //     Image(
+      //       image: AssetImage("graphics/images/bely_logo-edit.png"),
+      //       width: 55,
+      //     ),
+      //     Text("Bely Boutique Princess")
+      //   ]),
+      //   elevation: 8,
+      //   actions: [],
+      // ),
       body: Padding(
         padding: EdgeInsets.all(30),
         child: const CustomOptions(),

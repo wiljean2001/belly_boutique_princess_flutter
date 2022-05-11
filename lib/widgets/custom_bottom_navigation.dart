@@ -1,28 +1,47 @@
+import '../blocs/blocs.dart';
 import '/blocs/home/home_page_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomBottomNavigationBar extends StatelessWidget {
+class CustomBottomNavigationBar extends StatefulWidget {
   const CustomBottomNavigationBar({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<CustomBottomNavigationBar> createState() =>
+      _CustomBottomNavigationBarState();
+}
+
+class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+  @override
   Widget build(BuildContext context) {
     final homePageBloc = context.read<HomePageBloc>();
-    final List<Widget> items = <Widget>[
-      Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const [Icon(Icons.account_circle, size: 30)]),
-      Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const [Icon(Icons.home, size: 30)]),
-      Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const [Icon(Icons.shopping_cart, size: 30)]),
-    ];
+
+    // try {
+
+    List<Widget> _listItems() {
+      List<Widget> items = [
+        Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [Icon(Icons.account_circle, size: 30)]),
+        Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [Icon(Icons.home, size: 30)]),
+        Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [Icon(Icons.shopping_cart, size: 30)]),
+        // Column(
+        //     mainAxisSize: MainAxisSize.min,
+        //     children: const [Icon(Icons.analytics_outlined, size: 30)]),
+      ];
+      return items;
+    }
+    // } catch (e) {
+    //   print(e);
+    // }
 
     return BlocBuilder<HomePageBloc, HomePageState>(
       builder: (context, state) {
@@ -37,7 +56,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               animationCurve: Curves.easeInOut,
               animationDuration: const Duration(milliseconds: 400),
               color: Theme.of(context).primaryColor,
-              items: items,
+              items: _listItems(),
               onTap: (index) =>
                   homePageBloc.add(HomeTabChangeEvent(newIndex: index)),
             ),
