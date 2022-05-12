@@ -5,6 +5,7 @@ import 'dart:async';
 // import 'package:belly_boutique_princess/repositories/repositories.dart';
 // import 'package:belly_boutique_princess/screens/admin/menu_admin.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:belly_boutique_princess/blocs/home/home_page_bloc.dart';
 import 'package:belly_boutique_princess/screens/admin/admin_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
         onWillPop: () async => false,
         child: Scaffold(
           body: BlocListener<AuthBloc, AuthState>(
-            listener: (context, state) async {
+            listener: (context, state) {
               if (state.status == AuthStatus.unauthenticated) {
                 Timer(
                   const Duration(seconds: 2),
@@ -53,41 +54,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 );
               }
               if (state.status == AuthStatus.authenticated) {
-                try {
-                  // BlocProvider.of<ProfileBloc>(context).stream;
-                  // BlocProvider.of<ProfileBloc>(context).stream;
-                } catch (e) {
-                  print('Error> $e');
-                }
-                // BlocBuilder<ProfileBloc, ProfileState>(
-                //   builder: (context, state) {
-                //     if (state is ProfileLoading) {
-                //       return const CircularProgressIndicator();
-                //     }
-                //     if (state is ProfileLoaded) {
-                //       if (state.user.role == 'user') {
-                //         Timer(
-                //           const Duration(seconds: 2),
-                //           () => Navigator.of(context).pushNamedAndRemoveUntil(
-                //             HomeScreen.routeName,
-                //             (route) => false,
-                //           ),
-                //         );
-                //       } else {
-                //         Timer(
-                //           const Duration(seconds: 2),
-                //           () => Navigator.of(context).pushNamedAndRemoveUntil(
-                //             MenuAdmintration.routeName,
-                //             (route) => false,
-                //           ),
-                //         );
-                //       }
-                //     }
-                //     print('${state}');
-                //     return const CircularProgressIndicator();
-                //   },
-                // );
-
                 Timer(
                   const Duration(seconds: 2),
                   () => Navigator.of(context).pushNamedAndRemoveUntil(

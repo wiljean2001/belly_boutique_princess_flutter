@@ -19,7 +19,8 @@ class _CustomScrollViewProductsState extends State<CustomScrollViewProducts> {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      restorationId: 'grid_view_demo_grid_offset',
+      // restorationId: 'grid_view_demo_grid_offset',
+      primary: true,
       crossAxisCount: 2,
       mainAxisSpacing: 8,
       crossAxisSpacing: 8,
@@ -40,7 +41,13 @@ class _CustomScrollViewProductsState extends State<CustomScrollViewProducts> {
               ),
               clipBehavior: Clip.antiAlias,
               child: GridTileBar(
-                title: Text(product.name),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(product.name),
+                    Text(product.gender),
+                  ],
+                ),
                 backgroundColor: Colors.black45,
               ),
             ),

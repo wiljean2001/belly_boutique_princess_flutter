@@ -27,6 +27,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "COMMENT1": MessageLookupByLibrary.simpleMessage(" // HOME SCREENS "),
         "COMMENT2":
             MessageLookupByLibrary.simpleMessage(" // ONBOARDING SCREENS "),
+        "COMMENT3":
+            MessageLookupByLibrary.simpleMessage(" // ADMIN BOARDING SCREEN "),
         "Error_displaying_interaces": MessageLookupByLibrary.simpleMessage(
             "Error al cargar las interfaces"),
         "bttn_date_birth": MessageLookupByLibrary.simpleMessage(
@@ -58,7 +60,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Usuario existente"),
         "register_error_title":
             MessageLookupByLibrary.simpleMessage("Error de registro"),
+        "title_admin_screen":
+            MessageLookupByLibrary.simpleMessage("Administración"),
         "title_app": MessageLookupByLibrary.simpleMessage("Bienvenido"),
+        "title_new_product_screen":
+            MessageLookupByLibrary.simpleMessage("Nuevo producto"),
         "title_user_screen": MessageLookupByLibrary.simpleMessage("Usuario"),
         "tooltip_bttn_options":
             MessageLookupByLibrary.simpleMessage("Opciones"),

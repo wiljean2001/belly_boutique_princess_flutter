@@ -22,26 +22,20 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
     // try {
 
-    List<Widget> _listItems() {
-      List<Widget> items = [
-        Column(
-            mainAxisSize: MainAxisSize.min,
-            children: const [Icon(Icons.account_circle, size: 30)]),
-        Column(
-            mainAxisSize: MainAxisSize.min,
-            children: const [Icon(Icons.home, size: 30)]),
-        Column(
-            mainAxisSize: MainAxisSize.min,
-            children: const [Icon(Icons.shopping_cart, size: 30)]),
-        // Column(
-        //     mainAxisSize: MainAxisSize.min,
-        //     children: const [Icon(Icons.analytics_outlined, size: 30)]),
-      ];
-      return items;
-    }
-    // } catch (e) {
-    //   print(e);
-    // }
+    List<Widget> _listItems = [
+      Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [Icon(Icons.account_circle, size: 30)]),
+      Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [Icon(Icons.home, size: 30)]),
+      Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [Icon(Icons.shopping_cart, size: 30)]),
+      // Column(
+      //     mainAxisSize: MainAxisSize.min,
+      //     children: const [Icon(Icons.analytics_outlined, size: 30)]),
+    ];
 
     return BlocBuilder<HomePageBloc, HomePageState>(
       builder: (context, state) {
@@ -53,10 +47,11 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               index: state.indexBottomNav,
               height: 65,
               backgroundColor: Colors.transparent,
+              // buttonBackgroundColor: Colors.black,
               animationCurve: Curves.easeInOut,
-              animationDuration: const Duration(milliseconds: 400),
+              animationDuration: const Duration(milliseconds: 420),
               color: Theme.of(context).primaryColor,
-              items: _listItems(),
+              items: _listItems,
               onTap: (index) =>
                   homePageBloc.add(HomeTabChangeEvent(newIndex: index)),
             ),

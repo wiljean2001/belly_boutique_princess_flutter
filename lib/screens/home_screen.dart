@@ -1,5 +1,4 @@
 // import 'package:belly_boutique_princess/cubit/cubits.dart';
-import 'package:belly_boutique_princess/screens/admin/menu_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -95,7 +94,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       // backgroundColor: Theme.of(context).backgroundColor,
-      appBar: CustomAppBar(title: S.of(context).AppTitle, hasActions: true),
+      // appBar: CustomAppBar(title: S.of(context).AppTitle, hasActions: true),
       // appBar: AppBar(
       //   title: Row(
       //     children: [

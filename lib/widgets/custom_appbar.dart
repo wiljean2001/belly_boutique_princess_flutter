@@ -1,4 +1,5 @@
-import 'package:belly_boutique_princess/blocs/home/home_page_bloc.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:belly_boutique_princess/screens/admin/menu_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,66 +9,72 @@ import '../generated/l10n.dart';
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final bool hasActions;
+  final bool hasIcon;
 
   const CustomAppBar({
     Key? key,
     required this.title,
     this.hasActions = true,
+    this.hasIcon = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Image(
-            image: AssetImage(S.of(context).logo_home),
-            width: 55,
-          ),
-          Text(
-            title,
+          hasIcon
+              ? Image(
+                  image: AssetImage(S.of(context).logo_home),
+                  width: 45,
+                )
+              : const Text(''),
+          Expanded(
+            child: AutoSizeText(
+              title,
+              style: const TextStyle(fontSize: 18),
+              // style: Theme.of(context).textTheme,
+            ),
           ),
         ],
       ),
       actions: hasActions
           ? [
+              BlocBuilder<ProfileBloc, ProfileState>(
+                builder: (context, state) {
+                  if (state is ProfileLoading) {
+                    return const CircularProgressIndicator();
+                  }
+                  if (state is ProfileLoaded) {
+                    print('State: ${state.user.role}');
+                    if (state.user.role == 'admin') {
+                      return IconButton(
+                        tooltip: S.of(context).tooltip_bttn_shopping_card,
+                        icon: const Icon(Icons.analytics_outlined),
+                        onPressed: () => Navigator.of(context).pushNamed(
+                          MenuAdmintration.routeName,
+                        ),
+                      );
+                    } else {
+                      return Text('');
+                    }
+                  }
+                  return const CircularProgressIndicator();
+                },
+              ),
+
               IconButton(
                 tooltip: S.of(context).tooltip_bttn_shopping_card,
                 icon: const Icon(Icons.shopping_cart),
                 onPressed: () {},
               ),
-              BlocBuilder<HomePageBloc, HomePageState>(
-                  builder: (context, state) {
-                    if (state is RoleUserLoading) {
-                      return const CircularProgressIndicator();
-                    }
-                    if (state is RoleUserLoaded) {
-                      print('State: ${state.user.role}');
-                      return IconButton(
-                        tooltip: S.of(context).tooltip_bttn_shopping_card,
-                        icon: const Icon(Icons.shopping_cart),
-                        onPressed: () {},
-                      );
-                    }
-                    return const Icon(Icons.error);
-                  },
-                ),
-              // BlocBuilder<ProfileBloc, ProfileState>(
-              //   builder: (context, state) {
-              //     if (state is ProfileLoading) {
-              //       return const CircularProgressIndicator();
-              //     }
-              //     if (state is ProfileLoaded) {
-              //       print('State: ${state.user.role}');
-              //       return IconButton(
-              //         tooltip: S.of(context).tooltip_bttn_shopping_card,
-              //         icon: const Icon(Icons.shopping_cart),
-              //         onPressed: () {},
-              //       );
-              //     }
-              //     return const Icon(Icons.error);
-              //   },
-              // ),
+              IconButton(
+                tooltip: S.of(context).tooltip_bttn_shopping_card,
+                icon: const Icon(Icons.search_outlined),
+                onPressed: () {},
+              ),
+
               // PopupMenuButton<String>(
               //   tooltip: S.of(context).tooltip_bttn_options,
               //   onSelected: (index) {

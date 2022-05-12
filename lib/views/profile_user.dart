@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/blocs.dart';
 import '../generated/l10n.dart';
+import '../widgets/custom_appbar.dart';
 
 class UserProfileView extends StatefulWidget {
   const UserProfileView({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class _UserProfilePageState extends State<UserProfileView> {
   Widget build(BuildContext context) {
     final edad = DateTime.now().year - usuario.dateOfBirth!.toDate().year;
     return Scaffold(
+      appBar: CustomAppBar(title: S.of(context).AppTitle, hasActions: false),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -54,7 +56,7 @@ class _UserProfilePageState extends State<UserProfileView> {
             Container(
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Padding(

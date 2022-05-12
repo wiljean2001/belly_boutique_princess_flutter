@@ -1,46 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../blocs/blocs.dart';
+import '../../widgets/custom_appbar.dart';
 import '../../widgets/custom_dropdown_categories.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../../../generated/l10n.dart';
+import '../auth/auth_screens.dart';
 
-class NewProductScreen extends StatefulWidget {
+class NewProductScreen extends StatelessWidget {
+  static const String routeName = '/admin/nuevo/producto'; //route
+
+  static Route route() {
+    return MaterialPageRoute(
+        settings: const RouteSettings(name: routeName),
+        builder: (context) {
+          // print the status user with the authbloc
+          print(BlocProvider.of<AuthBloc>(context).state.status);
+
+          return BlocProvider.of<AuthBloc>(context).state.status ==
+                  AuthStatus.unauthenticated
+              ? const OnboardingScreen()
+              : NewProductScreen();
+        });
+  }
+
   NewProductScreen({Key? key}) : super(key: key);
 
-  @override
-  State<NewProductScreen> createState() => _newProductState();
-}
-
-class _newProductState extends State<NewProductScreen> {
   final controller = CarouselController();
   // final List<String> tallas;
   final itemsTallas = <String>[];
   final List<String> itemsImages = [
     'graphics/images/Bestido 1_n.jpg',
   ];
-  void _setText(title) {
-    setState(() {
-      itemsTallas.add(title);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Row(children: const [
-            Image(
-              image: AssetImage("graphics/images/bely_logo-edit.png"),
-              width: 55,
-            ),
-            Text("Bely Boutique Princess")
-          ]),
-          elevation: 8,
+        appBar: CustomAppBar(
+          title: S.of(context).title_new_product_screen,
+          hasActions: false,
+          hasIcon: false,
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(
-            padding: EdgeInsets.all(30),
+            padding: const EdgeInsets.all(30),
             constraints:
                 BoxConstraints(minHeight: MediaQuery.of(context).size.height),
             child: Column(
@@ -127,7 +132,7 @@ class _newProductState extends State<NewProductScreen> {
                                     border: OutlineInputBorder(),
                                     labelText: 'Ingresar tallas',
                                   ),
-                                  onChanged: (text) => _setText(text),
+                                  // onChanged: (text) => _setText(text),
                                   maxLines: 1,
                                 ),
                               ),

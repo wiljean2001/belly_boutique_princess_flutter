@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/blocs.dart';
+import '../../generated/l10n.dart';
+import '../../widgets/custom_appbar.dart';
 import '../screens.dart';
 import '/screens/admin/new_product_screen.dart';
 import 'package:flutter/material.dart';
@@ -26,20 +28,19 @@ class MenuAdmintration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Row(children: const [
-      //     Image(
-      //       image: AssetImage("graphics/images/bely_logo-edit.png"),
-      //       width: 55,
-      //     ),
-      //     Text("Bely Boutique Princess")
-      //   ]),
-      //   elevation: 8,
-      //   actions: [],
-      // ),
-      body: Padding(
-        padding: EdgeInsets.all(30),
-        child: const CustomOptions(),
+      appBar: CustomAppBar(
+          title: S.of(context).title_admin_screen,
+          hasActions: false,
+          hasIcon: false),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        child: SafeArea(
+          // child: SingleChildScrollView(
+          // padding: EdgeInsets.all(30),
+          // primary: true,
+          child: CustomOptions(),
+          // ),
+        ),
       ),
     );
   }
@@ -58,18 +59,21 @@ class CustomOptions extends StatelessWidget {
       crossAxisSpacing: 15,
       children: <Widget>[
         Container(
-          color: Color.fromARGB(31, 177, 177, 177),
+          color: const Color.fromARGB(31, 177, 177, 177),
           child: GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return NewProductScreen();
-              }));
+              Navigator.pushNamed(
+                context,
+                NewProductScreen.routeName,
+              );
             },
             child: const GridTile(
               footer: Material(
                 color: Color.fromARGB(0, 255, 0, 0),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(4),
+                  ),
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: GridTileBar(
@@ -90,7 +94,7 @@ class CustomOptions extends StatelessWidget {
           ),
         ),
         Container(
-          color: Color.fromARGB(31, 177, 177, 177),
+          color: const Color.fromARGB(31, 177, 177, 177),
           child: GestureDetector(
             onTap: () {},
             child: const GridTile(
@@ -118,7 +122,7 @@ class CustomOptions extends StatelessWidget {
           ),
         ),
         Container(
-          color: Color.fromARGB(31, 177, 177, 177),
+          color: const Color.fromARGB(31, 177, 177, 177),
           child: GestureDetector(
             onTap: () {},
             child: const GridTile(
@@ -146,7 +150,7 @@ class CustomOptions extends StatelessWidget {
           ),
         ),
         Container(
-          color: Color.fromARGB(31, 177, 177, 177),
+          color: const Color.fromARGB(31, 177, 177, 177),
           child: GestureDetector(
             onTap: () {},
             child: const GridTile(
@@ -174,7 +178,7 @@ class CustomOptions extends StatelessWidget {
           ),
         ),
         Container(
-          color: Color.fromARGB(31, 177, 177, 177),
+          color: const Color.fromARGB(31, 177, 177, 177),
           child: GestureDetector(
             onTap: () {},
             child: const GridTile(
@@ -202,7 +206,63 @@ class CustomOptions extends StatelessWidget {
           ),
         ),
         Container(
-          color: Color.fromARGB(31, 177, 177, 177),
+          color: const Color.fromARGB(31, 177, 177, 177),
+          child: GestureDetector(
+            onTap: () {},
+            child: const GridTile(
+              footer: Material(
+                color: Color.fromARGB(0, 255, 0, 0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: GridTileBar(
+                  title: Text(
+                    "[...]",
+                    style: TextStyle(color: Colors.black),
+                    textAlign: TextAlign.center,
+                  ),
+                  // backgroundColor: Colors.black45,
+                ),
+              ),
+              // Buscar la forma de almacenar las imagenes
+              child: Icon(
+                Icons.add,
+                size: 80,
+              ),
+            ),
+          ),
+        ),
+        Container(
+          color: const Color.fromARGB(31, 177, 177, 177),
+          child: GestureDetector(
+            onTap: () {},
+            child: const GridTile(
+              footer: Material(
+                color: Color.fromARGB(0, 255, 0, 0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: GridTileBar(
+                  title: Text(
+                    "[...]",
+                    style: TextStyle(color: Colors.black),
+                    textAlign: TextAlign.center,
+                  ),
+                  // backgroundColor: Colors.black45,
+                ),
+              ),
+              // Buscar la forma de almacenar las imagenes
+              child: Icon(
+                Icons.add,
+                size: 80,
+              ),
+            ),
+          ),
+        ),
+        Container(
+          color: const Color.fromARGB(31, 177, 177, 177),
           child: GestureDetector(
             onTap: () {},
             child: const GridTile(

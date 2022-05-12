@@ -1,3 +1,4 @@
+import 'package:belly_boutique_princess/screens/admin/new_product_screen.dart';
 import 'package:belly_boutique_princess/screens/setting_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,8 @@ class Routers {
         return OnboardingScreen.route();
       case SettingScreen.routeName:
         return SettingScreen.route();
+      case NewProductScreen.routeName:
+        return NewProductScreen.route();
       default:
         return _errorRoute();
     }

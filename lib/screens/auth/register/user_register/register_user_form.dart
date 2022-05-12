@@ -54,7 +54,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
               initialDate: DateTime((DateTime.now().year - 18)),
               firstDate: DateTime(1900),
               lastDate: DateTime(DateTime.now().year - 18),
-              locale: const Locale("ar", "AR"),
+              locale: context.read<Locale>(),
               // (2101)
             );
             if (picked != null) {

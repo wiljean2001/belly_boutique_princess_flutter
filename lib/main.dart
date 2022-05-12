@@ -100,10 +100,11 @@ class MyApp extends StatelessWidget {
             create: (context) => HomePageBloc(
               authBloc: BlocProvider.of<AuthBloc>(context),
               databaseRepository: context.read<DatabaseRepository>(),
-            )..add(
+            )
+              ..add(
                 const HomeTabChangeEvent(
                     newIndex: 1), //newIndex = 0 is the first screen
-              ),
+              )
           ),
         ],
         child: MaterialApp(

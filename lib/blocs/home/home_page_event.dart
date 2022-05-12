@@ -19,20 +19,20 @@ class HomeTabChangeEvent extends HomePageEvent {
 }
 
 
-class LoadRoleUser extends HomePageEvent {
-  final String userId;
+// class LoadRoleUser extends HomePageEvent {
+//   final String userId;
 
-  const LoadRoleUser({required this.userId});
+//   const LoadRoleUser({required this.userId});
 
-  @override
-  List<Object> get props => [userId];
-}
+//   @override
+//   List<Object> get props => [userId];
+// }
 
-class UpdateRoleUser extends HomePageEvent {
-  final User user;
+// class UpdateRoleUser extends HomePageEvent {
+//   final User user;
 
-  const UpdateRoleUser({required this.user});
+//   const UpdateRoleUser({required this.user});
 
-  @override
-  List<Object> get props => [user];
-}
+//   @override
+//   List<Object> get props => [user];
+// }

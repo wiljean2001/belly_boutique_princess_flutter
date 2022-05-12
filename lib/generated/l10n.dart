@@ -359,6 +359,36 @@ class S {
       args: [],
     );
   }
+
+  /// ` // ADMIN BOARDING SCREEN `
+  String get COMMENT3 {
+    return Intl.message(
+      ' // ADMIN BOARDING SCREEN ',
+      name: 'COMMENT3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Administración`
+  String get title_admin_screen {
+    return Intl.message(
+      'Administración',
+      name: 'title_admin_screen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nuevo producto`
+  String get title_new_product_screen {
+    return Intl.message(
+      'Nuevo producto',
+      name: 'title_new_product_screen',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
