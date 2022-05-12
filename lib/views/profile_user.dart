@@ -3,9 +3,12 @@
 import 'package:belly_boutique_princess/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../blocs/blocs.dart';
 import '../generated/l10n.dart';
+import '../repositories/auth/auth_repository.dart';
+import '../screens/setting_screen.dart';
 import '../widgets/custom_appbar.dart';
 
 class UserProfileView extends StatefulWidget {
@@ -40,14 +43,24 @@ class _UserProfilePageState extends State<UserProfileView> {
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      const Text('Edad'),
-                      Text(edad.toString()),
+                      const Text(
+                        'Edad',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Text(
+                        edad.toString(),
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ],
                   ),
                   Column(
                     children: <Widget>[
-                      const Text("Sexo"),
-                      Text(usuario.gender),
+                      const Text(
+                        "Sexo",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Text(usuario.gender,
+                          style: TextStyle(color: Colors.white)),
                     ],
                   ),
                 ],
@@ -64,7 +77,16 @@ class _UserProfilePageState extends State<UserProfileView> {
                     width: MediaQuery.of(context).size.width,
                     height: 50,
                     child: MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Fluttertoast.showToast(
+                            msg: "Tab a visitanos",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.grey,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      },
                       child: const Text(
                         'Visitanos',
                         style: TextStyle(color: Colors.pink),
@@ -79,7 +101,9 @@ class _UserProfilePageState extends State<UserProfileView> {
                     width: MediaQuery.of(context).size.width,
                     height: 50,
                     child: MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, SettingScreen.routeName);
+                      },
                       child: const Text(
                         'Configuraciones',
                         style: TextStyle(color: Colors.pink),
@@ -94,7 +118,16 @@ class _UserProfilePageState extends State<UserProfileView> {
                     width: MediaQuery.of(context).size.width,
                     height: 50,
                     child: MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Fluttertoast.showToast(
+                            msg: "Tap a ayuda",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.grey,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      },
                       child: const Text(
                         'Ayuda',
                         style: TextStyle(color: Colors.pink),
@@ -109,7 +142,15 @@ class _UserProfilePageState extends State<UserProfileView> {
                     width: MediaQuery.of(context).size.width,
                     height: 50,
                     child: MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        RepositoryProvider.of<AuthRepository>(context)
+                            .signOut();
+                        context
+                            .read<AuthBloc>()
+                            .add(const AuthUserChanged(user: null));
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, '/', (route) => false);
+                      },
                       child: const Text(
                         'Cerrar Sesion',
                         style: TextStyle(color: Colors.pink),
