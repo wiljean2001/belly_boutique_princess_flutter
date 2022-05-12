@@ -53,31 +53,71 @@ class _UserProfilePageState extends State<UserProfileView> {
                 ],
               ),
             ),
-            Container(
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: 50,
-                      child: MaterialButton(
-                          onPressed: () {}, child: const Text('Visitanos')),
+            Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    child: MaterialButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Visitanos',
+                        style: TextStyle(color: Colors.pink),
+                      ),
                     ),
                   ),
-                  const Divider(height: 20, thickness: 1),
-                  TextButton(
-                      onPressed: () {}, child: const Text('Configuraciones')),
-                  const Divider(height: 20, thickness: 1),
-                  TextButton(onPressed: () {}, child: const Text('Ayuda')),
-                  const Divider(height: 20, thickness: 1),
-                  TextButton(
-                      onPressed: () {}, child: const Text('Cerrar Sesión')),
-                ],
-              ),
+                ),
+                const Divider(height: 20, thickness: 1),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    child: MaterialButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Configuraciones',
+                        style: TextStyle(color: Colors.pink),
+                      ),
+                    ),
+                  ),
+                ),
+                const Divider(height: 20, thickness: 1),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    child: MaterialButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Ayuda',
+                        style: TextStyle(color: Colors.pink),
+                      ),
+                    ),
+                  ),
+                ),
+                const Divider(height: 20, thickness: 1),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    child: MaterialButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Cerrar Sesion',
+                        style: TextStyle(color: Colors.pink),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             )
           ],
         ),
