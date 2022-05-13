@@ -3,11 +3,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:belly_boutique_princess/models/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
 
 import '../blocs/blocs.dart';
+import '../blocs/theme.dart';
 import '../generated/l10n.dart';
 import '../repositories/auth/auth_repository.dart';
 import '../screens/setting_screen.dart';
@@ -62,7 +64,7 @@ class getProfileLoaded extends StatelessWidget {
             // backgroundColor: Colors.transparent,
             floating: true,
             // brightness: ,
-            expandedHeight: 240,
+            expandedHeight: 280,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               title: Text(
@@ -175,11 +177,16 @@ class getProfileLoaded extends StatelessWidget {
   }
 }
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -196,16 +203,32 @@ class Body extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               height: 50,
               child: MaterialButton(
-                onPressed: () {
-                  Fluttertoast.showToast(
-                      msg: "Tab a visitanos",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.grey,
-                      textColor: Colors.white,
-                      fontSize: 16.0);
-                },
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    content: PagesVisit(),
+                    backgroundColor: Colors.transparent,
+                    // actions: <Widget>[
+                    //   TextButton(
+                    //     onPressed: () => Navigator.pop(context, 'Cancel'),
+                    //     child: const Text('Cancel'),
+                    //   ),
+                    //   TextButton(
+                    //     onPressed: () => Navigator.pop(context, 'OK'),
+                    //     child: const Text('OK'),
+                    //   ),
+                    // ],
+                  ),
+                ),
+                // Fluttertoast.showToast(
+                //     msg: "Tab a visitanos",
+                //     toastLength: Toast.LENGTH_SHORT,
+                //     gravity: ToastGravity.BOTTOM,
+                //     timeInSecForIosWeb: 1,
+                //     backgroundColor: Colors.grey,
+                //     textColor: Colors.white,
+                //     fontSize: 16.0);
+
                 child: const Text(
                   'Visitanos',
                   style: TextStyle(color: Colors.pink),
@@ -300,117 +323,76 @@ class Body extends StatelessWidget {
   }
 }
 
-// class Header extends StatelessWidget {
-//   final User usuario;
-//   final double height;
+class PagesVisit extends StatelessWidget {
+  const PagesVisit({Key? key}) : super(key: key);
 
-//   const Header({
-//     Key? key,
-//     required this.usuario,
-//     this.height = 190,
-//   }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> cardPages = [
+      const CardVisit(
+        backgroundColor: Colors.amber,
+        title: 'Facebook',
+        descript: 'Visita en Facebook dandole click al botón',
+        icon: Icon(Icons.facebook),
+      ),
+      const CardVisit(
+        backgroundColor: Colors.amber,
+        title: 'Whatsapp',
+        descript: 'Visita en Whatsapp dandole click al botón',
+        icon: Icon(Icons.whatsapp),
+      ),
+    ];
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final edad = DateTime.now().year - usuario.dateOfBirth!.toDate().year;
-//     return Column(
-//       children: [
-//         Container(
-//           width: double.infinity,
-//           height: height,
-//           padding: const EdgeInsets.only(bottom: 10),
-//           decoration: const BoxDecoration(
-//             image: DecorationImage(
-//               image: AssetImage("graphics/images/fondo_user.jpg"),
-//               fit: BoxFit.cover,
-//             ),
-//           ),
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             crossAxisAlignment: CrossAxisAlignment.center,
-//             children: <Widget>[
-//               // UserPhoto(usuario: usuario, size: 120),
-//               Expanded(
-//                 child: Text(
-//                   "@" + (usuario.name), //nombre de usuario
-//                   style: TextStyle(
-//                       fontSize: 25, color: Theme.of(context).primaryColorLight),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//         Container(
-//           color: Colors.pink,
-//           padding: const EdgeInsets.symmetric(vertical: 10),
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//             children: <Widget>[
-//               Column(
-//                 children: <Widget>[
-//                   const Text(
-//                     'Edad',
-//                     style: TextStyle(color: Colors.white),
-//                   ),
-//                   Text(
-//                     edad.toString(),
-//                     style: const TextStyle(color: Colors.white),
-//                   ),
-//                 ],
-//               ),
-//               Column(
-//                 children: <Widget>[
-//                   const Text(
-//                     "Sexo",
-//                     style: TextStyle(color: Colors.white),
-//                   ),
-//                   Text(usuario.gender,
-//                       style: const TextStyle(color: Colors.white)),
-//                 ],
-//               ),
-//             ],
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: 300,
+      child: Center(
+        child: PageView(
+          children: cardPages,
+        ),
+      ),
+    );
+  }
+}
 
-// class UserPhoto extends StatelessWidget {
-//   final double size;
-//   final User usuario;
+class CardVisit extends StatelessWidget {
+  final String title;
+  final String? descript;
+  final Icon? icon;
+  final Image? image;
+  final Color? backgroundColor;
 
-//   const UserPhoto({
-//     Key? key,
-//     required this.usuario,
-//     this.size = 120,
-//   }) : super(key: key);
+  const CardVisit(
+      {Key? key,
+      required this.title,
+      this.descript,
+      this.icon,
+      this.backgroundColor = Colors.red,
+      this.image})
+      : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       width: size,
-//       height: size,
-//       child: ,
-//     );
-//   }
-
-// }
-// decoration: BoxDecoration(
-//         image: DecorationImage(
-//           image: FadeInImage(
-//                   image: NetworkImage(usuario.imageUrls[0]),
-//                   placeholder:
-//                       const AssetImage('graphics/images/loading_gif.gif'))
-//               .placeholder,
-//         ),
-//         //image: const DecorationImage(
-//         //image: AssetImage("graphics/images/user.jpg"),
-//         //fit: BoxFit.cover,
-//         // ),
-//         shape: BoxShape.circle,
-//         border: Border.all(
-//           color: Colors.white,
-//           width: 4,
-//         ),
-//       ),
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      color: backgroundColor,
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(title),
+            descript != null ? Text(descript!, style: TextStyle(),) : const Text(''),
+            icon != null ? icon! : const Text(''),
+            image != null
+                ? Container(
+                    width: 200,
+                    child: image!,
+                  )
+                : const Text(''),
+          ],
+        ),
+      ),
+    );
+  }
+}
