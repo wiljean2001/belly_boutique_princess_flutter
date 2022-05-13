@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-import '../../config/theme_default.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/curved_widget.dart';
 import '../../widgets/custom_button_gradiant.dart';
@@ -36,12 +35,13 @@ class StartScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 100),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.white,
-                        Colors.white.withOpacity(0.5),
-                      ]),
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.white,
+                      Colors.white.withOpacity(0.5),
+                    ],
+                  ),
                 ),
                 width: double.infinity,
                 height: 400,
@@ -78,7 +78,6 @@ class StartScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-
                   CustomButtonGradiant(
                     text: Text(
                       S.of(context).bttn_start,

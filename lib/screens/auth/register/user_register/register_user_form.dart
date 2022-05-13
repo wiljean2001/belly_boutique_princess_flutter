@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../../blocs/blocs.dart';
 import '../../../../generated/l10n.dart';
 import '/cubit/signup/signup_cubit.dart';
-import '/screens/home_screen.dart';
+import '../../../user/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

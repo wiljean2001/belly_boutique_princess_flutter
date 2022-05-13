@@ -1,18 +1,13 @@
-// import 'package:belly_boutique_princess/cubit/cubits.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/blocs.dart';
-import '../blocs/home/home_page_bloc.dart';
-import '../generated/l10n.dart';
-// import '../models/models.dart';
-// import '../repositories/repositories.dart';
-import '../views/user_views.dart';
-import '../widgets/custom_appbar.dart';
-import '../widgets/custom_bottom_navigation.dart';
-import 'auth/onboarding_screen.dart';
-// import 'package:flutter/services.dart';
-// import 'setting_screen.dart';
+import '../../blocs/blocs.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../generated/l10n.dart';
+
+import '../../pages/user_views.dart';
+import '../../widgets/custom_bottom_navigation.dart';
+import '../auth/onboarding_screen.dart';
+import '../../blocs/home/home_page_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String routeName = '/'; //route

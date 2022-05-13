@@ -2,8 +2,6 @@ import '../generated/l10n.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_dropdown_categories.dart';
 import '../widgets/custom_scrollview_products.dart';
-import '/blocs/home/home_page_bloc.dart';
-import '/screens/product_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {

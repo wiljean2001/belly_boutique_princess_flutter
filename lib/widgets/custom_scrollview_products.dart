@@ -1,7 +1,7 @@
 import '/models/user_model.dart';
 import 'package:flutter/material.dart';
 
-import '/screens/product_screen.dart';
+import '../screens/user/product_screen.dart';
 import '../screens/admin/new_product_screen.dart';
 
 class CustomScrollViewProducts extends StatefulWidget {

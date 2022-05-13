@@ -14,7 +14,7 @@ import '../blocs/blocs.dart';
 import '../generated/l10n.dart';
 import '../models/user_model.dart';
 import 'auth/onboarding_screen.dart';
-import 'home_screen.dart';
+import 'user/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = '/splash';

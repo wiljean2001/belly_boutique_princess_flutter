@@ -5,7 +5,7 @@ ThemeData themeDefault() {
     primaryColor: Colors.pink,
     primarySwatch: Colors.pink,
     // primaryColorDark: Colors.black,
-    // primaryColorLight: Colors.white,
+    primaryColorLight: Colors.white,
     // accentColor: const Color(0xFFE84545),
     scaffoldBackgroundColor: const Color(0xFFFFFFFF),
     backgroundColor: const Color(0xFFF4F4F4),

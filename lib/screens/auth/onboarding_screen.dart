@@ -3,10 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// import 'widgets.dart';
 import 'auth_screens.dart';
-import '../../widgets/curved_widget.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatelessWidget {
   static const String routeName = '/onboarding';
@@ -42,6 +39,7 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(overlayStyle);
     return DefaultTabController(
+      animationDuration: const Duration(seconds: 1),
       length: tabs.length,
       child: Builder(builder: (BuildContext context) {
         final TabController tabController = DefaultTabController.of(context)!;
@@ -59,7 +57,8 @@ class OnboardingScreen extends StatelessWidget {
           body: TabBarView(
             physics: const NeverScrollableScrollPhysics(), // never scroll
             // controller: tabController,
-            dragStartBehavior: DragStartBehavior.down,
+            // dragStartBehavior: DragStartBehavior.start,
+            // viewportFraction: 5,
             children: [
               StartScreen(tabController: tabController),
               LoginScreen(tabController: tabController),
