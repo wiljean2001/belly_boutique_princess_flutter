@@ -1,6 +1,6 @@
 # belly_boutique_princess_flutter
 
-A new Flutter project.
+A Flutter project.
 
 ## Getting Started
 

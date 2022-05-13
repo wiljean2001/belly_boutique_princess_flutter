@@ -5,6 +5,7 @@ import 'package:belly_boutique_princess/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pinch_zoom/pinch_zoom.dart';
 
 import '../blocs/blocs.dart';
 import '../generated/l10n.dart';
@@ -19,11 +20,8 @@ class UserProfileView extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfileView> {
-  final User usuario = User.users.last;
-
   @override
   Widget build(BuildContext context) {
-    final edad = DateTime.now().year - usuario.dateOfBirth!.toDate().year;
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         if (state is ProfileLoading) {
@@ -32,7 +30,9 @@ class _UserProfilePageState extends State<UserProfileView> {
           );
         }
         if (state is ProfileLoaded) {
-          return getProfileLoaded(edad: edad, usuario: usuario);
+          final edad =
+              DateTime.now().year - state.user.dateOfBirth!.toDate().year;
+          return getProfileLoaded(edad: edad, usuario: state.user);
         }
         return Center(child: Text(S.of(context).error_desc));
       },
@@ -62,98 +62,118 @@ class getProfileLoaded extends StatelessWidget {
             // backgroundColor: Colors.transparent,
             floating: true,
             // brightness: ,
-            expandedHeight: 250,
+            expandedHeight: 240,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               title: Text(
-                '@${state.user.name}',
-                style: const TextStyle(fontSize: 16),
+                '@${usuario.name}',
+                style: TextStyle(
+                  fontSize: 16,
+                  shadows: [
+                    Shadow(
+                        color: Theme.of(context).primaryColorDark,
+                        blurRadius: 10)
+                  ],
+                ),
               ),
               // collapseMode: CollapseMode.none,
-              background: Container(
-                // margin: const EdgeInsets.all(20.0),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      state.user.imageUrls[0],
-                      // fit: BoxFit.fill,
+              background: PinchZoom(
+                // onTap: () {
+                //   Fluttertoast.showToast(
+                //       msg: "Agrandar la imagen",
+                //       toastLength: Toast.LENGTH_SHORT,
+                //       gravity: ToastGravity.BOTTOM,
+                //       timeInSecForIosWeb: 1,
+                //       backgroundColor: Colors.grey,
+                //       textColor: Colors.white,
+                //       fontSize: 16.0);
+                // },
+                child: Container(
+                  // margin: const EdgeInsets.all(20.0),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        usuario.imageUrls[0],
+                        // fit: BoxFit.fill,
+                      ),
+                      alignment: Alignment.center,
+                      fit: BoxFit.fitWidth,
                     ),
-                    fit: BoxFit.cover,
                   ),
+                  // child: CircleAvatar(
+                  //   foregroundImage: NetworkImage(
+                  //     state.user.imageUrls[0],
+                  //     // fit: BoxFit.fill,
+                  //   ),
+                  // ),
                 ),
-                // child: CircleAvatar(
-                //   foregroundImage: NetworkImage(
-                //     state.user.imageUrls[0],
-                //     // fit: BoxFit.fill,
-                //   ),
-                // ),
               ),
             ),
           ),
           SliverFillRemaining(
-            child: Column(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  height: 85,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: const BorderRadius.vertical(
-                        bottom: Radius.circular(25),
+            hasScrollBody: true,
+            fillOverscroll: true,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 20),
+                    // width: double.infinity,
+                    height: 80,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: const BorderRadius.vertical(
+                          bottom: Radius.circular(25),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                'Edad',
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColorLight),
+                              ),
+                              Text(
+                                edad.toString(),
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColorLight),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                "Sexo",
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColorLight),
+                              ),
+                              Text(
+                                usuario.gender,
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColorLight),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Text(
-                              'Edad',
-                              style: TextStyle(
-                                  color: Theme.of(context)
-                                      .primaryColorLight),
-                            ),
-                            Text(
-                              edad.toString(),
-                              style: TextStyle(
-                                  color: Theme.of(context)
-                                      .primaryColorLight),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Text(
-                              "Sexo",
-                              style: TextStyle(
-                                  color: Theme.of(context)
-                                      .primaryColorLight),
-                            ),
-                            Text(
-                              usuario.gender,
-                              style: TextStyle(
-                                  color: Theme.of(context)
-                                      .primaryColorLight),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
                   ),
-                ),
-                const Body(),
-              ],
+                  const Body(),
+                ],
+              ),
             ),
-          )
+          ),
         ],
       ),
     );
   }
 }
-
 
 class Body extends StatelessWidget {
   const Body({
@@ -163,90 +183,114 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        const SizedBox(
-          height: 10,
-        ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 50,
-            child: MaterialButton(
-              onPressed: () {
-                Fluttertoast.showToast(
-                    msg: "Tab a visitanos",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.grey,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
-              },
-              child: const Text(
-                'Visitanos',
-                style: TextStyle(color: Colors.pink),
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColorDark.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 50,
+              child: MaterialButton(
+                onPressed: () {
+                  Fluttertoast.showToast(
+                      msg: "Tab a visitanos",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.grey,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                },
+                child: const Text(
+                  'Visitanos',
+                  style: TextStyle(color: Colors.pink),
+                ),
               ),
             ),
           ),
         ),
-        const Divider(height: 20, thickness: 1),
+        const SizedBox(height: 20),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 50,
-            child: MaterialButton(
-              onPressed: () {
-                Navigator.pushNamed(context, SettingScreen.routeName);
-              },
-              child: const Text(
-                'Configuraciones',
-                style: TextStyle(color: Colors.pink),
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColorDark.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 50,
+              child: MaterialButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, SettingScreen.routeName);
+                },
+                child: const Text(
+                  'Configuraciones',
+                  style: TextStyle(color: Colors.pink),
+                ),
               ),
             ),
           ),
         ),
-        const Divider(height: 20, thickness: 1),
+        const SizedBox(height: 20),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 50,
-            child: MaterialButton(
-              onPressed: () {
-                Fluttertoast.showToast(
-                    msg: "Tap a ayuda",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.grey,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
-              },
-              child: const Text(
-                'Ayuda',
-                style: TextStyle(color: Colors.pink),
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColorDark.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 50,
+              child: MaterialButton(
+                onPressed: () {
+                  Fluttertoast.showToast(
+                      msg: "Tap a ayuda",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.grey,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                },
+                child: const Text(
+                  'Ayuda',
+                  style: TextStyle(color: Colors.pink),
+                ),
               ),
             ),
           ),
         ),
-        const Divider(height: 20, thickness: 1),
+        const SizedBox(height: 20),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 50,
-            child: MaterialButton(
-              onPressed: () {
-                RepositoryProvider.of<AuthRepository>(context).signOut();
-                context.read<AuthBloc>().add(const AuthUserChanged(user: null));
-                Navigator.pushNamedAndRemoveUntil(
-                    context, '/', (route) => false);
-              },
-              child: const Text(
-                'Cerrar Sesion',
-                style: TextStyle(color: Colors.pink),
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColorDark.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 50,
+              child: MaterialButton(
+                onPressed: () {
+                  RepositoryProvider.of<AuthRepository>(context).signOut();
+                  context
+                      .read<AuthBloc>()
+                      .add(const AuthUserChanged(user: null));
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/', (route) => false);
+                },
+                child: const Text(
+                  'Cerrar Sesion',
+                  style: TextStyle(color: Colors.pink),
+                ),
               ),
             ),
           ),
