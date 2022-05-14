@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeChanger>(context);
+    final ThemeData getThema = theme.getTheme<ThemeData>();
     /**
      * MultiRepositoryProvider
      */
@@ -97,20 +98,27 @@ class MyApp extends StatelessWidget {
               ),
           ),
           BlocProvider(
-            create: (context) => HomePageBloc(
-              authBloc: BlocProvider.of<AuthBloc>(context),
-              databaseRepository: context.read<DatabaseRepository>(),
-            )
-              ..add(
-                const HomeTabChangeEvent(
-                    newIndex: 1), //newIndex = 0 is the first screen
-              )
-          ),
+              create: (context) => HomePageBloc(
+                    authBloc: BlocProvider.of<AuthBloc>(context),
+                    databaseRepository: context.read<DatabaseRepository>(),
+                  )..add(
+                      const HomeTabChangeEvent(
+                          newIndex: 1), //newIndex = 0 is the first screen
+                    )),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Bely boutique princess',
-          theme: theme.getTheme(),
+          theme: getThema,
+          /**
+           * .copyWith(
+              pageTransitionsTheme: const PageTransitionsTheme(
+              builders: <TargetPlatform, PageTransitionsBuilder>{
+              TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+              },
+              ),
+              ),
+           * */
           localizationsDelegates: const [
             // translate
             GlobalMaterialLocalizations.delegate,

@@ -1,3 +1,3 @@
-export './home_view.dart';
-export './profile_user.dart';
-export './shopping_cart_view.dart';
+export './home_page.dart';
+export './profile_user_page.dart';
+export './shopping_cart_page.dart';

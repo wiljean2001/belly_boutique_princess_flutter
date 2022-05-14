@@ -1,18 +1,18 @@
-// ignore_for_file: deprecated_member_use
-
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:belly_boutique_princess/models/user_model.dart';
+import 'package:belly_boutique_princess/utils/open_all.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:pinch_zoom/pinch_zoom.dart';
 
-import '../blocs/blocs.dart';
-import '../blocs/theme.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import '../generated/l10n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../blocs/blocs.dart';
+import 'package:pinch_zoom/pinch_zoom.dart';
+// import 'package:url_launcher/url_launcher.dart';
+
 import '../repositories/auth/auth_repository.dart';
 import '../screens/setting_screen.dart';
+import 'package:belly_boutique_princess/models/user_model.dart';
+
+import 'pruebaAnimate.dart';
 
 class UserProfileView extends StatefulWidget {
   const UserProfileView({Key? key}) : super(key: key);
@@ -203,9 +203,14 @@ class _BodyState extends State<Body> {
               width: MediaQuery.of(context).size.width,
               height: 50,
               child: MaterialButton(
-                onPressed: () => showDialog(
+                onPressed: () async => await showDialog(
                   context: context,
-                  builder: (BuildContext context) => AlertDialog(
+                  // barrierColor: Colors.transparent,
+                  useRootNavigator: true,
+                  anchorPoint: Offset.infinite,
+                  builder: (BuildContext context) => const AlertDialog(
+                    contentPadding: EdgeInsets.all(0),
+                    alignment: Alignment.center,
                     content: PagesVisit(),
                     backgroundColor: Colors.transparent,
                     // actions: <Widget>[
@@ -273,14 +278,16 @@ class _BodyState extends State<Body> {
               height: 50,
               child: MaterialButton(
                 onPressed: () {
-                  Fluttertoast.showToast(
-                      msg: "Tap a ayuda",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.grey,
-                      textColor: Colors.white,
-                      fontSize: 16.0);
+                  Navigator.pushNamed(
+                      context, OpenContainerTransformDemo.routeName);
+                  // Fluttertoast.showToast(
+                  // msg: "Tap a ayuda",
+                  // toastLength: Toast.LENGTH_SHORT,
+                  // gravity: ToastGravity.BOTTOM,
+                  // timeInSecForIosWeb: 1,
+                  // backgroundColor: Colors.grey,
+                  // textColor: Colors.white,
+                  // fontSize: 16.0);
                 },
                 child: const Text(
                   'Ayuda',
@@ -329,27 +336,38 @@ class PagesVisit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> cardPages = [
-      const CardVisit(
-        backgroundColor: Colors.amber,
-        title: 'Facebook',
-        descript: 'Visita en Facebook dandole click al botón',
-        icon: Icon(Icons.facebook),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CardVisit(
+          backgroundColor: Theme.of(context).primaryColorLight,
+          title: 'Facebook',
+          descript: 'Visítanos en Facebook dandole click al botón',
+          icon: const Icon(Icons.facebook),
+          image: 'graphics/images/facebook_64.png',
+          urlWeb: 'https://www.facebook.com/belyboutiqueprincess',
+        ),
       ),
-      const CardVisit(
-        backgroundColor: Colors.amber,
-        title: 'Whatsapp',
-        descript: 'Visita en Whatsapp dandole click al botón',
-        icon: Icon(Icons.whatsapp),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CardVisit(
+          backgroundColor: Theme.of(context).primaryColor,
+          title: 'Whatsapp',
+          descript: 'Visítanos en Whatsapp dandole click al botón',
+          icon: const Icon(Icons.whatsapp),
+          image: 'graphics/images/whatsapp_64.png',
+          whatsapp: "+51953433761",
+          whatsappMessage: "Hola",
+        ),
       ),
     ];
 
     return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: 300,
-      child: Center(
-        child: PageView(
-          children: cardPages,
-        ),
+      width: 200,
+      height: 250,
+      child: PageView(
+        physics: const BouncingScrollPhysics(),
+        controller: PageController(viewportFraction: 0.8),
+        children: cardPages,
       ),
     );
   }
@@ -359,35 +377,78 @@ class CardVisit extends StatelessWidget {
   final String title;
   final String? descript;
   final Icon? icon;
-  final Image? image;
+  final String? image;
   final Color? backgroundColor;
+  final String? urlWeb;
+  final String? whatsapp;
+  final String? whatsappMessage;
 
-  const CardVisit(
-      {Key? key,
-      required this.title,
-      this.descript,
-      this.icon,
-      this.backgroundColor = Colors.red,
-      this.image})
-      : super(key: key);
+  // final Function onPressed;
+
+  const CardVisit({
+    Key? key,
+    required this.title,
+    this.descript,
+    this.icon,
+    this.backgroundColor = Colors.red,
+    this.image,
+    this.urlWeb,
+    this.whatsapp,
+    this.whatsappMessage,
+
+    // required this.onPressed
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      height: double.infinity,
-      color: backgroundColor,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            backgroundColor!,
+            Colors.white,
+          ],
+        ),
+      ),
       child: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(title),
-            descript != null ? Text(descript!, style: TextStyle(),) : const Text(''),
-            icon != null ? icon! : const Text(''),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            const SizedBox(height: 10),
+            descript != null
+                ? Text(
+                    descript!,
+                    textAlign: TextAlign.center,
+                  )
+                : const Text(''),
+            // icon != null ? icon! : const Text(''),
+            const SizedBox(height: 10),
             image != null
-                ? Container(
-                    width: 200,
-                    child: image!,
+                ? MaterialButton(
+                    onPressed: () {
+                      if (urlWeb != null) {
+                        OpenAll.openUrl(
+                          urlWeb:
+                              'https://www.facebook.com/belyboutiqueprincess',
+                        );
+                      } else if (whatsapp != null && whatsappMessage != null) {
+                        OpenAll.openwhatsapp(
+                          whatsapp: whatsapp!,
+                          message: whatsappMessage!,
+                        );
+                      }
+                    },
+                    child: Image(
+                      image: AssetImage(image!),
+                    ),
                   )
                 : const Text(''),
           ],
