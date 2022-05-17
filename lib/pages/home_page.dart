@@ -11,26 +11,30 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(title: S.of(context).AppTitle, hasActions: true),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 10),
-        child: Column(
-          // mainAxisSize: MainAxisSize.min,
-          children: [
-            // const CustomDropDownCategories(), // Cegories dropdown
-            SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: ConstrainedBox(
-                constraints: BoxConstraints.expand(
-                  height: MediaQuery.of(context).size.height - 180,
-                ),
-                child: CustomScrollViewProducts(),
+    // return Scaffold(
+    // appBar: CustomAppBar(title: S.of(context).AppTitle, hasActions: true),
+    // body: Padding(
+    return Padding(
+      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      // padding: const EdgeInsets.only(top: 10),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisSize: MainAxisSize.min,
+        children: [
+          // const CustomDropDownCategories(), // Cegories dropdown
+          SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: ConstrainedBox(
+              constraints: BoxConstraints.expand(
+                height: MediaQuery.of(context).size.height - 180,
               ),
+              child: CustomScrollViewProducts(),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
+      // ),
     );
   }
 }

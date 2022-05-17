@@ -14,6 +14,7 @@ import '../blocs/blocs.dart';
 import '../generated/l10n.dart';
 import '../models/user_model.dart';
 import 'auth/onboarding_screen.dart';
+import '../navegator_screens.dart';
 import 'user/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -54,11 +55,20 @@ class _SplashScreenState extends State<SplashScreen> {
                 );
               }
               if (state.status == AuthStatus.authenticated) {
+                // Timer(
+                //   const Duration(seconds: 2),
+                //   () => Navigator.of(context).pushNamedAndRemoveUntil(
+                //     // HomeScreen.routeName,
+                //     NavegatorScreen.routeName,
+                //     (route) => false,
+                //   ),
+                // );
                 Timer(
                   const Duration(seconds: 2),
-                  () => Navigator.of(context).pushNamedAndRemoveUntil(
-                    HomeScreen.routeName,
-                    (route) => false,
+                  () => Navigator.of(context).pushNamed(
+                    // HomeScreen.routeName,
+                    NavegatorScreen.routeName,
+                    // (route) => false,
                   ),
                 );
               }

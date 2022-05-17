@@ -2,6 +2,7 @@ import 'package:belly_boutique_princess/screens/setting_screen.dart';
 import 'package:flutter/material.dart';
 import '../pages/pruebaAnimate.dart';
 import '../screens/admin/admin_screens.dart';
+import '../navegator_screens.dart';
 import '/screens/screens.dart';
 
 class Routers {
@@ -13,6 +14,10 @@ class Routers {
     switch (settings.name) {
       // switch the name route on screens
       case '/':
+        return HomeScreen.route();
+      case NavegatorScreen.routeName:
+        return NavegatorScreen.route();
+      case HomeScreen.routeName:
         return HomeScreen.route();
       case SplashScreen.routeName:
         return SplashScreen.route();

@@ -4,13 +4,14 @@ import '../../blocs/blocs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../generated/l10n.dart';
 
+import '../../navegator_screens.dart';
 import '../../pages/user_views.dart';
 import '../../widgets/custom_bottom_navigation.dart';
 import '../auth/onboarding_screen.dart';
 import '../../blocs/home/home_page_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
-  static const String routeName = '/'; //route
+  static const String routeName = '/homemenu'; //route
 
   static Route route() {
     return MaterialPageRoute(
@@ -22,7 +23,7 @@ class HomeScreen extends StatelessWidget {
           return BlocProvider.of<AuthBloc>(context).state.status ==
                   AuthStatus.unauthenticated
               ? const OnboardingScreen()
-              : const HomeScreen();
+              : NavegatorScreen();
         });
   }
 
@@ -78,88 +79,7 @@ class HomeScreen extends StatelessWidget {
       const ShoppingCartView(),
       // const MenuAdmintration()
     ];
-    // Items from navigation bar
-
-    final itemsAppbar = <String>[
-      S.of(context).menu_appbar_item1,
-      S.of(context).menu_appbar_item2,
-      S.of(context).menu_appbar_item3,
-      S.of(context).menu_appbar_item4
-    ];
     return Scaffold(
-      extendBody: true,
-      // backgroundColor: Theme.of(context).backgroundColor,
-      // appBar: CustomAppBar(title: S.of(context).AppTitle, hasActions: true),
-      // appBar: AppBar(
-      //   title: Row(
-      //     children: [
-      //       Image(
-      //         image: AssetImage(S.of(context).logo_home),
-      //         width: 55,
-      //       ),
-      //       Text(
-      //         S.of(context).AppTitle,
-      //       ),
-      //     ],
-      //   ),
-      //   elevation: 10,
-      //   actions: <Widget>[
-      //     IconButton(
-      //       tooltip: S.of(context).tooltip_bttn_shopping_card,
-      //       icon: const Icon(Icons.shopping_cart),
-      //       onPressed: () {},
-      //     ),
-
-      //     // PopupMenuButton<String>(
-      //     //   tooltip: S.of(context).tooltip_bttn_options,
-      //     //   onSelected: (index) {
-      //     //     // Visitanos
-      //     //     if (index == S.of(context).menu_appbar_item1) {
-      //     //       Fluttertoast.showToast(
-      //     //           msg: "Tab a visitanos",
-      //     //           toastLength: Toast.LENGTH_SHORT,
-      //     //           gravity: ToastGravity.BOTTOM,
-      //     //           timeInSecForIosWeb: 1,
-      //     //           backgroundColor: Colors.grey,
-      //     //           textColor: Colors.white,
-      //     //           fontSize: 16.0);
-      //     //     }
-      //     //     // setting screen
-      //     //     if (index == S.of(context).menu_appbar_item2) {
-      //     //       Navigator.pushNamed(context, SettingScreen.routeName);
-      //     //     }
-      //     //     // Ayuda
-      //     //     if (index == S.of(context).menu_appbar_item3) {
-      //     //       Fluttertoast.showToast(
-      //     //           msg: "Tap a ayuda",
-      //     //           toastLength: Toast.LENGTH_SHORT,
-      //     //           gravity: ToastGravity.BOTTOM,
-      //     //           timeInSecForIosWeb: 1,
-      //     //           backgroundColor: Colors.grey,
-      //     //           textColor: Colors.white,
-      //     //           fontSize: 16.0);
-      //     //     }
-      //     //     // SignOut session
-      //     //     if (index == S.of(context).menu_appbar_item4) {
-      //     //       RepositoryProvider.of<AuthRepository>(context).signOut();
-      //     //       context.read<AuthBloc>().add(const AuthUserChanged(user: null));
-      //     //       Navigator.pushNamedAndRemoveUntil(
-      //     //           context, '/', (route) => false);
-      //     //     }
-      //     //   },
-      //     //   itemBuilder: (BuildContext context) {
-      //     //     return itemsAppbar.map(
-      //     //       (String choice) {
-      //     //         return PopupMenuItem<String>(
-      //     //           value: choice,
-      //     //           child: Text(choice),
-      //     //         );
-      //     //       },
-      //     //     ).toList();
-      //     //   },
-      //     // ),
-      //   ],
-      // ),
       body: BlocBuilder<HomePageBloc, HomePageState>(
         builder: (context, state) {
           if (state is HomePageInitial) {
@@ -171,7 +91,7 @@ class HomeScreen extends StatelessWidget {
           return Text(S.of(context).Error_displaying_interaces);
         },
       ),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
+      // bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }
