@@ -18,13 +18,12 @@ class HomeView extends StatelessWidget {
         child: Column(
           // mainAxisSize: MainAxisSize.min,
           children: [
-            const CustomDropDownCategories(),
+            // const CustomDropDownCategories(), // Cegories dropdown
             SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: ConstrainedBox(
                 constraints: BoxConstraints.expand(
-                  height: MediaQuery.of(context).size.height - 210,
-                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height - 180,
                 ),
                 child: CustomScrollViewProducts(),
               ),

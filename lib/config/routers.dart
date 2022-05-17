@@ -1,8 +1,5 @@
-import 'package:belly_boutique_princess/screens/admin/new_product_screen.dart';
 import 'package:belly_boutique_princess/screens/setting_screen.dart';
 import 'package:flutter/material.dart';
-
-// import '../models/models.dart';
 import '../pages/pruebaAnimate.dart';
 import '../screens/admin/admin_screens.dart';
 import '/screens/screens.dart';
@@ -19,14 +16,14 @@ class Routers {
         return HomeScreen.route();
       case SplashScreen.routeName:
         return SplashScreen.route();
-      case MenuAdmintration.routeName:
-        return MenuAdmintration.route();
-      case OnboardingScreen.routeName:
-        return OnboardingScreen.route();
       case SettingScreen.routeName:
         return SettingScreen.route();
-      case NewProductScreen.routeName:
-        return NewProductScreen.route();
+      case OnboardingScreen.routeName:
+        return OnboardingScreen.route();
+      case MenuAdmintration.routeName:
+        return MenuAdmintration.route();
+      case CreateProductScreen.routeName:
+        return CreateProductScreen.route();
       case OpenContainerTransformDemo.routeName:
         return OpenContainerTransformDemo.route();
       default:

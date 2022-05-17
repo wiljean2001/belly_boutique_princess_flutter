@@ -380,10 +380,10 @@ class S {
     );
   }
 
-  /// `Nuevo producto`
+  /// `Crear producto`
   String get title_new_product_screen {
     return Intl.message(
-      'Nuevo producto',
+      'Crear producto',
       name: 'title_new_product_screen',
       desc: '',
       args: [],

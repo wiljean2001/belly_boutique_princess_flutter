@@ -4,8 +4,9 @@ import '../../blocs/blocs.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/custom_appbar.dart';
 import '../screens.dart';
-import '/screens/admin/new_product_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'admin_screens.dart';
 
 class MenuAdmintration extends StatelessWidget {
   static const String routeName = '/admin'; //route
@@ -32,16 +33,7 @@ class MenuAdmintration extends StatelessWidget {
           title: S.of(context).title_admin_screen,
           hasActions: false,
           hasIcon: false),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-        child: SafeArea(
-          // child: SingleChildScrollView(
-          // padding: EdgeInsets.all(30),
-          // primary: true,
-          child: CustomOptions(),
-          // ),
-        ),
-      ),
+      body: const CustomOptions(),
     );
   }
 }
@@ -53,251 +45,94 @@ class CustomOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      mainAxisSpacing: 15,
-      crossAxisSpacing: 15,
-      children: <Widget>[
-        Container(
-          color: const Color.fromARGB(31, 177, 177, 177),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(
-                context,
-                NewProductScreen.routeName,
-              );
-            },
-            child: const GridTile(
-              footer: Material(
-                color: Color.fromARGB(0, 255, 0, 0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(4),
-                  ),
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: GridTileBar(
-                  title: Text(
-                    "NUEVO PRODUCTO",
-                    style: TextStyle(color: Colors.black),
-                    textAlign: TextAlign.center,
-                  ),
-                  // backgroundColor: Colors.black45,
-                ),
-              ),
-              // Buscar la forma de almacenar las imagenes
-              child: Icon(
-                Icons.addchart,
-                size: 80,
-              ),
-            ),
-          ),
-        ),
-        Container(
-          color: const Color.fromARGB(31, 177, 177, 177),
-          child: GestureDetector(
-            onTap: () {},
-            child: const GridTile(
-              footer: Material(
-                color: Color.fromARGB(0, 255, 0, 0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: GridTileBar(
-                  title: Text(
-                    "EDITAR PRODUCTO",
-                    style: TextStyle(color: Colors.black),
-                    textAlign: TextAlign.center,
-                  ),
-                  // backgroundColor: Colors.black45,
+    List<OptionAdmin> listOptions = [
+      OptionAdmin(
+        title: 'AGREGAR PRODUCTO',
+        icon: Icons.add_chart_outlined,
+        onPressed: () =>
+            Navigator.of(context).pushNamed(CreateProductScreen.routeName),
+      ),
+      OptionAdmin(
+        title: 'EDITAR PRODUCTO',
+        icon: Icons.edit_outlined,
+        onPressed: () {},
+      ),
+      OptionAdmin(
+          title: 'VER PRODUCTOS',
+          icon: Icons.view_module_outlined,
+          onPressed: () {}),
+      OptionAdmin(
+        title: 'AGREGAR CATEGORÍA',
+        icon: Icons.add_comment_outlined,
+        onPressed: () {},
+      ),
+      OptionAdmin(
+        title: 'EDITAR CATEGORÍA',
+        icon: Icons.edit_note_outlined,
+        onPressed: () {},
+      ),
+      OptionAdmin(
+        title: 'VER CATEGORÍAS',
+        icon: Icons.view_agenda_outlined,
+        onPressed: () {},
+      ),
+    ];
+    return CustomScrollView(
+      physics: const BouncingScrollPhysics(),
+      slivers: [
+        SliverGrid(
+          delegate: SliverChildBuilderDelegate((context, i) {
+            return Card(
+              elevation: 8,
+              surfaceTintColor: Theme.of(context).primaryColorLight,
+              margin: const EdgeInsets.all(10.0),
+              child: TextButton(
+                onPressed: () => listOptions[i].onPressed(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      listOptions[i].icon,
+                      size: 85,
+                    ),
+                    Text(
+                      listOptions[i].title,
+                      style: Theme.of(context).textTheme.titleMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
               ),
-              // Buscar la forma de almacenar las imagenes
-              child: Icon(
-                Icons.edit,
-                size: 80,
-              ),
-            ),
-          ),
-        ),
-        Container(
-          color: const Color.fromARGB(31, 177, 177, 177),
-          child: GestureDetector(
-            onTap: () {},
-            child: const GridTile(
-              footer: Material(
-                color: Color.fromARGB(0, 255, 0, 0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: GridTileBar(
-                  title: Text(
-                    "CATEGORÍA",
-                    style: TextStyle(color: Colors.black),
-                    textAlign: TextAlign.center,
-                  ),
-                  // backgroundColor: Colors.black45,
-                ),
-              ),
-              // Buscar la forma de almacenar las imagenes
-              child: Icon(
-                Icons.category_outlined,
-                size: 80,
-              ),
-            ),
-          ),
-        ),
-        Container(
-          color: const Color.fromARGB(31, 177, 177, 177),
-          child: GestureDetector(
-            onTap: () {},
-            child: const GridTile(
-              footer: Material(
-                color: Color.fromARGB(0, 255, 0, 0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: GridTileBar(
-                  title: Text(
-                    "[...]",
-                    style: TextStyle(color: Colors.black),
-                    textAlign: TextAlign.center,
-                  ),
-                  // backgroundColor: Colors.black45,
-                ),
-              ),
-              // Buscar la forma de almacenar las imagenes
-              child: Icon(
-                Icons.add,
-                size: 80,
-              ),
-            ),
-          ),
-        ),
-        Container(
-          color: const Color.fromARGB(31, 177, 177, 177),
-          child: GestureDetector(
-            onTap: () {},
-            child: const GridTile(
-              footer: Material(
-                color: Color.fromARGB(0, 255, 0, 0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: GridTileBar(
-                  title: Text(
-                    "[...]",
-                    style: TextStyle(color: Colors.black),
-                    textAlign: TextAlign.center,
-                  ),
-                  // backgroundColor: Colors.black45,
-                ),
-              ),
-              // Buscar la forma de almacenar las imagenes
-              child: Icon(
-                Icons.add,
-                size: 80,
-              ),
-            ),
-          ),
-        ),
-        Container(
-          color: const Color.fromARGB(31, 177, 177, 177),
-          child: GestureDetector(
-            onTap: () {},
-            child: const GridTile(
-              footer: Material(
-                color: Color.fromARGB(0, 255, 0, 0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: GridTileBar(
-                  title: Text(
-                    "[...]",
-                    style: TextStyle(color: Colors.black),
-                    textAlign: TextAlign.center,
-                  ),
-                  // backgroundColor: Colors.black45,
-                ),
-              ),
-              // Buscar la forma de almacenar las imagenes
-              child: Icon(
-                Icons.add,
-                size: 80,
-              ),
-            ),
-          ),
-        ),
-        Container(
-          color: const Color.fromARGB(31, 177, 177, 177),
-          child: GestureDetector(
-            onTap: () {},
-            child: const GridTile(
-              footer: Material(
-                color: Color.fromARGB(0, 255, 0, 0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: GridTileBar(
-                  title: Text(
-                    "[...]",
-                    style: TextStyle(color: Colors.black),
-                    textAlign: TextAlign.center,
-                  ),
-                  // backgroundColor: Colors.black45,
-                ),
-              ),
-              // Buscar la forma de almacenar las imagenes
-              child: Icon(
-                Icons.add,
-                size: 80,
-              ),
-            ),
-          ),
-        ),
-        Container(
-          color: const Color.fromARGB(31, 177, 177, 177),
-          child: GestureDetector(
-            onTap: () {},
-            child: const GridTile(
-              footer: Material(
-                color: Color.fromARGB(0, 255, 0, 0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: GridTileBar(
-                  title: Text(
-                    "[...]",
-                    style: TextStyle(color: Colors.black),
-                    textAlign: TextAlign.center,
-                  ),
-                  // backgroundColor: Colors.black45,
-                ),
-              ),
-              // Buscar la forma de almacenar las imagenes
-              child: Icon(
-                Icons.add,
-                size: 80,
-              ),
-            ),
+            );
+          }, childCount: listOptions.length),
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 200.0,
+            mainAxisSpacing: 10.0,
+            crossAxisSpacing: 10.0,
+            childAspectRatio: 1.0,
           ),
         ),
       ],
     );
   }
 }
-/** 
+
+class OptionAdmin {
+  String title;
+  IconData icon;
+  Function onPressed;
+  OptionAdmin({
+    required this.title,
+    required this.icon,
+    required this.onPressed,
+  });
+}
+/**
  * InteractiveViewer(
           boundaryMargin: EdgeInsets.all(20.0),
           minScale: 0.1,
           maxScale: 1.6,
           child: Image(image: AssetImage("graphics/images/Bestido 1_n.jpg")),
         ),
+ *
  */

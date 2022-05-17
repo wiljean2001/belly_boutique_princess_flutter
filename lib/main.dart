@@ -1,4 +1,5 @@
-import 'package:belly_boutique_princess/blocs/sinple_bloc_observer.dart';
+import 'package:belly_boutique_princess/repositories/category/category_repository.dart';
+import 'package:belly_boutique_princess/sinple_bloc_observer.dart';
 import 'package:belly_boutique_princess/config/routers.dart';
 import 'package:belly_boutique_princess/screens/screens.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ void main() async {
       // ),
       // options: defaultF
       );
-
+  
   // simple bloc observer
   BlocOverrides.runZoned(
     () => {
@@ -98,13 +99,19 @@ class MyApp extends StatelessWidget {
               ),
           ),
           BlocProvider(
-              create: (context) => HomePageBloc(
-                    authBloc: BlocProvider.of<AuthBloc>(context),
-                    databaseRepository: context.read<DatabaseRepository>(),
-                  )..add(
-                      const HomeTabChangeEvent(
-                          newIndex: 1), //newIndex = 0 is the first screen
-                    )),
+            create: (context) => HomePageBloc(
+              authBloc: BlocProvider.of<AuthBloc>(context),
+              databaseRepository: context.read<DatabaseRepository>(),
+            )..add(
+                const HomeTabChangeEvent(
+                    newIndex: 1), //newIndex = 0 is the first screen
+              ),
+          ),
+          BlocProvider(
+            create: (context) => CategoryBloc(
+              categoryRepository: CategoryRepository(),
+            )..add(LoadCategories()),
+          )
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
