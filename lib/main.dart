@@ -21,16 +21,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 /// Metodo main de la aplicacion flutter
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-      // options: const FirebaseOptions(
-      //   apiKey: "XXX",
-      //   appId: "XXX",
-      //   messagingSenderId: "XXX",
-      //   projectId: "XXX",
-      // ),
-      // options: defaultF
-      );
-  
+  await Firebase.initializeApp();
+
   // simple bloc observer
   BlocOverrides.runZoned(
     () => {

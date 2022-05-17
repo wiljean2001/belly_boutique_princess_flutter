@@ -22,6 +22,8 @@ class Routers {
         return OnboardingScreen.route();
       case MenuAdmintration.routeName:
         return MenuAdmintration.route();
+      case MenuDrawerAdminScreen.routeName:
+        return MenuDrawerAdminScreen.route();
       case CreateProductScreen.routeName:
         return CreateProductScreen.route();
       case OpenContainerTransformDemo.routeName:

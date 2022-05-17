@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/blocs.dart';
 import '../generated/l10n.dart';
+import '../screens/admin/admin_screens.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
@@ -52,15 +53,19 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                       return IconButton(
                         tooltip: S.of(context).tooltip_bttn_shopping_card,
                         icon: const Icon(Icons.analytics_outlined),
-                        onPressed: () => Navigator.of(context).pushNamed(
-                          MenuAdmintration.routeName,
+                        // onPressed: () => Navigator.of(context).pushNamed(
+                        //   MenuAdmintration.routeName,
+                        // ),
+                        onPressed: () => Navigator.of(context).pushNamedAndRemoveUntil(
+                          MenuDrawerAdminScreen.routeName,
+                          (route) => false,
                         ),
                       );
                     } else {
                       return Text('');
                     }
                   }
-                  return const CircularProgressIndicator();
+                  return Text('');
                 },
               ),
 

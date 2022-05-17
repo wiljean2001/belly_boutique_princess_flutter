@@ -7,3 +7,5 @@ export 'product/show_products_screen.dart';
 export 'category/create_category_screen.dart';
 export 'category/show_category_screen.dart';
 export 'category/update_category_screen.dart';
+// menu
+export 'menu/navegator_screens.dart';
