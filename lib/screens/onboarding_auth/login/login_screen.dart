@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../generated/assets.dart';
 import '../../../generated/l10n.dart';
 import '/widgets/curved_widget.dart';
 import 'login_form.dart';
@@ -35,26 +36,27 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       height: double.infinity,
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Stack(
           children: <Widget>[
             CurvedWidget(
               mode: 2,
               //curved widget with logo
               chield: Container(
-                padding: const EdgeInsets.only(top: 40),
+                padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 40),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.white,
-                        Colors.white.withOpacity(0.5),
+                        Colors.white70.withOpacity(0.5),
                       ]),
                 ),
                 width: double.infinity,
-                height: 300,
-                child: Image(
-                  image: AssetImage(S.of(context).logo),
+                height: 370,
+                child: const Image(
+                  image: AssetImage(Assets.imagesLogoCoronaTexto),
                   alignment: Alignment.topCenter,
                 ),
                 // Text("Login",
@@ -63,7 +65,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 280),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 370),
+              height: 300,
               // constraints: BoxConstraints(ma),
               child: LoginForm(
                 tabController: tabController,

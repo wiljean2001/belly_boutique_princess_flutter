@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/blocs.dart';
+import '../generated/assets.dart';
 import '../generated/l10n.dart';
 import 'onboarding_auth/onboarding_screen.dart';
 import 'user/home_screen.dart';
@@ -64,26 +65,24 @@ class _SplashScreenState extends State<SplashScreen> {
                 );
               }
             },
-            child: Container(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image(
-                      image: AssetImage(S.of(context).logo),
-                      width: 270,
-                    ),
-                    // SvgPicture.asset(
-                    //   'assets/logo.svg',
-                    //   height: 100,
-                    // ),
-                    // SizedBox(height: 20),
-                    // Text(
-                    //   'ARROW',
-                    //   style: Theme.of(context).textTheme.headline1,
-                    // )
-                  ],
-                ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                    image: const AssetImage(Assets.imagesLogoTextoRosa),
+                    width: MediaQuery.of(context).size.width * 0.75,
+                  ),
+                  // SvgPicture.asset(
+                  //   'assets/logo.svg',
+                  //   height: 100,
+                  // ),
+                  // SizedBox(height: 20),
+                  // Text(
+                  //   'ARROW',
+                  //   style: Theme.of(context).textTheme.headline1,
+                  // )
+                ],
               ),
             ),
           ),

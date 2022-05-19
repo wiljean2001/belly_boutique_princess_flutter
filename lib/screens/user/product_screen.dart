@@ -84,7 +84,7 @@ class CustomExtraProducts extends StatelessWidget {
       //         backgroundColor: Colors.black45,
       //       ),
       //     ),
-      //     child: Image(image: AssetImage('graphics/images/Bestido 1_n.jpg')),
+      //     child: Image(image: AssetImage('graphics/images/Bestido1_n.jpg')),
       //   );
       //   ;
       // }).toList(),
@@ -168,7 +168,7 @@ class CustomInfoProduct extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {}, // Tap para abrir pantalla completa de la imagen
                 child: const Image(
-                  image: AssetImage('graphics/images/Bestido 1_n.jpg'),
+                  image: AssetImage('graphics/images/Bestido1_n.jpg'),
                 ),
               ),
             ),

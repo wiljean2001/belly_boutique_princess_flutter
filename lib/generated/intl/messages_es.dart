@@ -45,8 +45,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "gender": MessageLookupByLibrary.simpleMessage("Sexo"),
         "gender_female": MessageLookupByLibrary.simpleMessage("Femenino"),
         "gender_male": MessageLookupByLibrary.simpleMessage("Masculino"),
-        "logo": MessageLookupByLibrary.simpleMessage(
-            "graphics/images/LOGO4-small.png"),
         "logo_home": MessageLookupByLibrary.simpleMessage(
             "graphics/images/bely_logo-edit.png"),
         "menu_appbar_item1": MessageLookupByLibrary.simpleMessage("Visitanos"),

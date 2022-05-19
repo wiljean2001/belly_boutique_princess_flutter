@@ -54,8 +54,6 @@ class OnboardingScreen extends StatelessWidget {
           ),
           body: TabBarView(
             physics: const NeverScrollableScrollPhysics(), // never scroll
-            // controller: tabController,
-            // dragStartBehavior: DragStartBehavior.start,
             // viewportFraction: 5,
             children: [
               StartScreen(tabController: tabController),

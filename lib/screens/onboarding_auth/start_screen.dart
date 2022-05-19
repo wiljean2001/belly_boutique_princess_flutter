@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../../generated/assets.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/curved_widget.dart';
 import '../../widgets/custom_button_gradiant.dart';
@@ -32,7 +33,7 @@ class StartScreen extends StatelessWidget {
               mode: 2,
               //curved widget with logo
               chield: Container(
-                padding: const EdgeInsets.only(top: 100),
+                padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 40),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
@@ -45,16 +46,9 @@ class StartScreen extends StatelessWidget {
                 ),
                 width: double.infinity,
                 height: 400,
-                child: Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Image(
-                        image: AssetImage(S.of(context).logo),
-                        // alignment: Alignment.topCenter,
-                      ),
-                    ),
-                  ],
+                child: const Image(
+                  image: AssetImage(Assets.imagesLogoCoronaTexto),
+                  // alignment: Alignment.topCenter,
                 ),
               ),
             ),

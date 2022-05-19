@@ -1,11 +1,6 @@
-import 'package:belly_boutique_princess/repositories/repositories.dart';
-import 'package:belly_boutique_princess/screens/screens.dart';
 import 'package:belly_boutique_princess/utils/validators.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../blocs/auth/auth_bloc.dart';
-import '../../../blocs/auth/auth_bloc.dart';
-import '../../../blocs/blocs.dart';
 import '../../../blocs/blocs.dart';
 import '../../../generated/l10n.dart';
 import '/cubit/cubits.dart';
@@ -23,12 +18,12 @@ class LoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final _contextSignUp = context.read<SignupCubit>();
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
         return Container(
-          height: MediaQuery.of(context).size.height / 1.7,
+          // height: MediaQuery.of(context).size.height,
           alignment: Alignment.center,
-          padding: const EdgeInsets.all(20.0),
           child: Form(
             key: _formKey,
             child: Column(

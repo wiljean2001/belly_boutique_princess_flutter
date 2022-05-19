@@ -132,7 +132,7 @@ class OptionAdmin {
           boundaryMargin: EdgeInsets.all(20.0),
           minScale: 0.1,
           maxScale: 1.6,
-          child: Image(image: AssetImage("graphics/images/Bestido 1_n.jpg")),
+          child: Image(image: AssetImage("graphics/images/Bestido1_n.jpg")),
         ),
  *
  */

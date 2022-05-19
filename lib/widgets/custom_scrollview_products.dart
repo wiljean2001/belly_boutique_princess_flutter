@@ -52,7 +52,7 @@ class _CustomScrollViewProductsState extends State<CustomScrollViewProducts> {
             ),
             // Buscar la forma de almacenar las imagenes
             child: const Image(
-                image: AssetImage('graphics/images/Bestido 1_n.jpg')),
+                image: AssetImage('graphics/images/Bestido1_n.jpg')),
           ),
         );
       }).toList(),

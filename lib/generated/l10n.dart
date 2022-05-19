@@ -60,16 +60,6 @@ class S {
     );
   }
 
-  /// `graphics/images/LOGO4-small.png`
-  String get logo {
-    return Intl.message(
-      'graphics/images/LOGO4-small.png',
-      name: 'logo',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `graphics/images/bely_logo-edit.png`
   String get logo_home {
     return Intl.message(

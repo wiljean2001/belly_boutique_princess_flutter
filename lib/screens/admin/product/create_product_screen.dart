@@ -31,9 +31,9 @@ class CreateProductScreen extends StatelessWidget {
   // final List<String> tallas;
   final itemsTallas = <String>[];
   final List<String> itemsImages = [
-    'graphics/images/Bestido 1_n.jpg',
-    'graphics/images/Bestido 1_n.jpg',
-    'graphics/images/Bestido 1_n.jpg',
+    'graphics/images/Bestido1_n.jpg',
+    'graphics/images/Bestido1_n.jpg',
+    'graphics/images/Bestido1_n.jpg',
   ];
 
   @override
