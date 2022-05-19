@@ -6,8 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/blocs.dart';
 import '../blocs/theme.dart';
 import '../config/theme_default.dart';
-import 'auth/auth_screens.dart';
 import 'package:provider/provider.dart';
+
+import 'onboarding_auth/onboarding_screen.dart';
 
 enum themesAll { dark, light, deffault, otro }
 
@@ -34,11 +35,9 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  themesAll? _character = themesAll.deffault;
-
   @override
   Widget build(BuildContext context) {
-    final ThemeChanger theme = Provider.of<ThemeChanger>(context);
+  final ThemeChanger theme = Provider.of<ThemeChanger>(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -110,7 +109,12 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
+  themesAll? _character = themesAll.deffault;
+
   Future<void> _showMyDialog(ThemeChanger theme) async {
+    ThemeData themeData = theme.getTheme();
+    _character =
+        themeData == ThemeData.dark() ? themesAll.dark : themesAll.deffault;
     return showDialog<void>(
       context: context,
       // barrierDismissible: false, // user must tap button!

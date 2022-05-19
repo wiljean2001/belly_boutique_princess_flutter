@@ -1,11 +1,7 @@
-import 'package:belly_boutique_princess/utils/validators.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../blocs/blocs.dart';
 import '../../../../generated/l10n.dart';
-import '/cubit/signup/signup_cubit.dart';
-import '../../../user/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,24 +18,18 @@ class RegisterUserForm extends StatefulWidget {
 }
 
 class _RegisterUserFormState extends State<RegisterUserForm> {
-  // final TextEditingController _emailController = TextEditingController();
-  // final TextEditingController _passwordController = TextEditingController();
-
-  final _date18years = DateTime.now().year - 18;
-
   // @override
   // void initState() {
   //   super.initState();
   // }
 
-  String dropdownValue = 'Sexo';
+  String? dropdownValue;
   final GlobalKey<FormState> _formKeyUser = GlobalKey<FormState>();
 
   String? name;
 
   @override
   Widget build(BuildContext context) {
-    final _contextRegister = context.read<SignupCubit>();
     final listGender = <String>[
       S.of(context).gender, // gender
       S.of(context).gender_male, // male
@@ -48,13 +38,15 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     return BlocBuilder<OnboardingBloc, OnboardingState>(
       builder: (context, state) {
         if (state is OnboardingLoaded) {
+          // date picker
           Future<void> _showDatePicker() async {
             final DateTime? picked = await showDatePicker(
               context: context,
               initialDate: DateTime((DateTime.now().year - 18)),
               firstDate: DateTime(1900),
               lastDate: DateTime(DateTime.now().year - 18),
-              locale: context.read<Locale>(),
+              locale: Locale(context.read<Locale>().languageCode,
+                  context.read<Locale>().countryCode),
               // (2101)
             );
             if (picked != null) {
@@ -96,6 +88,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                     height: 55,
                     child: DropdownButton<String>(
                       isExpanded: true,
+                      hint: const Text('Sexo'),
                       focusColor: Colors.pink,
                       value: listGender[0],
                       icon: const Icon(
@@ -121,18 +114,12 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       ).toList(),
 
                       onChanged: (index) {
-                        setState(
-                          () {
-                            if (index != listGender[0]) {
-                              dropdownValue = index!;
-                              context.read<OnboardingBloc>().add(
-                                    UpdateUser(
-                                        user:
-                                            state.user.copyWith(gender: index)),
-                                  );
-                            }
-                          },
-                        );
+                        setState(() {
+                          dropdownValue = index!;
+                          context.read<OnboardingBloc>().add(UpdateUser(
+                                user: state.user.copyWith(gender: index),
+                              ));
+                        });
                       },
                     ),
                   ),

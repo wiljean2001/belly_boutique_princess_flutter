@@ -11,28 +11,29 @@ part 'home_page_event.dart';
 part 'home_page_state.dart';
 
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
-  // final AuthBloc _authBloc;
+  final AuthBloc _authBloc;
   // final DatabaseRepository _databaseRepository;
   StreamSubscription? _authSubscription;
 
-// _authBloc = authBloc,
+
 // _databaseRepository = databaseRepository,
   HomePageBloc({
     required AuthBloc authBloc,
     required DatabaseRepository databaseRepository,
-  }) : super(HomePageInitial()) {
+  }) : _authBloc = authBloc,
+  super(HomePageInitial()) {
     on<HomeTabChangeEvent>(_onTabChange);
     // on<LoadRoleUser>(_onLoadRoleUser);
     // on<UpdateRoleUser>(_onUpdateRoleUser);
 
-    // _authSubscription = _authBloc.stream.listen((state) {
-    //   if (state.user is AuthUserChanged) {
-    //     if (state.user != null) {
-    //       print('SE CARGÓ EL LOADPROFILE OBTENIDO DEL AUTHBLOC');
+    _authSubscription = _authBloc.stream.listen((state) {
+      if (state.user is AuthUserChanged) {
+        if (state.user != null) {
+          print('SE CARGÓ EL LOADPROFILE OBTENIDO DEL AUTHBLOC');
     //       add(LoadRoleUser(userId: state.user!.uid));
-    //     }
-    //   }
-    // });
+        }
+      }
+    });
   }
 
   void _onTabChange(HomeTabChangeEvent event, Emitter<HomePageState> emit) {

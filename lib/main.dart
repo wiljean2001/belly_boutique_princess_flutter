@@ -1,22 +1,21 @@
-import 'package:belly_boutique_princess/repositories/category/category_repository.dart';
-import 'package:belly_boutique_princess/sinple_bloc_observer.dart';
-import 'package:belly_boutique_princess/config/routers.dart';
-import 'package:belly_boutique_princess/screens/screens.dart';
 import 'package:flutter/material.dart';
 
-import 'blocs/home/home_page_bloc.dart';
-import 'blocs/theme.dart';
-import 'config/theme_default.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'generated/l10n.dart';
 import 'repositories/repositories.dart';
+import 'package:provider/provider.dart';
 
 import 'blocs/blocs.dart';
 import 'cubit/cubits.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'blocs/theme.dart';
+import 'config/theme_default.dart';
 import 'screens/splash_screen.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:belly_boutique_princess/config/routers.dart';
+import 'package:belly_boutique_princess/sinple_bloc_observer.dart';
+import 'package:belly_boutique_princess/screens/screens.dart';
 
 /// Metodo main de la aplicacion flutter
 void main() async {

@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:belly_boutique_princess/screens/admin/menu_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +22,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           hasIcon
               ? Image(
@@ -31,22 +30,23 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                   width: 45,
                 )
               : const Text(''),
-          Expanded(
-            child: AutoSizeText(
-              title,
-              style: const TextStyle(fontSize: 18),
-              // style: Theme.of(context).textTheme,
-            ),
+          Text(
+            title,
+            style: const TextStyle(fontSize: 18),
+            // style: Theme.of(context).textTheme,
           ),
         ],
       ),
       actions: hasActions
           ? [
               BlocBuilder<ProfileBloc, ProfileState>(
+                // buildWhen: (profStprevious, profStcurrent) {
+                //   return profStprevious is ProfileLoading ? false : true;
+                // },
                 builder: (context, state) {
-                  if (state is ProfileLoading) {
-                    return const CircularProgressIndicator();
-                  }
+                  // if (state is ProfileLoading) {
+                  //   return const CircularProgressIndicator();
+                  // }
                   if (state is ProfileLoaded) {
                     print('State: ${state.user.role}');
                     if (state.user.role == 'admin') {
@@ -56,7 +56,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                         // onPressed: () => Navigator.of(context).pushNamed(
                         //   MenuAdmintration.routeName,
                         // ),
-                        onPressed: () => Navigator.of(context).pushNamedAndRemoveUntil(
+                        onPressed: () =>
+                            Navigator.of(context).pushNamedAndRemoveUntil(
                           MenuDrawerAdminScreen.routeName,
                           (route) => false,
                         ),
@@ -67,12 +68,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                   }
                   return Text('');
                 },
-              ),
-
-              IconButton(
-                tooltip: S.of(context).tooltip_bttn_shopping_card,
-                icon: const Icon(Icons.shopping_cart),
-                onPressed: () {},
               ),
               IconButton(
                 tooltip: S.of(context).tooltip_bttn_shopping_card,

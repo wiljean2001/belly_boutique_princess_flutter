@@ -1,3 +1,7 @@
+import 'package:belly_boutique_princess/screens/user/home_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../blocs/profile/profile_bloc.dart';
 import '../app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -29,35 +33,53 @@ class _HomeDrawerState extends State<HomeDrawer> {
   void setDrawerListArray() {
     drawerList = <DrawerList>[
       DrawerList(
-        index: DrawerIndex.HOME,
+        index: DrawerIndex.HOME_USER,
         labelName: 'Ver como usuario',
         icon: const Icon(Icons.home),
       ),
       DrawerList(
-        index: DrawerIndex.Help,
+        index: DrawerIndex.Products,
         labelName: 'Productos',
-        isAssetsImage: true,
-        imageName: 'graphics/images/whatsapp_64.png',
+        icon: const Icon(Icons.addchart_outlined),
+        // isAssetsImage: true,
+        // imageName: 'graphics/images/whatsapp_64.png',
+        isTap: false,
       ),
       DrawerList(
-        index: DrawerIndex.Help,
+        index: DrawerIndex.Product_create,
         labelName: 'Agregar producto',
         isAssetsImage: false,
       ),
       DrawerList(
-        index: DrawerIndex.Help,
+        index: DrawerIndex.Product_edit,
         labelName: 'Editar Producto',
         isAssetsImage: false,
       ),
       DrawerList(
-        index: DrawerIndex.Help,
+        index: DrawerIndex.Product_show,
         labelName: 'Ver Productos',
         isAssetsImage: false,
       ),
       DrawerList(
-        index: DrawerIndex.FeedBack,
+        index: DrawerIndex.Categories,
         labelName: 'Categorías',
-        icon: const Icon(Icons.help),
+        icon: const Icon(Icons.category_outlined),
+        isTap: false,
+      ),
+      DrawerList(
+        index: DrawerIndex.Category_create,
+        labelName: 'Agregar categoría',
+        isAssetsImage: false,
+      ),
+      DrawerList(
+        index: DrawerIndex.Category_edit,
+        labelName: 'Editar categoría',
+        isAssetsImage: false,
+      ),
+      DrawerList(
+        index: DrawerIndex.Category_show,
+        labelName: 'Ver categorías',
+        isAssetsImage: false,
       ),
     ];
   }
@@ -75,59 +97,76 @@ class _HomeDrawerState extends State<HomeDrawer> {
             padding: const EdgeInsets.only(top: 40.0),
             child: Container(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  AnimatedBuilder(
-                    animation: widget.iconAnimationController!,
-                    builder: (BuildContext context, Widget? child) {
-                      return ScaleTransition(
-                        scale: AlwaysStoppedAnimation<double>(1.0 -
-                            (widget.iconAnimationController!.value) * 0.2),
-                        child: RotationTransition(
-                          turns: AlwaysStoppedAnimation<double>(Tween<double>(
-                                      begin: 0.0, end: 24.0)
-                                  .animate(CurvedAnimation(
-                                      parent: widget.iconAnimationController!,
-                                      curve: Curves.fastOutSlowIn))
-                                  .value /
-                              360),
-                          child: Container(
-                            height: 120,
-                            width: 120,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                    color: AppTheme.grey.withOpacity(0.6),
-                                    offset: const Offset(2.0, 4.0),
-                                    blurRadius: 8),
-                              ],
-                            ),
-                            child: ClipRRect(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(60.0)),
-                              child: Image.network(
-                                  'https://api.lorem.space/image/face?w=180&h=180'),
+              child: BlocBuilder<ProfileBloc, ProfileState>(
+                builder: (context, state) {
+                  if (state is ProfileLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (state is ProfileLoaded) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        AnimatedBuilder(
+                          animation: widget.iconAnimationController!,
+                          builder: (BuildContext context, Widget? child) {
+                            return ScaleTransition(
+                              scale: AlwaysStoppedAnimation<double>(1.0 -
+                                  (widget.iconAnimationController!.value) *
+                                      0.2),
+                              child: RotationTransition(
+                                turns: AlwaysStoppedAnimation<double>(
+                                    Tween<double>(begin: 0.0, end: 24.0)
+                                            .animate(CurvedAnimation(
+                                                parent: widget
+                                                    .iconAnimationController!,
+                                                curve: Curves.fastOutSlowIn))
+                                            .value /
+                                        360),
+                                child: Container(
+                                  height: 120,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    boxShadow: <BoxShadow>[
+                                      BoxShadow(
+                                        color: AppTheme.grey.withOpacity(0.6),
+                                        offset: const Offset(2.0, 4.0),
+                                        blurRadius: 8,
+                                      ),
+                                    ],
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(60.0)),
+                                    child: Image.network(
+                                      state.user.imageUrls[0],
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8, left: 4),
+                          child: Text(
+                            state.user.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: AppTheme.grey,
+                              fontSize: 18,
                             ),
                           ),
                         ),
-                      );
-                    },
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 8, left: 4),
-                    child: Text(
-                      'Wilmer Ayala García',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: AppTheme.grey,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                ],
+                      ],
+                    );
+                  }
+                  return Container();
+                },
               ),
             ),
           ),
@@ -156,7 +195,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             children: <Widget>[
               ListTile(
                 title: const Text(
-                  'Cerrar Sesión',
+                  'Salir de modo administrador',
                   style: TextStyle(
                     fontFamily: AppTheme.fontName,
                     fontWeight: FontWeight.w600,
@@ -171,6 +210,10 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 ),
                 onTap: () {
                   onTapped();
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    HomeScreen.routeName,
+                    (route) => false,
+                  );
                 },
               ),
               SizedBox(
@@ -192,10 +235,10 @@ class _HomeDrawerState extends State<HomeDrawer> {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        splashColor: Colors.grey.withOpacity(0.1),
+        splashColor: Theme.of(context).primaryColor.withOpacity(0.1),
         highlightColor: Colors.transparent,
         onTap: () {
-          navigationtoScreen(listData.index!);
+          listData.isTap == true ? navigationtoScreen(listData.index!) : null;
         },
         child: Stack(
           children: <Widget>[
@@ -221,18 +264,18 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   const Padding(
                     padding: EdgeInsets.all(4.0),
                   ),
-                  listData.isAssetsImage
+                  listData.isAssetsImage // valida si ingresa icon o image
                       ? Container(
                           width: 24,
                           height: 24,
                           child: Image.asset(listData.imageName,
                               color: widget.screenIndex == listData.index
-                                  ? Colors.blue
+                                  ? Theme.of(context).primaryColor
                                   : AppTheme.nearlyBlack),
                         )
                       : Icon(listData.icon?.icon,
                           color: widget.screenIndex == listData.index
-                              ? Colors.blue
+                              ? Theme.of(context).primaryColor
                               : AppTheme.nearlyBlack),
                   const Padding(
                     padding: EdgeInsets.all(4.0),
@@ -243,7 +286,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       color: widget.screenIndex == listData.index
-                          ? Colors.blue
+                          ? Theme.of(context).primaryColor
                           : AppTheme.nearlyBlack,
                     ),
                     textAlign: TextAlign.left,
@@ -257,12 +300,13 @@ class _HomeDrawerState extends State<HomeDrawer> {
                     builder: (BuildContext context, Widget? child) {
                       return Transform(
                         transform: Matrix4.translationValues(
-                            (MediaQuery.of(context).size.width * 0.75 - 64) *
-                                (1.0 -
-                                    widget.iconAnimationController!.value -
-                                    1.0),
-                            0.0,
-                            0.0),
+                          (MediaQuery.of(context).size.width * 0.75 - 64) *
+                              (1.0 -
+                                  widget.iconAnimationController!.value -
+                                  1.0),
+                          0.0,
+                          0.0,
+                        ),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 8, bottom: 8),
                           child: Container(
@@ -270,12 +314,16 @@ class _HomeDrawerState extends State<HomeDrawer> {
                                 MediaQuery.of(context).size.width * 0.75 - 64,
                             height: 46,
                             decoration: BoxDecoration(
-                              color: Colors.blue.withOpacity(0.2),
-                              borderRadius: new BorderRadius.only(
-                                topLeft: const Radius.circular(0),
-                                topRight: const Radius.circular(28),
-                                bottomLeft: const Radius.circular(0),
-                                bottomRight: const Radius.circular(28),
+                              // esferico a la derecha
+                              // color: Colors.blue.withOpacity(0.2),
+                              color: Theme.of(context)
+                                  .primaryColor
+                                  .withOpacity(0.2),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(0),
+                                topRight: Radius.circular(28),
+                                bottomLeft: Radius.circular(0),
+                                bottomRight: Radius.circular(28),
                               ),
                             ),
                           ),
@@ -290,15 +338,22 @@ class _HomeDrawerState extends State<HomeDrawer> {
     );
   }
 
+  // cambiar de pantalla
   Future<void> navigationtoScreen(DrawerIndex indexScreen) async {
     widget.callBackIndex!(indexScreen);
   }
 }
 
 enum DrawerIndex {
-  HOME,
-  FeedBack,
-  Help,
+  HOME_USER,
+  Products,
+  Product_create,
+  Product_edit,
+  Product_show,
+  Categories,
+  Category_create,
+  Category_edit,
+  Category_show,
 }
 
 class DrawerList {
@@ -308,6 +363,7 @@ class DrawerList {
     this.icon,
     this.index,
     this.imageName = '',
+    this.isTap = true,
   });
 
   String labelName;
@@ -315,4 +371,5 @@ class DrawerList {
   bool isAssetsImage;
   String imageName;
   DrawerIndex? index;
+  bool? isTap;
 }

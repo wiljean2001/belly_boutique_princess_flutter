@@ -1,5 +1,3 @@
-import 'package:belly_boutique_princess/screens/auth/start_screen.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

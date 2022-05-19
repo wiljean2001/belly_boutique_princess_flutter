@@ -1,9 +1,9 @@
+import 'package:belly_boutique_princess/screens/onboarding_auth/onboarding_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/blocs.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/custom_appbar.dart';
-import '../screens.dart';
 import 'package:flutter/material.dart';
 
 import 'admin_screens.dart';

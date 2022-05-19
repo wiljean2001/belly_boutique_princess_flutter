@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/blocs.dart';
-import '../screens/auth/auth_screens.dart';
+import '../screens/onboarding_auth/auth_screens.dart';
 
 const String _loremIpsumParagraph =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod '

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../blocs/blocs.dart';
-import '../../screens.dart';
-import 'app_theme.dart';
-import 'drawer/custom_drawer.dart';
-import 'drawer/custom_drawer_user.dart';
+import '../../blocs/blocs.dart';
+import '../screens.dart';
+import 'admin_screens.dart';
+import 'menu/app_theme.dart';
+import 'menu/drawer/custom_drawer.dart';
+import 'menu/drawer/custom_drawer_user.dart';
 
 class MenuDrawerAdminScreen extends StatefulWidget {
   static const String routeName = '/menu-admin';
@@ -35,7 +36,7 @@ class _HomeScreenState extends State<MenuDrawerAdminScreen> {
 
   @override
   void initState() {
-    drawerIndex = DrawerIndex.HOME;
+    drawerIndex = DrawerIndex.HOME_USER;
     screenView = const HomeScreen();
     super.initState();
   }
@@ -76,17 +77,37 @@ class _HomeScreenState extends State<MenuDrawerAdminScreen> {
     if (drawerIndex != drawerIndexdata) {
       drawerIndex = drawerIndexdata;
       switch (drawerIndex) {
-        case DrawerIndex.HOME:
+        case DrawerIndex.HOME_USER:
           setState(() {
             screenView = const HomeScreen();
           });
           break;
-        case DrawerIndex.Help:
+        case DrawerIndex.Product_create:
+          setState(() {
+            screenView = CreateProductScreen();
+          });
+          break;
+        case DrawerIndex.Product_edit:
+          setState(() {
+            // screenView = FeedbackScreen();
+          });
+          break;
+        case DrawerIndex.Product_show:
           setState(() {
             // screenView = HelpScreen();
           });
           break;
-        case DrawerIndex.FeedBack:
+        case DrawerIndex.Category_create:
+          setState(() {
+            // screenView = FeedbackScreen();
+          });
+          break;
+        case DrawerIndex.Category_edit:
+          setState(() {
+            // screenView = FeedbackScreen();
+          });
+          break;
+        case DrawerIndex.Category_show:
           setState(() {
             // screenView = FeedbackScreen();
           });

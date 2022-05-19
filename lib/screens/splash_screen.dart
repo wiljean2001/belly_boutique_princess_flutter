@@ -1,19 +1,11 @@
 import 'dart:async';
 
-// import 'package:animated_splash_screen/animated_splash_screen.dart';
-// import 'package:belly_boutique_princess/models/user_model.dart';
-// import 'package:belly_boutique_princess/repositories/repositories.dart';
-// import 'package:belly_boutique_princess/screens/admin/menu_admin.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:belly_boutique_princess/blocs/home/home_page_bloc.dart';
-import 'package:belly_boutique_princess/screens/admin/admin_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/blocs.dart';
 import '../generated/l10n.dart';
-import '../models/user_model.dart';
-import 'auth/onboarding_screen.dart';
+import 'onboarding_auth/onboarding_screen.dart';
 import 'user/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -54,6 +46,15 @@ class _SplashScreenState extends State<SplashScreen> {
                 );
               }
               if (state.status == AuthStatus.authenticated) {
+                BlocBuilder<ProfileBloc, ProfileState>(
+                  builder: (context, state) {
+                    if(state is ProfileLoaded){
+                      print('ROle>>>>>>>> ${state.user.role}');
+                      return Text('');
+                    }
+                    return Text('');
+                  },
+                );
                 Timer(
                   const Duration(seconds: 2),
                   () => Navigator.of(context).pushNamedAndRemoveUntil(
