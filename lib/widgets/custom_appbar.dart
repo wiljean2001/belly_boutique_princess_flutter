@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/blocs.dart';
+import '../generated/assets.dart';
 import '../generated/l10n.dart';
 import '../screens/admin/admin_screens.dart';
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget {
   final String title;
   final bool hasActions;
   final bool hasIcon;
@@ -20,114 +21,62 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      title: Row(
+    return Container(
+      color: Theme.of(context).primaryColor,
+      height: AppBar().preferredSize.height,
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          hasIcon
-              ? Image(
-                  image: AssetImage(S.of(context).logo_home),
-                  width: 45,
-                )
-              : const Text(''),
-          Text(
-            title,
-            style: const TextStyle(fontSize: 18),
-            // style: Theme.of(context).textTheme,
+          Padding(
+            padding: const EdgeInsets.only(top: 8, left: 8),
+            child: Container(
+              width: AppBar().preferredSize.height - 8,
+              height: AppBar().preferredSize.height - 8,
+            ),
           ),
+          Expanded(
+            child: Row(
+              children: [
+                hasIcon
+                    ? const Image(
+                        image: AssetImage(Assets.imagesLocoCorona),
+                        width: 45,
+                      )
+                    : const SizedBox(),
+                Text(
+                  title,
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColorLight,
+                      fontSize:
+                          Theme.of(context).textTheme.titleLarge?.fontSize),
+                  // style: Theme.of(context).textTheme,
+                ),
+              ],
+            ),
+          ),
+          hasActions
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 8, right: 8),
+                  child: Container(
+                    width: AppBar().preferredSize.height - 8,
+                    height: AppBar().preferredSize.height - 8,
+                    color: Colors.transparent,
+                    child: Material(
+                      color: Colors.transparent,
+                      //tooltip: S.of(context).tooltip_bttn_shopping_card,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(
+                            AppBar().preferredSize.height),
+                        child: Icon(Icons.search_outlined,
+                            color: Theme.of(context).primaryColorLight),
+                        onTap: () {},
+                      ),
+                    ),
+                  ),
+                )
+              : const SizedBox(),
         ],
       ),
-      actions: hasActions
-          ? [
-              BlocBuilder<ProfileBloc, ProfileState>(
-                // buildWhen: (profStprevious, profStcurrent) {
-                //   return profStprevious is ProfileLoading ? false : true;
-                // },
-                builder: (context, state) {
-                  // if (state is ProfileLoading) {
-                  //   return const CircularProgressIndicator();
-                  // }
-                  if (state is ProfileLoaded) {
-                    print('State: ${state.user.role}');
-                    if (state.user.role == 'admin') {
-                      return IconButton(
-                        tooltip: S.of(context).tooltip_bttn_shopping_card,
-                        icon: const Icon(Icons.analytics_outlined),
-                        // onPressed: () => Navigator.of(context).pushNamed(
-                        //   MenuAdmintration.routeName,
-                        // ),
-                        onPressed: () =>
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                          MenuDrawerAdminScreen.routeName,
-                          (route) => false,
-                        ),
-                      );
-                    } else {
-                      return Text('');
-                    }
-                  }
-                  return Text('');
-                },
-              ),
-              IconButton(
-                tooltip: S.of(context).tooltip_bttn_shopping_card,
-                icon: const Icon(Icons.search_outlined),
-                onPressed: () {},
-              ),
-
-              // PopupMenuButton<String>(
-              //   tooltip: S.of(context).tooltip_bttn_options,
-              //   onSelected: (index) {
-              //     // Visitanos
-              //     if (index == S.of(context).menu_appbar_item1) {
-              //       Fluttertoast.showToast(
-              //           msg: "Tab a visitanos",
-              //           toastLength: Toast.LENGTH_SHORT,
-              //           gravity: ToastGravity.BOTTOM,
-              //           timeInSecForIosWeb: 1,
-              //           backgroundColor: Colors.grey,
-              //           textColor: Colors.white,
-              //           fontSize: 16.0);
-              //     }
-              //     // setting screen
-              //     if (index == S.of(context).menu_appbar_item2) {
-              //       Navigator.pushNamed(context, SettingScreen.routeName);
-              //     }
-              //     // Ayuda
-              //     if (index == S.of(context).menu_appbar_item3) {
-              //       Fluttertoast.showToast(
-              //           msg: "Tap a ayuda",
-              //           toastLength: Toast.LENGTH_SHORT,
-              //           gravity: ToastGravity.BOTTOM,
-              //           timeInSecForIosWeb: 1,
-              //           backgroundColor: Colors.grey,
-              //           textColor: Colors.white,
-              //           fontSize: 16.0);
-              //     }
-              //     // SignOut session
-              //     if (index == S.of(context).menu_appbar_item4) {
-              //       RepositoryProvider.of<AuthRepository>(context).signOut();
-              //       context.read<AuthBloc>().add(const AuthUserChanged(user: null));
-              //       Navigator.pushNamedAndRemoveUntil(
-              //           context, '/', (route) => false);
-              //     }
-              //   },
-              //   itemBuilder: (BuildContext context) {
-              //     return itemsAppbar.map(
-              //       (String choice) {
-              //         return PopupMenuItem<String>(
-              //           value: choice,
-              //           child: Text(choice),
-              //         );
-              //       },
-              //     ).toList();
-              //   },
-              // ),
-            ]
-          : null,
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(56.0);
 }

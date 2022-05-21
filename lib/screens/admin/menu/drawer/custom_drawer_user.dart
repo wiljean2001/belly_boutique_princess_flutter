@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../app_theme.dart';
 import 'custom_drawer.dart';
 
 class DrawerUserController extends StatefulWidget {
@@ -92,7 +91,8 @@ class _DrawerUserControllerState extends State<DrawerUserController>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.white,
+      // backgroundColor: AppTheme.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor, // drawer
       body: SingleChildScrollView(
         controller: scrollController,
         scrollDirection: Axis.horizontal,
@@ -110,11 +110,11 @@ class _DrawerUserControllerState extends State<DrawerUserController>
                  * dividimos el ancho del primer cajón con HomeDrawer y
                  * el segundo ancho de pantalla completa con toda la pantalla
                  * de inicio, llamamos vista de pantalla
-                 * 
+                 *
                  * we divided first drawer Width with HomeDrawer and
                  * second full-screen Width with all home screen,
                  * we called screen View
-                 * 
+                 *
                  */
                 height: MediaQuery.of(context).size.height,
                 child: AnimatedBuilder(
@@ -124,17 +124,16 @@ class _DrawerUserControllerState extends State<DrawerUserController>
                       /**
                        * Transformamos que usamos para el cajón
                        * estable que no necesitamos mover con la vista de desplazamiento
-                       * 
+                       *
                        * Transform we use for the stable drawer  we,
                        * not need to move with scroll view
-                       * 
+                       *
                        */
                       transform: Matrix4.translationValues(
                           scrollController!.offset, 0.0, 0.0),
                       child: HomeDrawer(
-                        screenIndex: widget.screenIndex == null
-                            ? DrawerIndex.HOME_USER
-                            : widget.screenIndex,
+                        screenIndex:
+                            widget.screenIndex ?? DrawerIndex.HOME_USER,
                         iconAnimationController: iconAnimationController,
                         callBackIndex: (DrawerIndex indexType) {
                           onDrawerClick();
@@ -152,11 +151,15 @@ class _DrawerUserControllerState extends State<DrawerUserController>
                 height: MediaQuery.of(context).size.height,
                 //full-screen Width with widget.screenView
                 child: Container(
+                  /**
+                   * shadow in left screen
+                   */
                   decoration: BoxDecoration(
-                    color: AppTheme.white,
+                    color: Theme.of(context).primaryColorLight,
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                          color: AppTheme.grey.withOpacity(0.6),
+                          color:
+                              Theme.of(context).primaryColor.withOpacity(0.5),
                           blurRadius: 24),
                     ],
                   ),
@@ -165,12 +168,12 @@ class _DrawerUserControllerState extends State<DrawerUserController>
                       /**
                        * Este IgnorePointer lo usamos como vista táctil (interfaz de usuario)
                        * widget.screen, por ejemplo, desplazamiento de desplazamiento == 1
-                       * significa que el cajón está cerrado, solo permitimos tocar todos los widget.screen 
-                       * 
+                       * significa que el cajón está cerrado, solo permitimos tocar todos los widget.screen
+                       *
                        * this IgnorePointer we use as touch(user Interface)
                        * widget.screen View, for example scrolloffset == 1
                        * means drawer is close we just allow touching all widget.screen View
-                       * 
+                       *
                        */
                       IgnorePointer(
                         ignoring: scrolloffset == 1 || false,
@@ -200,13 +203,15 @@ class _DrawerUserControllerState extends State<DrawerUserController>
                                 padding: const EdgeInsets.only(right: 20),
                                 child: Center(
                                   // if you use your own menu view UI you add form initialization
+                                  // insertar icono drawer
                                   child: widget.menuView ??
                                       AnimatedIcon(
-                                          color: Theme.of(context)
-                                              .primaryColorLight,
-                                          icon: widget.animatedIconData ??
-                                              AnimatedIcons.arrow_menu,
-                                          progress: iconAnimationController!),
+                                        color:
+                                            Theme.of(context).primaryColorLight,
+                                        icon: widget.animatedIconData ??
+                                            AnimatedIcons.arrow_menu,
+                                        progress: iconAnimationController!,
+                                      ),
                                 ),
                               ),
                               onTap: () {

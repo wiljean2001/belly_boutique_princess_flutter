@@ -35,6 +35,7 @@ class RegisterUserScreen extends StatelessWidget {
             ),
             height: double.infinity,
             child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Stack(
                 children: <Widget>[
                   CurvedWidget(
@@ -57,16 +58,14 @@ class RegisterUserScreen extends StatelessWidget {
                       height: 300,
                       child: Text(
                         S.of(context).title_user_screen,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 40,
-                        ),
+                        style: Theme.of(context).textTheme.headline2
                       ),
                     ),
                   ),
                   Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     margin: const EdgeInsets.only(top: 220),
-                    // constraints: BoxConstraints(ma),
+                    height: 280,
                     child: RegisterUserForm(tabController: tabController),
                   ),
                 ],

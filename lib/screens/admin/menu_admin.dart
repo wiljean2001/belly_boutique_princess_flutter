@@ -29,10 +29,10 @@ class MenuAdmintration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-          title: S.of(context).title_admin_screen,
-          hasActions: false,
-          hasIcon: false),
+      // appBar: CustomAppBar(
+      //     title: S.of(context).title_admin_screen,
+      //     hasActions: false,
+      //     hasIcon: false),
       body: const CustomOptions(),
     );
   }

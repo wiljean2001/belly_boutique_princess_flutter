@@ -210,6 +210,16 @@ class S {
     );
   }
 
+  /// `INICIAR SESIÓN`
+  String get title_sign_in {
+    return Intl.message(
+      'INICIAR SESIÓN',
+      name: 'title_sign_in',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Correo electrónico`
   String get email {
     return Intl.message(
@@ -255,6 +265,16 @@ class S {
     return Intl.message(
       'Registrarse',
       name: 'bttn_register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registrar`
+  String get title_register {
+    return Intl.message(
+      'Registrar',
+      name: 'title_register',
       desc: '',
       args: [],
     );

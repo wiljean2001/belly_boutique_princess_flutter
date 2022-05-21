@@ -1,5 +1,6 @@
-import 'package:belly_boutique_princess/screens/onboarding_auth/onboarding_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'package:belly_boutique_princess/screens/onboarding_auth/onboarding_screen.dart';
 
 import '../../blocs/blocs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,9 +8,10 @@ import '../../generated/l10n.dart';
 
 import '../../pages/user_views.dart';
 import '../../widgets/custom_bottom_navigation.dart';
+import '../admin/navigator_admin_screens.dart';
 
 class HomeScreen extends StatelessWidget {
-  static const String routeName = '/'; //route
+  static const String routeName = '/home'; //route
 
   static Route route() {
     return MaterialPageRoute(
@@ -49,32 +51,22 @@ class HomeScreen extends StatelessWidget {
       const UserProfileView(),
       const HomeView(),
       const ShoppingCartView(),
-      // const MenuAdmintration()
     ];
 
-    return Scaffold(
-      body: BlocBuilder<AuthBloc, AuthState>(
-        builder: (context, state) {
-          if (state.status == AuthStatus.authenticated) {
-            return BlocBuilder<HomePageBloc, HomePageState>(
-              builder: (context, state) {
-                if (state is HomePageInitial) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (state is BottomNavigationInitial) {
-                  return views[state.indexBottomNav];
-                }
-                return Text(S.of(context).Error_displaying_interaces);
-              },
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
+    return BlocBuilder<HomePageBloc, HomePageState>(
+      builder: (context, state) {
+        if (state is HomePageInitial) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (state is BottomNavigationInitial) {
+          return Scaffold(
+            body: views[state.indexBottomNav],
+            bottomNavigationBar: const CustomBottomNavigationBar(),
+          );
+        }
+        return Text(S.of(context).Error_displaying_interaces);
+      },
     );
+    return Scaffold();
   }
 }

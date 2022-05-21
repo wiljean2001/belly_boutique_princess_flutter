@@ -63,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "title_app": MessageLookupByLibrary.simpleMessage("Bienvenido"),
         "title_new_product_screen":
             MessageLookupByLibrary.simpleMessage("Crear producto"),
+        "title_register": MessageLookupByLibrary.simpleMessage("Registrar"),
+        "title_sign_in": MessageLookupByLibrary.simpleMessage("INICIAR SESIÓN"),
         "title_user_screen": MessageLookupByLibrary.simpleMessage("Usuario"),
         "tooltip_bttn_options":
             MessageLookupByLibrary.simpleMessage("Opciones"),

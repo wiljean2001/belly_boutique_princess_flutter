@@ -91,8 +91,8 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => HomePageBloc(
-              authBloc: BlocProvider.of<AuthBloc>(context),
-              databaseRepository: context.read<DatabaseRepository>(),
+              // authBloc: BlocProvider.of<AuthBloc>(context),
+              // databaseRepository: context.read<DatabaseRepository>(),
             )..add(
                 const HomeTabChangeEvent(
                     newIndex: 1), //newIndex = 0 is the first screen

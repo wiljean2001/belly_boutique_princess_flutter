@@ -8,4 +8,4 @@ export 'category/create_category_screen.dart';
 export 'category/show_category_screen.dart';
 export 'category/update_category_screen.dart';
 // menu
-export 'navegator_screens.dart';
+export 'navigator_admin_screens.dart';

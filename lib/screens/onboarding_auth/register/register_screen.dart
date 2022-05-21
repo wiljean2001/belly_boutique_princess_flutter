@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../generated/l10n.dart';
 import '/widgets/curved_widget.dart';
 
 import 'register_form.dart';
@@ -11,13 +12,6 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   extendBodyBehindAppBar: true,
-    //   appBar: AppBar(
-    //     iconTheme: const IconThemeData(color: Colors.black),
-    //     elevation: 0,
-    //     backgroundColor: Colors.transparent,
-    //   ),
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -31,6 +25,7 @@ class RegisterScreen extends StatelessWidget {
       ),
       height: double.infinity,
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Stack(
           children: <Widget>[
             CurvedWidget(
@@ -43,18 +38,19 @@ class RegisterScreen extends StatelessWidget {
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.white,
-                        Colors.white.withOpacity(0.5),
+                        Colors.white70.withOpacity(0.5),
                       ]),
                 ),
                 width: double.infinity,
                 height: 300,
-                child: const Text("Registrar",
-                    style: TextStyle(color: Colors.black, fontSize: 40)),
+                child: Text(S.of(context).title_register,
+                    style: Theme.of(context).textTheme.headline2),
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 220),
-              // constraints: BoxConstraints(ma),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              margin: const EdgeInsets.only(top: 300),
+              height: 300,
               child: RegisterForm(tabController: tabController),
             ),
           ],

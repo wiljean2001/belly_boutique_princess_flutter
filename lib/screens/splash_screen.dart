@@ -5,9 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/blocs.dart';
 import '../generated/assets.dart';
-import '../generated/l10n.dart';
 import 'onboarding_auth/onboarding_screen.dart';
-import 'user/home_screen.dart';
+import 'screens.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = '/splash';
@@ -40,49 +39,31 @@ class _SplashScreenState extends State<SplashScreen> {
               if (state.status == AuthStatus.unauthenticated) {
                 Timer(
                   const Duration(seconds: 2),
-                  () => Navigator.of(context).pushNamedAndRemoveUntil(
-                    OnboardingScreen.routeName,
-                    (route) => false,
-                  ),
+                      () =>
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        OnboardingScreen.routeName,
+                            (route) => false,
+                      ),
                 );
               }
               if (state.status == AuthStatus.authenticated) {
-                BlocBuilder<ProfileBloc, ProfileState>(
-                  builder: (context, state) {
-                    if(state is ProfileLoaded){
-                      print('ROle>>>>>>>> ${state.user.role}');
-                      return Text('');
-                    }
-                    return Text('');
-                  },
-                );
                 Timer(
                   const Duration(seconds: 2),
-                  () => Navigator.of(context).pushNamedAndRemoveUntil(
-                    HomeScreen.routeName,
-                    (route) => false,
-                  ),
+                      () =>
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        MenuUserScreen.routeName,
+                            (route) => false,
+                      ),
                 );
               }
             },
             child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image(
-                    image: const AssetImage(Assets.imagesLogoTextoRosa),
-                    width: MediaQuery.of(context).size.width * 0.75,
-                  ),
-                  // SvgPicture.asset(
-                  //   'assets/logo.svg',
-                  //   height: 100,
-                  // ),
-                  // SizedBox(height: 20),
-                  // Text(
-                  //   'ARROW',
-                  //   style: Theme.of(context).textTheme.headline1,
-                  // )
-                ],
+              child: Image(
+                image: const AssetImage(Assets.imagesLogoTextoRosa),
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width * 0.75,
               ),
             ),
           ),

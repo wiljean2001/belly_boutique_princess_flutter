@@ -2,7 +2,6 @@ import 'package:belly_boutique_princess/screens/user/home_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../blocs/profile/profile_bloc.dart';
-import '../app_theme.dart';
 import 'package:flutter/material.dart';
 
 class HomeDrawer extends StatefulWidget {
@@ -23,6 +22,7 @@ class HomeDrawer extends StatefulWidget {
 
 class _HomeDrawerState extends State<HomeDrawer> {
   List<DrawerList>? drawerList;
+
   @override
   void initState() {
     setDrawerListArray();
@@ -87,7 +87,10 @@ class _HomeDrawerState extends State<HomeDrawer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.notWhite.withOpacity(0.5),
+      // backgroundColor: AppTheme.notWhite.withOpacity(0.5),
+      backgroundColor: Theme.of(context)
+          .primaryColor
+          .withOpacity(0.1), // with opacity background
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -126,13 +129,17 @@ class _HomeDrawerState extends State<HomeDrawer> {
                                             .value /
                                         360),
                                 child: Container(
+                                  // User photo
                                   height: 120,
                                   width: 120,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     boxShadow: <BoxShadow>[
                                       BoxShadow(
-                                        color: AppTheme.grey.withOpacity(0.6),
+                                        // color: AppTheme.grey.withOpacity(0.6),
+                                        color: Theme.of(context)
+                                            .primaryColor
+                                            .withOpacity(0.6),
                                         offset: const Offset(2.0, 4.0),
                                         blurRadius: 8,
                                       ),
@@ -142,7 +149,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(60.0)),
                                     child: Image.network(
-                                      state.user.imageUrls[0],
+                                      state.user.imageUrls[0], // user image
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -154,10 +161,11 @@ class _HomeDrawerState extends State<HomeDrawer> {
                         Padding(
                           padding: const EdgeInsets.only(top: 8, left: 4),
                           child: Text(
-                            state.user.name,
-                            style: const TextStyle(
+                            state.user.name, // name user
+                            style: TextStyle(
                               fontWeight: FontWeight.w600,
-                              color: AppTheme.grey,
+                              // color: AppTheme.grey,
+                              color: Theme.of(context).primaryColorDark,
                               fontSize: 18,
                             ),
                           ),
@@ -175,7 +183,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           Divider(
             height: 1,
-            color: AppTheme.grey.withOpacity(0.6),
+            // color: AppTheme.grey.withOpacity(0.6),
+            color: Theme.of(context).primaryColorDark.withOpacity(0.7),
           ),
           Expanded(
             child: ListView.builder(
@@ -189,18 +198,21 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           Divider(
             height: 1,
-            color: AppTheme.grey.withOpacity(0.6),
+            color: Theme.of(context).primaryColorDark.withOpacity(0.6),
           ),
           Column(
             children: <Widget>[
               ListTile(
-                title: const Text(
-                  'Salir de modo administrador',
+                title: Text(
+                  'Cerrar sesión',
                   style: TextStyle(
-                    fontFamily: AppTheme.fontName,
+                    // fontFamily: AppTheme.fontName,
+                    fontFamily:
+                        Theme.of(context).textTheme.headline1?.fontFamily,
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
-                    color: AppTheme.darkText,
+                    // color: AppTheme.darkText,
+                    color: Theme.of(context).primaryColorDark,
                   ),
                   textAlign: TextAlign.left,
                 ),
@@ -211,7 +223,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 onTap: () {
                   onTapped();
                   Navigator.of(context).pushNamedAndRemoveUntil(
-                    HomeScreen.routeName,
+                    '/',
                     (route) => false,
                   );
                 },
@@ -271,12 +283,14 @@ class _HomeDrawerState extends State<HomeDrawer> {
                           child: Image.asset(listData.imageName,
                               color: widget.screenIndex == listData.index
                                   ? Theme.of(context).primaryColor
-                                  : AppTheme.nearlyBlack),
+                                  // : AppTheme.nearlyBlack),
+                                  : Theme.of(context).primaryColorDark),
                         )
                       : Icon(listData.icon?.icon,
                           color: widget.screenIndex == listData.index
                               ? Theme.of(context).primaryColor
-                              : AppTheme.nearlyBlack),
+                              // : AppTheme.nearlyBlack),
+                              : Theme.of(context).primaryColorDark),
                   const Padding(
                     padding: EdgeInsets.all(4.0),
                   ),
@@ -287,7 +301,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
                       fontSize: 16,
                       color: widget.screenIndex == listData.index
                           ? Theme.of(context).primaryColor
-                          : AppTheme.nearlyBlack,
+                          // : AppTheme.nearlyBlack,
+                          : Theme.of(context).primaryColorDark,
                     ),
                     textAlign: TextAlign.left,
                   ),

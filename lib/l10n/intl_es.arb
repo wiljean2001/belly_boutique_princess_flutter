@@ -21,12 +21,15 @@
   "description_app": "Esta es una tienda que se dedica a vender vestidos para las princesas de casa.",
   "bttn_start": "Empezar",
 
+
+  "title_sign_in": "INICIAR SESIÓN",
   "email": "Correo electrónico",
   "validator_email_error": "Correo no válido",
   "password": "Contraseña",
   "validator_password_error": "Contraseña no válida",
 
   "bttn_register": "Registrarse",
+  "title_register": "Registrar",
   "register_error_title": "Error de registro",
   "register_error_desc": "Usuario existente",
 

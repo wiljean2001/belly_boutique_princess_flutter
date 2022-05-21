@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               margin: const EdgeInsets.only(top: 370),
-              height: 300,
+              height: 360,
               // constraints: BoxConstraints(ma),
               child: LoginForm(
                 tabController: tabController,

@@ -1,12 +1,10 @@
 import 'package:belly_boutique_princess/utils/open_all.dart';
 import 'package:flutter/material.dart';
 
-// import 'package:fluttertoast/fluttertoast.dart';
 import '../generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/blocs.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
-// import 'package:url_launcher/url_launcher.dart';
 
 import '../repositories/auth/auth_repository.dart';
 import '../screens/setting_screen.dart';

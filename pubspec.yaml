@@ -42,15 +42,19 @@ dev_dependencies:
 
   flutter_lints: ^1.0.0
 
-
 flutter:
   uses-material-design: true
 
+  fonts:
+    - family: SourceSansPro
+      fonts:
+        - asset: assets/fonts/Source_sans_pro/SourceSansProBold.ttf
+
   assets:
-    - graphics/images/
-    - graphics/images/facebook_64.png
-    - graphics/images/whatsapp_64.png
-    - graphics/videos/
+    - assets/images/
+    - assets/images/facebook_64.png
+    - assets/images/whatsapp_64.png
+    - assets/videos/
 flutter_intl:
   enabled: true
   main_locale: es

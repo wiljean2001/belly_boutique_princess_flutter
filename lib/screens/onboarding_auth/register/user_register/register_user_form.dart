@@ -18,15 +18,9 @@ class RegisterUserForm extends StatefulWidget {
 }
 
 class _RegisterUserFormState extends State<RegisterUserForm> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
-
   String? dropdownValue;
-  final GlobalKey<FormState> _formKeyUser = GlobalKey<FormState>();
-
   String? name;
+  final GlobalKey<FormState> _formKeyUser = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -49,23 +43,23 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                   context.read<Locale>().countryCode),
               // (2101)
             );
-            if (picked != null) {
-              // Date ->
-              context.read<OnboardingBloc>().add(
-                    UpdateUser(
-                      user: state.user
-                          .copyWith(dateOfBirth: Timestamp.fromDate(picked)),
-                    ),
-                  );
-            }
+            // Date ->
+            picked != null
+                ? context.read<OnboardingBloc>().add(
+                      UpdateUser(
+                        user: state.user.copyWith(
+                          dateOfBirth: Timestamp.fromDate(picked),
+                        ),
+                      ),
+                    )
+                : null;
           }
 
-          return Padding(
-            padding: const EdgeInsets.all(20.0),
+          return Center(
             child: Form(
               key: _formKeyUser,
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   //campo formulario NOMBRE
                   TextFormField(
@@ -81,10 +75,9 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       name = value;
                     },
                   ),
-                  const SizedBox(height: 10),
                   // Genero
                   SizedBox(
-                    width: 300,
+                    width: double.infinity,
                     height: 55,
                     child: DropdownButton<String>(
                       isExpanded: true,

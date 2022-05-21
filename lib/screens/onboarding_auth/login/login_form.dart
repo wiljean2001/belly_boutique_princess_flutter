@@ -1,3 +1,4 @@
+import 'package:belly_boutique_princess/config/theme_default.dart';
 import 'package:belly_boutique_princess/utils/validators.dart';
 
 import '../../../blocs/auth/auth_bloc.dart';
@@ -21,14 +22,23 @@ class LoginForm extends StatelessWidget {
 
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
-        return Container(
-          // height: MediaQuery.of(context).size.height,
-          alignment: Alignment.center,
+        return Center(
           child: Form(
             key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
+                Text(
+                  S.of(context).title_sign_in,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineLarge,
+                ),
+                Text(
+                  'Inicia sesión con una cuenta existente de Bely Boutique',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  textAlign: TextAlign.center,
+                ),
                 TextFormField(
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.emailAddress,
@@ -95,7 +105,7 @@ class LoginForm extends StatelessWidget {
                     );
                   },
                 ),
-                const Divider(height: 10),
+                const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
