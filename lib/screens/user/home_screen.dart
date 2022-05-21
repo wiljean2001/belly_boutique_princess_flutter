@@ -6,7 +6,9 @@ import '../../blocs/blocs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../generated/l10n.dart';
 
+import '../../models/models.dart';
 import '../../pages/user_views.dart';
+import '../../widgets/Custom_loading_screen.dart';
 import '../../widgets/custom_bottom_navigation.dart';
 import '../admin/navigator_admin_screens.dart';
 
@@ -30,6 +32,7 @@ class HomeScreen extends StatelessWidget {
 
   const HomeScreen({
     Key? key,
+    // required this.user,
   }) : super(key: key);
 
   // Seteo del bottom navigation opcions del sistema operativo
@@ -44,7 +47,6 @@ class HomeScreen extends StatelessWidget {
   //   SystemChrome.setSystemUIOverlayStyle(overlayStyle);
   // }
   // pages
-
   @override
   Widget build(BuildContext context) {
     List<Widget> views = [
@@ -64,9 +66,8 @@ class HomeScreen extends StatelessWidget {
             bottomNavigationBar: const CustomBottomNavigationBar(),
           );
         }
-        return Text(S.of(context).Error_displaying_interaces);
+        return Center(child: Text(S.of(context).Error_displaying_interaces));
       },
     );
-    return Scaffold();
   }
 }

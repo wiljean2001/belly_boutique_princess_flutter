@@ -13,9 +13,12 @@ class Routers {
     switch (settings.name) {
       // switch the name route on screens
       case '/':
-        return MenuUserScreen.route();
+        return MenuAdminScreen.route();
+      // return MenuUserScreen.route();
       case HomeScreen.routeName:
         return HomeScreen.route();
+      case MenuAdminScreen.routeName:
+        return MenuAdminScreen.route();
       case SplashScreen.routeName:
         return SplashScreen.route();
       case SettingScreen.routeName:
@@ -24,8 +27,6 @@ class Routers {
         return OnboardingScreen.route();
       // case MenuAdmintration.routeName:
       //   return MenuAdmintration.route();
-      case MenuAdminScreen.routeName:
-        return MenuAdminScreen.route();
       case CreateProductScreen.routeName:
         return CreateProductScreen.route();
       case OpenContainerTransformDemo.routeName:

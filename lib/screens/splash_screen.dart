@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/blocs.dart';
 import '../generated/assets.dart';
+import 'admin/admin_screens.dart';
 import 'onboarding_auth/onboarding_screen.dart';
 import 'screens.dart';
 
@@ -39,31 +40,28 @@ class _SplashScreenState extends State<SplashScreen> {
               if (state.status == AuthStatus.unauthenticated) {
                 Timer(
                   const Duration(seconds: 2),
-                      () =>
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        OnboardingScreen.routeName,
-                            (route) => false,
-                      ),
+                  () => Navigator.of(context).pushNamedAndRemoveUntil(
+                    OnboardingScreen.routeName,
+                    (route) => false,
+                  ),
                 );
               }
               if (state.status == AuthStatus.authenticated) {
                 Timer(
                   const Duration(seconds: 2),
-                      () =>
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        MenuUserScreen.routeName,
-                            (route) => false,
-                      ),
+                  () => Future.delayed(Duration.zero, () async {
+                    await Navigator.of(context).pushNamedAndRemoveUntil(
+                      MenuAdminScreen.routeName,
+                      (route) => false,
+                    );
+                  }),
                 );
               }
             },
             child: Center(
               child: Image(
                 image: const AssetImage(Assets.imagesLogoTextoRosa),
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width * 0.75,
+                width: MediaQuery.of(context).size.width * 0.75,
               ),
             ),
           ),

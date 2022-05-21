@@ -18,7 +18,7 @@ import 'package:belly_boutique_princess/sinple_bloc_observer.dart';
 import 'package:belly_boutique_princess/screens/screens.dart';
 
 /// Metodo main de la aplicacion flutter
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 

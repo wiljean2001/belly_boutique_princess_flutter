@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/blocs.dart';
+import '../../widgets/Custom_loading_screen.dart';
 import '../screens.dart';
 import 'admin_screens.dart';
 import 'menu/drawer/custom_drawer.dart';
 import 'menu/drawer/custom_drawer_user.dart';
 
 class MenuAdminScreen extends StatefulWidget {
-  static const String routeName = '/admin';
+  // static const String routeName = '/menu_admin';
+  static const String routeName = '/';
 
   static Route route() {
     return MaterialPageRoute(
@@ -33,10 +36,20 @@ class _HomeScreenState extends State<MenuAdminScreen> {
   Widget? screenView;
   DrawerIndex? drawerIndex;
 
+  // User user = User(
+  //     name: '',
+  //     dateOfBirth: Timestamp.fromDate(DateTime.now()),
+  //     gender: '',
+  //     role: '',
+  //     imageUrls: ['https://api.lorem.space/image/face?w=150&h=150'],
+  //     interests: [''],
+  //     location: '');
+
   @override
-  void initState() {
+  initState() {
     drawerIndex = DrawerIndex.HOME_USER;
     screenView = const HomeScreen();
+    //user: user
     super.initState();
   }
 
@@ -44,18 +57,22 @@ class _HomeScreenState extends State<MenuAdminScreen> {
   Widget build(BuildContext context) {
     return Container(
       // color: AppTheme.nearlyWhite,
-      color: Theme.of(context).primaryColor,
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: SafeArea(
         top: false,
         bottom: false,
         child: Scaffold(
           // backgroundColor: AppTheme.nearlyWhite,
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {
               if (state.status == AuthStatus.authenticated) {
                 return BlocBuilder<ProfileBloc, ProfileState>(
-                  builder: (context, state) {
+                    builder: (context, state) {
+                  if (state is ProfileLoading) {
+                    return const CustomLoadingScreen();
+                  }
+                  // Future.delayed(Duration.zero, () async {
                     if (state is ProfileLoaded) {
                       if (state.user.role == 'admin') {
                         return DrawerUserController(
@@ -64,27 +81,28 @@ class _HomeScreenState extends State<MenuAdminScreen> {
                           onDrawerCall: (DrawerIndex drawerIndexdata) {
                             changeIndex(drawerIndexdata);
                             /**
-                             * devolución de llamada desde el cajón para reemplazar
-                             * la pantalla según las necesidades del usuario al pasar
-                             * DrawerIndex (índice Enum)
-                             */
+                                 * devolución de llamada desde el cajón para reemplazar
+                                 * la pantalla según las necesidades del usuario al pasar
+                                 * DrawerIndex (índice Enum)
+                                 */
                           },
                           screenView: screenView,
                           /**
-                           * reemplazamos la vista de pantalla según sea necesario
-                           * en las pantallas de inicio de navegación como MyHomePage,
-                           * HelpScreen, FeedbackScreen, etc.
-                           */
+                               * reemplazamos la vista de pantalla según sea necesario
+                               * en las pantallas de inicio de navegación como MyHomePage,
+                               * HelpScreen, FeedbackScreen, etc.
+                               */
                         );
                       } else {
-                        return const Center(child: CircularProgressIndicator());
+                        return const HomeScreen();
                       }
                     }
-                    return const Center(child: CircularProgressIndicator());
-                  },
-                );
+                  // });
+                  print('///');
+                  return const CustomLoadingScreen();
+                });
               } else {
-                return const Center(child: CircularProgressIndicator());
+                return const CustomLoadingScreen();
               }
             },
           ),

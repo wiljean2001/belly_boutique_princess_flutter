@@ -48,7 +48,7 @@ flutter:
   fonts:
     - family: SourceSansPro
       fonts:
-        - asset: assets/fonts/Source_sans_pro/SourceSansProBold.ttf
+        - asset: assets/fonts/Source_sans_pro/SourceSansProSemiBold.ttf
 
   assets:
     - assets/images/
