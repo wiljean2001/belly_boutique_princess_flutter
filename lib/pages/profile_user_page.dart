@@ -122,7 +122,7 @@ class getProfileLoaded extends StatelessWidget {
                     // width: double.infinity,
                     height: 80,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
                       decoration: BoxDecoration(
                         color: Theme.of(context).primaryColor,
                         borderRadius: const BorderRadius.vertical(
@@ -138,12 +138,14 @@ class getProfileLoaded extends StatelessWidget {
                               Text(
                                 'Edad',
                                 style: TextStyle(
-                                    color: Theme.of(context).primaryColorLight),
+                                    color: Theme.of(context).primaryColorLight,
+                                fontSize: 18 ),
                               ),
                               Text(
                                 edad.toString(),
                                 style: TextStyle(
-                                    color: Theme.of(context).primaryColorLight),
+                                    color: Theme.of(context).primaryColorLight,
+                                    fontSize: 18 ),
                               ),
                             ],
                           ),
@@ -152,12 +154,14 @@ class getProfileLoaded extends StatelessWidget {
                               Text(
                                 "Sexo",
                                 style: TextStyle(
-                                    color: Theme.of(context).primaryColorLight),
+                                    color: Theme.of(context).primaryColorLight,
+                                    fontSize: 18 ),
                               ),
                               Text(
                                 usuario.gender,
                                 style: TextStyle(
-                                    color: Theme.of(context).primaryColorLight),
+                                    color: Theme.of(context).primaryColorLight,
+                                    fontSize: 18 ),
                               ),
                             ],
                           ),
@@ -206,7 +210,7 @@ class _BodyState extends State<Body> {
                   context: context,
                   // barrierColor: Colors.transparent,
                   useRootNavigator: true,
-                  anchorPoint: Offset.infinite,
+                  //anchorPoint: Offset.infinite,
                   builder: (BuildContext context) => const AlertDialog(
                     contentPadding: EdgeInsets.all(0),
                     alignment: Alignment.center,

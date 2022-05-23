@@ -1,3 +1,4 @@
+import '../generated/assets.dart';
 import '/models/user_model.dart';
 import 'package:flutter/material.dart';
 
@@ -28,9 +29,7 @@ class _CustomScrollViewProductsState extends State<CustomScrollViewProducts> {
       children: User.users.map<Widget>((User product) {
         return GestureDetector(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return ProductScreen();
-            }));
+            Navigator.of(context).pushNamed(ProductScreen.routeName);
           },
           child: GridTile(
             footer: Material(
@@ -52,7 +51,7 @@ class _CustomScrollViewProductsState extends State<CustomScrollViewProducts> {
             ),
             // Buscar la forma de almacenar las imagenes
             child: const Image(
-                image: AssetImage('graphics/images/Bestido1_n.jpg')),
+                image: AssetImage(Assets.imagesBestido1N)),
           ),
         );
       }).toList(),

@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../blocs/auth/auth_bloc.dart';
+import '../onboarding_auth/onboarding_screen.dart';
 
 // falta cambiar los textos a dinamicos
 
 class ProductScreen extends StatefulWidget {
+  static const String routeName = '/producto'; //route
+
+  static Route route() {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) {
+        // print the status user with the authbloc
+        print(BlocProvider.of<AuthBloc>(context).state.status);
+
+        return BlocProvider.of<AuthBloc>(context).state.status ==
+            AuthStatus.unauthenticated
+            ? const OnboardingScreen()
+            : const ProductScreen();
+      },
+    );
+  }
+
   const ProductScreen({
     Key? key,
   }) : super(key: key);

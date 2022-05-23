@@ -21,23 +21,23 @@ class HomeView extends StatelessWidget {
           children: [
             CustomAppBar(title: S.of(context).AppTitle, hasActions: true),
             Expanded(
-              child: Container(
-                  child: const Text('LISTA DE TODOS LOS PRODUCTOS')
+              child:  SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints.expand(
+                    height: MediaQuery.of(context).size.height - 180,
+                  ),
+                  child: CustomScrollViewProducts(),
+                ),
               ),
+              /*child: Container(
+                  child: const Text('LISTA DE TODOS LOS PRODUCTOS')
+              ),*/
             ),
             // const SizedBox(
             //   height: 70,
             // ),
             // const CustomDropDownCategories(), // Cegories dropdown
-            // SingleChildScrollView(
-            //   scrollDirection: Axis.vertical,
-            //   child: ConstrainedBox(
-            //     constraints: BoxConstraints.expand(
-            //       height: MediaQuery.of(context).size.height - 180,
-            //     ),
-            //     child: CustomScrollViewProducts(),
-            //   ),
-            // ),
           ],
         ),
       ),

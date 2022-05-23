@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../generated/l10n.dart';
@@ -18,13 +19,8 @@ class ShoppingCartView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             CustomAppBar(title: S.of(context).AppTitle, hasActions: false),
-            const Expanded(
-              child: Text(
-                "Hola",
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
+            Expanded(
+              child: Text('tu no has visto nada')
             ),
           ],
         ),

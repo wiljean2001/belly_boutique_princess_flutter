@@ -1,8 +1,10 @@
+import 'package:belly_boutique_princess/pages/prueba_distrib.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/blocs.dart';
+import '../../pages/pruebaAnimate.dart';
 import '../../widgets/Custom_loading_screen.dart';
 import '../screens.dart';
 import 'admin_screens.dart';
@@ -128,7 +130,7 @@ class _HomeScreenState extends State<MenuAdminScreen> {
           break;
         case DrawerIndex.Product_edit:
           setState(() {
-            // screenView = FeedbackScreen();
+             screenView = OpenContainerTransformDemo();
           });
           break;
         case DrawerIndex.Product_show:
@@ -138,6 +140,7 @@ class _HomeScreenState extends State<MenuAdminScreen> {
           break;
         case DrawerIndex.Category_create:
           setState(() {
+            screenView = PruebaDistrib();
             // screenView = FeedbackScreen();
           });
           break;

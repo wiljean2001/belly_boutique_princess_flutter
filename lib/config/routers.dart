@@ -31,6 +31,8 @@ class Routers {
         return CreateProductScreen.route();
       case OpenContainerTransformDemo.routeName:
         return OpenContainerTransformDemo.route();
+      case ProductScreen.routeName:
+        return ProductScreen.route();
       default:
         return _errorRoute();
     }

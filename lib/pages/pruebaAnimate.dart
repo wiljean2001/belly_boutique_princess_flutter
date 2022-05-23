@@ -244,10 +244,9 @@ class _OpenContainerTransformDemoState
               closedElevation: 0.0,
               closedBuilder: (BuildContext _, VoidCallback openContainer) {
                 return ListTile(
-                  leading: Image.asset(
-                    'assets/avatar_logo.png',
-                    width: 40,
-                  ),
+                  leading: Image.network(
+                      'https://api.lorem.space/image/album?w=600&h=300',
+                      width: 40),
                   onTap: openContainer,
                   title: Text('List item ${index + 1}'),
                   subtitle: const Text('Secondary text'),
@@ -330,9 +329,9 @@ class _ExampleCard extends StatelessWidget {
             child: Container(
               color: Colors.black38,
               child: Center(
-                child: Image.asset(
-                  'assets/placeholder_image.png',
-                  width: 100,
+                child: Image.network(
+                  'https://api.lorem.space/image/album?w=600&h=300',
+                  //width: 100
                 ),
               ),
             ),
@@ -383,8 +382,8 @@ class _SmallerCard extends StatelessWidget {
             color: Colors.black38,
             height: 150,
             child: Center(
-              child: Image.asset(
-                'assets/placeholder_image.png',
+              child: Image.network(
+                'https://api.lorem.space/image/album?w=150&h=150',
                 width: 80,
               ),
             ),
@@ -434,10 +433,8 @@ class _ExampleSingleTile extends StatelessWidget {
             height: height,
             width: height,
             child: Center(
-              child: Image.asset(
-                'assets/placeholder_image.png',
-                width: 60,
-              ),
+              child: Image.network(
+                  'https://api.lorem.space/image/album?w=150&h=150'),
             ),
           ),
           Expanded(
@@ -515,8 +512,9 @@ class _DetailsPage extends StatelessWidget {
             height: 250,
             child: Padding(
               padding: const EdgeInsets.all(70.0),
-              child: Image.asset(
-                'assets/placeholder_image.png',
+              child: Image.network(
+                'https://api.lorem.space/image/album?w=600&h=300',
+                //width: 100
               ),
             ),
           ),
