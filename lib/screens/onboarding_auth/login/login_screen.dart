@@ -5,7 +5,6 @@ import '../../../generated/l10n.dart';
 import '/widgets/curved_widget.dart';
 import 'login_form.dart';
 
-
 class LoginScreen extends StatefulWidget {
   final TabController tabController;
 
@@ -43,7 +42,8 @@ class _LoginScreenState extends State<LoginScreen> {
               mode: 2,
               //curved widget with logo
               chield: Container(
-                padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 40),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 45, horizontal: 40),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ]),
                 ),
                 width: double.infinity,
-                height: 370,
+                height: 355,
                 child: const Image(
                   image: AssetImage(Assets.imagesLogoCoronaTexto),
                   alignment: Alignment.topCenter,
@@ -66,8 +66,8 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              margin: const EdgeInsets.only(top: 370),
-              height: 360,
+              margin: const EdgeInsets.only(top: 355),
+              height: 350,
               // constraints: BoxConstraints(ma),
               child: LoginForm(
                 tabController: tabController,

@@ -33,9 +33,9 @@ class CreateProductScreen extends StatelessWidget {
   // final List<String> tallas;
   final itemsTallas = <String>[];
   final List<String> itemsImages = [
-    Assets.imagesBestido1N,
-    Assets.imagesBestido1N,
-    Assets.imagesBestido1N,
+    // Assets.imagesBestido1N,
+    // Assets.imagesBestido1N,
+    // Assets.imagesBestido1N,
   ];
 
   @override
@@ -69,95 +69,22 @@ class CreateProductScreen extends StatelessWidget {
                           'PRODUCTO',
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 10),
-                          child: Column(
-                            children: [
-                              TextFormField(
-                                textInputAction: TextInputAction.next,
-                                keyboardType: TextInputType.text,
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: 'Nombre',
-                                ),
-                                maxLines: 1,
-                              ),
-                              const SizedBox(height: 10),
-                              TextFormField(
-                                textInputAction: TextInputAction.next,
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: 'Descripción',
-                                ),
-                                // maxLines: 3,
-                              ),
-                              const SizedBox(height: 10),
-                              TextFormField(
-                                textInputAction: TextInputAction.next,
-                                keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: 'Costo',
-                                  suffixText: 'Soles',
-                                  prefixText: 'S/',
-                                ),
-                                maxLines: 1,
-                              ),
-                            ],
-                          ),
-                        ),
+                        const FormProduct(),
                         const SizedBox(height: 10),
                         Text(
                           'CATEGORÍAS',
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                         const Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 10),
                           child: CustomDropDownCategories(),
                         ),
                         Text(
                           'TALLAS Y MÉTRICAS',
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 10),
-                          child: SizedBox(
-                            // height: 100,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: TextFormField(
-                                    textInputAction: TextInputAction.next,
-                                    keyboardType: TextInputType.number,
-                                    decoration: const InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      labelText: 'Tallas',
-                                      suffixText: 'Tallas',
-                                    ),
-                                    maxLines: null,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: TextButton(
-                                    onPressed: () {},
-                                    child: const Icon(Icons.add_circle_outline,
-                                        size: 60),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        CustomCarouselSliders(
-                          itemsImages: itemsImages,
-                          controller: controller,
-                        ),
+                        const FormSizes(),
                         CustomCarouselSliders(
                           itemsImages: itemsImages,
                           controller: controller,
@@ -170,6 +97,118 @@ class CreateProductScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// crashing
+class FormSizes extends StatelessWidget {
+  const FormSizes({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      child: SizedBox(
+        height: 50,
+        width: double.infinity,
+        child: Row(
+          children: [
+            Expanded(
+              child: MaterialButton(
+                color: Theme.of(context).primaryColor,
+                onPressed: () {},
+                child: Text(
+                  'Seleccionar tallas',
+                  style: Theme.of(context)
+                      .textTheme
+                      .button!
+                      .copyWith(color: Theme.of(context).primaryColorLight),
+                ),
+              ),
+              // child: SizedBox(
+              //   // width: MediaQuery.of(context).size.width * 0.6,
+              //   child: TextFormField(
+              //     textInputAction: TextInputAction.next,
+              //     keyboardType: TextInputType.text,
+              //     decoration: const InputDecoration(
+              //       border: OutlineInputBorder(),
+              //       labelText: 'Tallas',
+              //       suffixText: 'Tallas',
+              //     ),
+              //     // maxLines: null,
+              //   ),
+              // ),
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+            Material(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(50),
+              clipBehavior: Clip.hardEdge,
+              child: InkWell(
+                onTap: () {},
+                child: const Icon(
+                  Icons.add_circle_outline,
+                  size: 45,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class FormProduct extends StatelessWidget {
+  const FormProduct({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      child: Column(
+        children: [
+          TextFormField(
+            textInputAction: TextInputAction.next,
+            keyboardType: TextInputType.text,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Nombre',
+            ),
+            maxLines: 1,
+          ),
+          const SizedBox(height: 10),
+          TextFormField(
+            textInputAction: TextInputAction.next,
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Descripción',
+            ),
+            // maxLines: 3,
+          ),
+          const SizedBox(height: 10),
+          TextFormField(
+            textInputAction: TextInputAction.next,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Costo',
+              suffixText: 'Soles',
+              prefixText: 'S/',
+            ),
+            maxLines: 1,
+          ),
+        ],
       ),
     );
   }
@@ -190,7 +229,7 @@ class CustomCarouselSliders extends StatelessWidget {
     return Row(
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: () => controller.previousPage(),
           child: const Icon(
             Icons.keyboard_arrow_left_outlined,
             size: 45,
@@ -207,8 +246,13 @@ class CustomCarouselSliders extends StatelessWidget {
                           return Column(
                             children: [
                               Expanded(
-                                child: Image(
-                                  image: AssetImage('$e'),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    // TODO: Open galery
+                                  },
+                                  child: Image(
+                                    image: AssetImage(e),
+                                  ),
                                 ),
                               ),
                             ],
@@ -241,8 +285,9 @@ class CustomCarouselSliders extends StatelessWidget {
               onPageChanged: (
                 indexPage,
                 carousel,
-              ) {},
-              // cuando cambie la pagina
+              ) {
+                // cuando cambie la pagina
+              },
               viewportFraction: 0.5,
               aspectRatio: 2.0,
               initialPage: 1,
@@ -250,7 +295,7 @@ class CustomCarouselSliders extends StatelessWidget {
           ),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () => controller.nextPage(),
           child: const Icon(
             Icons.keyboard_arrow_right_outlined,
             size: 45,

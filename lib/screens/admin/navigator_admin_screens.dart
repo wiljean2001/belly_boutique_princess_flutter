@@ -36,15 +36,6 @@ class _HomeScreenState extends State<MenuAdminScreen> {
   Widget? screenView;
   DrawerIndex? drawerIndex;
 
-  // User user = User(
-  //     name: '',
-  //     dateOfBirth: Timestamp.fromDate(DateTime.now()),
-  //     gender: '',
-  //     role: '',
-  //     imageUrls: ['https://api.lorem.space/image/face?w=150&h=150'],
-  //     interests: [''],
-  //     location: '');
-
   @override
   initState() {
     drawerIndex = DrawerIndex.HOME_USER;
@@ -73,30 +64,33 @@ class _HomeScreenState extends State<MenuAdminScreen> {
                     return const CustomLoadingScreen();
                   }
                   // Future.delayed(Duration.zero, () async {
-                    if (state is ProfileLoaded) {
-                      if (state.user.role == 'admin') {
-                        return DrawerUserController(
-                          screenIndex: drawerIndex,
-                          drawerWidth: MediaQuery.of(context).size.width * 0.65,
-                          onDrawerCall: (DrawerIndex drawerIndexdata) {
-                            changeIndex(drawerIndexdata);
-                            /**
+                  if (state is ProfileLoaded) {
+                    if (state.user.role == 'admin') {
+                      // Future.delayed(Duration.zero, () async {
+                      return DrawerUserController(
+                        drawerIsOpen: ((value) => false),
+                        drawerWidth: MediaQuery.of(context).size.width * 0.65,
+                        screenIndex: drawerIndex,
+                        onDrawerCall: (DrawerIndex drawerIndexdata) {
+                          changeIndex(drawerIndexdata);
+                          /**
                                  * devolución de llamada desde el cajón para reemplazar
                                  * la pantalla según las necesidades del usuario al pasar
                                  * DrawerIndex (índice Enum)
                                  */
-                          },
-                          screenView: screenView,
-                          /**
+                        },
+                        screenView: screenView,
+                        /**
                                * reemplazamos la vista de pantalla según sea necesario
                                * en las pantallas de inicio de navegación como MyHomePage,
                                * HelpScreen, FeedbackScreen, etc.
                                */
-                        );
-                      } else {
-                        return const HomeScreen();
-                      }
+                      );
+                      // });
+                    } else {
+                      return const HomeScreen();
                     }
+                  }
                   // });
                   print('///');
                   return const CustomLoadingScreen();

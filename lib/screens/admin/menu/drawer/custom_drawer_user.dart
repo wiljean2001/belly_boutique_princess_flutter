@@ -77,15 +77,20 @@ class _DrawerUserControllerState extends State<DrawerUserController>
             curve: Curves.fastOutSlowIn);
       }
     });
-    WidgetsBinding.instance.addPostFrameCallback((_) => getInitState());
+    WidgetsBinding.instance?.addPostFrameCallback((_) => getInitState());
     super.initState();
   }
 
   Future<bool> getInitState() async {
-    scrollController?.jumpTo(
-      widget.drawerWidth,
-    );
-    return true;
+    if (scrollController!.hasClients) {
+      Future.delayed(const Duration(milliseconds: 50), () {
+        scrollController?.jumpTo(
+          widget.drawerWidth,
+        );
+      });
+      return true;
+    }
+    return false;
   }
 
   @override
@@ -94,9 +99,10 @@ class _DrawerUserControllerState extends State<DrawerUserController>
       // backgroundColor: AppTheme.white,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor, // drawer
       body: SingleChildScrollView(
-        controller: scrollController,
+        controller: scrollController!,
         scrollDirection: Axis.horizontal,
         physics: const PageScrollPhysics(parent: ClampingScrollPhysics()),
+        // physics: const BouncingScrollPhysics(),
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width + widget.drawerWidth,
@@ -155,7 +161,7 @@ class _DrawerUserControllerState extends State<DrawerUserController>
                    * shadow in left screen
                    */
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColorLight,
+                    color: Colors.white,
                     boxShadow: <BoxShadow>[
                       BoxShadow(
                           color:

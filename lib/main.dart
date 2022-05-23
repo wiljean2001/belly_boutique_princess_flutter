@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -6,7 +7,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'generated/l10n.dart';
 import 'repositories/repositories.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:io';
 import 'blocs/blocs.dart';
 import 'cubit/cubits.dart';
 
@@ -21,15 +23,19 @@ import 'package:belly_boutique_princess/screens/screens.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   // simple bloc observer
   BlocOverrides.runZoned(
-    () => {
+    () async => {
       runApp(
         ChangeNotifierProvider(
-          create: (_) => ThemeChanger(themeDefault()),
-          child: const MyApp(),
-        ),
+            create: (_) => ThemeChanger(themeDefault()),
+            child:
+                await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+              DeviceOrientation.portraitUp,
+              DeviceOrientation.portraitDown
+            ]).then(
+              (_) => const MyApp(),
+            )),
       ),
     },
     blocObserver: SimpleBlocObserver(),
@@ -44,6 +50,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness:
+          !kIsWeb && Platform.isAndroid ? Brightness.dark : Brightness.light,
+      systemNavigationBarColor: Colors.white,
+      systemNavigationBarDividerColor: Colors.transparent,
+      systemNavigationBarIconBrightness: Brightness.dark,
+    ));
+
     final theme = Provider.of<ThemeChanger>(context);
     final ThemeData getThema = theme.getTheme<ThemeData>();
     /**
@@ -61,6 +77,9 @@ class MyApp extends StatelessWidget {
           create: (context) => StorageRepository(),
         ),
       ],
+      /**
+       * MultiBLocProvider
+       */
       child: MultiBlocProvider(
         //
         providers: [
@@ -91,11 +110,12 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => HomePageBloc(
-              // authBloc: BlocProvider.of<AuthBloc>(context),
-              // databaseRepository: context.read<DatabaseRepository>(),
-            )..add(
+                // authBloc: BlocProvider.of<AuthBloc>(context),
+                // databaseRepository: context.read<DatabaseRepository>(),
+                )
+              ..add(
                 const HomeTabChangeEvent(
-                    newIndex: 1), //newIndex = 0 is the first screen
+                    newIndex: 1), //newIhe first scndex = 0 is treen
               ),
           ),
           BlocProvider(
@@ -109,14 +129,14 @@ class MyApp extends StatelessWidget {
           title: 'Bely boutique princess',
           theme: getThema,
           /**
-           * .copyWith(
+            .copyWith(
               pageTransitionsTheme: const PageTransitionsTheme(
               builders: <TargetPlatform, PageTransitionsBuilder>{
               TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
               },
               ),
               ),
-           * */
+           */
           localizationsDelegates: const [
             // translate
             GlobalMaterialLocalizations.delegate,

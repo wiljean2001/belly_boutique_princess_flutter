@@ -5,10 +5,10 @@ ThemeData themeDefault() {
     primaryColor: Colors.pink, // pink
     primarySwatch: Colors.pink, // pink
     primaryColorDark: const Color(0xFF3A5160), // black
-    primaryColorLight: Colors.white,
+    // primaryColorLight: Colors.white,
     // primaryColorLight: const Color(0xFFFEFEFE), // white opaque
     // accentColor: const Color(0xFFE84545),
-    scaffoldBackgroundColor: const Color(0xFFFFFFFF), // white
+    scaffoldBackgroundColor: Colors.white, // white
     backgroundColor: const Color(0xFFF4F4F4), //
     iconTheme: const IconThemeData(color: Colors.pink), // pink
     bottomAppBarColor: const Color(0x9ED7D7D7),

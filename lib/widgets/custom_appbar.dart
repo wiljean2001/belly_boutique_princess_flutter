@@ -29,7 +29,7 @@ class CustomAppBar extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 8, left: 8),
-            child: Container(
+            child: SizedBox(
               width: AppBar().preferredSize.height - 8,
               height: AppBar().preferredSize.height - 8,
             ),
@@ -46,7 +46,7 @@ class CustomAppBar extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                      color: Theme.of(context).primaryColorLight,
+                      color: Colors.white,
                       fontSize:
                           Theme.of(context).textTheme.titleLarge?.fontSize),
                   // style: Theme.of(context).textTheme,

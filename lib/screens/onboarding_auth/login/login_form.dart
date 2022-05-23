@@ -28,15 +28,16 @@ class LoginForm extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
+                // Text(
+                //   S.of(context).title_sign_in,
+                //   style: Theme.of(context).textTheme.headlineLarge,
+                // ),
                 Text(
-                  S.of(context).title_sign_in,
+                  'Iniciar sesión con una cuenta existente de Bely Boutique',
                   style: Theme.of(context)
                       .textTheme
-                      .headlineLarge,
-                ),
-                Text(
-                  'Inicia sesión con una cuenta existente de Bely Boutique',
-                  style: Theme.of(context).textTheme.headlineSmall,
+                      .headline6
+                      ?.copyWith(color: Colors.black.withOpacity(.5)),
                   textAlign: TextAlign.center,
                 ),
                 TextFormField(
@@ -105,7 +106,7 @@ class LoginForm extends StatelessWidget {
                     );
                   },
                 ),
-                const SizedBox(height: 5),
+                // const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

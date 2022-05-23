@@ -49,12 +49,12 @@ class _SplashScreenState extends State<SplashScreen> {
               if (state.status == AuthStatus.authenticated) {
                 Timer(
                   const Duration(seconds: 2),
-                  () => Future.delayed(Duration.zero, () async {
-                    await Navigator.of(context).pushNamedAndRemoveUntil(
+                  () => // Future.delayed(Duration.zero, () async {await
+                    Navigator.of(context).pushNamedAndRemoveUntil(
                       MenuAdminScreen.routeName,
                       (route) => false,
-                    );
-                  }),
+                    ) //;
+                  // }),
                 );
               }
             },

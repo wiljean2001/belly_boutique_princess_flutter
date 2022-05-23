@@ -12,7 +12,7 @@ import '../../widgets/Custom_loading_screen.dart';
 import '../../widgets/custom_bottom_navigation.dart';
 import '../admin/navigator_admin_screens.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const String routeName = '/home'; //route
 
   static Route route() {
@@ -35,26 +35,29 @@ class HomeScreen extends StatelessWidget {
     // required this.user,
   }) : super(key: key);
 
-  // Seteo del bottom navigation opcions del sistema operativo
-  // if (BlocProvider.of<AuthBloc>(context).state.status ==
-  //     AuthStatus.authenticated) {
-  //   const SystemUiOverlayStyle overlayStyle = SystemUiOverlayStyle(
-  //     systemNavigationBarColor: Colors.pink,
-  //     // systemNavigationBarColor: Colors.transparent,
-  //     systemNavigationBarIconBrightness: Brightness.light,
-  //     systemNavigationBarDividerColor: Colors.pink,
-  //   );
-  //   SystemChrome.setSystemUIOverlayStyle(overlayStyle);
-  // }
-  // pages
   @override
-  Widget build(BuildContext context) {
-    List<Widget> views = [
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  List<Widget>? views;
+  @override
+  void initState() {
+    setListViews();
+    super.initState();
+  }
+
+  void setListViews() {
+    views = <Widget>[
       const UserProfileView(),
       const HomeView(),
       const ShoppingCartView(),
     ];
+  }
 
+  // Seteo del bottom navigation opcions del sistema operativo
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<HomePageBloc, HomePageState>(
       builder: (context, state) {
         if (state is HomePageInitial) {
@@ -62,7 +65,7 @@ class HomeScreen extends StatelessWidget {
         }
         if (state is BottomNavigationInitial) {
           return Scaffold(
-            body: views[state.indexBottomNav],
+            body: views![state.indexBottomNav],
             bottomNavigationBar: const CustomBottomNavigationBar(),
           );
         }

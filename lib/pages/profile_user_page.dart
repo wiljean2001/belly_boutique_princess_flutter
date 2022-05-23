@@ -206,7 +206,6 @@ class _BodyState extends State<Body> {
                   context: context,
                   // barrierColor: Colors.transparent,
                   useRootNavigator: true,
-                  anchorPoint: Offset.infinite,
                   builder: (BuildContext context) => const AlertDialog(
                     contentPadding: EdgeInsets.all(0),
                     alignment: Alignment.center,

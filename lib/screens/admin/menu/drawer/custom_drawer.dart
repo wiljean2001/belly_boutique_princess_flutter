@@ -89,8 +89,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
     return Scaffold(
       // backgroundColor: AppTheme.notWhite.withOpacity(0.5),
       backgroundColor: Theme.of(context)
-          .primaryColor
-          .withOpacity(0.1), // with opacity background
+          .primaryColorLight
+          .withOpacity(0.4), // with opacity background
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.start,
