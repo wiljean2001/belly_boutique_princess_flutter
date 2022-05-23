@@ -82,9 +82,13 @@ class _DrawerUserControllerState extends State<DrawerUserController>
   }
 
   Future<bool> getInitState() async {
-    scrollController?.jumpTo(
-      widget.drawerWidth,
-    );
+    if (scrollController!.hasClients) {
+      Future.delayed(Duration(milliseconds: 50), () {
+        scrollController?.jumpTo(
+          widget.drawerWidth,
+        );
+      });
+    }
     return true;
   }
 
