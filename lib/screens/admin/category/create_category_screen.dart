@@ -1,3 +1,4 @@
+import 'package:belly_boutique_princess/models/category_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../config/constrants.dart';
@@ -6,6 +7,7 @@ import '../../../widgets/custom_appbar.dart';
 
 class CreateCategoryScreen extends StatelessWidget {
   const CreateCategoryScreen({Key? key}) : super(key: key);
+// final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,52 +25,75 @@ class CreateCategoryScreen extends StatelessWidget {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(kPaddingM),
-                child: Form(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        'Categorias',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: kPaddingL, vertical: kPaddingS),
-                        child: Column(
-                          children: [
-                            TextFormField(
-                              textInputAction: TextInputAction.next,
-                              keyboardType: TextInputType.text,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Nombre de la categoría',
-                              ),
-                              maxLines: 1,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.6),
-                        child: MaterialButton(
-                          textColor: Theme.of(context).primaryColorLight,
-                          color: Theme.of(context).primaryColor,
-                          elevation: 10,
-                          onPressed: () {},
-                          child: const Text(
-                            'Guardar',
-                          ),
-                        ),
-                      ),
-                      const Divider(height: 20),
-                    ],
-                  ),
-                ),
+                child: FormCreateCategory(),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class FormCreateCategory extends StatelessWidget {
+  FormCreateCategory({
+    Key? key,
+  }) : super(key: key);
+
+  String? nameCategory;
+  @override
+  Widget build(BuildContext context) {
+    final GlobalKey<FormState> _keyForm = GlobalKey<FormState>();
+    return Form(
+      key: _keyForm,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            'Categorias',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: kPaddingL, vertical: kPaddingS),
+            child: Column(
+              children: [
+                TextFormField(
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.text,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Nombre de la categoría',
+                  ),
+                  maxLines: 1,
+                  onChanged: (nameC) => nameCategory = nameC,
+                  validator: (value) => value!.isEmpty
+                      ? 'Campo categoría no puede estar vacía.'
+                      : null,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding:
+                EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.6),
+            child: MaterialButton(
+              textColor: Theme.of(context).primaryColorLight,
+              color: Theme.of(context).primaryColor,
+              elevation: 10,
+              onPressed: () {
+                if (!_keyForm.currentState!.validate()) return;
+
+                Category categoria =
+                    Category(id: '', name: nameCategory!, imageUrl: '');
+              },
+              child: const Text(
+                'Guardar',
+              ),
+            ),
+          ),
+          const Divider(height: 20),
+        ],
       ),
     );
   }

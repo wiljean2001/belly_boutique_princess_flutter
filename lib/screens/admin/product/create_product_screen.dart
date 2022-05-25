@@ -1,6 +1,9 @@
 import 'package:belly_boutique_princess/screens/onboarding_auth/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
 
 import '../../../blocs/blocs.dart';
 import '../../../config/constrants.dart';
@@ -38,6 +41,10 @@ class CreateProductScreen extends StatelessWidget {
     // Assets.imagesBestido1N,
     // Assets.imagesBestido1N,
   ];
+  List? valueCategory;
+
+  List? sizesProduct;
+  List<String> listItems = ['XXS', 'XS', 'S', 'M', 'L', 'XL'];
 
   @override
   Widget build(BuildContext context) {
@@ -76,16 +83,54 @@ class CreateProductScreen extends StatelessWidget {
                           'CATEGORÍAS',
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: kPaddingL, vertical: kPaddingS),
-                          child: CustomDropDownCategories(),
+                        // TODO: Categories
+                        BlocBuilder<CategoryBloc, CategoryState>(
+                          builder: (context, state) {
+                            if (state is CategoryLoading) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            if (state is CategoryLoaded) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: kPaddingL, vertical: kPaddingS),
+                                child: CustomDropDown(
+                                  buttonText:
+                                      const Text('Seleccionar categorías'),
+                                  listItems: state.categories
+                                      .map((e) =>
+                                          MultiSelectItem(e.name, e.name))
+                                      .toList(),
+                                  onConfirm: (List<Object?> values) {
+                                    valueCategory = values;
+                                  },
+                                  title: const Text('Categorías'),
+                                ),
+                              );
+                            }
+                            return const SizedBox();
+                          },
                         ),
                         Text(
                           'TALLAS Y MÉTRICAS',
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
-                        const FormSizes(),
+                        // TODO: Sizes product
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: kPaddingL, vertical: kPaddingS),
+                          child: CustomDropDown(
+                            buttonText: const Text('Seleccionar tallas'),
+                            listItems: listItems
+                                .map((e) => MultiSelectItem(e, e))
+                                .toList(),
+                            onConfirm: (List<Object?> values) {
+                              sizesProduct = values;
+                            },
+                            title: const Text('Tallas'),
+                          ),
+                        ),
                         CustomCarouselSliders(
                           itemsImages: itemsImages,
                           controller: controller,
@@ -128,66 +173,6 @@ class CreateProductScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-// crashing
-class FormSizes extends StatefulWidget {
-  const FormSizes({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<FormSizes> createState() => _FormSizesState();
-}
-
-class _FormSizesState extends State<FormSizes> {
-  List<String>? sizesProduct;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: kPaddingL, vertical: kPaddingS),
-      child: SizedBox(
-        height: 50,
-        width: double.infinity,
-        child: Row(
-          children: [
-            Expanded(
-              // child: MaterialButton(
-              //   color: Theme.of(context).primaryColor,
-              //   onPressed: () {},
-              //   child: Text(
-              //     'Seleccionar tallas',
-              //     style: Theme.of(context)
-              //         .textTheme
-              //         .button!
-              //         .copyWith(color: Theme.of(context).primaryColorLight),
-              //   ),
-              // ),
-              child: 
-            )
-          ],
-        ),
-      ),
-    );
-  
-//  SizedBox(
-//               width: 15,
-//             )
-//             Material(
-//               color: Colors.transparent,
-//               borderRadius: BorderRadius.circular(50),
-//               clipBehavior: Clip.hardEdge,
-//               child: InkWell(
-//                 onTap: () {},
-//                 child: const Icon(
-//                   Icons.add_circle_outline,
-//                   size: 45,
-//                 ),
-    // ),
-    // );
   }
 }
 
