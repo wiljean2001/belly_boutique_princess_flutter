@@ -1,12 +1,12 @@
-import 'dart:ui';
+// import 'dart:ui';
 
 // Colors
-const Color kBlue = Color(0xFFEB5757);
-const Color kLightBlue = Color(0xFFDC4A4A);
-const Color kDarkBlue = Color(0xFFA64040);
-const Color kWhite = Color(0xFFFFFFFF);
-const Color kGrey = Color(0xFFF4F5F7);
-const Color kBlack = Color(0xFF2D3243);
+// const Color kBlue = Color(0xFFEB5757);
+// const Color kLightBlue = Color(0xFFDC4A4A);
+// const Color kDarkBlue = Color(0xFFA64040);
+// const Color kWhite = Color(0xFFFFFFFF);
+// const Color kGrey = Color(0xFFF4F5F7);
+// const Color kBlack = Color(0xFF2D3243);
 
 // Padding
 const double kPaddingS = 8.0;

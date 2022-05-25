@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/blocs.dart';
+import '../../../config/constrants.dart';
 import '../../../generated/assets.dart';
 import '../../../widgets/custom_appbar.dart';
 import '../../../widgets/custom_dropdown_categories.dart';
@@ -50,7 +51,7 @@ class CreateProductScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomAppBar(
-              title: S.of(context).title_new_product_screen,
+              title: S.of(context).title_create_product_screen,
               hasActions: false,
               hasIcon: false,
             ),
@@ -58,7 +59,7 @@ class CreateProductScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(kPaddingM),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -77,7 +78,7 @@ class CreateProductScreen extends StatelessWidget {
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 10),
+                              horizontal: kPaddingL, vertical: kPaddingS),
                           child: CustomDropDownCategories(),
                         ),
                         Text(
@@ -89,12 +90,40 @@ class CreateProductScreen extends StatelessWidget {
                           itemsImages: itemsImages,
                           controller: controller,
                         ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.4),
+                          child: MaterialButton(
+                            color: Theme.of(context).primaryColor,
+                            elevation: 8.0,
+                            onPressed: () {},
+                            child: ListTile(
+                              textColor: Theme.of(context).primaryColorLight,
+                              iconColor: Theme.of(context).primaryColorLight,
+                              // trailing: Icon(Icons.save_outlined),
+                              title: const Text('Guardar'),
+                              leading: const Icon(Icons.save_outlined),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
             ),
+            // Padding(
+            //   padding: EdgeInsets.only(
+            //       left: MediaQuery.of(context).size.width * 0.5,
+            //       right: kPaddingM),
+            //   child: MaterialButton(
+            //     onPressed: () {},
+            //     child: ListTile(
+            //       title: Text('Guardar'),
+            //       leading: Icon(Icons.save_outlined),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -103,65 +132,62 @@ class CreateProductScreen extends StatelessWidget {
 }
 
 // crashing
-class FormSizes extends StatelessWidget {
+class FormSizes extends StatefulWidget {
   const FormSizes({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<FormSizes> createState() => _FormSizesState();
+}
+
+class _FormSizesState extends State<FormSizes> {
+  List<String>? sizesProduct;
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      padding: const EdgeInsets.symmetric(
+          horizontal: kPaddingL, vertical: kPaddingS),
       child: SizedBox(
         height: 50,
         width: double.infinity,
         child: Row(
           children: [
             Expanded(
-              child: MaterialButton(
-                color: Theme.of(context).primaryColor,
-                onPressed: () {},
-                child: Text(
-                  'Seleccionar tallas',
-                  style: Theme.of(context)
-                      .textTheme
-                      .button!
-                      .copyWith(color: Theme.of(context).primaryColorLight),
-                ),
-              ),
-              // child: SizedBox(
-              //   // width: MediaQuery.of(context).size.width * 0.6,
-              //   child: TextFormField(
-              //     textInputAction: TextInputAction.next,
-              //     keyboardType: TextInputType.text,
-              //     decoration: const InputDecoration(
-              //       border: OutlineInputBorder(),
-              //       labelText: 'Tallas',
-              //       suffixText: 'Tallas',
-              //     ),
-              //     // maxLines: null,
+              // child: MaterialButton(
+              //   color: Theme.of(context).primaryColor,
+              //   onPressed: () {},
+              //   child: Text(
+              //     'Seleccionar tallas',
+              //     style: Theme.of(context)
+              //         .textTheme
+              //         .button!
+              //         .copyWith(color: Theme.of(context).primaryColorLight),
               //   ),
               // ),
-            ),
-            const SizedBox(
-              width: 15,
-            ),
-            Material(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(50),
-              clipBehavior: Clip.hardEdge,
-              child: InkWell(
-                onTap: () {},
-                child: const Icon(
-                  Icons.add_circle_outline,
-                  size: 45,
-                ),
-              ),
-            ),
+              child: 
+            )
           ],
         ),
       ),
     );
+  
+//  SizedBox(
+//               width: 15,
+//             )
+//             Material(
+//               color: Colors.transparent,
+//               borderRadius: BorderRadius.circular(50),
+//               clipBehavior: Clip.hardEdge,
+//               child: InkWell(
+//                 onTap: () {},
+//                 child: const Icon(
+//                   Icons.add_circle_outline,
+//                   size: 45,
+//                 ),
+    // ),
+    // );
   }
 }
 
@@ -173,7 +199,8 @@ class FormProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      padding: const EdgeInsets.symmetric(
+          horizontal: kPaddingL, vertical: kPaddingS),
       child: Column(
         children: [
           TextFormField(
@@ -185,7 +212,7 @@ class FormProduct extends StatelessWidget {
             ),
             maxLines: 1,
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: kPaddingS),
           TextFormField(
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.multiline,
@@ -230,8 +257,9 @@ class CustomCarouselSliders extends StatelessWidget {
       children: [
         TextButton(
           onPressed: () => controller.previousPage(),
-          child: const Icon(
+          child: Icon(
             Icons.keyboard_arrow_left_outlined,
+            color: Theme.of(context).primaryColorDark,
             size: 45,
           ),
         ),
@@ -262,16 +290,19 @@ class CustomCarouselSliders extends StatelessWidget {
                     },
                   ).toList()
                 : [
-                    const Icon(
+                    Icon(
                       Icons.add_a_photo_outlined,
+                      color: Theme.of(context).primaryColorDark,
                       size: 65,
                     ),
-                    const Icon(
+                    Icon(
                       Icons.add_a_photo_outlined,
+                      color: Theme.of(context).primaryColorDark,
                       size: 65,
                     ),
-                    const Icon(
+                    Icon(
                       Icons.add_a_photo_outlined,
+                      color: Theme.of(context).primaryColorDark,
                       size: 65,
                     ),
                   ],
@@ -296,8 +327,9 @@ class CustomCarouselSliders extends StatelessWidget {
         ),
         TextButton(
           onPressed: () => controller.nextPage(),
-          child: const Icon(
+          child: Icon(
             Icons.keyboard_arrow_right_outlined,
+            color: Theme.of(context).primaryColorDark,
             size: 45,
           ),
         ),

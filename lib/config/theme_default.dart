@@ -13,7 +13,6 @@ ThemeData themeDefault() {
     iconTheme: const IconThemeData(color: Colors.pink), // pink
     bottomAppBarColor: const Color(0x9ED7D7D7),
     fontFamily: 'SourceSansPro',
-
     // pageTransitionsTheme: const PageTransitionsTheme(
     //   builders: <TargetPlatform, PageTransitionsBuilder>{
     //     TargetPlatform.android: ZoomPageTransitionsBuilder(),
@@ -22,13 +21,13 @@ ThemeData themeDefault() {
 
     textTheme: const TextTheme(
       headline1: TextStyle(fontFamily: 'SourceSansPro'),
-      headline2: TextStyle(),
-      headline3: TextStyle(),
-      headline4: TextStyle(),
-      headline5: TextStyle(),
-      headline6: TextStyle(),
-      bodyText1: TextStyle(),
-      bodyText2: TextStyle(),
+      headline2: TextStyle(fontFamily: 'SourceSansPro'),
+      headline3: TextStyle(fontFamily: 'SourceSansPro'),
+      headline4: TextStyle(fontFamily: 'SourceSansPro'),
+      headline5: TextStyle(fontFamily: 'SourceSansPro'),
+      headline6: TextStyle(fontFamily: 'SourceSansPro'),
+      bodyText1: TextStyle(fontFamily: 'SourceSansPro'),
+      bodyText2: TextStyle(fontFamily: 'SourceSansPro'),
     ),
   );
 }

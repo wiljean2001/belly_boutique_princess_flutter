@@ -110,6 +110,16 @@ class S {
     );
   }
 
+  /// `Buscar`
+  String get tooltip_bttn_search_products {
+    return Intl.message(
+      'Buscar',
+      name: 'tooltip_bttn_search_products',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Opciones`
   String get tooltip_bttn_options {
     return Intl.message(
@@ -391,10 +401,60 @@ class S {
   }
 
   /// `Crear producto`
-  String get title_new_product_screen {
+  String get title_create_product_screen {
     return Intl.message(
       'Crear producto',
-      name: 'title_new_product_screen',
+      name: 'title_create_product_screen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Actualizar producto`
+  String get title_update_product_screen {
+    return Intl.message(
+      'Actualizar producto',
+      name: 'title_update_product_screen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ver los producto`
+  String get title_show_products_screen {
+    return Intl.message(
+      'Ver los producto',
+      name: 'title_show_products_screen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Crear categoría`
+  String get title_create_category_screen {
+    return Intl.message(
+      'Crear categoría',
+      name: 'title_create_category_screen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Actualizar categoría`
+  String get title_update_category_screen {
+    return Intl.message(
+      'Actualizar categoría',
+      name: 'title_update_category_screen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ver las categorias`
+  String get title_show_categories_screen {
+    return Intl.message(
+      'Ver las categorias',
+      name: 'title_show_categories_screen',
       desc: '',
       args: [],
     );

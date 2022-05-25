@@ -11,12 +11,14 @@ class CustomAppBar extends StatelessWidget {
   final String title;
   final bool hasActions;
   final bool hasIcon;
+  final Function? onTapOption;
 
   const CustomAppBar({
     Key? key,
     required this.title,
     this.hasActions = true,
     this.hasIcon = true,
+    this.onTapOption,
   }) : super(key: key);
 
   @override
@@ -45,11 +47,10 @@ class CustomAppBar extends StatelessWidget {
                     : const SizedBox(),
                 Text(
                   title,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize:
-                          Theme.of(context).textTheme.titleLarge?.fontSize),
-                  // style: Theme.of(context).textTheme,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: Colors.white),
                 ),
               ],
             ),
@@ -63,13 +64,15 @@ class CustomAppBar extends StatelessWidget {
                     color: Colors.transparent,
                     child: Material(
                       color: Colors.transparent,
-                      //tooltip: S.of(context).tooltip_bttn_shopping_card,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(
                             AppBar().preferredSize.height),
-                        child: Icon(Icons.search_outlined,
-                            color: Theme.of(context).primaryColorLight),
-                        onTap: () {},
+                        child: Tooltip(
+                          message: S.of(context).tooltip_bttn_search_products,
+                          child: Icon(Icons.search_outlined,
+                              color: Theme.of(context).primaryColorLight),
+                        ),
+                        onTap: () => onTapOption != null ? onTapOption!() : {},
                       ),
                     ),
                   ),

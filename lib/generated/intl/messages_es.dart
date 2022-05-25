@@ -61,13 +61,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "title_admin_screen":
             MessageLookupByLibrary.simpleMessage("Administración"),
         "title_app": MessageLookupByLibrary.simpleMessage("Bienvenido"),
-        "title_new_product_screen":
+        "title_create_category_screen":
+            MessageLookupByLibrary.simpleMessage("Crear categoría"),
+        "title_create_product_screen":
             MessageLookupByLibrary.simpleMessage("Crear producto"),
         "title_register": MessageLookupByLibrary.simpleMessage("Registrar"),
+        "title_show_categories_screen":
+            MessageLookupByLibrary.simpleMessage("Ver las categorias"),
+        "title_show_products_screen":
+            MessageLookupByLibrary.simpleMessage("Ver los producto"),
         "title_sign_in": MessageLookupByLibrary.simpleMessage("INICIAR SESIÓN"),
+        "title_update_category_screen":
+            MessageLookupByLibrary.simpleMessage("Actualizar categoría"),
+        "title_update_product_screen":
+            MessageLookupByLibrary.simpleMessage("Actualizar producto"),
         "title_user_screen": MessageLookupByLibrary.simpleMessage("Usuario"),
         "tooltip_bttn_options":
             MessageLookupByLibrary.simpleMessage("Opciones"),
+        "tooltip_bttn_search_products":
+            MessageLookupByLibrary.simpleMessage("Buscar"),
         "tooltip_bttn_shopping_card":
             MessageLookupByLibrary.simpleMessage("Carrito"),
         "validator_email_error":

@@ -122,27 +122,27 @@ class _HomeScreenState extends State<MenuAdminScreen> {
           break;
         case DrawerIndex.Product_edit:
           setState(() {
-            // screenView = FeedbackScreen();
+            screenView = const UpdateProductScreen();
           });
           break;
         case DrawerIndex.Product_show:
           setState(() {
-            // screenView = HelpScreen();
+            screenView = const ShowProductsScreen();
           });
           break;
         case DrawerIndex.Category_create:
           setState(() {
-            // screenView = FeedbackScreen();
+            screenView = const CreateCategoryScreen();
           });
           break;
         case DrawerIndex.Category_edit:
           setState(() {
-            // screenView = FeedbackScreen();
+            screenView = const UpdateCategoryScreen();
           });
           break;
         case DrawerIndex.Category_show:
           setState(() {
-            // screenView = FeedbackScreen();
+            screenView = const ShowCategoriesScreen();
           });
           break;
         default:

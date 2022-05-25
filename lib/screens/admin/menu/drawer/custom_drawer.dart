@@ -217,7 +217,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   textAlign: TextAlign.left,
                 ),
                 trailing: const Icon(
-                  Icons.power_settings_new,
+                  Icons.logout_outlined,
                   color: Colors.red,
                 ),
                 onTap: () {

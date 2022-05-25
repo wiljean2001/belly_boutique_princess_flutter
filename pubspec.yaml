@@ -21,7 +21,6 @@ dependencies:
   firebase_auth: ^3.3.16
   firebase_core: ^1.16.0
   fluttertoast: ^8.0.9
-  google_fonts: ^2.3.1
   intl:
   carousel_slider: ^4.1.1
   flutter_services_binding: ^0.1.0
@@ -29,13 +28,13 @@ dependencies:
   firebase_storage: ^10.0.3
   cloud_firestore: ^3.1.14
   uuid: ^3.0.5
-  animated_splash_screen: ^1.2.0
-  smooth_page_indicator: ^1.0.0+2
+  # animated_splash_screen: ^1.2.0
+  # smooth_page_indicator: ^1.0.0+2
   animations: ^2.0.2
-  auto_size_text: ^3.0.0
   pinch_zoom: ^1.0.0
   url_launcher: ^6.1.2
   flutter_settings_ui: ^2.0.1
+  multi_select_flutter: ^4.1.2
 
 dev_dependencies:
   flutter_test:

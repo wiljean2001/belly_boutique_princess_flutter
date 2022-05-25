@@ -5,7 +5,7 @@ export 'product/update_product_screen.dart';
 export 'product/show_products_screen.dart';
 // Categories
 export 'category/create_category_screen.dart';
-export 'category/show_category_screen.dart';
+export 'category/show_categories_screen.dart';
 export 'category/update_category_screen.dart';
 // menu
 export 'navigator_admin_screens.dart';

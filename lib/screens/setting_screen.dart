@@ -38,31 +38,60 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
+    final ThemeChanger theme = Provider.of<ThemeChanger>(context);
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         iconTheme: Theme.of(context).iconTheme,
+        title: Text(
+          'Configuraciones',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
         elevation: 0,
       ),
+      // TODO: Settings
       body: SettingsList(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         sections: [
           SettingsSection(
-            title: 'Cuenta',
-            titleWidget: Icon(Icons.account_circle_outlined),
-            titleTextStyle: TextStyle(fontSize: 22),
+            title: 'General',
+            titleTextStyle: Theme.of(context).textTheme.headlineSmall,
+            titlePadding: const EdgeInsets.only(left: 25, top: 10),
             tiles: [
               SettingsTile(
-                title: 'Editar perfil',
-                subtitle: 'Editar perfil',
-                leading: Icon(Icons.language),
+                title: 'Lenguaje',
+                leading: const Icon(Icons.language_outlined),
                 onPressed: (BuildContext context) {},
               ),
               SettingsTile.switchTile(
-                title: 'Use fingerprint',
-                leading: Icon(Icons.fingerprint),
+                title: 'Notificaciones',
+                leading: const Icon(Icons.notifications_outlined),
                 switchValue: true,
                 onToggle: (bool value) {},
+              ),
+              SettingsTile(
+                title: 'Tema',
+                leading: const Icon(Icons.palette_outlined),
+                onPressed: (BuildContext context) async =>
+                    await _showMyDialog(theme),
+              ),
+            ],
+          ),
+          SettingsSection(
+            title: 'Cuenta',
+            titleTextStyle: Theme.of(context).textTheme.headlineSmall,
+            titlePadding: const EdgeInsets.only(left: 25, top: 10),
+            tiles: [
+              SettingsTile(
+                title: 'Editar perfil',
+                leading: const Icon(Icons.edit_outlined),
+                onPressed: (BuildContext context) {},
+              ),
+              SettingsTile(
+                title: 'Cambiar contraseña',
+                leading: const Icon(Icons.password_outlined),
+                onPressed: (BuildContext context) {},
               ),
             ],
           ),
@@ -71,6 +100,12 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
+// SettingsTile.switchTile(
+  //   title: 'Use fingerprint',
+  //   leading: const Icon(Icons.fingerprint),
+  //   switchValue: true,
+  //   onToggle: (bool value) {},
+  // ),
   themesAll? _character = themesAll.deffault;
 
   Future<void> _showMyDialog(ThemeChanger theme) async {
@@ -132,6 +167,7 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 }
+
 /**
  * final ThemeChanger theme = Provider.of<ThemeChanger>(context);
     return Scaffold(

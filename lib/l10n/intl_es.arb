@@ -7,6 +7,7 @@
   "COMMENT1": " // HOME SCREENS ",
 
   "tooltip_bttn_shopping_card": "Carrito",
+  "tooltip_bttn_search_products": "Buscar",
 
   "tooltip_bttn_options": "Opciones",
   "menu_appbar_item1": "Visitanos",
@@ -46,5 +47,10 @@
   "COMMENT3": " // ADMIN BOARDING SCREEN ",
   "title_admin_screen": "Administración",
 
-  "title_new_product_screen": "Crear producto"
+  "title_create_product_screen": "Crear producto",
+  "title_update_product_screen": "Actualizar producto",
+  "title_show_products_screen": "Ver los producto",
+  "title_create_category_screen": "Crear categoría",
+  "title_update_category_screen": "Actualizar categoría",
+  "title_show_categories_screen": "Ver las categorias"
 }
