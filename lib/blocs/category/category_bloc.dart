@@ -50,8 +50,8 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     final state = this.state;
     if (state is CategoryLoaded) {
       await _categoryRepository.createCategory(event.category);
-      _onLoadCategories;
     }
+    add(LoadCategories());
   }
 
   // void _onDeleteCategory(
@@ -67,10 +67,11 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   void _onUpdateCategory(
     UpdateCategory event,
     Emitter<CategoryState> emit,
-  ) {
+  ) async {
     final state = this.state;
     if (state is CategoryLoaded) {
-      //
+      await _categoryRepository.updateCategory(event.category, '');
+      add(LoadCategories());
     }
   }
 }

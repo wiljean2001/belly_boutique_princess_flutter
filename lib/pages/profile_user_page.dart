@@ -30,7 +30,6 @@ class _UserProfilePageState extends State<UserProfileView> {
           );
         }
         if (state is ProfileLoaded) {
-
           final edad =
               DateTime.now().year - state.user.dateOfBirth!.toDate().year;
           return getProfileLoaded(edad: edad, usuario: state.user);
@@ -59,7 +58,7 @@ class getProfileLoaded extends StatelessWidget {
         slivers: [
           SliverAppBar(
             pinned: true,
-            snap: true,
+            snap: false,
             // backgroundColor: Colors.transparent,
             floating: true,
             // brightness: ,

@@ -8,7 +8,7 @@ import '../../generated/l10n.dart';
 
 import '../../models/models.dart';
 import '../../pages/user_views.dart';
-import '../../widgets/Custom_loading_screen.dart';
+import '../../widgets/custom_loading_screen.dart';
 import '../../widgets/custom_bottom_navigation.dart';
 import '../admin/navigator_admin_screens.dart';
 

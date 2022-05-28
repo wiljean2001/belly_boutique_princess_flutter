@@ -1,5 +1,8 @@
+import 'package:belly_boutique_princess/blocs/blocs.dart';
 import 'package:belly_boutique_princess/models/category_model.dart';
+import 'package:belly_boutique_princess/utils/show_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../config/constrants.dart';
 import '../../../generated/l10n.dart';
@@ -80,19 +83,24 @@ class FormCreateCategory extends StatelessWidget {
             child: MaterialButton(
               textColor: Theme.of(context).primaryColorLight,
               color: Theme.of(context).primaryColor,
+              splashColor: Theme.of(context).primaryColorLight,
               elevation: 10,
-              onPressed: () {
+              onPressed: () async {
                 if (!_keyForm.currentState!.validate()) return;
 
                 Category categoria =
-                    Category(id: '', name: nameCategory!, imageUrl: '');
+                    Category(name: nameCategory!, imageUrl: '');
+                BlocProvider.of<CategoryBloc>(context).add(
+                  AddCategory(category: categoria),
+                );
+                // ShowToast.showMessage(
+                //     msg: '¡Categoría agregada exitósamente!.');
+                // BlocProvider.of<CategoryBloc>(context)
+                //     .add(UpdateCategory(category: categoria));
               },
-              child: const Text(
-                'Guardar',
-              ),
+              child: const Text('Guardar'),
             ),
           ),
-          const Divider(height: 20),
         ],
       ),
     );

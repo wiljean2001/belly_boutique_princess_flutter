@@ -99,8 +99,8 @@ class CreateProductScreen extends StatelessWidget {
                                   buttonText:
                                       const Text('Seleccionar categorías'),
                                   listItems: state.categories
-                                      .map((e) =>
-                                          MultiSelectItem(e.name, e.name))
+                                      .map((e) => MultiSelectItem(
+                                          e.name, e.name))
                                       .toList(),
                                   onConfirm: (List<Object?> values) {
                                     valueCategory = values;

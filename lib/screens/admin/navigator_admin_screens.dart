@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/blocs.dart';
-import '../../widgets/Custom_loading_screen.dart';
+import '../../widgets/custom_loading_screen.dart';
 import '../screens.dart';
 import 'admin_screens.dart';
 import 'menu/drawer/custom_drawer.dart';

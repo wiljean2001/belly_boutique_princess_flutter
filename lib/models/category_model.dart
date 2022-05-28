@@ -2,25 +2,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class Category extends Equatable {
-  final String id;
+  final String? id;
   final String name;
   final String imageUrl;
 
   const Category({
-    required this.id,
+    this.id,
     required this.name,
     required this.imageUrl,
   });
 
   @override
   List<Object?> get props => [
+        id,
         name,
         imageUrl,
       ];
 
   static Category fromSnapshot(DocumentSnapshot snap) {
     Category category = Category(
-      id: snap['id'],
+      id: snap.id,
       name: snap['name'],
       imageUrl: snap['imageUrl'],
     );
@@ -29,19 +30,18 @@ class Category extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'name': name,
       'imageUrl': imageUrl,
     };
   }
 
   Category copyWith({
-    String? id,
+    // String? id,
     String? name,
     String? imageUrl,
   }) {
     return Category(
-      id: id ?? this.id,
+      // id: id ?? this.id,
       name: name ?? this.name,
       imageUrl: imageUrl ?? this.imageUrl,
     );
