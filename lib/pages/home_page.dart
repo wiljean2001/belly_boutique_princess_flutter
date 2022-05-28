@@ -80,14 +80,120 @@ class HomeView extends StatelessWidget {
                     ),
                   ],
                 ),
-                Sliver
+                SliverGrid(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: _buildCard(
+                          'Bestido blanco',
+                          '59.20',
+                          'https://api.lorem.space/image/face?w=${150 + index}&h=${150 + index}',
+                          true,
+                          true,
+                          context,
+                        ),
+                      );
+                    },
+                    childCount: 20,
+                  ),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    // mainAxisSpacing: 0,
+                    // crossAxisSpacing: 0,
+                    childAspectRatio: 0.7,
+                  ),
+                ),
               ],
             );
           }
-          return SizedBox();
+          return const SizedBox();
         },
       ),
     );
+  }
+
+  Widget _buildCard(String name, String price, String imgPath, bool added,
+      bool isFavorite, context) {
+    return Padding(
+        padding:
+            const EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
+        child: InkWell(
+            onTap: () {},
+            child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 3.0,
+                          blurRadius: 5.0)
+                    ],
+                    color: Colors.white),
+                child: Column(children: [
+                  Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            isFavorite
+                                ? const Icon(Icons.favorite,
+                                    color: const Color(0xFFEF7532))
+                                : const Icon(Icons.favorite_border,
+                                    color: Color(0xFFEF7532))
+                          ])),
+                  Hero(
+                      tag: imgPath,
+                      child: Container(
+                          height: 150.0,
+                          width: 150.0,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(imgPath),
+                                  fit: BoxFit.contain)))),
+                  const SizedBox(height: 7.0),
+                  Text(price,
+                      style: const TextStyle(
+                          color: Color(0xFFCC8053),
+                          fontFamily: 'Varela',
+                          fontSize: 14.0)),
+                  Text(name,
+                      style: const TextStyle(
+                          color: const Color(0xFF575E67),
+                          fontFamily: 'Varela',
+                          fontSize: 14.0)),
+                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                          color: const Color(0xFFEBEBEB), height: 1.0)),
+                  Padding(
+                      padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            if (!added) ...[
+                              const Icon(Icons.shopping_basket,
+                                  color: Color(0xFFD17E50), size: 12.0),
+                              const Text('Add to cart',
+                                  style: const TextStyle(
+                                      fontFamily: 'Varela',
+                                      color: const Color(0xFFD17E50),
+                                      fontSize: 12.0))
+                            ],
+                            if (added) ...[
+                              const Icon(Icons.remove_circle_outline,
+                                  color: Color(0xFFD17E50), size: 12.0),
+                              const Text('3',
+                                  style: const TextStyle(
+                                      fontFamily: 'Varela',
+                                      color: const Color(0xFFD17E50),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12.0)),
+                              const Icon(Icons.add_circle_outline,
+                                  color: const Color(0xFFD17E50), size: 12.0),
+                            ]
+                          ]))
+                ]))));
   }
 }
 
