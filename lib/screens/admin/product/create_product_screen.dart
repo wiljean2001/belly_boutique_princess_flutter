@@ -12,6 +12,7 @@ import '../../../widgets/custom_appbar.dart';
 import '../../../widgets/custom_dropdown_categories.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../../../generated/l10n.dart';
+import '../../../widgets/custom_sliver_app_bar.dart';
 
 class CreateProductScreen extends StatelessWidget {
   static const String routeName = '/admin/nuevo/producto'; //route
@@ -50,127 +51,121 @@ class CreateProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-        // padding: const EdgeInsets.all(30.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomAppBar(
-              title: S.of(context).title_create_product_screen,
-              hasActions: false,
-              hasIcon: false,
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Padding(
-                  padding: const EdgeInsets.all(kPaddingM),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'PRODUCTO',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        const FormProduct(),
-                        const SizedBox(height: 10),
-                        Text(
-                          'CATEGORÍAS',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        // TODO: Categories
-                        BlocBuilder<CategoryBloc, CategoryState>(
-                          builder: (context, state) {
-                            if (state is CategoryLoading) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            }
-                            if (state is CategoryLoaded) {
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: kPaddingL, vertical: kPaddingS),
-                                child: CustomDropDown(
-                                  buttonText:
-                                      const Text('Seleccionar categorías'),
-                                  listItems: state.categories
-                                      .map((e) => MultiSelectItem(
-                                          e.name, e.name))
-                                      .toList(),
-                                  onConfirm: (List<Object?> values) {
-                                    valueCategory = values;
-                                  },
-                                  title: const Text('Categorías'),
-                                ),
-                              );
-                            }
-                            return const SizedBox();
-                          },
-                        ),
-                        Text(
-                          'TALLAS Y MÉTRICAS',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        // TODO: Sizes product
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: kPaddingL, vertical: kPaddingS),
-                          child: CustomDropDown(
-                            buttonText: const Text('Seleccionar tallas'),
-                            listItems: listItems
-                                .map((e) => MultiSelectItem(e, e))
-                                .toList(),
-                            onConfirm: (List<Object?> values) {
-                              sizesProduct = values;
-                            },
-                            title: const Text('Tallas'),
-                          ),
-                        ),
-                        CustomCarouselSliders(
-                          itemsImages: itemsImages,
-                          controller: controller,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.4),
-                          child: MaterialButton(
-                            color: Theme.of(context).primaryColor,
-                            elevation: 8.0,
-                            onPressed: () {},
-                            child: ListTile(
-                              textColor: Theme.of(context).primaryColorLight,
-                              iconColor: Theme.of(context).primaryColorLight,
-                              // trailing: Icon(Icons.save_outlined),
-                              title: const Text('Guardar'),
-                              leading: const Icon(Icons.save_outlined),
-                            ),
-                          ),
-                        ),
-                      ],
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          CustomSliverAppBar(
+            title: S.of(context).title_create_product_screen,
+            hasActions: false,
+            hasIcon: false,
+            isTextCenter: false,
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(kPaddingM),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'PRODUCTO',
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
-                  ),
+                    const FormProduct(),
+                    const SizedBox(height: 10),
+                    Text(
+                      'CATEGORÍAS',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    // TODO: Categories
+                    BlocBuilder<CategoryBloc, CategoryState>(
+                      builder: (context, state) {
+                        if (state is CategoryLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        if (state is CategoryLoaded) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: kPaddingL, vertical: kPaddingS),
+                            child: CustomDropDown(
+                              buttonText: const Text('Seleccionar categorías'),
+                              listItems: state.categories
+                                  .map((e) => MultiSelectItem(e.name, e.name))
+                                  .toList(),
+                              onConfirm: (List<Object?> values) {
+                                valueCategory = values;
+                              },
+                              title: const Text('Categorías'),
+                            ),
+                          );
+                        }
+                        return const SizedBox();
+                      },
+                    ),
+                    Text(
+                      'TALLAS Y MÉTRICAS',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    // TODO: Sizes product
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: kPaddingL, vertical: kPaddingS),
+                      child: CustomDropDown(
+                        buttonText: const Text('Seleccionar tallas'),
+                        listItems: listItems
+                            .map((e) => MultiSelectItem(e, e))
+                            .toList(),
+                        onConfirm: (List<Object?> values) {
+                          sizesProduct = values;
+                        },
+                        title: const Text('Tallas'),
+                      ),
+                    ),
+                    CustomCarouselSliders(
+                      itemsImages: itemsImages,
+                      controller: controller,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.4),
+                        child: MaterialButton(
+                          color: Theme.of(context).primaryColor,
+                          elevation: 8.0,
+                          onPressed: ( ) { },
+                          child: ListTile(
+                            textColor: Theme.of(context).primaryColorLight,
+                            iconColor: Theme.of(context).primaryColorLight,
+                            // trailing: Icon(Icons.save_outlined),
+                            title: const Text('Guardar'),
+                            leading: const Icon(Icons.save_outlined),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            // Padding(
-            //   padding: EdgeInsets.only(
-            //       left: MediaQuery.of(context).size.width * 0.5,
-            //       right: kPaddingM),
-            //   child: MaterialButton(
-            //     onPressed: () {},
-            //     child: ListTile(
-            //       title: Text('Guardar'),
-            //       leading: Icon(Icons.save_outlined),
-            //     ),
-            //   ),
-            // ),
-          ],
-        ),
+          ),
+          // Padding(
+          //   padding: EdgeInsets.only(
+          //       left: MediaQuery.of(context).size.width * 0.5,
+          //       right: kPaddingM),
+          //   child: MaterialButton(
+          //     onPressed: () {},
+          //     child: ListTile(
+          //       title: Text('Guardar'),
+          //       leading: Icon(Icons.save_outlined),
+          //     ),
+          //   ),
+          // ),
+        ],
       ),
     );
   }

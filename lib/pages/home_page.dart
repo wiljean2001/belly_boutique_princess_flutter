@@ -51,7 +51,7 @@ class HomeView extends StatelessWidget {
                     crossAxisCount: 2,
                     // mainAxisSpacing: 0,
                     // crossAxisSpacing: 0,
-                    childAspectRatio: 0.7,
+                    childAspectRatio: 0.65,
                   ),
                 ),
               ],

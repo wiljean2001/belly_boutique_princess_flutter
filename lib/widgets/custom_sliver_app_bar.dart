@@ -8,6 +8,7 @@ class CustomSliverAppBar extends StatelessWidget {
   final bool hasActions;
   final bool hasIcon;
   final Function? onTapOption;
+  final bool isTextCenter;
 
   const CustomSliverAppBar({
     Key? key,
@@ -15,6 +16,7 @@ class CustomSliverAppBar extends StatelessWidget {
     this.hasActions = true,
     this.hasIcon = true,
     this.onTapOption,
+    this.isTextCenter = true,
   }) : super(key: key);
 
   @override
@@ -27,7 +29,8 @@ class CustomSliverAppBar extends StatelessWidget {
       elevation: 8.0,
       centerTitle: true,
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment:
+            isTextCenter ? MainAxisAlignment.center : MainAxisAlignment.start,
         children: [
           hasIcon
               ? const Image(
@@ -35,6 +38,7 @@ class CustomSliverAppBar extends StatelessWidget {
                   width: 45,
                 )
               : const SizedBox(),
+          isTextCenter ? const SizedBox() : const SizedBox(width: 40),
           Text(
             title,
             style: Theme.of(context)
