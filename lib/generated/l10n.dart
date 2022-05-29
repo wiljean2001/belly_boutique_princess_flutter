@@ -100,10 +100,20 @@ class S {
     );
   }
 
-  /// `Carrito`
+  /// `Cesta`
+  String get shopping_card_screen {
+    return Intl.message(
+      'Cesta',
+      name: 'shopping_card_screen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cesta`
   String get tooltip_bttn_shopping_card {
     return Intl.message(
-      'Carrito',
+      'Cesta',
       name: 'tooltip_bttn_shopping_card',
       desc: '',
       args: [],

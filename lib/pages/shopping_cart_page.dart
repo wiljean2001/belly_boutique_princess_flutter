@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../generated/l10n.dart';
 import '../widgets/custom_appbar.dart';
+import '../widgets/custom_sliver_app_bar.dart';
 
 // falta cambiar los textos a dinamicos
 
@@ -12,82 +13,73 @@ class ShoppingCartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      body: SafeArea(
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: <Widget>[
+            SliverToBoxAdapter(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(top: 15, left: 40),
+                    child: Text(
+                      'Cesta',
+                      style: TextStyle(
+                        fontSize: 25,
+                      ),
+                    ),
+                  ),
+                  _CustomProductSpace(),
+                  Divider(
+                    indent: 90.0,
+                    endIndent: 90.0,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 40),
+                    child: Text(
+                      'Seguro te gustara',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 300,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+//espacio de trabajo
+class _CustomProductSpace extends StatelessWidget {
+  const _CustomProductSpace({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 300,
+      child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            CustomAppBar(title: S.of(context).AppTitle, hasActions: false),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Align(
-                      alignment: AlignmentDirectional(-0.85, 0),
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Text(
-                          'Cesta(1)',
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 300,
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 90, 0, 5),
-                              child: Icon(
-                                Icons.shopping_cart,
-                                color: Color(0xA9A9A9A9),
-                                size: 120,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'No hay nada en tu cesta',
-                                style: TextStyle(
-                                  color: Color(0xA9A9A9A9),
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Align(
-                            alignment: AlignmentDirectional(-0.85, 0),
-                            child: Text(
-                              'Seguro te gustara',
-                              style: TextStyle(fontSize: 14),
-                            ),
-                          ),
-                          Container(
-                            width: double.infinity,
-                            height: 500,
-                            child: PageView(
-                              physics: BouncingScrollPhysics(),
-                              children: [shopping_controller()],
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.shopping_cart,
+              color: Color(0xA9A9A9A9),
+              size: 120,
+            ),
+            Text(
+              'No hay nada en tu cesta',
+              style: TextStyle(
+                color: Color(0xA9A9A9A9),
+                fontSize: 14,
               ),
             ),
           ],

@@ -58,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Usuario existente"),
         "register_error_title":
             MessageLookupByLibrary.simpleMessage("Error de registro"),
+        "shopping_card_screen": MessageLookupByLibrary.simpleMessage("Cesta"),
         "title_admin_screen":
             MessageLookupByLibrary.simpleMessage("Administración"),
         "title_app": MessageLookupByLibrary.simpleMessage("Bienvenido"),
@@ -81,7 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tooltip_bttn_search_products":
             MessageLookupByLibrary.simpleMessage("Buscar"),
         "tooltip_bttn_shopping_card":
-            MessageLookupByLibrary.simpleMessage("Carrito"),
+            MessageLookupByLibrary.simpleMessage("Cesta"),
         "validator_email_error":
             MessageLookupByLibrary.simpleMessage("Correo no válido"),
         "validator_password_error":

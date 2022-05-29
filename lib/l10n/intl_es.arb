@@ -6,7 +6,8 @@
 
   "COMMENT1": " // HOME SCREENS ",
 
-  "tooltip_bttn_shopping_card": "Carrito",
+  "shopping_card_screen": "Cesta",
+  "tooltip_bttn_shopping_card": "Cesta",
   "tooltip_bttn_search_products": "Buscar",
 
   "tooltip_bttn_options": "Opciones",

@@ -22,16 +22,104 @@ class pageTeGustara extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return Row(
       children: [
-        Container(
-          width: double.infinity,
-          height: 500,
-          color: Colors.amber,
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            _cardProducto(),
+            Card(
+              elevation: 5,
+              margin: EdgeInsets.all(15),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: Column(
+                  children: <Widget>[
+                    Image.network(
+                      "https://i.ebayimg.com/images/g/-ioAAOSw5Ulg-34h/s-l500.jpg",
+                    ),
+                    Text(
+                      "Rei Chiquita",
+                      style: TextStyle(fontSize: 14),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            /*Card(
+              elevation: 5,
+              margin: EdgeInsets.all(15),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: Column(
+                  children: <Widget>[
+                    Image.network(
+                      "https://i.ebayimg.com/images/g/-ioAAOSw5Ulg-34h/s-l500.jpg",
+                    ),
+                    Text(
+                      "Rei Chiquita",
+                      style: TextStyle(fontSize: 14),
+                    ),
+                  ],
+                ),
+              ),
+            ),*/
+          ],
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Card(
+              elevation: 5,
+              margin: EdgeInsets.all(15),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: Column(
+                  children: <Widget>[
+                    Image.network(
+                      "https://i.ebayimg.com/images/g/-ioAAOSw5Ulg-34h/s-l500.jpg",
+                    ),
+                    Text(
+                      "Rei Chiquita",
+                      style: TextStyle(fontSize: 14),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ],
+    );
+  }
+}
+
+class _cardProducto extends StatelessWidget {
+  const _cardProducto({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 5,
+      margin: EdgeInsets.all(15),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.4,
+        child: Column(
+          children: <Widget>[
+            Image.network(
+              "https://i.ebayimg.com/images/g/-ioAAOSw5Ulg-34h/s-l500.jpg",
+            ),
+            Text(
+              "Rei Chiquita",
+              style: TextStyle(fontSize: 14),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
