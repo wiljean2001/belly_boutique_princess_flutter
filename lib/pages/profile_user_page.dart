@@ -1,4 +1,5 @@
 import 'package:belly_boutique_princess/utils/open_all.dart';
+import 'package:belly_boutique_princess/widgets/custom_app_bar_avatar.dart';
 import 'package:flutter/material.dart';
 
 import '../generated/l10n.dart';
@@ -56,117 +57,97 @@ class getProfileLoaded extends StatelessWidget {
       // appBar: CustomAppBar(title: S.of(context).AppTitle, hasActions: false),
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            pinned: true,
-            snap: false,
-            // backgroundColor: Colors.transparent,
-            floating: true,
-            // brightness: ,
-            expandedHeight: 280,
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Text(
-                '@${usuario.name}',
-                style: TextStyle(
-                  fontSize: 16,
-                  shadows: [
-                    Shadow(
-                        color: Theme.of(context).primaryColorDark,
-                        blurRadius: 10)
-                  ],
-                ),
-              ),
-              // collapseMode: CollapseMode.none,
-              background: PinchZoom(
-                // onTap: () {
-                //   Fluttertoast.showToast(
-                //       msg: "Agrandar la imagen",
-                //       toastLength: Toast.LENGTH_SHORT,
-                //       gravity: ToastGravity.BOTTOM,
-                //       timeInSecForIosWeb: 1,
-                //       backgroundColor: Colors.grey,
-                //       textColor: Colors.white,
-                //       fontSize: 16.0);
-                // },
-                child: Container(
-                  // margin: const EdgeInsets.all(20.0),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        usuario.imageUrls[0],
-                        // fit: BoxFit.fill,
-                      ),
-                      alignment: Alignment.center,
-                      fit: BoxFit.fitWidth,
-                    ),
-                  ),
-                  // child: CircleAvatar(
-                  //   foregroundImage: NetworkImage(
-                  //     state.user.imageUrls[0],
-                  //     // fit: BoxFit.fill,
-                  //   ),
-                  // ),
-                ),
-              ),
+          // SliverAppBar(
+          //   pinned: true,
+          //   snap: false,
+          //   // backgroundColor: Colors.transparent,
+          //   floating: false,
+          //   // brightness: ,
+          //   expandedHeight: 280,
+          //   flexibleSpace: FlexibleSpaceBar(
+          //     centerTitle: true,
+          //     title: Text(
+          //       '@${usuario.name}',
+          //       style: Theme.of(context).textTheme.titleMedium?.copyWith(
+          //         fontSize: 16,
+          //         shadows: [
+          //           Shadow(
+          //               color: Theme.of(context).primaryColor, blurRadius: 10)
+          //         ],
+          //       ),
+          //     ),
+          //     // collapseMode: CollapseMode.none,
+          //     background: Image.network(
+          //       usuario.imageUrls[0],
+          //       fit: BoxFit.fitWidth,
+          //       alignment: Alignment.center,
+          //     ),
+          //   ),
+          // ),
+          TransitionAppBar(
+            avatar: Image.network(
+              usuario.imageUrls[0],
+              fit: BoxFit.fitWidth,
+              alignment: Alignment.center,
             ),
+            title: '@${usuario.name}',
+            extent: 280,
           ),
           SliverFillRemaining(
-            hasScrollBody: true,
-            fillOverscroll: true,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 20),
-                    // width: double.infinity,
-                    height: 80,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: const BorderRadius.vertical(
-                          bottom: Radius.circular(25),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Column(
-                            children: <Widget>[
-                              Text(
-                                'Edad',
-                                style: TextStyle(
-                                    color: Theme.of(context).primaryColorLight),
-                              ),
-                              Text(
-                                edad.toString(),
-                                style: TextStyle(
-                                    color: Theme.of(context).primaryColorLight),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: <Widget>[
-                              Text(
-                                "Sexo",
-                                style: TextStyle(
-                                    color: Theme.of(context).primaryColorLight),
-                              ),
-                              Text(
-                                usuario.gender,
-                                style: TextStyle(
-                                    color: Theme.of(context).primaryColorLight),
-                              ),
-                            ],
-                          ),
-                        ],
+            // hasScrollBody: true,
+            // fillOverscroll: true,
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  // width: double.infinity,
+                  height: 80,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: const BorderRadius.vertical(
+                        bottom: Radius.circular(25),
                       ),
                     ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            Text(
+                              'Edad',
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorLight),
+                            ),
+                            Text(
+                              edad.toString(),
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorLight),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Text(
+                              "Sexo",
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorLight),
+                            ),
+                            Text(
+                              usuario.gender,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorLight),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                  const Body(),
-                ],
-              ),
+                ),
+                const Body(),
+              ],
             ),
           ),
         ],
@@ -340,7 +321,7 @@ class PagesVisit extends StatelessWidget {
           title: 'Facebook',
           descript: 'Visítanos en Facebook dandole click al botón',
           icon: const Icon(Icons.facebook),
-          image: 'graphics/images/facebook_64.png',
+          image: 'assets/images/facebook_64.png',
           urlWeb: 'https://www.facebook.com/belyboutiqueprincess',
         ),
       ),
@@ -351,7 +332,7 @@ class PagesVisit extends StatelessWidget {
           title: 'Whatsapp',
           descript: 'Visítanos en Whatsapp dandole click al botón',
           icon: const Icon(Icons.whatsapp),
-          image: 'graphics/images/whatsapp_64.png',
+          image: 'assets/images/whatsapp_64.png',
           whatsapp: "+51953433761",
           whatsappMessage: "Hola",
         ),

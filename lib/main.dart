@@ -144,7 +144,7 @@ class MyApp extends StatelessWidget {
            */
           localizationsDelegates: const [
             // translate
-            GlobalMaterialLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate, 
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
             S.delegate,

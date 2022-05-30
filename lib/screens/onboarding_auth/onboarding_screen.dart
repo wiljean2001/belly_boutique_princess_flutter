@@ -19,23 +19,24 @@ class OnboardingScreen extends StatelessWidget {
     Tab(text: 'Login'),
     Tab(text: 'Register'),
     Tab(text: 'User'),
+    Tab(text: 'Pictures'),
   ];
 
   const OnboardingScreen({Key? key}) : super(key: key);
 
   // Seteo del bottom navigation opcions del sistema operativo
   // custom system bar
-  static const SystemUiOverlayStyle overlayStyle = SystemUiOverlayStyle(
-    systemNavigationBarColor: Color(0xfff4ced9),
-    // systemNavigationBarColor: Colors.transparent,
-    systemNavigationBarIconBrightness: Brightness.light,
-    // systemNavigationBarDividerColor: Colors.transparent,
-    systemNavigationBarDividerColor: Color(0xfff4ced9),
-  );
+  // static const SystemUiOverlayStyle overlayStyle = SystemUiOverlayStyle(
+  //   systemNavigationBarColor: Color(0xfff4ced9),
+  //   // systemNavigationBarColor: Colors.transparent,
+  //   systemNavigationBarIconBrightness: Brightness.light,
+  //   // systemNavigationBarDividerColor: Colors.transparent,
+  //   systemNavigationBarDividerColor: Color(0xfff4ced9),
+  // );
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(overlayStyle);
+    // SystemChrome.setSystemUIOverlayStyle(overlayStyle);
     return DefaultTabController(
       animationDuration: const Duration(seconds: 1),
       length: tabs.length,
@@ -60,6 +61,7 @@ class OnboardingScreen extends StatelessWidget {
               LoginScreen(tabController: tabController),
               RegisterScreen(tabController: tabController),
               RegisterUserScreen(tabController: tabController),
+              PicturesScreen(tabController: tabController)
             ],
           ),
         );

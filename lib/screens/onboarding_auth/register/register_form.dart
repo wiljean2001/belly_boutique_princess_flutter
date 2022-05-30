@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../../blocs/blocs.dart';
 import '../../../generated/l10n.dart';
 import '../../../utils/validators.dart';
@@ -12,12 +14,12 @@ import '../../../widgets/custom_button_gradiant.dart';
 class RegisterForm extends StatelessWidget {
   final TabController tabController;
 
-  const RegisterForm({Key? key, required this.tabController}) : super(key: key);
+  RegisterForm({Key? key, required this.tabController}) : super(key: key);
 
+  final GlobalKey<FormState> _formKeyReg = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final _contextRegister = context.read<SignupCubit>();
-    final GlobalKey<FormState> _formKeyReg = GlobalKey<FormState>();
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
         return Center(
@@ -81,35 +83,24 @@ class RegisterForm extends StatelessWidget {
                     // SignUp
                     await _contextRegister.signUpWithCredentials();
                     print(_contextRegister.state);
-                    try {
-                      User user = User(
-                        // created a empty user
-                        id: _contextRegister.state.user!.uid,
-                        name: '',
-                        dateOfBirth: null,
-                        gender: '',
-                        role: 'user',
-                        imageUrls: const [],
-                        interests: const [],
-                        location: '',
-                      );
-                      context.read<OnboardingBloc>().add(
-                            StartOnboarding(
-                              user: user,
-                            ),
-                          );
-                      return tabController.animateTo(tabController.index + 1);
-                    } catch (e) {
-                      await showDialog(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: Text(S.of(context).register_error_title),
-                          content: Text(S.of(context).register_error_desc),
-                        ),
-                      );
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, '/', (route) => false);
-                    }
+
+                    User user = User(
+                      // created a empty user
+                      id: _contextRegister.state.user!.uid,
+                      name: '',
+                      dateOfBirth: Timestamp.fromDate(DateTime.now()),
+                      gender: '',
+                      role: 'user',
+                      imageUrls: const [],
+                      interests: const [],
+                      location: '',
+                    );
+                    context.read<OnboardingBloc>().add(
+                          StartOnboarding(
+                            user: user,
+                          ),
+                        );
+                    return tabController.animateTo(tabController.index + 1);
                   },
                 ),
                 const SizedBox(height: 10),
@@ -144,3 +135,15 @@ class RegisterForm extends StatelessWidget {
     );
   }
 }
+
+/**
+ * await showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: Text(S.of(context).register_error_title),
+                          content: Text(S.of(context).register_error_desc),
+                        ),
+                      );
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/', (route) => false);
+ */

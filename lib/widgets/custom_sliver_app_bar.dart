@@ -59,6 +59,7 @@ class CustomSliverAppBar extends StatelessWidget {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
+                      onTap: () {},
                       borderRadius:
                           BorderRadius.circular(AppBar().preferredSize.height),
                       child: Tooltip(

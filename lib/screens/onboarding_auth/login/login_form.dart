@@ -13,12 +13,12 @@ import '../../../widgets/custom_button_gradiant.dart';
 class LoginForm extends StatelessWidget {
   final TabController tabController;
 
-  const LoginForm({Key? key, required this.tabController}) : super(key: key);
+  LoginForm({Key? key, required this.tabController}) : super(key: key);
 
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final _contextSignUp = context.read<SignupCubit>();
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {

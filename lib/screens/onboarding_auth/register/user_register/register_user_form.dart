@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../blocs/blocs.dart';
 import '../../../../generated/l10n.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../widgets/custom_button_gradiant.dart';
@@ -14,18 +14,21 @@ class RegisterUserForm extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<RegisterUserForm> createState() => _RegisterUserFormState();
+  State<RegisterUserForm> createState() =>
+      _RegisterUserFormState(tabController);
 }
 
 class _RegisterUserFormState extends State<RegisterUserForm> {
   String? dropdownValue;
-  String? name;
+  final TabController tabController;
+  // String? name;
   final GlobalKey<FormState> _formKeyUser = GlobalKey<FormState>();
+
+  _RegisterUserFormState(this.tabController);
 
   @override
   Widget build(BuildContext context) {
     final listGender = <String>[
-      S.of(context).gender, // gender
       S.of(context).gender_male, // male
       S.of(context).gender_female, // female
     ];
@@ -39,8 +42,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
               initialDate: DateTime((DateTime.now().year - 18)),
               firstDate: DateTime(1900),
               lastDate: DateTime(DateTime.now().year - 18),
-              locale: Locale(context.read<Locale>().languageCode,
-                  context.read<Locale>().countryCode),
+              locale: const Locale('es', 'ES'),
               // (2101)
             );
             // Date ->
@@ -72,7 +74,10 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                     ),
                     // validator: (name) => Validators.isNameValidator(name!),
                     onChanged: (value) {
-                      name = value;
+                      context.read<OnboardingBloc>().add(
+                            UpdateUser(user: state.user.copyWith(name: value)),
+                          );
+                      // name = value;
                     },
                   ),
                   // Genero
@@ -83,7 +88,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       isExpanded: true,
                       hint: const Text('Sexo'),
                       focusColor: Colors.pink,
-                      value: listGender[0],
+                      value: dropdownValue,
                       icon: const Icon(
                         Icons.keyboard_arrow_down_outlined,
                         size: 45,
@@ -140,6 +145,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                     ],
                   ),
                   const SizedBox(height: 10),
+                  //
                   CustomButtonGradiant(
                     height: 45,
                     width: 150,
@@ -154,17 +160,10 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       ),
                     ),
                     onPressed: () async {
-                      context.read<OnboardingBloc>().add(
-                          UpdateUser(user: state.user.copyWith(name: name)));
-
                       if (!_formKeyUser.currentState!.validate()) {
                         return;
                       }
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        '/',
-                        (route) => false,
-                      );
+                      tabController.animateTo(tabController.index + 1);
                     },
                   ),
                 ],

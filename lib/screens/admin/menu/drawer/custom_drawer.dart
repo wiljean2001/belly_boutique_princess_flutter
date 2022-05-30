@@ -1,4 +1,4 @@
-import 'package:belly_boutique_princess/screens/user/home_screen.dart';
+import 'package:belly_boutique_princess/screens/home_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../blocs/profile/profile_bloc.dart';

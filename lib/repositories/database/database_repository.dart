@@ -18,16 +18,6 @@ class DatabaseRepository extends BaseDatabaseRepository {
         .map((snap) => User.fromSnapshot(snap));
   }
 
-  // Future<String> checkRole(String userId) async {
-  //   final roleUser = await FirebaseFirestore.instance
-  //       .collection('users')
-  //       .doc(userId)
-  //       .snapshots()
-  //       .map((snap) => User.fromSnapshot(snap).role);
-    
-  //   return roleUser;
-  // }
-
   @override
   Stream<List<User>> getUsers(
     String userId,

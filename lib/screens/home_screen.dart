@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:belly_boutique_princess/screens/onboarding_auth/onboarding_screen.dart';
 
-import '../../blocs/blocs.dart';
+import '../blocs/blocs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../generated/l10n.dart';
+import '../generated/l10n.dart';
 
-import '../../models/models.dart';
-import '../../pages/user_views.dart';
-import '../../widgets/custom_loading_screen.dart';
-import '../../widgets/custom_bottom_navigation.dart';
-import '../admin/navigator_admin_screens.dart';
+import '../pages/user_views.dart';
+import '../widgets/custom_bottom_navigation.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home'; //route

@@ -1,14 +1,10 @@
-import 'package:belly_boutique_princess/models/models.dart';
 import 'package:belly_boutique_princess/widgets/Custom_loading_screen.dart';
 import 'package:belly_boutique_princess/widgets/custom_card_product.dart';
 import 'package:belly_boutique_princess/widgets/custom_sliver_app_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/blocs.dart';
-import '../generated/assets.dart';
 import '../generated/l10n.dart';
-import '../widgets/custom_appbar.dart';
-import '../widgets/custom_dropdown_categories.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -39,7 +35,7 @@ class HomeView extends StatelessWidget {
                           context: context,
                           added: true,
                           imgPath:
-                              'https://api.lorem.space/image/face?w=${150 + index}&h=${150 + index}',
+                          'https://api.lorem.space/image/shoes?w=${150 + index}&h=${150 + index}',
                           isFavorite: true,
                           name: 'Bestido blanco',
                           price: '59.20',

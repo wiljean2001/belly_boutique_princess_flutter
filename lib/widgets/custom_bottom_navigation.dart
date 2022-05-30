@@ -20,21 +20,10 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   Widget build(BuildContext context) {
     final homePageBloc = context.read<HomePageBloc>();
 
-    // try {
-
     List<Widget> _listItems = [
-      Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const [Icon(Icons.account_circle, size: 30)]),
-      Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const [Icon(Icons.home, size: 30)]),
-      Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const [Icon(Icons.shopping_cart, size: 30)]),
-      // Column(
-      //     mainAxisSize: MainAxisSize.min,
-      //     children: const [Icon(Icons.analytics_outlined, size: 30)]),
+      const Icon(Icons.account_circle, size: 30),
+      const Icon(Icons.home, size: 30),
+      const Icon(Icons.shopping_cart, size: 30),
     ];
 
     return BlocBuilder<HomePageBloc, HomePageState>(
@@ -45,7 +34,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                 .copyWith(iconTheme: const IconThemeData(color: Colors.white)),
             child: CurvedNavigationBar(
               index: state.indexBottomNav,
-              height: 65,
+              height: 55,
               backgroundColor: Colors.transparent,
               // buttonBackgroundColor: Colors.black,
               animationCurve: Curves.easeInOut,
