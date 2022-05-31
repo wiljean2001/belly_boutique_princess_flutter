@@ -1,6 +1,10 @@
-import 'package:belly_boutique_princess/pages/shopping_controler.dart';
+import 'package:belly_boutique_princess/widgets/Custom_loading_screen.dart';
+import 'package:belly_boutique_princess/widgets/custom_card_product.dart';
+import 'package:belly_boutique_princess/widgets/custom_card_shopping.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../blocs/blocs.dart';
 import '../generated/l10n.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_sliver_app_bar.dart';
@@ -45,6 +49,51 @@ class ShoppingCartView extends StatelessWidget {
                   ),
                   SizedBox(
                     height: 300,
+                    child: BlocBuilder<ProductBloc, ProductState>(
+                      builder: (context, state) {
+                        if (state is ProductLoading) {
+                          return const CustomLoadingScreen();
+                        }
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 10,
+                          itemBuilder: (BuildContext context, int index) {
+                            return CustomCardShopping(
+                                name: "Vestidos de temporada",
+                                price: "2.00",
+                                imgPath:
+                                    "https://api.lorem.space/image/face?w=${150 + index}&h=${150 + index}",
+                                added: false,
+                                isFavorite: false,
+                                context: context);
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 300,
+                    child: BlocBuilder<ProductBloc, ProductState>(
+                      builder: (context, state) {
+                        if (state is ProductLoading) {
+                          return const CustomLoadingScreen();
+                        }
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 10,
+                          itemBuilder: (BuildContext context, int index) {
+                            return CustomCardProduct(
+                                name: "blusas",
+                                price: "2.00",
+                                imgPath:
+                                    "https://api.lorem.space/image/face?w=${150 + index}&h=${150 + index}",
+                                added: false,
+                                isFavorite: false,
+                                context: context);
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
