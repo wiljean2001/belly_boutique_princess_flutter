@@ -9,6 +9,8 @@ class CustomCardProduct extends StatelessWidget {
     required this.added,
     required this.isFavorite,
     required this.context,
+    this.isShowAdd = true,
+    this.isShowFavorite = true,
   }) : super(key: key);
 
   final String name;
@@ -16,6 +18,8 @@ class CustomCardProduct extends StatelessWidget {
   final String imgPath;
   final bool added;
   final bool isFavorite;
+  final bool isShowAdd;
+  final bool isShowFavorite;
   final BuildContext context;
 
   @override
@@ -37,15 +41,21 @@ class CustomCardProduct extends StatelessWidget {
               color: Colors.white),
           child: Column(
             children: [
-              Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child:
-                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    isFavorite
-                        ? const Icon(Icons.favorite, color: Color(0xFFEF7532))
-                        : const Icon(Icons.favorite_border,
-                            color: Color(0xFFEF7532))
-                  ])),
+              isShowFavorite
+                  ? Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          isFavorite
+                              ? const Icon(Icons.favorite,
+                                  color: Color(0xFFEF7532))
+                              : const Icon(Icons.favorite_border,
+                                  color: Color(0xFFEF7532))
+                        ],
+                      ),
+                    )
+                  : const SizedBox(height: 5),
               Hero(
                   tag: imgPath,
                   child: Container(
@@ -62,36 +72,40 @@ class CustomCardProduct extends StatelessWidget {
               Text(name,
                   style: const TextStyle(
                       color: Color(0xFF575E67), fontSize: 14.0)),
-              Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child:
-                      Container(color: const Color(0xFFEBEBEB), height: 1.0)),
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    if (!added) ...[
-                      const Icon(Icons.shopping_basket,
-                          color: Color(0xFFD17E50), size: 12.0),
-                      const Text('Add to cart',
-                          style: TextStyle(
-                              color: Color(0xFFD17E50), fontSize: 12.0))
-                    ],
-                    if (added) ...[
-                      const Icon(Icons.remove_circle_outline,
-                          color: Color(0xFFD17E50), size: 12.0),
-                      const Text('3',
-                          style: TextStyle(
-                              color: Color(0xFFD17E50),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12.0)),
-                      const Icon(Icons.add_circle_outline,
-                          color: Color(0xFFD17E50), size: 12.0),
-                    ],
-                  ],
-                ),
-              )
+              isShowAdd
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                          color: const Color(0xFFEBEBEB), height: 1.0))
+                  : const SizedBox(),
+              isShowAdd
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          if (!added) ...[
+                            const Icon(Icons.shopping_basket,
+                                color: Color(0xFFD17E50), size: 12.0),
+                            const Text('Add to cart',
+                                style: TextStyle(
+                                    color: Color(0xFFD17E50), fontSize: 12.0))
+                          ],
+                          if (added) ...[
+                            const Icon(Icons.remove_circle_outline,
+                                color: Color(0xFFD17E50), size: 12.0),
+                            const Text('3',
+                                style: TextStyle(
+                                    color: Color(0xFFD17E50),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12.0)),
+                            const Icon(Icons.add_circle_outline,
+                                color: Color(0xFFD17E50), size: 12.0),
+                          ],
+                        ],
+                      ),
+                    )
+                  : const SizedBox(),
             ],
           ),
         ),

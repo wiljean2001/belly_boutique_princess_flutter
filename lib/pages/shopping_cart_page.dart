@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/blocs.dart';
-import '../generated/l10n.dart';
-import '../widgets/custom_appbar.dart';
-import '../widgets/custom_sliver_app_bar.dart';
 
 // falta cambiar los textos a dinamicos
 
@@ -26,7 +23,7 @@ class ShoppingCartView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(top: 15, left: 40),
                     child: Text(
                       'Cesta',
@@ -35,12 +32,12 @@ class ShoppingCartView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  _CustomProductSpace(),
-                  Divider(
+                  const _CustomProductSpace(),
+                  const Divider(
                     indent: 90.0,
                     endIndent: 90.0,
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(left: 40),
                     child: Text(
                       'Seguro te gustara',
@@ -48,7 +45,7 @@ class ShoppingCartView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 300,
+                    height: 220,
                     child: BlocBuilder<ProductBloc, ProductState>(
                       builder: (context, state) {
                         if (state is ProductLoading) {
@@ -62,7 +59,7 @@ class ShoppingCartView extends StatelessWidget {
                                 name: "Vestidos de temporada",
                                 price: "2.00",
                                 imgPath:
-                                    "https://api.lorem.space/image/face?w=${150 + index}&h=${150 + index}",
+                                    'https://api.lorem.space/image/shoes?w=${150 + index}&h=${150 + index}',
                                 added: false,
                                 isFavorite: false,
                                 context: context);
@@ -71,8 +68,9 @@ class ShoppingCartView extends StatelessWidget {
                       },
                     ),
                   ),
+                  // solucionado
                   SizedBox(
-                    height: 300,
+                    height: 220, // alto de los cards
                     child: BlocBuilder<ProductBloc, ProductState>(
                       builder: (context, state) {
                         if (state is ProductLoading) {
@@ -83,13 +81,16 @@ class ShoppingCartView extends StatelessWidget {
                           itemCount: 10,
                           itemBuilder: (BuildContext context, int index) {
                             return CustomCardProduct(
-                                name: "blusas",
-                                price: "2.00",
-                                imgPath:
-                                    "https://api.lorem.space/image/face?w=${150 + index}&h=${150 + index}",
-                                added: false,
-                                isFavorite: false,
-                                context: context);
+                              name: "blusas",
+                              price: "2.00",
+                              imgPath:
+                                  'https://api.lorem.space/image/shoes?w=${150 + index}&h=${150 + index}',
+                              added: false,
+                              isFavorite: false,
+                              context: context,
+                              isShowAdd: false, // mostrar opciones
+                              isShowFavorite: false, // mostrar opcion fav
+                            );
                           },
                         );
                       },
@@ -118,7 +119,7 @@ class _CustomProductSpace extends StatelessWidget {
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: const [
             Icon(
               Icons.shopping_cart,
               color: Color(0xA9A9A9A9),
