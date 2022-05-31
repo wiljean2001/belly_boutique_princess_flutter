@@ -96,58 +96,60 @@ class getProfileLoaded extends StatelessWidget {
           SliverFillRemaining(
             // hasScrollBody: true,
             // fillOverscroll: true,
-            child: Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 20),
-                  // width: double.infinity,
-                  height: 80,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: const BorderRadius.vertical(
-                        bottom: Radius.circular(25),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 20),
+                    // width: double.infinity,
+                    height: 80,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: const BorderRadius.vertical(
+                          bottom: Radius.circular(25),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                'Edad',
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColorLight),
+                              ),
+                              Text(
+                                edad.toString(),
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColorLight),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                "Sexo",
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColorLight),
+                              ),
+                              Text(
+                                usuario.gender,
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColorLight),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Text(
-                              'Edad',
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColorLight),
-                            ),
-                            Text(
-                              edad.toString(),
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColorLight),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Text(
-                              "Sexo",
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColorLight),
-                            ),
-                            Text(
-                              usuario.gender,
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColorLight),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
                   ),
-                ),
-                const Body(),
-              ],
+                  const Body(),
+                ],
+              ),
             ),
           ),
         ],
