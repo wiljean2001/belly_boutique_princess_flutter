@@ -5,14 +5,18 @@ class Product extends Equatable {
   final String? id; // identificador - PK
   final String title; // titulo o nombre del producto
   final String descript; // descripcion del producto
+  final double price; // descripcion del producto
   final List<dynamic> imageUrls; // imagenes - fotos
   final List<dynamic> sizes; //tallas
+  final List<dynamic>? categories;
 
   // Constructor
   const Product({
     this.id,
+    this.categories,
     required this.title,
     required this.descript,
+    required this.price,
     required this.imageUrls,
     required this.sizes,
   });
@@ -20,7 +24,9 @@ class Product extends Equatable {
   @override
   List<Object?> get props => [
         id,
+        categories,
         title,
+        price,
         descript,
         imageUrls,
         sizes,
@@ -30,10 +36,12 @@ class Product extends Equatable {
   static Product fromSnapshot(DocumentSnapshot snap) {
     Product product = Product(
       id: snap.id,
+      categories: snap['categories'],
       title: snap['title'],
       descript: snap['descript'],
       imageUrls: snap['imageUrls'],
       sizes: snap['sizes'],
+      price: snap['price'],
     );
     return product;
   }
@@ -41,9 +49,11 @@ class Product extends Equatable {
   Map<String, dynamic> toMap() {
     return {
       'title': title,
+      'categories': categories,
       'descript': descript,
       'imageUrls': imageUrls,
       'sizes': sizes,
+      'price': price,
     };
   }
 
@@ -53,6 +63,8 @@ class Product extends Equatable {
     String? descript,
     List<dynamic>? imageUrls,
     List<dynamic>? sizes,
+    List<dynamic>? categories,
+    double? price,
   }) {
     return Product(
       id: id ?? this.id,
@@ -60,6 +72,8 @@ class Product extends Equatable {
       descript: descript ?? this.descript,
       imageUrls: imageUrls ?? this.imageUrls,
       sizes: sizes ?? this.sizes,
+      price: price ?? this.price,
+      categories: categories ?? this.categories,
     );
   }
 }

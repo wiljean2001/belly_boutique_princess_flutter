@@ -90,6 +90,7 @@ class ShoppingCartView extends StatelessWidget {
                               context: context,
                               isShowAdd: false, // mostrar opciones
                               isShowFavorite: false, // mostrar opcion fav
+                              onTap: (){},
                             );
                           },
                         );

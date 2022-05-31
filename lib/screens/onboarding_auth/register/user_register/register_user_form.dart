@@ -5,6 +5,7 @@ import '../../../../blocs/blocs.dart';
 import '../../../../generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../utils/validators.dart';
 import '../../../../widgets/custom_button_gradiant.dart';
 
 class RegisterUserForm extends StatefulWidget {
@@ -72,7 +73,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       labelText: S.of(context).title_user_screen,
                       icon: const Icon(Icons.person),
                     ),
-                    // validator: (name) => Validators.isNameValidator(name!),
+                    validator: (name) => Validators.isNameValidator(name!),
                     onChanged: (value) {
                       context.read<OnboardingBloc>().add(
                             UpdateUser(user: state.user.copyWith(name: value)),

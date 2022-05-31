@@ -1,3 +1,5 @@
+import 'package:belly_boutique_princess/models/models.dart';
+import 'package:belly_boutique_princess/screens/user/product_screen.dart';
 import 'package:belly_boutique_princess/widgets/Custom_loading_screen.dart';
 import 'package:belly_boutique_princess/widgets/custom_card_product.dart';
 import 'package:belly_boutique_princess/widgets/custom_sliver_app_bar.dart';
@@ -29,16 +31,27 @@ class HomeView extends StatelessWidget {
                 SliverGrid(
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
+                      Product product = Product(
+                        title: 'Bestido blanco',
+                        descript: 'Bestido blanco',
+                        imageUrls: [
+                          'https://api.lorem.space/image/shoes?w=${150 + index}&h=${150 + index}'
+                        ],
+                        sizes: const ['19.50'],
+                        price: 59.20,
+                      );
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: CustomCardProduct(
                           context: context,
                           added: true,
-                          imgPath:
-                          'https://api.lorem.space/image/shoes?w=${150 + index}&h=${150 + index}',
-                          isFavorite: true,
-                          name: 'Bestido blanco',
-                          price: '59.20',
+                          imgPath: product.imageUrls[0],
+                          isFavorite: false,
+                          name: product.title,
+                          price: product.sizes[0],
+                          onTap: () => Navigator.of(context).pushNamed(
+                              ProductScreen.routeName,
+                              arguments: product),
                         ),
                       );
                     },

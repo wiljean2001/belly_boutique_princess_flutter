@@ -17,4 +17,16 @@ class ProductRepository extends BaseProductRepository {
       return snapshot.docs.map((doc) => Product.fromSnapshot(doc)).toList();
     });
   }
+
+  @override
+  Future<void> createCategory(Product product) async {
+    await _firebaseFirestore.collection('products').doc().set(product.toMap());
+  }
+
+  @override
+  Future<void> updateCategory(Product product, String docId) async {
+    _firebaseFirestore.collection('products').doc(docId).update(
+          product.toMap(),
+        );
+  }
 }

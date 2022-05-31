@@ -11,6 +11,7 @@ class CustomCardProduct extends StatelessWidget {
     required this.context,
     this.isShowAdd = true,
     this.isShowFavorite = true,
+    required this.onTap,
   }) : super(key: key);
 
   final String name;
@@ -21,6 +22,7 @@ class CustomCardProduct extends StatelessWidget {
   final bool isShowAdd;
   final bool isShowFavorite;
   final BuildContext context;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,9 @@ class CustomCardProduct extends StatelessWidget {
       padding:
           const EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
       child: InkWell(
-        onTap: () {},
+        onTap: () => onTap(),
+        splashColor: Theme.of(context).primaryColor,
+        highlightColor: Theme.of(context).primaryColor,
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),

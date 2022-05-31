@@ -33,15 +33,17 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
   final Widget avatar;
   final double extent;
   final String title;
-
+  // Alineación del avatar - pequeño a grande
   final _avatarAlignTween =
-      AlignmentTween(begin: Alignment.bottomCenter, end: Alignment.topLeft);
+      AlignmentTween(begin: Alignment.bottomCenter, end: Alignment.centerLeft);
   final _avatarMarginTween = EdgeInsetsTween(
     end: const EdgeInsets.only(left: 14, top: 36),
   );
 
-  final _iconAlignTween =
-      AlignmentTween(begin: Alignment.bottomRight, end: Alignment.topRight);
+  // Alineacion del icono
+  // final _iconAlignTween =
+  //     AlignmentTween(begin: Alignment.bottomRight, end: Alignment.topRight);
+
   final _titleMarginTween = EdgeInsetsTween(
     begin: const EdgeInsets.only(bottom: 20),
     end: const EdgeInsets.only(left: 64, top: 45),
@@ -60,20 +62,17 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     final tempVal = maxExtent * 72 / 100;
     final progress = shrinkOffset > tempVal ? 1.0 : shrinkOffset / tempVal;
     final avatarMargin = _avatarMarginTween.lerp(progress);
     final titleMargin = _titleMarginTween.lerp(progress);
 
     final avatarAlign = _avatarAlignTween.lerp(progress);
-    final iconAlign = _iconAlignTween.lerp(progress);
+    // final iconAlign = _iconAlignTween.lerp(progress);
 
-    final avatarSize = (1 - progress) * 200 + 32;
-
+    final double widthScreen = MediaQuery.of(context).size.width;
+    final avatarSize = (1 - progress) * widthScreen + 32;
     return Stack(
       children: <Widget>[
         AnimatedContainer(

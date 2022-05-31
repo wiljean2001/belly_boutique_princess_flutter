@@ -1,31 +1,102 @@
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../blocs/blocs.dart';
+import '../../models/models.dart';
+import '../../widgets/Custom_loading_screen.dart';
+import '../../widgets/custom_app_bar_avatar.dart';
+import '../../widgets/custom_card_product.dart';
+import '../../widgets/custom_carousel_sliders.dart';
 
 // falta cambiar los textos a dinamicos
 
 class ProductScreen extends StatefulWidget {
+  static const String routeName = '/product'; //route
+
+  static Route route({required Product product}) {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) {
+        // print the status user with the authbloc
+        return ProductScreen(product: product);
+      },
+    );
+  }
+
+  final Product product;
+  // pruebas:
+  // final
   const ProductScreen({
     Key? key,
+    required this.product,
   }) : super(key: key);
 
   @override
   ProductScreenState createState() {
-    return ProductScreenState();
+    return ProductScreenState(product);
   }
 }
 
 class ProductScreenState extends State<ProductScreen> {
-  ProductScreenState();
+  final Product product;
+  ProductScreenState(this.product);
 
+  final controller = CarouselController();
   @override
   Widget build(BuildContext context) {
+    List<dynamic> itemsImages = [
+      product.imageUrls[0],
+      product.imageUrls[0],
+      product.imageUrls[0],
+    ];
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Producto",
-        ),
-        elevation: 10,
+      body: CustomScrollView(
+        slivers: <Widget>[
+          TransitionAppBar(
+            avatar: Image.network(
+              product.imageUrls[0],
+              fit: BoxFit.fitWidth,
+              alignment: Alignment.center,
+            ),
+            title: product.title,
+            extent: 300,
+          ),
+          SliverToBoxAdapter(
+            child: ConstrainedBox(
+              constraints:
+                  BoxConstraints(minHeight: MediaQuery.of(context).size.height),
+              child: Column(
+                children: <Widget>[
+                  CustomInfoProduct(product: product),
+                  // const CustomInfoMiniProduct(),
+                  CustomCarouselSliders(
+                    itemsImages: itemsImages,
+                    controller: controller,
+                  ),
+                  const Divider(
+                    height: 10,
+                    color: Colors.black,
+                    endIndent: 20,
+                    indent: 20,
+                  ),
+                  Container(
+                    height: 250,
+                    child: CustomExtraProducts(),
+                    // color: Colors.red,
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
-      body: SingleChildScrollView(
+    );
+  }
+}
+
+/**
+ * body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: ConstrainedBox(
           constraints:
@@ -52,10 +123,7 @@ class ProductScreenState extends State<ProductScreen> {
       // body: BlocBuilder<ProductBloc, ProductState>(
       //   builder: (context, state) {},
       // ),
-    );
-  }
-}
-
+ */
 //  Cambiarlo para recibir de la base de datos
 class CustomExtraProducts extends StatelessWidget {
   const CustomExtraProducts({
@@ -64,13 +132,41 @@ class CustomExtraProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      restorationId: 'grid_view_demo_grid_offset',
-      crossAxisCount: 2,
-      mainAxisSpacing: 8,
-      crossAxisSpacing: 8,
-      padding: const EdgeInsets.all(8),
-      childAspectRatio: 1,
+    return SizedBox(
+      height: 180, // alto de los cards
+      child: BlocBuilder<ProductBloc, ProductState>(
+        builder: (context, state) {
+          if (state is ProductLoading) {
+            return const CustomLoadingScreen();
+          }
+          return ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: 10,
+            itemBuilder: (BuildContext context, int index) {
+              return CustomCardProduct(
+                name: "blusas",
+                price: "2.00",
+                imgPath:
+                    'https://api.lorem.space/image/shoes?w=${150 + index}&h=${150 + index}',
+                added: false,
+                isFavorite: false,
+                context: context,
+                isShowAdd: false, // mostrar opciones
+                isShowFavorite: false, // mostrar opcion fav
+                onTap: () {},
+              );
+            },
+          );
+        },
+      ),
+
+      // return GridView.count(
+      //   restorationId: 'grid_view_demo_grid_offset',
+      //   crossAxisCount: 2,
+      //   mainAxisSpacing: 8,
+      //   crossAxisSpacing: 8,
+      //   padding: const EdgeInsets.all(8),
+      //   childAspectRatio: 1,
       // children: Product.products().map<Widget>((photo) {
       //   return GridTile(
       //     header: Material(
@@ -151,39 +247,26 @@ class CustomInfoMiniProduct extends StatelessWidget {
 }
 
 class CustomInfoProduct extends StatelessWidget {
+  final Product product;
   const CustomInfoProduct({
     Key? key,
+    required this.product,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 280,
       padding: const EdgeInsets.all(10),
-      child: Expanded(
-        child: Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: GestureDetector(
-                onTap: () {}, // Tap para abrir pantalla completa de la imagen
-                child: const Image(
-                  image: AssetImage('graphics/images/Bestido1_n.jpg'),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Column(
-                children: const [
-                  Divider(height: 10),
-                  Text("Bestido blanco", style: TextStyle(fontSize: 22)),
-                  Text("Bestido para damita con encajes...",
-                      style: TextStyle(fontSize: 18)),
-                ],
-              ),
-            ),
-          ],
-        ),
+      child: Column(
+        children: const [
+          Divider(height: 10),
+          // Text(product.title, style: const TextStyle(fontSize: 22)),
+          Text("Bestido para damita con encajes...",
+              style: TextStyle(fontSize: 18)),
+          Text("...", style: TextStyle(fontSize: 18)),
+          Text("...", style: TextStyle(fontSize: 18)),
+        ],
       ),
     );
   }

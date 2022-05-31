@@ -40,24 +40,25 @@ class PicturesScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     SizedBox(
-                      height: 350,
-                      child: (imageCount > 0)
-                              ? CustomImageContainer(imageUrl: images[0])
-                              : const CustomImageContainer()
-                      // child: GridView.builder(
-                      //   gridDelegate:
-                      //       const SliverGridDelegateWithFixedCrossAxisCount(
-                      //     crossAxisCount: 2,
-                      //     childAspectRatio: 0.66,
-                      //   ),
-                      //   itemCount: 1,
-                      //   itemBuilder: (BuildContext context, int index) {
-                      //     return (imageCount > index)
-                      //         ? CustomImageContainer(imageUrl: images[index])
-                      //         : const CustomImageContainer();
-                      //   },
-                      // ),
-                    ),
+                        height: 350,
+                        width: MediaQuery.of(context).size.width,
+                        child: (imageCount > 0)
+                            ? CustomImageContainer(imageUrl: images[0])
+                            : const CustomImageContainer()
+                        // child: GridView.builder(
+                        //   gridDelegate:
+                        //       const SliverGridDelegateWithFixedCrossAxisCount(
+                        //     crossAxisCount: 2,
+                        //     childAspectRatio: 0.66,
+                        //   ),
+                        //   itemCount: 1,
+                        //   itemBuilder: (BuildContext context, int index) {
+                        //     return (imageCount > index)
+                        //         ? CustomImageContainer(imageUrl: images[index])
+                        //         : const CustomImageContainer();
+                        //   },
+                        // ),
+                        ),
                   ],
                 ),
                 //
