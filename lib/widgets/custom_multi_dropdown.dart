@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-
-import '../blocs/blocs.dart';
-import '../generated/l10n.dart';
 
 // import '../models/models.dart';
 //
-class CustomDropDown extends StatelessWidget {
+class CustomDropDown extends StatefulWidget {
   final List<MultiSelectItem> listItems;
   final GlobalKey<FormFieldState<dynamic>>? globalKey;
   final Function(List<Object?> values) onConfirm;
@@ -24,23 +20,25 @@ class CustomDropDown extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<CustomDropDown> createState() => _CustomDropDownState();
+}
+
+class _CustomDropDownState extends State<CustomDropDown> {
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      // width: 250,
-      height: 55,
-      child: MultiSelectDialogField(
-        items: listItems,
-        onConfirm: (values) => onConfirm(values),
-        // validator: ,
-        buttonText: buttonText,
-        buttonIcon: const Icon(Icons.keyboard_arrow_down_outlined),
-        dialogHeight: listItems.length * 55,
-        
-        // searchIcon: ,
-        // key: ,
-        // dialogHeight: double.,
-        title: title,
-      ),
+    return Wrap(
+      children: [
+        MultiSelectDialogField(
+            items: widget.listItems,
+            onConfirm: (List<Object?> values) => widget.onConfirm(values),
+            // validator: ,
+            buttonText: widget.buttonText,
+            buttonIcon: const Icon(Icons.keyboard_arrow_down_outlined),
+            dialogHeight: widget.listItems.length * 55,
+            // searchIcon: ,
+            // key: widget.globalKey,
+            title: widget.title),
+      ],
     );
   }
 }

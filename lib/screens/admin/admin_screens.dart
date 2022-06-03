@@ -1,4 +1,3 @@
-export 'menu_admin.dart';
 // Products
 export 'product/create_product_screen.dart';
 export 'product/update_product_screen.dart';

@@ -33,39 +33,40 @@ class _SplashScreenState extends State<SplashScreen> {
     // instanciar ProfileBloc xd
     // final contextProfile = ;
     return WillPopScope(
-        onWillPop: () async => false,
-        child: Scaffold(
-          body: BlocListener<AuthBloc, AuthState>(
-            listener: (context, state) {
-              if (state.status == AuthStatus.unauthenticated) {
-                Timer(
-                  const Duration(seconds: 2),
-                  () => Navigator.of(context).pushNamedAndRemoveUntil(
-                    OnboardingScreen.routeName,
-                    (route) => false,
-                  ),
-                );
-              }
-              if (state.status == AuthStatus.authenticated) {
-                Timer(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state.status == AuthStatus.unauthenticated) {
+              Timer(
+                const Duration(seconds: 2),
+                () => Navigator.of(context).pushNamedAndRemoveUntil(
+                  OnboardingScreen.routeName,
+                  (route) => false,
+                ),
+              );
+            }
+            if (state.status == AuthStatus.authenticated) {
+              Timer(
                   const Duration(seconds: 2),
                   () => // Future.delayed(Duration.zero, () async {await
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                      MenuAdminScreen.routeName,
-                      (route) => false,
-                    ) //;
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        MenuAdminScreen.routeName,
+                        (route) => false,
+                      ) //;
                   // }),
-                );
-              }
-            },
-            child: Center(
-              child: Image(
-                image: const AssetImage(Assets.imagesLogoTextoRosa),
-                width: MediaQuery.of(context).size.width * 0.70,
-              ),
+                  );
+            }
+          },
+          child: Center(
+            child: Image(
+              image: const AssetImage(Assets.imagesLogoTextoRosa),
+              width: MediaQuery.of(context).size.width * 0.70,
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 

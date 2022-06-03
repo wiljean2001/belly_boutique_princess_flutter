@@ -39,6 +39,7 @@ class HomeView extends StatelessWidget {
                         ],
                         sizes: const ['19.50'],
                         price: 59.20,
+                        categories: [],
                       );
                       return Padding(
                         padding: const EdgeInsets.all(8.0),

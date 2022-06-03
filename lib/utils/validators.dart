@@ -7,7 +7,8 @@ class Validators {
     r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
   );
 
-  static final RegExp _passwordRegExp = RegExp( // con problemas
+  static final RegExp _passwordRegExp = RegExp(
+    // con problemas
     /*
     * Mínimo 1 letra mayúscula.
     * Mínimo 1 letra minúscula.
@@ -35,23 +36,41 @@ class Validators {
     return _emailRegExp.hasMatch(email);
   }
 
-  static bool isValidPassword(String password) { //no funciona
+  static bool isValidPassword(String password) {
+    //no funciona
     return _passwordRegExp.hasMatch(password);
   }
 
-  static ispasswordValidator(String password, context){
-    if(password.isEmpty){
+  static ispasswordValidator(String password, context) {
+    if (password.isEmpty) {
       return S.of(context).validator_password_error;
-    }else if(password.length < 8){
+    } else if (password.length < 8) {
       return S.of(context).validator_password_error;
     }
     return null;
   }
-  static isNameValidator(String name){
-    if(name.isEmpty){
+
+  static isNameValidator(String name) {
+    if (name.isEmpty) {
       return 'Nombre invalido';
-    }else if(name.length < 3){
+    } else if (name.length < 3) {
       return 'Nombre invalido';
+    }
+    return null;
+  }
+
+  static isValidateOnlyTextMinMax({
+    required String text,
+    required int minCaracter,
+    required int maxCarater,
+    String messageError = 'Entrada no es valido.',
+  }) {
+    if (text.isEmpty) {
+      return messageError;
+    } else if (text.length < minCaracter) {
+      return messageError;
+    } else if (text.length > maxCarater) {
+      return messageError;
     }
     return null;
   }

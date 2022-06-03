@@ -8,12 +8,12 @@ class Product extends Equatable {
   final double price; // descripcion del producto
   final List<dynamic> imageUrls; // imagenes - fotos
   final List<dynamic> sizes; //tallas
-  final List<dynamic>? categories;
+  final List<dynamic> categories;
 
   // Constructor
   const Product({
     this.id,
-    this.categories,
+    required this.categories,
     required this.title,
     required this.descript,
     required this.price,
