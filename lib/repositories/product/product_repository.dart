@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../storage/storage_repository.dart';
 import '/models/product_model.dart';
 import '/repositories/product/base_product_repository.dart';
 
@@ -19,14 +20,34 @@ class ProductRepository extends BaseProductRepository {
   }
 
   @override
-  Future<void> createCategory(Product product) async {
+  Stream<Product> getProduct(String productId) {
+    print('Getting user images from DB');
+    return _firebaseFirestore
+        .collection('products')
+        .doc(productId)
+        .snapshots()
+        .map((snap) => Product.fromSnapshot(snap));
+  }
+
+  @override
+  Future<void> createProduct(Product product) async {
     await _firebaseFirestore.collection('products').doc().set(product.toMap());
   }
 
   @override
-  Future<void> updateCategory(Product product, String docId) async {
+  Future<void> updateProduct(Product product, String docId) async {
     _firebaseFirestore.collection('products').doc(docId).update(
           product.toMap(),
         );
+  }
+
+  @override
+  Future<void> updateProductPictures(Product product, String imageName) async {
+    String downloadUrl =
+        await StorageRepository().getDownloadURLProduct(product, imageName);
+
+    return _firebaseFirestore.collection('products').doc(product.id).update({
+      'imageUrls': FieldValue.arrayUnion([downloadUrl])
+    });
   }
 }

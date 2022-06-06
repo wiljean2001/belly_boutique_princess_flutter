@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 
 class TransitionAppBar extends StatelessWidget {
-  TransitionAppBar({
+  const TransitionAppBar({
     required this.avatar,
     required this.title,
+    this.onTapIcon,
+    required this.textTheme,
     this.extent = 250,
+    this.withIcon = false,
     Key? key,
   }) : super(key: key);
 
   final Widget avatar;
   final double extent;
   final String title;
+  final bool withIcon;
+  final Function? onTapIcon;
+  final TextStyle textTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -20,19 +26,31 @@ class TransitionAppBar extends StatelessWidget {
         avatar: avatar,
         title: title,
         extent: extent > 200 ? extent : 200,
+        withIcon: withIcon,
+        onTapIcon: onTapIcon != null ? onTapIcon : () {},
+        textTheme: textTheme,
       ),
     );
   }
 }
 
 class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _TransitionAppBarDelegate(
-      {required this.avatar, required this.title, this.extent = 250})
-      : assert(extent >= 200, '');
+  _TransitionAppBarDelegate({
+    required this.avatar,
+    required this.title,
+    required this.textTheme,
+    this.extent = 250,
+    this.withIcon = false,
+    this.onTapIcon,
+  }) : assert(extent >= 200, '');
 
   final Widget avatar;
   final double extent;
   final String title;
+  final bool withIcon;
+  final Function? onTapIcon;
+  final TextStyle textTheme;
+
   // Alineación del avatar - pequeño a grande
   final _avatarAlignTween =
       AlignmentTween(begin: Alignment.bottomCenter, end: Alignment.centerLeft);
@@ -41,8 +59,8 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
   );
 
   // Alineacion del icono
-  // final _iconAlignTween =
-  //     AlignmentTween(begin: Alignment.bottomRight, end: Alignment.topRight);
+  final _iconAlignTween =
+      AlignmentTween(begin: Alignment.bottomRight, end: Alignment.topRight);
 
   final _titleMarginTween = EdgeInsetsTween(
     begin: const EdgeInsets.only(bottom: 20),
@@ -69,7 +87,7 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
     final titleMargin = _titleMarginTween.lerp(progress);
 
     final avatarAlign = _avatarAlignTween.lerp(progress);
-    // final iconAlign = _iconAlignTween.lerp(progress);
+    final iconAlign = _iconAlignTween.lerp(progress);
 
     final double widthScreen = MediaQuery.of(context).size.width;
     final avatarSize = (1 - progress) * widthScreen + 32;
@@ -115,15 +133,31 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
             alignment: avatarAlign,
             child: Text(
               title,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontSize: 16,
-                shadows: [
-                  Shadow(color: Theme.of(context).primaryColor, blurRadius: 10)
-                ],
+              style: textTheme.copyWith(
+                color: progress < 0.9 ? Colors.white : Colors.black,
               ),
             ),
           ),
         ),
+        withIcon
+            ? Padding(
+                padding: titleMargin,
+                child: Align(
+                  alignment: iconAlign,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: GestureDetector(
+                      onTap: () => onTapIcon != null ? onTapIcon!() : {},
+                      child: Icon(
+                        Icons.close_outlined,
+                        size: 30,
+                        color: progress < 0.4 ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            : const SizedBox(),
       ],
     );
   }

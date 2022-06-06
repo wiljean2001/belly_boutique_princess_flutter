@@ -23,7 +23,7 @@ class HomeView extends StatelessWidget {
           if (state is ProductLoading) {
             return const CustomLoadingScreen();
           }
-          if (state is ProductLoaded) {
+          if (state is ProductsLoaded) {
             return CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: <Widget>[

@@ -1,12 +1,13 @@
 import 'package:belly_boutique_princess/blocs/blocs.dart';
 import 'package:belly_boutique_princess/models/category_model.dart';
-import 'package:belly_boutique_princess/utils/show_toast.dart';
+import 'package:belly_boutique_princess/utils/show_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../config/constrants.dart';
 import '../../../generated/l10n.dart';
 import '../../../widgets/custom_appbar.dart';
+import '../../../widgets/custom_sliver_app_bar.dart';
 
 class CreateCategoryScreen extends StatelessWidget {
   const CreateCategoryScreen({Key? key}) : super(key: key);
@@ -16,25 +17,44 @@ class CreateCategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(.2),
-      body: Padding(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomAppBar(
-                title: S.of(context).title_create_category_screen,
-                hasActions: false),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(kPaddingM),
-                child: FormCreateCategory(),
-              ),
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: <Widget>[
+          CustomSliverAppBar(
+            title: S.of(context).title_show_products_screen,
+            hasActions: false,
+            hasIcon: false,
+            isTextCenter: false,
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(kPaddingM),
+              child: FormCreateCategory(),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
+    // return Scaffold(
+    //   body: Padding(
+    //     padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+    //     child: Column(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       crossAxisAlignment: CrossAxisAlignment.start,
+    //       children: [
+    //         CustomAppBar(
+    //             title: S.of(context).title_create_category_screen,
+    //             hasActions: false),
+    //         Expanded(
+    //           child: Padding(
+    //             padding: const EdgeInsets.all(kPaddingM),
+    //             child: FormCreateCategory(),
+    //           ),
+    //         ),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 }
 

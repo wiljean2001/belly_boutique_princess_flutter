@@ -1,8 +1,10 @@
 import 'package:belly_boutique_princess/models/models.dart';
 import 'package:belly_boutique_princess/screens/onboarding_auth/onboarding_screen.dart';
+import 'package:belly_boutique_princess/utils/show_alert.dart';
 import 'package:belly_boutique_princess/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 
@@ -39,10 +41,8 @@ class CreateProductScreen extends StatefulWidget {
 }
 
 class _CreateProductScreenState extends State<CreateProductScreen> {
-  final controller = CarouselController();
-
   // images product
-  List<String>? itemsImages = [];
+  List<XFile>? itemsImages = [];
   List? categoriesProduct = [];
   List? sizesProduct = [];
   String? title;
@@ -98,12 +98,19 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                             child: CustomDropDown(
                               title: const Text('Categorías'),
                               listItems: state.categories
-                                  .map((e) => MultiSelectItem(e.name, e.name))
+                                  .map((e) => MultiSelectItem(e.id, e.name))
                                   .toList(),
                               buttonText: const Text('Seleccionar categorías'),
                               onConfirm: (List<Object?> values) {
                                 categoriesProduct = [];
                                 categoriesProduct = values;
+                              },
+                              validator: (value) {
+                                if (value.isNotEmpty) {
+                                  return null;
+                                } else {
+                                  return 'Selecciona al menos una opción.';
+                                }
                               },
                             ),
                           );
@@ -129,11 +136,43 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                           sizesProduct = values;
                         },
                         title: const Text('Tallas'),
+                        validator: (value) {
+                          if (value.isNotEmpty) {
+                            return null;
+                          } else {
+                            return 'Selecciona al menos una opción.';
+                          }
+                        },
                       ),
                     ),
                     CustomCarouselSliders(
-                      itemsImages: itemsImages!,
-                      controller: controller,
+                      itImages: itemsImages!,
+                      onTap: () async {
+                        ImagePicker _picker = ImagePicker();
+                        final List<XFile>? imagesXfile =
+                            await _picker.pickMultiImage(
+                          imageQuality: 100,
+                        );
+
+                        if (imagesXfile == null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Imagen no seleccionada.')),
+                          );
+                        }
+
+                        if (imagesXfile != null) {
+                          print('Uploading ...');
+                          setState(() {
+                            itemsImages = null;
+                            itemsImages = imagesXfile;
+                          });
+
+                          // context
+                          //     .read<ProductBloc>()
+                          //     .add(UpdateProductImages(image: imagesXfile));
+                        }
+                      },
                     ),
                     SizedBox(
                       width: double.infinity,
@@ -144,33 +183,32 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                           color: Theme.of(context).primaryColor,
                           elevation: 8.0,
                           onPressed: () {
-                            if (!_formKey.currentState!.validate()) return;
-                            print(sizesProduct);
-                            print(categoriesProduct);
-                            if (sizesProduct!.length > 0 &&
-                                categoriesProduct!.length > 0) {
-                              // validar por  espacio
-                              Product product = Product(
-                                title: title!,
-                                descript: description!,
-                                price: double.parse(price!),
-                                imageUrls: [],
-                                sizes: sizesProduct!,
-                                categories: categoriesProduct!,
-                              );
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Succes'),
-                                ),
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content:
-                                      Text('Por favor completa el registro.'),
-                                ),
-                              );
+                            if (!_formKey.currentState!.validate()) {
+                              ShowAlert.showErrorSnackBar(context,
+                                  message: 'Por favor completa el registro.');
+                              return;
                             }
+                            Product product = Product(
+                              title: title!,
+                              descript: description!,
+                              price: double.parse(price!),
+                              imageUrls: const [],
+                              sizes: sizesProduct!,
+                              categories: categoriesProduct!,
+                            );
+                            context.read<ProductBloc>().add(
+                                  AddProduct(product: product),
+                                );
+                            // try {
+                              // context.read<ProductBloc>().add(
+                              //       UpdateProductImages(image: itemsImages!),
+                              //     );
+                            // } catch (e) {
+                            //   ShowAlert.showErrorSnackBar(context);
+                            // }
+                            ShowAlert.showSuccessSnackBar(context,
+                                message: '¡Registro exitoso!.');
+                                _formKey.currentState!.save();
                           },
                           child: ListTile(
                             textColor: Theme.of(context).primaryColorLight,
@@ -223,26 +261,29 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
               maxCarater: 35,
               messageError: 'Nombre no valido.',
             ),
-            onChanged: (value) => title = value,
+            onSaved: (value) => setState(() {
+              title = value;
+            }),
             maxLines: 1,
           ),
           const SizedBox(height: kPaddingS),
           TextFormField(
-            textInputAction: TextInputAction.next,
-            keyboardType: TextInputType.multiline,
-            maxLines: null,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Descripción',
-            ),
-            validator: (value) => Validators.isValidateOnlyTextMinMax(
-              text: value!,
-              minCaracter: 3,
-              maxCarater: 50,
-              messageError: 'Descripción no valido.',
-            ),
-            onChanged: (value) => description = value,
-          ),
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Descripción',
+              ),
+              validator: (value) => Validators.isValidateOnlyTextMinMax(
+                    text: value!,
+                    minCaracter: 3,
+                    maxCarater: 50,
+                    messageError: 'Descripción no valido.',
+                  ),
+              onSaved: (value) => setState(() {
+                    description = value;
+                  })),
           const SizedBox(height: 10),
           TextFormField(
             textInputAction: TextInputAction.next,
@@ -260,7 +301,9 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
               maxCarater: 5,
               messageError: 'Costo no valido.',
             ),
-            onChanged: (value) => price = value,
+            onSaved: (value) => setState(() {
+              price = value;
+            }),
           ),
         ],
       ),

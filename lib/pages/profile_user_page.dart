@@ -85,6 +85,9 @@ class getProfileLoaded extends StatelessWidget {
           //   ),
           // ),
           TransitionAppBar(
+            textTheme: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  fontSize: 20,
+                ),
             avatar: Image.network(
               usuario.imageUrls[0],
               fit: BoxFit.fitWidth,

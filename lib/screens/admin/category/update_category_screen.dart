@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../widgets/custom_appbar.dart';
+import '../../../widgets/custom_sliver_app_bar.dart';
 
 class UpdateCategoryScreen extends StatelessWidget {
   const UpdateCategoryScreen({Key? key}) : super(key: key);
@@ -10,22 +11,28 @@ class UpdateCategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(.2),
-      body: Padding(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomAppBar(
-                title: S.of(context).title_update_category_screen,
-                hasActions: false),
-            Expanded(
-              child: Column(
-                children: [Text('')],
-              ),
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: <Widget>[
+          CustomSliverAppBar(
+            title: S.of(context).title_update_category_screen,
+            hasActions: false,
+            hasIcon: false,
+            isTextCenter: false,
+          ),
+          SliverToBoxAdapter(
+            child: DataTable(
+              columns: const [
+                DataColumn(label: Text('')),
+              ],
+              rows: const [
+                DataRow(
+                  cells: [DataCell(Text(''))],
+                )
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

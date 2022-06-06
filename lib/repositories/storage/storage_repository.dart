@@ -35,4 +35,31 @@ class StorageRepository extends BaseStorageRepository {
         await storage.ref('${user.id}/$imageName').getDownloadURL();
     return downloadURL;
   }
+
+  @override
+  Future<void> uploadImageProduct(Product product, List<XFile> images) async {
+    try {
+      for (var image in images) {
+        await storage
+            .ref('${product.id}/${image.name}')
+            .putFile(File(image.path))
+            .then(
+              (p0) => ProductRepository().updateProductPictures(
+                product,
+                image.name,
+              ),
+            );
+      }
+    } catch (err) {
+      print(err);
+    }
+  }
+  
+  @override
+  Future<String> getDownloadURLProduct(
+      Product product, String imageName) async {
+    String downloadURL =
+        await storage.ref('${product.id}/$imageName').getDownloadURL();
+    return downloadURL;
+  }
 }

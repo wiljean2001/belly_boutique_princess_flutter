@@ -5,16 +5,16 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 //
 class CustomDropDown extends StatefulWidget {
   final List<MultiSelectItem> listItems;
-  final GlobalKey<FormFieldState<dynamic>>? globalKey;
   final Function(List<Object?> values) onConfirm;
+  final Function(List<Object?> values) validator;
   final Text buttonText;
   final Widget title;
 
   const CustomDropDown({
     Key? key,
     required this.listItems,
-    this.globalKey,
     required this.onConfirm,
+    required this.validator,
     required this.buttonText,
     required this.title,
   }) : super(key: key);
@@ -30,13 +30,17 @@ class _CustomDropDownState extends State<CustomDropDown> {
       children: [
         MultiSelectDialogField(
             items: widget.listItems,
+            onSaved: (values){values?.clear();},
             onConfirm: (List<Object?> values) => widget.onConfirm(values),
             // validator: ,
+            cancelText: const Text('CANCELAR'),
+            confirmText: const Text('ACEPTAR'),
             buttonText: widget.buttonText,
             buttonIcon: const Icon(Icons.keyboard_arrow_down_outlined),
             dialogHeight: widget.listItems.length * 55,
-            // searchIcon: ,
-            // key: widget.globalKey,
+            validator: (value) => value != null
+                ? widget.validator(value)
+                : 'Selecciona al menos una opción.',
             title: widget.title),
       ],
     );

@@ -115,6 +115,11 @@ class _HomeScreenState extends State<MenuAdminScreen> {
             screenView = const HomeScreen();
           });
           break;
+        case DrawerIndex.DASHBOARD:
+          setState(() {
+            // screenView = const HomeScreen();
+          });
+          break;
         case DrawerIndex.Product_create:
           setState(() {
             screenView = CreateProductScreen();

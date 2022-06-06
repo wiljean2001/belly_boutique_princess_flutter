@@ -28,14 +28,15 @@ Future<void> main() async {
     () async => {
       runApp(
         ChangeNotifierProvider(
-            create: (_) => ThemeChanger(themeDefault()),
-            child:
-                await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
-              DeviceOrientation.portraitUp,
-              DeviceOrientation.portraitDown
-            ]).then(
-              (_) => const MyApp(),
-            )),
+          create: (_) => ThemeChanger(themeDefault()),
+          child:
+              await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+            DeviceOrientation.portraitUp,
+            DeviceOrientation.portraitDown
+          ]).then(
+            (_) => const MyApp(),
+          ),
+        ),
       ),
     },
     blocObserver: SimpleBlocObserver(),
@@ -50,15 +51,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarBrightness:
-          !kIsWeb && Platform.isAndroid ? Brightness.dark : Brightness.light,
-      systemNavigationBarColor: Colors.white,
-      systemNavigationBarDividerColor: Colors.transparent,
-      systemNavigationBarIconBrightness: Brightness.dark,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness:
+            !kIsWeb && Platform.isAndroid ? Brightness.dark : Brightness.light,
+        systemNavigationBarColor: Colors.white,
+        systemNavigationBarDividerColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
+    );
 
     final theme = Provider.of<ThemeChanger>(context);
     final ThemeData getThema = theme.getTheme<ThemeData>();
@@ -125,6 +128,7 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => ProductBloc(
+              storageRepository: context.read<StorageRepository>(),
               productRepository: ProductRepository(),
             )..add(LoadProducts()),
           )
@@ -144,7 +148,7 @@ class MyApp extends StatelessWidget {
            */
           localizationsDelegates: const [
             // translate
-            GlobalMaterialLocalizations.delegate, 
+            GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
             S.delegate,

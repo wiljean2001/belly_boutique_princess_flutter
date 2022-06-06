@@ -2,23 +2,29 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:image_picker/image_picker.dart';
+import '../../repositories/repositories.dart';
 import '/models/models.dart';
-import '/repositories/product/product_repository.dart';
 
 part 'product_event.dart';
 part 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final ProductRepository _productRepository;
+  final StorageRepository _storageRepository;
   StreamSubscription? _productSubscription;
 
-  ProductBloc({required ProductRepository productRepository})
-      : _productRepository = productRepository,
+  ProductBloc({
+    required ProductRepository productRepository,
+    required StorageRepository storageRepository,
+  })  : _productRepository = productRepository,
+        _storageRepository = storageRepository,
         super(ProductLoading()) {
     on<LoadProducts>(_onLoadProducts);
     on<UpdateProducts>(_onUpdateProducts);
     on<AddProduct>(_onAddProduct);
     on<UpdateProduct>(_onUpdateProduct);
+    on<UpdateProductImages>(_onUpdateProductImages);
   }
 
   void _onLoadProducts(
@@ -37,7 +43,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     UpdateProducts event,
     Emitter<ProductState> emit,
   ) {
-    emit(ProductLoaded(products: event.products));
+    emit(ProductsLoaded(products: event.products));
   }
 
   void _onAddProduct(
@@ -45,8 +51,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     Emitter<ProductState> emit,
   ) async {
     final state = this.state;
-    if (state is ProductLoaded) {
-      await _productRepository.createCategory(event.product);
+    if (state is ProductsLoaded) {
+      await _productRepository.createProduct(event.product);
     }
     add(LoadProducts());
   }
@@ -56,9 +62,26 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     Emitter<ProductState> emit,
   ) async {
     final state = this.state;
-    if (state is ProductLoaded) {
-      await _productRepository.updateCategory(event.product, '');
+    if (state is ProductsLoaded) {
+      await _productRepository.updateProduct(event.product, '');
       add(LoadProducts());
+    }
+  }
+
+  void _onUpdateProductImages(
+    UpdateProductImages event,
+    Emitter<ProductState> emit,
+  ) async {
+    if (state is ProductsLoaded) {
+      print('ULTIMO');
+      Product product = (state as ProductsLoaded).products.last;
+      print(product);
+
+      await _storageRepository.uploadImageProduct(product, event.image);
+
+      _productRepository.getProduct(product.id!).listen((product) {
+        add(UpdateProduct(product: product));
+      });
     }
   }
 }

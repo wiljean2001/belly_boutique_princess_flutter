@@ -38,6 +38,11 @@ class _HomeDrawerState extends State<HomeDrawer> {
         icon: const Icon(Icons.home),
       ),
       DrawerList(
+        index: DrawerIndex.DASHBOARD,
+        labelName: 'Dashboard',
+        icon: const Icon(Icons.dashboard_outlined),
+      ),
+      DrawerList(
         index: DrawerIndex.Products,
         labelName: 'Productos',
         icon: const Icon(Icons.addchart_outlined),
@@ -360,6 +365,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
 }
 
 enum DrawerIndex {
+  DASHBOARD,
   HOME_USER,
   Products,
   Product_create,

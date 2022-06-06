@@ -1,3 +1,4 @@
+import 'package:belly_boutique_princess/utils/show_alert.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,7 +46,7 @@ class ProductScreenState extends State<ProductScreen> {
   final controller = CarouselController();
   @override
   Widget build(BuildContext context) {
-    List<dynamic> itemsImages = [
+    List<String> itemsImages = [
       product.imageUrls[0],
       product.imageUrls[0],
       product.imageUrls[0],
@@ -59,8 +60,16 @@ class ProductScreenState extends State<ProductScreen> {
               fit: BoxFit.fitWidth,
               alignment: Alignment.center,
             ),
+            withIcon: true,
             title: product.title,
             extent: 300,
+            textTheme: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              fontSize: 22,
+              shadows: [
+                Shadow(color: Theme.of(context).primaryColor, blurRadius: 10)
+              ],
+            ),
+            onTapIcon: () => Navigator.of(context).pop(),
           ),
           SliverToBoxAdapter(
             child: ConstrainedBox(
@@ -70,10 +79,9 @@ class ProductScreenState extends State<ProductScreen> {
                 children: <Widget>[
                   CustomInfoProduct(product: product),
                   // const CustomInfoMiniProduct(),
-                  CustomCarouselSliders(
-                    itemsImages: itemsImages,
-                    controller: controller,
-                  ),
+                  // CustomCarouselSliders(
+                  //   itImages: ,
+                  // ),
                   const Divider(
                     height: 10,
                     color: Colors.black,
