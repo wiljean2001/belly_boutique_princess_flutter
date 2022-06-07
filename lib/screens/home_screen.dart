@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:belly_boutique_princess/screens/onboarding_auth/onboarding_screen.dart';
+import 'package:bely_boutique_princess/screens/onboarding_auth/onboarding_screen.dart';
 
 import '../blocs/blocs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../generated/l10n.dart';
 
-import '../pages/user_views.dart';
 import '../widgets/custom_bottom_navigation.dart';
+import 'user/menu/user_views.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home'; //route

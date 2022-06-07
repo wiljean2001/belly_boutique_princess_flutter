@@ -1,16 +1,16 @@
-import 'package:belly_boutique_princess/utils/open_all.dart';
-import 'package:belly_boutique_princess/widgets/custom_app_bar_avatar.dart';
+import 'package:bely_boutique_princess/utils/open_all.dart';
+import 'package:bely_boutique_princess/widgets/custom_app_bar_avatar.dart';
 import 'package:flutter/material.dart';
 
-import '../generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/blocs.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
 
-import '../repositories/auth/auth_repository.dart';
-import '../screens/setting_screen.dart';
-import 'package:belly_boutique_princess/models/user_model.dart';
+import 'package:bely_boutique_princess/models/user_model.dart';
 
+import '../../../blocs/blocs.dart';
+import '../../../generated/l10n.dart';
+import '../../../repositories/auth/auth_repository.dart';
+import '../../setting_screen.dart';
 import 'pruebaAnimate.dart';
 
 class UserProfileView extends StatefulWidget {

@@ -1,7 +1,9 @@
-import 'package:belly_boutique_princess/models/models.dart';
-import 'package:belly_boutique_princess/screens/onboarding_auth/onboarding_screen.dart';
-import 'package:belly_boutique_princess/utils/show_alert.dart';
-import 'package:belly_boutique_princess/utils/validators.dart';
+import 'package:bely_boutique_princess/models/models.dart';
+import 'package:bely_boutique_princess/repositories/repositories.dart';
+import 'package:bely_boutique_princess/screens/onboarding_auth/onboarding_screen.dart';
+import 'package:bely_boutique_princess/utils/show_alert.dart';
+import 'package:bely_boutique_princess/utils/validators.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,7 +14,6 @@ import '../../../blocs/blocs.dart';
 import '../../../config/constrants.dart';
 import '../../../widgets/custom_carousel_sliders.dart';
 import '../../../widgets/custom_multi_dropdown.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import '../../../generated/l10n.dart';
 import '../../../widgets/custom_sliver_app_bar.dart';
 
@@ -164,7 +165,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                         if (imagesXfile != null) {
                           print('Uploading ...');
                           setState(() {
-                            itemsImages = null;
+                            // itemsImages = null;
                             itemsImages = imagesXfile;
                           });
 
@@ -182,33 +183,51 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                         child: MaterialButton(
                           color: Theme.of(context).primaryColor,
                           elevation: 8.0,
-                          onPressed: () {
+                          onPressed: () async {
                             if (!_formKey.currentState!.validate()) {
                               ShowAlert.showErrorSnackBar(context,
                                   message: 'Por favor completa el registro.');
                               return;
                             }
+                            _formKey.currentState!.save();
+                            ShowAlert.showSuccessSnackBar(context,
+                                message: 'Registrando...');
+                            print(title!);
+                            print(description!);
+                            print(double.parse(price!));
+                            print(sizesProduct!);
+                            print(categoriesProduct!);
+                            print(itemsImages!);
+                            await context
+                                .read<StorageRepository>()
+                                .uploadImageProduct(itemsImages!);
+
+                            List<String> downloadURLProduct = await context
+                                .read<StorageRepository>()
+                                .getDownloadURLProduct(itemsImages!);
+                            print('GET IMAGEN $downloadURLProduct');
+                            // FieldValue.arrayUnion(downloadURLProduct);
                             Product product = Product(
                               title: title!,
                               descript: description!,
                               price: double.parse(price!),
-                              imageUrls: const [],
+                              imageUrls: downloadURLProduct,
                               sizes: sizesProduct!,
                               categories: categoriesProduct!,
                             );
+                            print(product);
                             context.read<ProductBloc>().add(
                                   AddProduct(product: product),
                                 );
                             // try {
-                              // context.read<ProductBloc>().add(
-                              //       UpdateProductImages(image: itemsImages!),
-                              //     );
+                            // context.read<ProductBloc>().add(
+                            //       UpdateProductImages(image: itemsImages!),
+                            //     );
                             // } catch (e) {
                             //   ShowAlert.showErrorSnackBar(context);
                             // }
                             ShowAlert.showSuccessSnackBar(context,
                                 message: '¡Registro exitoso!.');
-                                _formKey.currentState!.save();
                           },
                           child: ListTile(
                             textColor: Theme.of(context).primaryColorLight,

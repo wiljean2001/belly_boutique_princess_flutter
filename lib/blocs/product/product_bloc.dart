@@ -24,7 +24,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<UpdateProducts>(_onUpdateProducts);
     on<AddProduct>(_onAddProduct);
     on<UpdateProduct>(_onUpdateProduct);
-    on<UpdateProductImages>(_onUpdateProductImages);
+    // on<UpdateProductImages>(_onUpdateProductImages);
   }
 
   void _onLoadProducts(
@@ -68,20 +68,20 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     }
   }
 
-  void _onUpdateProductImages(
-    UpdateProductImages event,
-    Emitter<ProductState> emit,
-  ) async {
-    if (state is ProductsLoaded) {
-      print('ULTIMO');
-      Product product = (state as ProductsLoaded).products.last;
-      print(product);
+  // void _onUpdateProductImages(
+  //   UpdateProductImages event,
+  //   Emitter<ProductState> emit,
+  // ) async {
+  //   if (state is ProductsLoaded) {
+  //     print('ULTIMO');
+  //     Product product = (state as ProductsLoaded).products.last;
+  //     print(product);
 
-      await _storageRepository.uploadImageProduct(product, event.image);
+  //     await _storageRepository.uploadImageProduct(event.image);
 
-      _productRepository.getProduct(product.id!).listen((product) {
-        add(UpdateProduct(product: product));
-      });
-    }
-  }
+  //     _productRepository.getProduct(product.id!).listen((product) {
+  //       add(UpdateProduct(product: product));
+  //     });
+  //   }
+  // }
 }

@@ -1,4 +1,4 @@
-import 'package:belly_boutique_princess/blocs/blocs.dart';
+import 'package:bely_boutique_princess/blocs/blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

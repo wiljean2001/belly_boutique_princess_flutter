@@ -30,7 +30,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
       children: [
         MultiSelectDialogField(
             items: widget.listItems,
-            onSaved: (values){values?.clear();},
+            // onSaved: (values){values?.clear();},
             onConfirm: (List<Object?> values) => widget.onConfirm(values),
             // validator: ,
             cancelText: const Text('CANCELAR'),

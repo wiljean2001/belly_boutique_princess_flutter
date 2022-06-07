@@ -1,5 +1,5 @@
-import 'package:belly_boutique_princess/config/theme_default.dart';
-import 'package:belly_boutique_princess/utils/validators.dart';
+import 'package:bely_boutique_princess/config/theme_default.dart';
+import 'package:bely_boutique_princess/utils/validators.dart';
 
 import '../../../blocs/auth/auth_bloc.dart';
 import '../../../blocs/blocs.dart';

@@ -15,9 +15,9 @@ import 'cubit/cubits.dart';
 import 'blocs/theme.dart';
 import 'config/theme_default.dart';
 import 'screens/splash_screen.dart';
-import 'package:belly_boutique_princess/config/routers.dart';
-import 'package:belly_boutique_princess/sinple_bloc_observer.dart';
-import 'package:belly_boutique_princess/screens/screens.dart';
+import 'package:bely_boutique_princess/config/routers.dart';
+import 'package:bely_boutique_princess/sinple_bloc_observer.dart';
+import 'package:bely_boutique_princess/screens/screens.dart';
 
 /// Metodo main de la aplicacion flutter
 Future<void> main() async {

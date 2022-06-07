@@ -41,13 +41,13 @@ class ProductRepository extends BaseProductRepository {
         );
   }
 
-  @override
-  Future<void> updateProductPictures(Product product, String imageName) async {
-    String downloadUrl =
-        await StorageRepository().getDownloadURLProduct(product, imageName);
+  // @override
+  // Future<void> updateProductPictures(String imageName) async {
+  //   String downloadUrl =
+  //       await StorageRepository().getDownloadURLProduct(imageName);
 
-    return _firebaseFirestore.collection('products').doc(product.id).update({
-      'imageUrls': FieldValue.arrayUnion([downloadUrl])
-    });
-  }
+  //   return _firebaseFirestore.collection('products').doc().update({
+  //     'imageUrls': FieldValue.arrayUnion([downloadUrl])
+  //   });
+  // }
 }

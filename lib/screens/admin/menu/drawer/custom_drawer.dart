@@ -1,8 +1,10 @@
-import 'package:belly_boutique_princess/screens/home_screen.dart';
+import 'package:bely_boutique_princess/screens/home_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../blocs/profile/profile_bloc.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../generated/l10n.dart';
 
 class HomeDrawer extends StatefulWidget {
   const HomeDrawer(
@@ -25,26 +27,27 @@ class _HomeDrawerState extends State<HomeDrawer> {
 
   @override
   void initState() {
-    setDrawerListArray();
     super.initState();
+    // Future.delayed(Duration.zero, () {
+    // });
   }
 
 // lista de drawer (botones internos del drawer)
-  void setDrawerListArray() {
+  void setDrawerListArray() async {
     drawerList = <DrawerList>[
       DrawerList(
         index: DrawerIndex.HOME_USER,
-        labelName: 'Ver como usuario',
-        icon: const Icon(Icons.home),
+        labelName: S.of(context).title_show_as_user, // 'Ver como usuario',
+        icon: const Icon(Icons.home_outlined),
       ),
       DrawerList(
         index: DrawerIndex.DASHBOARD,
-        labelName: 'Dashboard',
+        labelName: S.of(context).title_dashboard_screen, // 'Dashboard',
         icon: const Icon(Icons.dashboard_outlined),
       ),
       DrawerList(
         index: DrawerIndex.Products,
-        labelName: 'Productos',
+        labelName: S.of(context).title_products, // 'Productos',
         icon: const Icon(Icons.addchart_outlined),
         // isAssetsImage: true,
         // imageName: 'graphics/images/whatsapp_64.png',
@@ -52,38 +55,42 @@ class _HomeDrawerState extends State<HomeDrawer> {
       ),
       DrawerList(
         index: DrawerIndex.Product_create,
-        labelName: 'Agregar producto',
+        labelName:
+            S.of(context).title_create_product_screen, // 'Agregar producto'
         isAssetsImage: false,
       ),
       DrawerList(
         index: DrawerIndex.Product_edit,
-        labelName: 'Editar Producto',
+        labelName: S.of(context).title_update_product_screen, // Editar Producto
         isAssetsImage: false,
       ),
       DrawerList(
         index: DrawerIndex.Product_show,
-        labelName: 'Ver Productos',
+        labelName: S.of(context).title_show_products_screen, // Ver Productos
         isAssetsImage: false,
       ),
       DrawerList(
         index: DrawerIndex.Categories,
-        labelName: 'Categorías',
+        labelName: S.of(context).title_show_products_screen, // 'Categorías',
         icon: const Icon(Icons.category_outlined),
         isTap: false,
       ),
       DrawerList(
         index: DrawerIndex.Category_create,
-        labelName: 'Agregar categoría',
+        labelName:
+            S.of(context).title_create_category_screen, // 'Agregar categoría',
         isAssetsImage: false,
       ),
       DrawerList(
         index: DrawerIndex.Category_edit,
-        labelName: 'Editar categoría',
+        labelName:
+            S.of(context).title_update_category_screen, // 'Editar categoría',
         isAssetsImage: false,
       ),
       DrawerList(
         index: DrawerIndex.Category_show,
-        labelName: 'Ver categorías',
+        labelName:
+            S.of(context).title_show_categories_screen, // 'Ver categorías',
         isAssetsImage: false,
       ),
     ];
@@ -91,6 +98,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    setDrawerListArray();
     return Scaffold(
       // backgroundColor: AppTheme.notWhite.withOpacity(0.5),
       backgroundColor: Theme.of(context)
@@ -365,8 +373,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
 }
 
 enum DrawerIndex {
-  DASHBOARD,
   HOME_USER,
+  DASHBOARD,
   Products,
   Product_create,
   Product_edit,

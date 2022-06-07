@@ -1,10 +1,10 @@
-import 'package:belly_boutique_princess/widgets/Custom_loading_screen.dart';
-import 'package:belly_boutique_princess/widgets/custom_card_product.dart';
-import 'package:belly_boutique_princess/widgets/custom_card_shopping.dart';
+import 'package:bely_boutique_princess/widgets/Custom_loading_screen.dart';
+import 'package:bely_boutique_princess/widgets/custom_card_product.dart';
+import 'package:bely_boutique_princess/widgets/custom_card_shopping.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/blocs.dart';
+import '../../../blocs/blocs.dart';
 
 // falta cambiar los textos a dinamicos
 

@@ -1,6 +1,6 @@
-import 'package:belly_boutique_princess/blocs/blocs.dart';
-import 'package:belly_boutique_princess/models/category_model.dart';
-import 'package:belly_boutique_princess/utils/show_alert.dart';
+import 'package:bely_boutique_princess/blocs/blocs.dart';
+import 'package:bely_boutique_princess/models/category_model.dart';
+import 'package:bely_boutique_princess/utils/show_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:belly_boutique_princess/repositories/storage/base_storage_repository.dart';
+import 'package:bely_boutique_princess/repositories/storage/base_storage_repository.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
@@ -37,29 +37,29 @@ class StorageRepository extends BaseStorageRepository {
   }
 
   @override
-  Future<void> uploadImageProduct(Product product, List<XFile> images) async {
+  Future<void> uploadImageProduct(List<XFile> images) async {
     try {
       for (var image in images) {
-        await storage
-            .ref('${product.id}/${image.name}')
-            .putFile(File(image.path))
-            .then(
-              (p0) => ProductRepository().updateProductPictures(
-                product,
-                image.name,
-              ),
-            );
+        await storage.ref('product/${image.name}').putFile(File(image.path));
+        // .then(
+        //   (p0) => ProductRepository().updateProductPictures(
+        //     image.name,
+        //   ),
+        // );
       }
     } catch (err) {
       print(err);
     }
   }
-  
+
   @override
-  Future<String> getDownloadURLProduct(
-      Product product, String imageName) async {
-    String downloadURL =
-        await storage.ref('${product.id}/$imageName').getDownloadURL();
-    return downloadURL;
+  Future<List<String>> getDownloadURLProduct(List<XFile> imageName) async {
+    List<String>? downloadURL;
+    imageName.map(
+      (e) async => downloadURL!
+          .add(await storage.ref('product/${e.name}').getDownloadURL()),
+    );
+
+    return downloadURL!;
   }
 }
