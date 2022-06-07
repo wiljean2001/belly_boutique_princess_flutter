@@ -8,6 +8,13 @@
 // const Color kGrey = Color(0xFFF4F5F7);
 // const Color kBlack = Color(0xFF2D3243);
 
+import 'package:flutter/material.dart';
+
+const primaryColor = Color(0xFF2697FF);
+const secondaryColor = Color(0xFF2A2D3E);
+const bgColor = Color(0xFF212332);
+
+const defaultPadding = 16.0;
 // Padding
 const double kPaddingS = 8.0;
 const double kPaddingM = 16.0;
