@@ -42,7 +42,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^1.0.0
 
 flutter:
@@ -55,8 +54,10 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/icons/
     - assets/images/facebook_64.png
     - assets/images/whatsapp_64.png
+    - assets/images/profile_pic.png
     - assets/images/loading_gif.gif
     - assets/videos/
 flutter_intl:
