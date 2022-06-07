@@ -79,9 +79,7 @@ class ProductScreenState extends State<ProductScreen> {
                 children: <Widget>[
                   CustomInfoProduct(product: product),
                   // const CustomInfoMiniProduct(),
-                  // CustomCarouselSliders(
-                  //   itImages: ,
-                  // ),
+
                   const Divider(
                     height: 10,
                     color: Colors.black,
@@ -267,13 +265,15 @@ class CustomInfoProduct extends StatelessWidget {
       height: 280,
       padding: const EdgeInsets.all(10),
       child: Column(
-        children: const [
-          Divider(height: 10),
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          const Divider(height: 10),
           // Text(product.title, style: const TextStyle(fontSize: 22)),
-          Text("Bestido para damita con encajes...",
+          const Text("Bestido para damita con encajes...",
               style: TextStyle(fontSize: 18)),
-          Text("...", style: TextStyle(fontSize: 18)),
-          Text("...", style: TextStyle(fontSize: 18)),
+          Text('S/ ${product.price}', style: TextStyle(fontSize: 18)),
+          Text('${product.sizes.map((e) => e)}',
+              style: const TextStyle(fontSize: 18)),
         ],
       ),
     );

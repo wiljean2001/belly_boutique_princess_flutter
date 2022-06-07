@@ -60,15 +60,16 @@ class CustomCardProduct extends StatelessWidget {
                       ),
                     )
                   : const SizedBox(height: 5),
-              Hero(
-                  tag: imgPath,
-                  child: Container(
-                      height: 150.0,
-                      width: 150.0,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(imgPath),
-                              fit: BoxFit.contain)))),
+              // Hero(
+              //     tag: imgPath.substring(0, 20),
+              //     child: Container(
+              Container(
+                  height: 150.0,
+                  width: 150.0,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(imgPath),
+                          fit: BoxFit.contain))), // ),
               const SizedBox(height: 7.0),
               Text(price,
                   style: const TextStyle(
