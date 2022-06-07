@@ -1,4 +1,6 @@
+import 'package:belly_boutique_princess/blocs/product/product_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../widgets/custom_sliver_app_bar.dart';
@@ -20,15 +22,54 @@ class ShowProductsScreen extends StatelessWidget {
             isTextCenter: false,
           ),
           SliverToBoxAdapter(
-            child: DataTable(
-              columns: const [
-                DataColumn(label: Text('')),
-              ],
-              rows: const [
-                DataRow(
-                  cells: [DataCell(Text(''))],
-                )
-              ],
+            child: BlocBuilder<ProductBloc, ProductState>(
+              builder: (context, state) {
+                if (state is ProductLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (state is ProductsLoaded) {
+                  int contIndex = 0;
+                  return DataTable(
+                    headingRowColor: MaterialStateProperty.all<Color>(
+                      Theme.of(context).primaryColorLight.withOpacity(.3),
+                    ),
+                    dataRowColor: MaterialStateProperty.all<Color>(
+                      Theme.of(context).primaryColorLight.withOpacity(.1),
+                    ),
+                    headingTextStyle: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                    columns: const [
+                      DataColumn(
+                          label: Text('N°',
+                              style: TextStyle(fontStyle: FontStyle.italic)),
+                          numeric: true),
+                      DataColumn(
+                          label: Text('Categoría',
+                              style: TextStyle(fontStyle: FontStyle.italic))),
+                      DataColumn(
+                          label: Text('Imagen',
+                              style: TextStyle(fontStyle: FontStyle.italic))),
+                    ],
+                    rows: state.products != null
+                        ? state.products.map<DataRow>((e) {
+                            contIndex += 1;
+                            return DataRow(
+                              cells: [
+                                DataCell(Text(contIndex.toString())),
+                                DataCell(Text(e.title)),
+                                DataCell(Text('e.imageUrl')),
+                              ],
+                            );
+                          }).toList()
+                        : [],
+                  );
+                }
+                return const SizedBox();
+              },
             ),
           ),
         ],
