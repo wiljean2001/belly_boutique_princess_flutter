@@ -1,4 +1,5 @@
 import 'package:bely_boutique_princess/utils/show_alert.dart';
+import 'package:bely_boutique_princess/widgets/custom_carousel_sliders%20copy.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,11 +47,6 @@ class ProductScreenState extends State<ProductScreen> {
   final controller = CarouselController();
   @override
   Widget build(BuildContext context) {
-    List<String> itemsImages = [
-      product.imageUrls[0],
-      product.imageUrls[0],
-      product.imageUrls[0],
-    ];
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -87,8 +83,13 @@ class ProductScreenState extends State<ProductScreen> {
                     indent: 20,
                   ),
                   Container(
-                    height: 250,
-                    child: CustomExtraProducts(),
+                    height: 500,
+                    child: Column(
+                      children: const [
+                        CustomExtraProducts(),
+                        CustomExtraProducts(),
+                      ],
+                    ),
                     // color: Colors.red,
                   ),
                 ],
@@ -101,35 +102,6 @@ class ProductScreenState extends State<ProductScreen> {
   }
 }
 
-/**
- * body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: ConstrainedBox(
-          constraints:
-              BoxConstraints(minHeight: MediaQuery.of(context).size.height),
-          child: Column(
-            children: <Widget>[
-              const CustomInfoProduct(),
-              const CustomInfoMiniProduct(),
-              const Divider(
-                height: 10,
-                color: Colors.black,
-                endIndent: 20,
-                indent: 20,
-              ),
-              Container(
-                height: 250,
-                child: CustomExtraProducts(),
-                // color: Colors.red,
-              ),
-            ],
-          ),
-        ),
-      ),
-      // body: BlocBuilder<ProductBloc, ProductState>(
-      //   builder: (context, state) {},
-      // ),
- */
 //  Cambiarlo para recibir de la base de datos
 class CustomExtraProducts extends StatelessWidget {
   const CustomExtraProducts({
@@ -139,7 +111,7 @@ class CustomExtraProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 180, // alto de los cards
+      height: 240, // alto de los cards
       child: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
           if (state is ProductLoading) {
@@ -261,6 +233,11 @@ class CustomInfoProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> itemsImages = [
+      product.imageUrls[0],
+      product.imageUrls[0],
+      product.imageUrls[0],
+    ];
     return Container(
       height: 280,
       padding: const EdgeInsets.all(10),
@@ -274,6 +251,7 @@ class CustomInfoProduct extends StatelessWidget {
           Text('S/ ${product.price}', style: TextStyle(fontSize: 18)),
           Text('${product.sizes.map((e) => e)}',
               style: const TextStyle(fontSize: 18)),
+          CustomCarouselSliders2(itImages: itemsImages)
         ],
       ),
     );
