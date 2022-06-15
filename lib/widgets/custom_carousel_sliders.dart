@@ -6,10 +6,10 @@ import 'package:image_picker/image_picker.dart';
 
 class CustomCarouselSliders extends StatefulWidget {
   const CustomCarouselSliders({
-    Key? key,
+    // Key? key,
     this.onTap,
     required this.itImages,
-  }) : super(key: key);
+  }); //: super(key: key);
 
   final Function? onTap;
   final List<XFile> itImages;
@@ -34,7 +34,7 @@ class _CustomCarouselSlidersState extends State<CustomCarouselSliders> {
           ),
         ),
         Expanded(
-          child: GestureDetector(
+          child: InkWell(
             onTap: () => widget.onTap != null ? widget.onTap!() : {},
             child: CarouselSlider(
               items: widget.itImages.isNotEmpty

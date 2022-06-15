@@ -92,7 +92,7 @@ class _HomeViewState extends State<HomeView> {
                               padding: const EdgeInsets.all(8.0),
                               child: CustomCardProduct(
                                 context: context,
-                                added: true,
+                                added: false,
                                 imgPath: state
                                         .products[index].imageUrls.isNotEmpty
                                     ? state.products[index].imageUrls[0]

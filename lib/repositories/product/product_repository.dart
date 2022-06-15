@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
 import '../storage/storage_repository.dart';
 import '/models/product_model.dart';
 import '/repositories/product/base_product_repository.dart';
@@ -21,7 +22,7 @@ class ProductRepository extends BaseProductRepository {
 
   @override
   Stream<Product> getProduct(String productId) {
-    print('Getting user images from DB');
+    print('Getting products from DB');
     return _firebaseFirestore
         .collection('products')
         .doc(productId)
@@ -30,8 +31,19 @@ class ProductRepository extends BaseProductRepository {
   }
 
   @override
-  Future<void> createProduct(Product product) async {
-    await _firebaseFirestore.collection('products').doc().set(product.toMap());
+  Future<String> createProduct(Product product) async {
+    String id = _firebaseFirestore.collection('products').doc().id;
+    await _firebaseFirestore
+        .collection('products')
+        .doc(id)
+        .set(
+          product.toMap(),
+        )
+        .then((value) {
+      print(id);
+      return id;
+    });
+    return '';
   }
 
   @override
@@ -41,13 +53,17 @@ class ProductRepository extends BaseProductRepository {
         );
   }
 
-  // @override
-  // Future<void> updateProductPictures(String imageName) async {
-  //   String downloadUrl =
-  //       await StorageRepository().getDownloadURLProduct(imageName);
+  @override
+  Future<void> updateProductPictures(
+    String imageName,
+    String productId,
+  ) async {
+    String downloadUrl =
+        await StorageRepository().getDownloadURLProduct(imageName);
 
-  //   return _firebaseFirestore.collection('products').doc().update({
-  //     'imageUrls': FieldValue.arrayUnion([downloadUrl])
-  //   });
-  // }
+    return _firebaseFirestore.collection('products').doc(productId).update({
+      'imageUrls': FieldValue.arrayUnion([downloadUrl])
+      // 'imageUrls': downloadUrl
+    });
+  }
 }

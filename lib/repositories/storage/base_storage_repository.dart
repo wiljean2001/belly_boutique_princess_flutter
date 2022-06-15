@@ -4,6 +4,6 @@ import '/models/models.dart';
 abstract class BaseStorageRepository {
   Future<void> uploadImage(User user, XFile image);
   Future<String> getDownloadURL(User user, String imageName);
-  Future<void> uploadImageProduct(List<XFile> image);
-  Future<List<String>> getDownloadURLProduct(List<XFile> imageName);
+  Future<void> uploadImageProduct(List<XFile> image, String productid);
+  Future<String> getDownloadURLProduct(String imageName);
 }

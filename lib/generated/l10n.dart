@@ -270,10 +270,10 @@ class S {
     );
   }
 
-  /// `Contraseña no válida`
+  /// `Contraseña no válida (Al menos 8 carácteres, al menos 1 letra mayúscula, 1 letra minúscula y 1 número).`
   String get validator_password_error {
     return Intl.message(
-      'Contraseña no válida',
+      'Contraseña no válida (Al menos 8 carácteres, al menos 1 letra mayúscula, 1 letra minúscula y 1 número).',
       name: 'validator_password_error',
       desc: '',
       args: [],

@@ -17,3 +17,12 @@ class ProductsLoaded extends ProductState {
   @override
   List<Object> get props => [products];
 }
+
+class ProductLoaded extends ProductState {
+  final Product product;
+
+  const ProductLoaded({required this.product});
+
+  @override
+  List<Object> get props => [product];
+}

@@ -11,12 +11,20 @@ import '../../../blocs/onboarding/onboarding_bloc.dart';
 import '../../../models/models.dart';
 import '../../../widgets/custom_button_gradiant.dart';
 
-class RegisterForm extends StatelessWidget {
+class RegisterForm extends StatefulWidget {
   final TabController tabController;
 
   RegisterForm({Key? key, required this.tabController}) : super(key: key);
 
+  @override
+  State<RegisterForm> createState() => _RegisterFormState();
+}
+
+class _RegisterFormState extends State<RegisterForm> {
   final GlobalKey<FormState> _formKeyReg = GlobalKey<FormState>();
+
+  bool noShowPass = true;
+
   @override
   Widget build(BuildContext context) {
     final _contextRegister = context.read<SignupCubit>();
@@ -48,14 +56,25 @@ class RegisterForm extends StatelessWidget {
                 TextFormField(
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.text,
-                  obscureText: true,
+                  obscureText: noShowPass,
                   decoration: InputDecoration(
                     // border: OutlineInputBorder(),
                     labelText: S.of(context).password,
                     icon: const Icon(Icons.lock),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        noShowPass == true
+                            ? noShowPass = false
+                            : noShowPass = true;
+                        setState(() {});
+                      },
+                      child: const Icon(Icons.remove_red_eye_outlined),
+                    ),
                   ),
-                  validator: (pass) =>
-                      Validators.ispasswordValidator(pass!, context),
+                  toolbarOptions: const ToolbarOptions(),
+                  validator: (pass) => !Validators.isValidPassword(pass!)
+                      ? S.of(context).validator_password_error
+                      : null,
                   onChanged: (text) {
                     _contextRegister.passwordChanged(text);
                   },
@@ -100,7 +119,8 @@ class RegisterForm extends StatelessWidget {
                             user: user,
                           ),
                         );
-                    return tabController.animateTo(tabController.index + 1);
+                    return widget.tabController
+                        .animateTo(widget.tabController.index + 1);
                   },
                 ),
                 const SizedBox(height: 10),
@@ -108,8 +128,8 @@ class RegisterForm extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     TextButton(
-                      onPressed: () =>
-                          tabController.animateTo(tabController.index - 1),
+                      onPressed: () => widget.tabController
+                          .animateTo(widget.tabController.index - 1),
                       child: Text(S.of(context).bttn_go_back),
                     ),
                   ],

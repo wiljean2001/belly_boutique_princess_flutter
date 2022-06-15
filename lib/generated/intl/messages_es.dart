@@ -91,7 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cesta"),
         "validator_email_error":
             MessageLookupByLibrary.simpleMessage("Correo no válido"),
-        "validator_password_error":
-            MessageLookupByLibrary.simpleMessage("Contraseña no válida")
+        "validator_password_error": MessageLookupByLibrary.simpleMessage(
+            "Contraseña no válida (Al menos 8 carácteres, al menos 1 letra mayúscula, 1 letra minúscula y 1 número).")
       };
 }

@@ -1,4 +1,3 @@
-import 'package:bely_boutique_princess/config/theme_default.dart';
 import 'package:bely_boutique_princess/utils/validators.dart';
 
 import '../../../blocs/auth/auth_bloc.dart';
@@ -10,16 +9,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../widgets/custom_button_gradiant.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   final TabController tabController;
 
-  LoginForm({Key? key, required this.tabController}) : super(key: key);
+  const LoginForm({Key? key, required this.tabController}) : super(key: key);
 
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  bool noShowPass = true;
+
   @override
   Widget build(BuildContext context) {
     final _contextSignUp = context.read<SignupCubit>();
-
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
         return Center(
@@ -33,7 +39,7 @@ class LoginForm extends StatelessWidget {
                 //   style: Theme.of(context).textTheme.headlineLarge,
                 // ),
                 Text(
-                  'Iniciar sesión con una cuenta existente de Bely Boutique',
+                  'Iniciar sesión con una cuenta existente de Bely Boutique Princess',
                   style: Theme.of(context)
                       .textTheme
                       .headline6
@@ -57,14 +63,28 @@ class LoginForm extends StatelessWidget {
                 ),
                 TextFormField(
                   textInputAction: TextInputAction.next,
-                  obscureText: true,
+                  obscureText: noShowPass,
                   decoration: InputDecoration(
                     // border: OutlineInputBorder(),
                     labelText: S.of(context).password,
                     icon: const Icon(Icons.lock),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        print('a');
+                        setState(() {
+                          noShowPass == true
+                              ? noShowPass = false
+                              : noShowPass = true;
+                        });
+                      },
+                      child: Icon(Icons.remove_red_eye_outlined),
+                    ),
                   ),
-                  validator: (pass) =>
-                      Validators.ispasswordValidator(pass!, context),
+                  toolbarOptions: const ToolbarOptions(),
+                  validator: (pass) => !Validators.isValidPassword(pass!)
+                      ? S.of(context).validator_password_error
+                      : null,
+                  // Validators.ispasswordValidator(pass!, context),
                   onChanged: (value) {
                     _contextSignUp.passwordChanged(value);
                   },
@@ -122,8 +142,8 @@ class LoginForm extends StatelessWidget {
                     //   width: 150,
                     // ),
                     TextButton(
-                      onPressed: () =>
-                          tabController.animateTo(tabController.index + 1),
+                      onPressed: () => widget.tabController
+                          .animateTo(widget.tabController.index + 1),
                       child: Text(S.of(context).bttn_register),
                     ),
                     //icon:

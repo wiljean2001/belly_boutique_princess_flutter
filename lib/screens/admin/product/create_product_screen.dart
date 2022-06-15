@@ -3,7 +3,6 @@ import 'package:bely_boutique_princess/repositories/repositories.dart';
 import 'package:bely_boutique_princess/screens/onboarding_auth/onboarding_screen.dart';
 import 'package:bely_boutique_princess/utils/show_alert.dart';
 import 'package:bely_boutique_princess/utils/validators.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -189,6 +188,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                                   message: 'Por favor completa el registro.');
                               return;
                             }
+                            // itemsImages validar
                             _formKey.currentState!.save();
                             ShowAlert.showSuccessSnackBar(context,
                                 message: 'Registrando...');
@@ -198,27 +198,19 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                             print(sizesProduct!);
                             print(categoriesProduct!);
                             print(itemsImages!);
-                            await context
-                                .read<StorageRepository>()
-                                .uploadImageProduct(itemsImages!);
 
-                            List<String> downloadURLProduct = await context
-                                .read<StorageRepository>()
-                                .getDownloadURLProduct(itemsImages!);
-                            print('GET IMAGEN $downloadURLProduct');
-                            // FieldValue.arrayUnion(downloadURLProduct);
                             Product product = Product(
                               title: title!,
                               descript: description!,
                               price: double.parse(price!),
-                              imageUrls: downloadURLProduct,
+                              imageUrls: const [], //downloadURLProduct
                               sizes: sizesProduct!,
                               categories: categoriesProduct!,
                             );
+
                             print(product);
-                            context.read<ProductBloc>().add(
-                                  AddProduct(product: product),
-                                );
+                            context.read<ProductBloc>().add(AddProduct(
+                                product: product, images: itemsImages!));
                             // try {
                             // context.read<ProductBloc>().add(
                             //       UpdateProductImages(image: itemsImages!),

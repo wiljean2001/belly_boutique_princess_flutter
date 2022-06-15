@@ -7,37 +7,28 @@ class Validators {
     r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
   );
 
+// at least 8 characters / Al menos 8 carácteres
+// must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number / debe contener al menos 1 letra mayúscula, 1 letra minúscula y 1 número
+// Can contain special characters / Puede contener caracteres especiales
+  // r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$',
   static final RegExp _passwordRegExp = RegExp(
-    // con problemas
     /*
     * Mínimo 1 letra mayúscula.
     * Mínimo 1 letra minúscula.
     * Mínimo 1 carácter especial.
     * Número mínimo 1.
     * Mínimo 8 caracteres.
-    * 30 caracteres como máximo.
+    * 30 caracteres como máximo (No).
     * */
-    r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$',
+    r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,}$',
+    // r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$',
   );
 
-  /*
-  * Mínimo ocho caracteres, al menos una letra y un número
-  * "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-  * Mínimo ocho caracteres, al menos una letra, un número y un carácter especial:
-  * "^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
-  * Mínimo ocho caracteres, al menos una letra mayúscula, una letra minúscula y un número:
-  * "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
-  * */
-  /*
-  * Correos validos
-  *  [...]@[...].[...]
-  * */
   static bool isValidEmail(String email) {
     return _emailRegExp.hasMatch(email);
   }
 
   static bool isValidPassword(String password) {
-    //no funciona
     return _passwordRegExp.hasMatch(password);
   }
 

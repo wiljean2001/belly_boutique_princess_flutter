@@ -62,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
         if (state is BottomNavigationInitial) {
           return Scaffold(
+            extendBody: true,
             body: views![state.indexBottomNav],
             bottomNavigationBar: const CustomBottomNavigationBar(),
           );
