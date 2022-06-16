@@ -36,4 +36,15 @@ class ShowAlert {
       ),
     );
   }
+
+  static Future<void> showAlertSnackBar(BuildContext context,
+      {String message = 'Operación en proceso...'}) async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.yellow,
+        content: Text(message,
+            style: TextStyle(color: Theme.of(context).primaryColorDark)),
+      ),
+    );
+  }
 }

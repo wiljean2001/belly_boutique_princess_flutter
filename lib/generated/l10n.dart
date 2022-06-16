@@ -60,16 +60,6 @@ class S {
     );
   }
 
-  /// `graphics/images/bely_logo-edit.png`
-  String get logo_home {
-    return Intl.message(
-      'graphics/images/bely_logo-edit.png',
-      name: 'logo_home',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Error`
   String get error_title {
     return Intl.message(
@@ -270,10 +260,10 @@ class S {
     );
   }
 
-  /// `Contraseña no válida (Al menos 8 carácteres, al menos 1 letra mayúscula, 1 letra minúscula y 1 número).`
+  /// `Contraseña no válida\n(Mínimo 8 caracteres, 1 letra mayúscula,\n1 carácter especial, 1 número).`
   String get validator_password_error {
     return Intl.message(
-      'Contraseña no válida (Al menos 8 carácteres, al menos 1 letra mayúscula, 1 letra minúscula y 1 número).',
+      'Contraseña no válida\n(Mínimo 8 caracteres, 1 letra mayúscula,\n1 carácter especial, 1 número).',
       name: 'validator_password_error',
       desc: '',
       args: [],
@@ -345,6 +335,46 @@ class S {
     return Intl.message(
       'Usuario',
       name: 'title_user_screen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ubicación`
+  String get title_user_location {
+    return Intl.message(
+      'Ubicación',
+      name: 'title_user_location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ingresar ubicación`
+  String get title_user_location_desc {
+    return Intl.message(
+      'Ingresar ubicación',
+      name: 'title_user_location_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nombre`
+  String get title_user_name {
+    return Intl.message(
+      'Nombre',
+      name: 'title_user_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ingresar nombre`
+  String get title_user_name_desc {
+    return Intl.message(
+      'Ingresar nombre',
+      name: 'title_user_name_desc',
       desc: '',
       args: [],
     );

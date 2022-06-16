@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../blocs/blocs.dart';
+import '../utils/show_alert.dart';
 
 class CustomImageContainer extends StatelessWidget {
   const CustomImageContainer({
@@ -38,18 +39,17 @@ class CustomImageContainer extends StatelessWidget {
                     ImagePicker _picker = ImagePicker();
                     final XFile? _image = await _picker.pickImage(
                       source: ImageSource.gallery,
-                      imageQuality: 50,
+                      // imageQuality: 50,
                     );
 
                     if (_image == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text('Imagen no seleccionada.')),
-                      );
+                      ShowAlert.showErrorSnackBar(context,
+                          message: 'Imagen no seleccionada.');
                     }
 
                     if (_image != null) {
-                      print('Uploading ...');
+                      ShowAlert.showAlertSnackBar(context,
+                          message: 'Subiendo imagen...');
                       BlocProvider.of<OnboardingBloc>(context).add(
                         UpdateUserImages(image: _image),
                       );
@@ -57,10 +57,7 @@ class CustomImageContainer extends StatelessWidget {
                   },
                 ),
               )
-            : Image.network(
-                imageUrl!,
-                fit: BoxFit.cover,
-              ),
+            : Image.network(imageUrl!, fit: BoxFit.cover),
       ),
     );
   }

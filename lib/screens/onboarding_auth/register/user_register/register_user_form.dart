@@ -29,10 +29,10 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
 
   @override
   Widget build(BuildContext context) {
-    final listGender = <String>[
-      S.of(context).gender_male, // male
-      S.of(context).gender_female, // female
-    ];
+    // final listGender = <String>[
+    //   S.of(context).gender_male, // male
+    //   S.of(context).gender_female, // female
+    // ];
     return BlocBuilder<OnboardingBloc, OnboardingState>(
       builder: (context, state) {
         if (state is OnboardingLoaded) {
@@ -70,10 +70,15 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
                       // border: OutlineInputBorder(),
-                      labelText: S.of(context).title_user_screen,
+                      labelText: S.of(context).title_user_name_desc,
                       icon: const Icon(Icons.person),
                     ),
-                    validator: (name) => Validators.isNameValidator(name!),
+                    validator: (name) => Validators.isValidateOnlyTextMinMax(
+                      text: name!,
+                      minCaracter: 3,
+                      maxCarater: 50,
+                      messageError: 'Nombre invalido',
+                    ),
                     onChanged: (value) {
                       context.read<OnboardingBloc>().add(
                             UpdateUser(user: state.user.copyWith(name: value)),
@@ -81,47 +86,70 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       // name = value;
                     },
                   ),
-                  // Genero
-                  SizedBox(
-                    width: double.infinity,
-                    height: 55,
-                    child: DropdownButton<String>(
-                      isExpanded: true,
-                      hint: const Text('Sexo'),
-                      focusColor: Colors.pink,
-                      value: dropdownValue,
-                      icon: const Icon(
-                        Icons.keyboard_arrow_down_outlined,
-                        size: 45,
-                      ),
-                      elevation: 16,
-                      style: const TextStyle(
-                          color: Colors.deepPurple, fontSize: 18),
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      underline: Container(
-                        height: 2,
-                        color: Colors.black12,
-                      ),
-                      // cambiar por tipo Categorias
-                      items: listGender.map<DropdownMenuItem<String>>(
-                        (String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        },
-                      ).toList(),
-
-                      onChanged: (index) {
-                        setState(() {
-                          dropdownValue = index!;
-                          context.read<OnboardingBloc>().add(UpdateUser(
-                                user: state.user.copyWith(gender: index),
-                              ));
-                        });
-                      },
+                  TextFormField(
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(
+                      // border: OutlineInputBorder(),
+                      labelText: S.of(context).title_user_location_desc,
+                      icon: const Icon(Icons.person),
                     ),
+                    validator: (location) =>
+                        Validators.isValidateOnlyTextMinMax(
+                      text: location!,
+                      minCaracter: 5,
+                      maxCarater: 100,
+                      messageError: 'Ubicación no valido',
+                    ),
+                    onChanged: (value) {
+                      context.read<OnboardingBloc>().add(
+                            UpdateUser(
+                                user: state.user.copyWith(location: value)),
+                          );
+                      // name = value;
+                    },
                   ),
+                  // Genero
+                  // SizedBox(
+                  //   width: double.infinity,
+                  //   height: 55,
+                  //   child: DropdownButton<String>(
+                  //     isExpanded: true,
+                  //     hint: const Text('Sexo'),
+                  //     focusColor: Colors.pink,
+                  //     value: dropdownValue,
+                  //     icon: const Icon(
+                  //       Icons.keyboard_arrow_down_outlined,
+                  //       size: 45,
+                  //     ),
+                  //     elevation: 16,
+                  //     style: const TextStyle(
+                  //         color: Colors.deepPurple, fontSize: 18),
+                  //     borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  //     underline: Container(
+                  //       height: 2,
+                  //       color: Colors.black12,
+                  //     ),
+                  //     // cambiar por tipo Categorias
+                  //     items: listGender.map<DropdownMenuItem<String>>(
+                  //       (String value) {
+                  //         return DropdownMenuItem<String>(
+                  //           value: value,
+                  //           child: Text(value),
+                  //         );
+                  //       },
+                  //     ).toList(),
+
+                  //     onChanged: (index) {
+                  //       setState(() {
+                  //         dropdownValue = index!;
+                  //         context.read<OnboardingBloc>().add(UpdateUser(
+                  //               user: state.user.copyWith(gender: index),
+                  //             ));
+                  //       });
+                  //     },
+                  //   ),
+                  // ),
 
                   // Intertar mas secciones
 
@@ -130,11 +158,8 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Expanded(
-                        child: Icon(Icons.date_range),
-                      ),
+                      const Icon(Icons.date_range, size: 45),
                       Expanded(
-                        flex: 3,
                         child: MaterialButton(
                           elevation: 10,
                           child: Text(S.of(context).bttn_date_birth),

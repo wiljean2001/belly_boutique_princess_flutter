@@ -45,14 +45,14 @@ class OnboardingScreen extends StatelessWidget {
 
         return Scaffold(
           extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            // actions: [
-            //   TextButton(onPressed: () {}, child: Text("Saltar")),
-            // ],
-          ),
+          // appBar: AppBar(
+          //   automaticallyImplyLeading: false,
+          //   elevation: 0,
+          //   backgroundColor: Colors.transparent,
+          //   // actions: [
+          //   //   TextButton(onPressed: () {}, child: Text("Saltar")),
+          //   // ],
+          // ),
           body: TabBarView(
             physics: const NeverScrollableScrollPhysics(), // never scroll
             // viewportFraction: 5,

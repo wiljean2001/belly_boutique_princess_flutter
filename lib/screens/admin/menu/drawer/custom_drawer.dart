@@ -161,10 +161,14 @@ class _HomeDrawerState extends State<HomeDrawer> {
                                   child: ClipRRect(
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(60.0)),
-                                    child: Image.network(
-                                      state.user.imageUrls[0], // user image
-                                      fit: BoxFit.cover,
-                                    ),
+                                    child: state.user.image.isNotEmpty
+                                        ? Image.network(
+                                            state.user.image, // user image
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image.asset(
+                                            'assets/images/profile_pic.png',
+                                          ),
                                   ),
                                 ),
                               ),

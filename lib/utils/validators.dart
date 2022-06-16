@@ -32,23 +32,15 @@ class Validators {
     return _passwordRegExp.hasMatch(password);
   }
 
-  static ispasswordValidator(String password, context) {
-    if (password.isEmpty) {
-      return S.of(context).validator_password_error;
-    } else if (password.length < 8) {
-      return S.of(context).validator_password_error;
-    }
-    return null;
-  }
 
-  static isNameValidator(String name) {
-    if (name.isEmpty) {
-      return 'Nombre invalido';
-    } else if (name.length < 3) {
-      return 'Nombre invalido';
-    }
-    return null;
-  }
+  // static isNameValidator(String name) {
+  //   if (name.isEmpty) {
+  //     return 'Nombre invalido';
+  //   } else if (name.length < 3) {
+  //     return 'Nombre invalido';
+  //   }
+  //   return null;
+  // }
 
   static isValidateOnlyTextMinMax({
     required String text,

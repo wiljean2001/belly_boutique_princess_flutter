@@ -45,8 +45,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "gender": MessageLookupByLibrary.simpleMessage("Sexo"),
         "gender_female": MessageLookupByLibrary.simpleMessage("Femenino"),
         "gender_male": MessageLookupByLibrary.simpleMessage("Masculino"),
-        "logo_home": MessageLookupByLibrary.simpleMessage(
-            "graphics/images/bely_logo-edit.png"),
         "menu_appbar_item1": MessageLookupByLibrary.simpleMessage("Visitanos"),
         "menu_appbar_item2":
             MessageLookupByLibrary.simpleMessage("Configuracion"),
@@ -82,6 +80,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Actualizar categoría"),
         "title_update_product_screen":
             MessageLookupByLibrary.simpleMessage("Actualizar producto"),
+        "title_user_location":
+            MessageLookupByLibrary.simpleMessage("Ubicación"),
+        "title_user_location_desc":
+            MessageLookupByLibrary.simpleMessage("Ingresar ubicación"),
+        "title_user_name": MessageLookupByLibrary.simpleMessage("Nombre"),
+        "title_user_name_desc":
+            MessageLookupByLibrary.simpleMessage("Ingresar nombre"),
         "title_user_screen": MessageLookupByLibrary.simpleMessage("Usuario"),
         "tooltip_bttn_options":
             MessageLookupByLibrary.simpleMessage("Opciones"),
@@ -92,6 +97,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "validator_email_error":
             MessageLookupByLibrary.simpleMessage("Correo no válido"),
         "validator_password_error": MessageLookupByLibrary.simpleMessage(
-            "Contraseña no válida (Al menos 8 carácteres, al menos 1 letra mayúscula, 1 letra minúscula y 1 número).")
+            "Contraseña no válida\n(Mínimo 8 caracteres, 1 letra mayúscula,\n1 carácter especial, 1 número).")
       };
 }

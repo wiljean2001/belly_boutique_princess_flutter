@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../generated/l10n.dart';
+import '../../../utils/show_alert.dart';
 import '../../../widgets/custom_button_gradiant.dart';
 import '../../../widgets/custom_image_container.dart';
 import '/blocs/blocs.dart';
@@ -23,28 +24,30 @@ class PicturesScreen extends StatelessWidget {
           );
         }
         if (state is OnboardingLoaded) {
-          var images = state.user.imageUrls;
-          var imageCount = images.length;
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Seleccionar foto de perfil',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const SizedBox(height: 20),
-                    SizedBox(
+          // var images = state.user.image;
+          // var imageCount = images.length;
+          return SingleChildScrollView(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Seleccionar foto de perfil',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      const SizedBox(height: 20),
+                      SizedBox(
                         height: 350,
                         width: MediaQuery.of(context).size.width,
-                        child: (imageCount > 0)
-                            ? CustomImageContainer(imageUrl: images[0])
-                            : const CustomImageContainer()
+                        child: (state.user.image.isNotEmpty)
+                            ? CustomImageContainer(imageUrl: state.user.image)
+                            : const CustomImageContainer(),
                         // child: GridView.builder(
                         //   gridDelegate:
                         //       const SliverGridDelegateWithFixedCrossAxisCount(
@@ -58,29 +61,35 @@ class PicturesScreen extends StatelessWidget {
                         //         : const CustomImageContainer();
                         //   },
                         // ),
-                        ),
-                  ],
-                ),
-                //
-                CustomButtonGradiant(
-                  height: 45,
-                  width: 150,
-                  icon: const Icon(
-                    Icons.check,
-                    color: Colors.white,
+                      ),
+                    ],
                   ),
-                  text: Text(
-                    S.of(context).bttn_register,
-                    style: const TextStyle(
+                  //
+                  CustomButtonGradiant(
+                    height: 45,
+                    width: 150,
+                    icon: const Icon(
+                      Icons.check,
                       color: Colors.white,
                     ),
+                    text: Text(
+                      S.of(context).bttn_register,
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () async {
+                      if (state.user.image.isEmpty) {
+                        ShowAlert.showErrorSnackBar(context,
+                            message: 'Imagen no seleccionada.');
+                        return;
+                      }
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/', (route) => false);
+                    },
                   ),
-                  onPressed: () async {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, '/', (route) => false);
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
           );
         } else {

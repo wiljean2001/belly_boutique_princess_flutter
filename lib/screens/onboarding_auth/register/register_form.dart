@@ -108,9 +108,9 @@ class _RegisterFormState extends State<RegisterForm> {
                       id: _contextRegister.state.user!.uid,
                       name: '',
                       dateOfBirth: Timestamp.fromDate(DateTime.now()),
-                      gender: '',
+                      // gender: '',
                       role: 'user',
-                      imageUrls: const [],
+                      image: '',
                       interests: const [],
                       location: '',
                     );

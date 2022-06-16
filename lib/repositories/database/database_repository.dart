@@ -53,8 +53,9 @@ class DatabaseRepository extends BaseDatabaseRepository {
     String downloadUrl =
         await StorageRepository().getDownloadURL(user, imageName);
 
-    return _firebaseFirestore.collection('users').doc(user.id).update({
-      'imageUrls': FieldValue.arrayUnion([downloadUrl])
-    });
+    return _firebaseFirestore
+        .collection('users')
+        .doc(user.id)
+        .update({'image': downloadUrl});
   }
 }

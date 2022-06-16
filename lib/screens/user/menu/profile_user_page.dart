@@ -88,11 +88,13 @@ class getProfileLoaded extends StatelessWidget {
             textTheme: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontSize: 20,
                 ),
-            avatar: Image.network(
-              usuario.imageUrls[0],
-              fit: BoxFit.fitWidth,
-              alignment: Alignment.center,
-            ),
+            avatar: usuario.image.isNotEmpty
+                ? Image.network(
+                    usuario.image,
+                    fit: BoxFit.fitWidth,
+                    alignment: Alignment.center,
+                  )
+                : Image.asset('assets/images/profile_pic.png'),
             title: '@${usuario.name}',
             extent: 280,
           ),
@@ -127,20 +129,6 @@ class getProfileLoaded extends StatelessWidget {
                               ),
                               Text(
                                 edad.toString(),
-                                style: TextStyle(
-                                    color: Theme.of(context).primaryColorLight),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: <Widget>[
-                              Text(
-                                "Sexo",
-                                style: TextStyle(
-                                    color: Theme.of(context).primaryColorLight),
-                              ),
-                              Text(
-                                usuario.gender,
                                 style: TextStyle(
                                     color: Theme.of(context).primaryColorLight),
                               ),

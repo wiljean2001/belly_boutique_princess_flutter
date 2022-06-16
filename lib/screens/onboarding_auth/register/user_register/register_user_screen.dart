@@ -64,7 +64,7 @@ class RegisterUserScreen extends StatelessWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    margin: const EdgeInsets.only(top: 220),
+                    margin: const EdgeInsets.only(top: 250),
                     height: 280,
                     child: RegisterUserForm(tabController: tabController),
                   ),

@@ -275,7 +275,6 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
             onSaved: (value) => setState(() {
               title = value;
             }),
-            maxLines: 1,
           ),
           const SizedBox(height: kPaddingS),
           TextFormField(
@@ -289,7 +288,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
               validator: (value) => Validators.isValidateOnlyTextMinMax(
                     text: value!,
                     minCaracter: 3,
-                    maxCarater: 50,
+                    maxCarater: 100,
                     messageError: 'Descripción no valido.',
                   ),
               onSaved: (value) => setState(() {
@@ -305,7 +304,6 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
               suffixText: 'Soles',
               prefixText: 'S/',
             ),
-            maxLines: 1,
             validator: (value) => Validators.isValidateOnlyTextMinMax(
               text: value!,
               minCaracter: 1,
