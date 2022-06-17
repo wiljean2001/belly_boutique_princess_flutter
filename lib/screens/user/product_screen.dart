@@ -52,7 +52,9 @@ class ProductScreenState extends State<ProductScreen> {
         slivers: <Widget>[
           TransitionAppBar(
             avatar: Image.network(
-              product.imageUrls[0],
+              product.imageUrls.isNotEmpty
+                  ? product.imageUrls[0]
+                  : 'https://api.lorem.space/image/shoes?w=150&h=150',
               fit: BoxFit.fitWidth,
               alignment: Alignment.center,
             ),
@@ -127,7 +129,7 @@ class CustomExtraProducts extends StatelessWidget {
                 imgPath:
                     'https://api.lorem.space/image/shoes?w=${150 + index}&h=${150 + index}',
                 added: false,
-                isFavorite: false,
+                // isFavorite: false,
                 context: context,
                 isShowAdd: false, // mostrar opciones
                 isShowFavorite: false, // mostrar opcion fav
@@ -233,11 +235,6 @@ class CustomInfoProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> itemsImages = [
-      product.imageUrls[0],
-      product.imageUrls[0],
-      product.imageUrls[0],
-    ];
     return Container(
       height: 280,
       padding: const EdgeInsets.all(10),
@@ -251,7 +248,7 @@ class CustomInfoProduct extends StatelessWidget {
           Text('S/ ${product.price}', style: TextStyle(fontSize: 18)),
           Text('${product.sizes.map((e) => e)}',
               style: const TextStyle(fontSize: 18)),
-          CustomCarouselSliders2(itImages: itemsImages)
+          CustomCarouselSliders2(itImages: product.imageUrls)
         ],
       ),
     );

@@ -9,7 +9,7 @@ class Responsive extends StatelessWidget {
     Key? key,
     required this.mobile,
     this.tablet,
-    required this.desktop,
+    required this.desktop,  
   }) : super(key: key);
 
 // This size work fine on my design, maybe you need some customization depends on your design

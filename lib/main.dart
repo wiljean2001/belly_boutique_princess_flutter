@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'config/responsive.dart';
 import 'generated/l10n.dart';
 import 'repositories/repositories.dart';
 import 'package:provider/provider.dart';
@@ -22,18 +23,29 @@ import 'package:bely_boutique_princess/screens/screens.dart';
 /// Metodo main de la aplicacion flutter
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // FirebaseOptions firebaseConfig = FirebaseOptions(
+  //   apiKey: "AIzaSyBkzutMzpfzvVZaOnmCfenchdn9LwI-BMg",
+  //   authDomain: "belyapp-87679.firebaseapp.com",
+  //   projectId: "belyapp-87679",
+  //   storageBucket: "belyapp-87679.appspot.com",
+  //   messagingSenderId: "394573783744",
+  //   appId: "1:394573783744:web:fad8afd4afe7d92dec4325",
+  //   measurementId: "G-ZHGRNBD7H7",
+  // );
+  await Firebase.initializeApp(); //options: firebaseConfig
   // simple bloc observer
   BlocOverrides.runZoned(
     () async => {
       runApp(
         ChangeNotifierProvider(
           create: (_) => ThemeChanger(themeDefault()),
-          child:
-              await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
-            DeviceOrientation.portraitUp,
-            DeviceOrientation.portraitDown
-          ]).then(
+          // child: const MyApp(),
+          child: await SystemChrome.setPreferredOrientations(
+            <DeviceOrientation>[
+              DeviceOrientation.portraitUp,
+              DeviceOrientation.portraitDown,
+            ],
+          ).then(
             (_) => const MyApp(),
           ),
         ),

@@ -86,7 +86,7 @@ class ShoppingCartView extends StatelessWidget {
                               imgPath:
                                   'https://api.lorem.space/image/shoes?w=${150 + index}&h=${150 + index}',
                               added: false,
-                              isFavorite: false,
+                              // isFavorite: false,
                               context: context,
                               isShowAdd: false, // mostrar opciones
                               isShowFavorite: false, // mostrar opcion fav

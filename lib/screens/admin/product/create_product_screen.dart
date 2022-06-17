@@ -51,9 +51,9 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
 
   List<String> listItems = ['XXS', 'XS', 'S', 'M', 'L', 'XL'];
 
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
@@ -209,8 +209,10 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                             );
 
                             print(product);
-                            context.read<ProductBloc>().add(AddProduct(
-                                product: product, images: itemsImages!));
+                            context.read<ProductBloc>().add(
+                                  AddProduct(
+                                      product: product, images: itemsImages!),
+                                );
                             // try {
                             // context.read<ProductBloc>().add(
                             //       UpdateProductImages(image: itemsImages!),
@@ -307,7 +309,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
             validator: (value) => Validators.isValidateOnlyTextMinMax(
               text: value!,
               minCaracter: 1,
-              maxCarater: 5,
+              maxCarater: 6,
               messageError: 'Costo no valido.',
             ),
             onSaved: (value) => setState(() {

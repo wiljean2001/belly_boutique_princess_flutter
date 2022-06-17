@@ -52,9 +52,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ) async {
     final state = this.state;
     if (state is ProductsLoaded) {
-      String productId = await _productRepository.createProduct(event.product);
-      add(LoadProducts());
-      _storageRepository.uploadImageProduct(event.images, productId);
+      await _productRepository.createProduct(event.product).then(
+        (productId) {
+          print("Porduct ID:");
+          print(productId);
+          _storageRepository.uploadImageProduct(event.images, productId);
+          return add(LoadProducts());
+        },
+      );
+
       // await context
       //     .read<StorageRepository>()
       //     .uploadImageProduct(itemsImages!);

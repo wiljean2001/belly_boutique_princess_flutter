@@ -40,12 +40,17 @@ class StorageRepository extends BaseStorageRepository {
   Future<void> uploadImageProduct(List<XFile> images, String productid) async {
     try {
       for (var image in images) {
+        print("Imagenes - uploadImageProduct:");
+        print(image.name);
+        print(image.path);
         await storage
-            .ref('product/${image.name}')
+            .ref('product/$productid/${image.name}')
             .putFile(File(image.path))
             .then(
-              (p0) => ProductRepository()
-                  .updateProductPictures(image.name, productid),
+              (p0) => ProductRepository().updateProductPictures(
+                image.name,
+                productid,
+              ),
             );
       }
     } catch (err) {
@@ -54,10 +59,12 @@ class StorageRepository extends BaseStorageRepository {
   }
 
   @override
-  Future<String> getDownloadURLProduct(String imageName) async {
+  Future<String> getDownloadURLProduct(
+      String imageName, String productid) async {
     String downloadURL =
-        await storage.ref('product/$imageName').getDownloadURL();
-
+        await storage.ref('product/$productid/$imageName').getDownloadURL();
+    print('URL Image - getDownloadURLProduct:');
+    print(downloadURL);
     return downloadURL;
   }
 }

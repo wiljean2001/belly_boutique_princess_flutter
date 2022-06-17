@@ -7,7 +7,7 @@ class CustomCardProduct extends StatelessWidget {
     required this.price,
     required this.imgPath,
     required this.added,
-    required this.isFavorite,
+    // required this.isFavorite,
     required this.context,
     this.isShowAdd = true,
     this.isShowFavorite = true,
@@ -18,7 +18,7 @@ class CustomCardProduct extends StatelessWidget {
   final String price;
   final String imgPath;
   final bool added;
-  final bool isFavorite;
+  // final bool isFavorite;
   final bool isShowAdd;
   final bool isShowFavorite;
   final BuildContext context;
@@ -34,6 +34,8 @@ class CustomCardProduct extends StatelessWidget {
         splashColor: Theme.of(context).primaryColor,
         highlightColor: Theme.of(context).primaryColor,
         child: Container(
+          height: 200,
+          width: 150,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
               boxShadow: [
@@ -45,31 +47,33 @@ class CustomCardProduct extends StatelessWidget {
               color: Colors.white),
           child: Column(
             children: [
-              isShowFavorite
-                  ? Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          isFavorite
-                              ? const Icon(Icons.favorite,
-                                  color: Color(0xFFEF7532))
-                              : const Icon(Icons.favorite_border,
-                                  color: Color(0xFFEF7532))
-                        ],
-                      ),
-                    )
-                  : const SizedBox(height: 5),
+              // isShowFavorite
+              //     ? Padding(
+              //         padding: const EdgeInsets.all(5.0),
+              //         child: Row(
+              //           mainAxisAlignment: MainAxisAlignment.end,
+              //           children: [
+              //             isFavorite
+              //                 ? const Icon(Icons.favorite,
+              //                     color: Color(0xFFEF7532))
+              //                 : const Icon(Icons.favorite_border,
+              //                     color: Color(0xFFEF7532))
+              //           ],
+              //         ),
+              //       )
+              //     : const SizedBox(height: 5),
               // Hero(
               //     tag: imgPath.substring(0, 20),
               //     child: Container(
               Container(
-                  height: 150.0,
-                  width: 150.0,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(imgPath),
-                          fit: BoxFit.contain))), // ),
+                height: 150.0,
+                // width: 150.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(imgPath), fit: BoxFit.contain),
+                ),
+              ), // ),
+              // Image.network(imgPath, fit: BoxFit.contain),
               const SizedBox(height: 7.0),
               Text(price,
                   style: const TextStyle(
