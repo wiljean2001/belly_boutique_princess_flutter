@@ -10,7 +10,7 @@ class CustomCarouselSliders2 extends StatefulWidget {
   }) : super(key: key);
 
   final Function? onTap;
-  final List<String> itImages;
+  final List<dynamic> itImages;
   // final String? imageUrl;
 
   @override
