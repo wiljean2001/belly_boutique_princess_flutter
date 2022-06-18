@@ -1,7 +1,9 @@
 // screen Start
 
+import 'package:bely_boutique_princess/config/responsive.dart';
 import 'package:flutter/material.dart';
 
+import '../../config/constrants.dart';
 import '../../generated/assets.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/curved_widget.dart';
@@ -14,6 +16,7 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print(MediaQuery.of(context).size.width);
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -33,7 +36,8 @@ class StartScreen extends StatelessWidget {
               mode: 2,
               //curved widget with logo
               chield: Container(
-                padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 40),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 60, horizontal: 40),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
@@ -44,8 +48,10 @@ class StartScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                constraints: BoxConstraints(
+                  maxHeight: Responsive.isMobile(context) ? 400 : 500,
+                ),
                 width: double.infinity,
-                height: 400,
                 child: const Image(
                   image: AssetImage(Assets.imagesLogoCoronaTexto),
                   // alignment: Alignment.topCenter,
@@ -53,9 +59,10 @@ class StartScreen extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 400),
+              margin: EdgeInsets.only(
+                  top: Responsive.isMobile(context) ? 400 : 500),
               alignment: Alignment.center,
-              height: 250,
+              height: Responsive.isMobile(context) ? 250 : 300,
               // constraints: BoxConstraints(ma),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -65,17 +72,22 @@ class StartScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline3,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
+                    padding: const EdgeInsets.symmetric(horizontal: kPaddingL),
                     child: Text(
                       S.of(context).description_app,
-                      style: Theme.of(context).textTheme.bodyText2,
+                      style: Responsive.isMobile(context)
+                          ? Theme.of(context).textTheme.bodyText2
+                          : Theme.of(context).textTheme.headline5,
                       textAlign: TextAlign.center,
                     ),
                   ),
                   CustomButtonGradiant(
                     text: Text(
                       S.of(context).bttn_start,
-                      style: const TextStyle(color: Colors.white),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          ?.copyWith(color: Colors.white),
                     ),
                     icon: const Icon(
                       Icons.start,
@@ -83,9 +95,10 @@ class StartScreen extends StatelessWidget {
                     ),
                     height: 55,
                     width: 200,
-                    onPressed: () =>
-                        tabController.animateTo(tabController.index + 1),
-                  )
+                    onPressed: () => tabController.animateTo(
+                      tabController.index + 1,
+                    ),
+                  ),
                 ],
               ),
             ),

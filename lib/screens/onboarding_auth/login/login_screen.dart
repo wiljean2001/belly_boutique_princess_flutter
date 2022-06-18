@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../config/responsive.dart';
 import '../../../generated/assets.dart';
 import '../../../generated/l10n.dart';
 import '/widgets/curved_widget.dart';
@@ -37,24 +38,27 @@ class _LoginScreenState extends State<LoginScreen> {
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Stack(
+          alignment: AlignmentDirectional.topCenter,
           children: <Widget>[
             CurvedWidget(
               mode: 2,
               //curved widget with logo
               chield: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 45, horizontal: 40),
+                padding: const EdgeInsets.symmetric(vertical: 45),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.white,
-                        Colors.white70.withOpacity(0.5),
-                      ]),
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.white,
+                      Colors.white70.withOpacity(0.5),
+                    ],
+                  ),
                 ),
                 width: double.infinity,
-                height: 355,
+                constraints: BoxConstraints(
+                  maxHeight: Responsive.isMobile(context) ? 355 : 400,
+                ),
                 child: const Image(
                   image: AssetImage(Assets.imagesLogoCoronaTexto),
                   alignment: Alignment.topCenter,
@@ -65,9 +69,16 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              margin: const EdgeInsets.only(top: 355),
-              height: 350,
+              // padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              constraints: BoxConstraints(
+                maxWidth: Responsive.isMobile(context)
+                    ? MediaQuery.of(context).size.width * 0.85
+                    : 700,
+              ),
+              margin: EdgeInsets.only(
+                top: Responsive.isMobile(context) ? 355 : 400,
+              ),
+              height: Responsive.isMobile(context) ? 350 : 400,
               // constraints: BoxConstraints(ma),
               child: LoginForm(
                 tabController: tabController,

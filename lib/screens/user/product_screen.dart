@@ -243,10 +243,9 @@ class CustomInfoProduct extends StatelessWidget {
         children: [
           const Divider(height: 10),
           // Text(product.title, style: const TextStyle(fontSize: 22)),
-          const Text("Bestido para damita con encajes...",
-              style: TextStyle(fontSize: 18)),
+          Text(product.descript, style: const TextStyle(fontSize: 18)),
           Text('S/ ${product.price}', style: TextStyle(fontSize: 18)),
-          Text('${product.sizes.map((e) => e)}',
+          Text('Tallas: ${product.sizes.map((e) => e)}',
               style: const TextStyle(fontSize: 18)),
           CustomCarouselSliders2(itImages: product.imageUrls)
         ],

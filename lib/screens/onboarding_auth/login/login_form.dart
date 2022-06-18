@@ -1,7 +1,9 @@
+import 'package:bely_boutique_princess/utils/show_alert.dart';
 import 'package:bely_boutique_princess/utils/validators.dart';
 
 import '../../../blocs/auth/auth_bloc.dart';
 import '../../../blocs/blocs.dart';
+import '../../../config/responsive.dart';
 import '../../../generated/l10n.dart';
 import '/cubit/cubits.dart';
 import 'package:flutter/material.dart';
@@ -40,17 +42,24 @@ class _LoginFormState extends State<LoginForm> {
                 // ),
                 Text(
                   'Iniciar sesión con una cuenta existente de Bely Boutique Princess',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6
-                      ?.copyWith(color: Colors.black.withOpacity(.5)),
+                  style: Responsive.isMobile(context)
+                      ? Theme.of(context)
+                          .textTheme
+                          .headline6
+                          ?.copyWith(color: Colors.black.withOpacity(.5))
+                      : Theme.of(context)
+                          .textTheme
+                          .headline5
+                          ?.copyWith(color: Colors.black.withOpacity(.5)),
                   textAlign: TextAlign.center,
                 ),
                 TextFormField(
                   textInputAction: TextInputAction.next,
+                  style: Responsive.isMobile(context)
+                      ? null
+                      : Theme.of(context).textTheme.headline6,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                    // border: OutlineInputBorder(),
                     labelText: S.of(context).email,
                     icon: const Icon(Icons.email),
                   ),
@@ -64,20 +73,21 @@ class _LoginFormState extends State<LoginForm> {
                 TextFormField(
                   textInputAction: TextInputAction.next,
                   obscureText: noShowPass,
+                  style: Responsive.isMobile(context)
+                      ? null
+                      : Theme.of(context).textTheme.headline6,
                   decoration: InputDecoration(
-                    // border: OutlineInputBorder(),
                     labelText: S.of(context).password,
                     icon: const Icon(Icons.lock),
                     suffixIcon: GestureDetector(
                       onTap: () {
-                        print('a');
                         setState(() {
                           noShowPass == true
                               ? noShowPass = false
                               : noShowPass = true;
                         });
                       },
-                      child: Icon(Icons.remove_red_eye_outlined),
+                      child: const Icon(Icons.remove_red_eye_outlined),
                     ),
                   ),
                   toolbarOptions: const ToolbarOptions(),
@@ -91,39 +101,66 @@ class _LoginFormState extends State<LoginForm> {
                 ),
                 CustomButtonGradiant(
                   // SignIn
-                  height: 45,
+                  height: Responsive.isMobile(context) ? 45 : 55,
                   icon: const Icon(Icons.check, color: Colors.white),
                   text: Text(
                     S.of(context).bttn_login,
-                    style: const TextStyle(color: Colors.white),
+                    style: Responsive.isMobile(context)
+                        ? Theme.of(context)
+                            .textTheme
+                            .headline6
+                            ?.copyWith(color: Colors.white)
+                        : Theme.of(context)
+                            .textTheme
+                            .headline5
+                            ?.copyWith(color: Colors.white),
                   ),
-                  width: 150,
+                  width: Responsive.isMobile(context) ? 150 : 200,
                   onPressed: () async {
                     if (!_formKey.currentState!.validate()) {
                       return;
                     }
-                    await _contextSignUp.signInWithCredentials().then(
-                      (value) {
-                        context.read<AuthBloc>().add(
-                            AuthUserChanged(user: _contextSignUp.state.user));
-                        if (_contextSignUp.state.status ==
-                            SignupStatus.success) {
-                          // go to home screen
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, '/', (route) => false);
-                        }
-                      },
-                    ).catchError(
-                      (e) async {
-                        await showDialog(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: Text(S.of(context).error_title),
-                            content: Text(S.of(context).error_desc),
-                          ),
-                        );
-                      },
+                    await _contextSignUp.signInWithCredentials();
+                    if (_contextSignUp.state.status == SignupStatus.success) {
+                      // go to home screen
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        '/',
+                        (route) => false,
+                      );
+                    }
+                    ShowAlert.showErrorSnackBar(
+                      context,
+                      message: S.of(context).validator_user_existent,
                     );
+                    // await showDialog(
+                    //   context: context,
+                    //   builder: (BuildContext context) => AlertDialog(
+                    //     title: Text(S.of(context).error_title),
+                    //     content: Text(S.of(context).error_desc),
+                    //   ),
+                    // );
+                    // await _contextSignUp.signInWithCredentials().then(
+                    //   (value) {
+                    //     context.read<AuthBloc>().add(
+                    //           AuthUserChanged(user: _contextSignUp.state.user),
+                    //         );
+                    //     if (_contextSignUp.state.status ==
+                    //         SignupStatus.success) {
+                    //       // go to home screen
+                    //       Navigator.pushNamedAndRemoveUntil(
+                    //           context, '/', (route) => false);
+                    //     }
+                    //   },
+                    // ).onError(
+                    //   (error, stackTrace) async => await showDialog(
+                    //     context: context,
+                    //     builder: (BuildContext context) => AlertDialog(
+                    //       title: Text(S.of(context).error_title),
+                    //       content: Text(S.of(context).error_desc),
+                    //     ),
+                    //   ),
+                    // );
                   },
                 ),
                 // const SizedBox(height: 5),
@@ -144,8 +181,14 @@ class _LoginFormState extends State<LoginForm> {
                     TextButton(
                       onPressed: () => widget.tabController
                           .animateTo(widget.tabController.index + 1),
-                      child: Text(S.of(context).bttn_register),
-                    ),
+                      child: Text(
+                        S.of(context).bttn_register,
+                        style: Responsive.isMobile(context)
+                            ? null
+                            : Theme.of(context).textTheme.headline6?.copyWith(
+                                color: Theme.of(context).primaryColor),
+                      ),
+                    )
                     //icon:
                     // const Icon(Icons.arrow_forward, color: Colors.white),
                     //  tabController.animateTo(tabController.index + 1),

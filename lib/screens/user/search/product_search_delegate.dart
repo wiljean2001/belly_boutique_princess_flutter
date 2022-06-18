@@ -59,7 +59,7 @@ class ProductSearchDelegate extends SearchDelegate {
                             : 'https://api.lorem.space/image/shoes?w=150&h=150',
                         // isFavorite: false,
                         name: product.title,
-                        price: product.sizes[0],
+                        price: 'S/ ${product.price.toString()}',
                         onTap: () => Navigator.of(context).pushNamed(
                             ProductScreen.routeName,
                             arguments: product),
@@ -75,48 +75,53 @@ class ProductSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    if (history.isNotEmpty) {
-      return Container(
-        constraints: const BoxConstraints(maxWidth: 400, maxHeight: 400),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 100,
-              child: BlocBuilder<CategoryBloc, CategoryState>(
-                  builder: (context, state) {
-                if (state is CategoryLoaded) {
-                  return Center(
-                    child: Wrap(
-                        children: state.categories.isNotEmpty
-                            ? state.categories
-                                .map(
-                                  (category) => InkWell(
-                                    onTap: () {},
-                                    child: Chip(
-                                      avatar: CircleAvatar(
-                                        child: category.imageUrl.isNotEmpty
-                                            ? Image.network(category.imageUrl)
-                                            : const SizedBox(),
-                                      ),
-                                      label: Text(category.name),
-                                    ),
-                                  ),
-                                )
-                                .toList()
-                            : []),
-                  );
-                }
-                return const Center(child: CircularProgressIndicator());
-              }),
-            ),
-            Column(children: history.map((e) => Text(e.title)).toList())
-          ],
-        ),
-      );
-    }
     return Container(
-      constraints: const BoxConstraints(maxWidth: 400, maxHeight: 200),
-      child: const Text('filstrados'),
+      constraints: const BoxConstraints(maxWidth: 400, maxHeight: 400),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 100,
+            child: BlocBuilder<CategoryBloc, CategoryState>(
+                builder: (context, state) {
+              if (state is CategoryLoaded) {
+                return Center(
+                  child: Wrap(
+                      children: state.categories.isNotEmpty
+                          ? state.categories
+                              .map(
+                                (category) => InkWell(
+                                  onTap: () {},
+                                  child: Chip(
+                                    avatar: CircleAvatar(
+                                      child: category.imageUrl.isNotEmpty
+                                          ? Image.network(category.imageUrl)
+                                          : const SizedBox(),
+                                    ),
+                                    label: Text(category.name),
+                                  ),
+                                ),
+                              )
+                              .toList()
+                          : []),
+                );
+              }
+              return const Center(child: CircularProgressIndicator());
+            }),
+          ),
+          history.isNotEmpty
+              ? Column(children: history.map((e) => Text(e.title)).toList())
+              : Container(
+                  constraints:
+                      const BoxConstraints(maxWidth: 400, maxHeight: 200),
+                  child: const Text('Recomendaciones'),
+                )
+        ],
+      ),
     );
+
+    // return Container(
+    //   constraints: const BoxConstraints(maxWidth: 400, maxHeight: 200),
+    //   child: const Text('filstrados'),
+    // );
   }
 }

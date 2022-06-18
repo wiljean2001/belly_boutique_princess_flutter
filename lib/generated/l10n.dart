@@ -220,6 +220,16 @@ class S {
     );
   }
 
+  /// `Correo electrónico o contraseña incorrecta.`
+  String get validator_user_existent {
+    return Intl.message(
+      'Correo electrónico o contraseña incorrecta.',
+      name: 'validator_user_existent',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `INICIAR SESIÓN`
   String get title_sign_in {
     return Intl.message(

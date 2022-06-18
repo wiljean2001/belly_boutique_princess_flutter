@@ -60,10 +60,11 @@ class SignupCubit extends Cubit<SignupState> {
         email: state.email,
         password: state.password,
       );
-      emit(state.copyWith(
-          status: SignupStatus.success,
-          user: user)); // emite nuevo estado user success
+      if (user != null) {
+        emit(
+          state.copyWith(status: SignupStatus.success, user: user),
+        );
+      } // emite nuevo estado user success
     } catch (_) {}
   }
-
 }
