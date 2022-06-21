@@ -89,7 +89,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 // const SizedBox(height: 10),
                 CustomButtonGradiant(
                   height: Responsive.isMobile(context) ? 45 : 55,
-                  width: Responsive.isMobile(context) ? 150 : 220,
+                  width: Responsive.isMobile(context) ? 170 : 220,
                   icon: const Icon(
                     Icons.check,
                     color: Colors.white,

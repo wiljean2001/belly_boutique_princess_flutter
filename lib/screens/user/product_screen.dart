@@ -215,7 +215,7 @@ class CustomInfoProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Responsive.isMobile(context) ? 300 : 400,
+      height: Responsive.isMobile(context) ? 340 : 400,
       padding: const EdgeInsets.all(10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -231,7 +231,7 @@ class CustomInfoProduct extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal:
-                    Responsive.isMobile(context) ? kPaddingM : kPaddingL),
+                    Responsive.isMobile(context) ? kPaddingS : kPaddingL),
             child: CustomCarouselSliders2(itImages: product.imageUrls),
           ),
           Padding(

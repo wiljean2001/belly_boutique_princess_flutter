@@ -137,7 +137,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                   //
                   CustomButtonGradiant(
                     height: Responsive.isMobile(context) ? 45 : 55,
-                    width: Responsive.isMobile(context) ? 150 : 220,
+                    width: Responsive.isMobile(context) ? 180 : 220,
                     icon: const Icon(
                       Icons.check,
                       color: Colors.white,
