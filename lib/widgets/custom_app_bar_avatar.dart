@@ -97,7 +97,9 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
           duration: const Duration(milliseconds: 100),
           height: 80,
           constraints: BoxConstraints(maxHeight: minExtent),
-          color: Colors.white,
+          color: progress < 1
+              ? Theme.of(context).scaffoldBackgroundColor
+              : Colors.white, //  Colors.white
           // color: Theme.of(context).primaryColor,
         ),
         Padding(

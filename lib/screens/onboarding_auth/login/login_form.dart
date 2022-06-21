@@ -41,7 +41,7 @@ class _LoginFormState extends State<LoginForm> {
                 //   style: Theme.of(context).textTheme.headlineLarge,
                 // ),
                 Text(
-                  'Iniciar sesión con una cuenta existente de Bely Boutique Princess',
+                  S.of(context).description_login,
                   style: Responsive.isMobile(context)
                       ? Theme.of(context)
                           .textTheme
@@ -102,6 +102,7 @@ class _LoginFormState extends State<LoginForm> {
                 CustomButtonGradiant(
                   // SignIn
                   height: Responsive.isMobile(context) ? 45 : 55,
+                  width: Responsive.isMobile(context) ? 150 : 200,
                   icon: const Icon(Icons.check, color: Colors.white),
                   text: Text(
                     S.of(context).bttn_login,
@@ -115,7 +116,6 @@ class _LoginFormState extends State<LoginForm> {
                             .headline5
                             ?.copyWith(color: Colors.white),
                   ),
-                  width: Responsive.isMobile(context) ? 150 : 200,
                   onPressed: () async {
                     if (!_formKey.currentState!.validate()) {
                       return;
@@ -133,40 +133,24 @@ class _LoginFormState extends State<LoginForm> {
                       context,
                       message: S.of(context).validator_user_existent,
                     );
-                    // await showDialog(
-                    //   context: context,
-                    //   builder: (BuildContext context) => AlertDialog(
-                    //     title: Text(S.of(context).error_title),
-                    //     content: Text(S.of(context).error_desc),
-                    //   ),
-                    // );
-                    // await _contextSignUp.signInWithCredentials().then(
-                    //   (value) {
-                    //     context.read<AuthBloc>().add(
-                    //           AuthUserChanged(user: _contextSignUp.state.user),
-                    //         );
-                    //     if (_contextSignUp.state.status ==
-                    //         SignupStatus.success) {
-                    //       // go to home screen
-                    //       Navigator.pushNamedAndRemoveUntil(
-                    //           context, '/', (route) => false);
-                    //     }
-                    //   },
-                    // ).onError(
-                    //   (error, stackTrace) async => await showDialog(
-                    //     context: context,
-                    //     builder: (BuildContext context) => AlertDialog(
-                    //       title: Text(S.of(context).error_title),
-                    //       content: Text(S.of(context).error_desc),
-                    //     ),
-                    //   ),
-                    // );
                   },
                 ),
                 // const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    TextButton(
+                      onPressed: () => widget.tabController
+                          .animateTo(widget.tabController.index + 1),
+                      child: Text(
+                        S.of(context).bttn_register,
+                        style: Responsive.isMobile(context)
+                            ? null
+                            : Theme.of(context).textTheme.headline6?.copyWith(
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                      ),
+                    )
                     // CustomButtonGradiant(
                     //   height: 45,
                     //   icon: const Icon(Icons.backspace, color: Colors.white),
@@ -178,17 +162,6 @@ class _LoginFormState extends State<LoginForm> {
                     //       tabController.animateTo(tabController.index - 1),
                     //   width: 150,
                     // ),
-                    TextButton(
-                      onPressed: () => widget.tabController
-                          .animateTo(widget.tabController.index + 1),
-                      child: Text(
-                        S.of(context).bttn_register,
-                        style: Responsive.isMobile(context)
-                            ? null
-                            : Theme.of(context).textTheme.headline6?.copyWith(
-                                color: Theme.of(context).primaryColor),
-                      ),
-                    )
                     //icon:
                     // const Icon(Icons.arrow_forward, color: Colors.white),
                     //  tabController.animateTo(tabController.index + 1),
@@ -202,3 +175,31 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 }
+// await showDialog(
+//   context: context,
+//   builder: (BuildContext context) => AlertDialog(
+//     title: Text(S.of(context).error_title),
+//     content: Text(S.of(context).error_desc),
+//   ),
+// );
+// await _contextSignUp.signInWithCredentials().then(
+//   (value) {
+//     context.read<AuthBloc>().add(
+//           AuthUserChanged(user: _contextSignUp.state.user),
+//         );
+//     if (_contextSignUp.state.status ==
+//         SignupStatus.success) {
+//       // go to home screen
+//       Navigator.pushNamedAndRemoveUntil(
+//           context, '/', (route) => false);
+//     }
+//   },
+// ).onError(
+//   (error, stackTrace) async => await showDialog(
+//     context: context,
+//     builder: (BuildContext context) => AlertDialog(
+//       title: Text(S.of(context).error_title),
+//       content: Text(S.of(context).error_desc),
+//     ),
+//   ),
+// );

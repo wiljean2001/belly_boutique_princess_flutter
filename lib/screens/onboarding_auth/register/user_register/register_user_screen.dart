@@ -2,6 +2,7 @@ import 'package:bely_boutique_princess/blocs/blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../config/responsive.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../widgets/curved_widget.dart';
 import 'register_user_form.dart';
@@ -37,6 +38,7 @@ class RegisterUserScreen extends StatelessWidget {
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Stack(
+                alignment: AlignmentDirectional.topCenter,
                 children: <Widget>[
                   CurvedWidget(
                     mode: 0,
@@ -44,7 +46,10 @@ class RegisterUserScreen extends StatelessWidget {
                     curvedHeight: 100,
                     //curved widget with logo
                     chield: Container(
-                      padding: const EdgeInsets.only(left: 50, top: 100),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 50,
+                        vertical: Responsive.isMobile(context) ? 100 : 150,
+                      ),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                             begin: Alignment.topCenter,
@@ -55,17 +60,25 @@ class RegisterUserScreen extends StatelessWidget {
                             ]),
                       ),
                       width: double.infinity,
-                      height: 300,
+                      constraints: BoxConstraints(
+                        maxHeight: Responsive.isMobile(context) ? 300 : 450,
+                      ),
                       child: Text(
                         S.of(context).title_user_screen,
-                        style: Theme.of(context).textTheme.headline2
+                        style: Theme.of(context).textTheme.headline2,
                       ),
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    margin: const EdgeInsets.only(top: 250),
-                    height: 280,
+                    constraints: BoxConstraints(
+                      maxWidth: Responsive.isMobile(context)
+                          ? MediaQuery.of(context).size.width * 0.85
+                          : 700,
+                    ),
+                    margin: EdgeInsets.only(
+                      top: Responsive.isMobile(context) ? 300 : 330,
+                    ),
+                    height: Responsive.isMobile(context) ? 300 : 350,
                     child: RegisterUserForm(tabController: tabController),
                   ),
                 ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../config/responsive.dart';
 import '../../../generated/l10n.dart';
 import '/widgets/curved_widget.dart';
 
@@ -27,11 +28,15 @@ class RegisterScreen extends StatelessWidget {
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Stack(
+          alignment: AlignmentDirectional.topCenter,
           children: <Widget>[
             CurvedWidget(
               //curved widget with logo
               chield: Container(
-                padding: const EdgeInsets.only(left: 50, top: 100),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 50,
+                  vertical: Responsive.isMobile(context) ? 100 : 150,
+                ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
@@ -42,15 +47,26 @@ class RegisterScreen extends StatelessWidget {
                       ]),
                 ),
                 width: double.infinity,
-                height: 300,
-                child: Text(S.of(context).title_register,
-                    style: Theme.of(context).textTheme.headline2),
+                constraints: BoxConstraints(
+                  maxHeight: Responsive.isMobile(context) ? 300 : 450,
+                ),
+                // height: Responsive.isMobile(context) ? 300 : 350,
+                child: Text(
+                  S.of(context).title_register_screen,
+                  style: Theme.of(context).textTheme.headline2,
+                ),
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              margin: const EdgeInsets.only(top: 300),
-              height: 300,
+              constraints: BoxConstraints(
+                maxWidth: Responsive.isMobile(context)
+                    ? MediaQuery.of(context).size.width * 0.85
+                    : 700,
+              ),
+              margin: EdgeInsets.only(
+                top: Responsive.isMobile(context) ? 300 : 330,
+              ),
+              height: Responsive.isMobile(context) ? 300 : 350,
               child: RegisterForm(tabController: tabController),
             ),
           ],

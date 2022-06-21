@@ -1,3 +1,4 @@
+import 'package:bely_boutique_princess/config/responsive.dart';
 import 'package:bely_boutique_princess/utils/open_all.dart';
 import 'package:bely_boutique_princess/widgets/custom_app_bar_avatar.dart';
 import 'package:flutter/material.dart';
@@ -57,33 +58,6 @@ class getProfileLoaded extends StatelessWidget {
       // appBar: CustomAppBar(title: S.of(context).AppTitle, hasActions: false),
       body: CustomScrollView(
         slivers: [
-          // SliverAppBar(
-          //   pinned: true,
-          //   snap: false,
-          //   // backgroundColor: Colors.transparent,
-          //   floating: false,
-          //   // brightness: ,
-          //   expandedHeight: 280,
-          //   flexibleSpace: FlexibleSpaceBar(
-          //     centerTitle: true,
-          //     title: Text(
-          //       '@${usuario.name}',
-          //       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-          //         fontSize: 16,
-          //         shadows: [
-          //           Shadow(
-          //               color: Theme.of(context).primaryColor, blurRadius: 10)
-          //         ],
-          //       ),
-          //     ),
-          //     // collapseMode: CollapseMode.none,
-          //     background: Image.network(
-          //       usuario.imageUrls[0],
-          //       fit: BoxFit.fitWidth,
-          //       alignment: Alignment.center,
-          //     ),
-          //   ),
-          // ),
           TransitionAppBar(
             textTheme: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontSize: 20,
@@ -91,17 +65,17 @@ class getProfileLoaded extends StatelessWidget {
             avatar: usuario.image.isNotEmpty
                 ? Image.network(
                     usuario.image,
-                    fit: BoxFit.fitWidth,
+                    fit: BoxFit.fitHeight,
                     alignment: Alignment.center,
                   )
                 : Image.asset('assets/images/profile_pic.png'),
             title: '@${usuario.name}',
-            extent: 280,
+            extent: Responsive.isMobile(context) ? 280 : 500,
           ),
-          SliverFillRemaining(
-            // hasScrollBody: true,
-            // fillOverscroll: true,
-            child: SingleChildScrollView(
+          SliverToBoxAdapter(
+            child: Container(
+              constraints:
+                  BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
               child: Column(
                 children: [
                   Container(
@@ -161,145 +135,150 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
+    List<ButtonProfile> listButtons = [
+      ButtonProfile(
+        title: 'Visitanos',
+        onPressed: () async => await showDialog(
+          context: context,
+          // barrierColor: Colors.transparent,
+          useRootNavigator: true,
+          builder: (BuildContext context) => const AlertDialog(
+            contentPadding: EdgeInsets.all(0),
+            alignment: Alignment.center,
+            content: PagesVisit(),
+            backgroundColor: Colors.transparent,
+          ),
+        ),
+      ),
+      ButtonProfile(
+        title: 'Configuraciones',
+        onPressed: () => Navigator.pushNamed(context, SettingScreen.routeName),
+      ),
+      ButtonProfile(
+        title: 'Ayuda',
+        onPressed: () {
+          Navigator.pushNamed(context, OpenContainerTransformDemo.routeName);
+          // Fluttertoast.showToast(
+          // msg: "Tap a ayuda",
+          // toastLength: Toast.LENGTH_SHORT,
+          // gravity: ToastGravity.BOTTOM,
+          // timeInSecForIosWeb: 1,
+          // backgroundColor: Colors.grey,
+          // textColor: Colors.white,
+          // fontSize: 16.0);
+        },
+      ),
+      ButtonProfile(
+        title: 'Cerrar Sesion',
+        onPressed: () {
+          RepositoryProvider.of<AuthRepository>(context).signOut();
+          context.read<AuthBloc>().add(const AuthUserChanged(user: null));
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            '/',
+            (route) => false,
+          );
+        },
+      ),
+    ];
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColorDark.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 50,
-              child: MaterialButton(
-                onPressed: () async => await showDialog(
-                  context: context,
-                  // barrierColor: Colors.transparent,
-                  useRootNavigator: true,
-                  builder: (BuildContext context) => const AlertDialog(
-                    contentPadding: EdgeInsets.all(0),
-                    alignment: Alignment.center,
-                    content: PagesVisit(),
-                    backgroundColor: Colors.transparent,
-                    // actions: <Widget>[
-                    //   TextButton(
-                    //     onPressed: () => Navigator.pop(context, 'Cancel'),
-                    //     child: const Text('Cancel'),
-                    //   ),
-                    //   TextButton(
-                    //     onPressed: () => Navigator.pop(context, 'OK'),
-                    //     child: const Text('OK'),
-                    //   ),
-                    // ],
-                  ),
-                ),
-                // Fluttertoast.showToast(
-                //     msg: "Tab a visitanos",
-                //     toastLength: Toast.LENGTH_SHORT,
-                //     gravity: ToastGravity.BOTTOM,
-                //     timeInSecForIosWeb: 1,
-                //     backgroundColor: Colors.grey,
-                //     textColor: Colors.white,
-                //     fontSize: 16.0);
-
-                child: const Text(
-                  'Visitanos',
-                  style: TextStyle(color: Colors.pink),
-                ),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 20),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColorDark.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 50,
-              child: MaterialButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, SettingScreen.routeName);
-                },
-                child: const Text(
-                  'Configuraciones',
-                  style: TextStyle(color: Colors.pink),
-                ),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 20),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColorDark.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 50,
-              child: MaterialButton(
-                onPressed: () {
-                  Navigator.pushNamed(
-                      context, OpenContainerTransformDemo.routeName);
-                  // Fluttertoast.showToast(
-                  // msg: "Tap a ayuda",
-                  // toastLength: Toast.LENGTH_SHORT,
-                  // gravity: ToastGravity.BOTTOM,
-                  // timeInSecForIosWeb: 1,
-                  // backgroundColor: Colors.grey,
-                  // textColor: Colors.white,
-                  // fontSize: 16.0);
-                },
-                child: const Text(
-                  'Ayuda',
-                  style: TextStyle(color: Colors.pink),
-                ),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 20),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColorDark.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 50,
-              child: MaterialButton(
-                onPressed: () {
-                  RepositoryProvider.of<AuthRepository>(context).signOut();
-                  context
-                      .read<AuthBloc>()
-                      .add(const AuthUserChanged(user: null));
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, '/', (route) => false);
-                },
-                child: const Text(
-                  'Cerrar Sesion',
-                  style: TextStyle(color: Colors.pink),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
+      children: listButtons
+          .map(
+            (e) => CustomButtonProfile(title: e.title, onPressed: e.onPressed),
+          )
+          .toList(),
     );
   }
 }
+
+class ButtonProfile {
+  final String title;
+  final Function onPressed;
+
+  ButtonProfile({required this.title, required this.onPressed});
+}
+
+class CustomButtonProfile extends StatelessWidget {
+  final String title;
+  final Function onPressed;
+  const CustomButtonProfile({
+    Key? key,
+    required this.title,
+    required this.onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: Responsive.isMobile(context) ? 25 : 40,
+          vertical: Responsive.isMobile(context) ? 10 : 15),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColorLight.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: Responsive.isMobile(context) ? 50 : 60,
+          child: MaterialButton(
+            onPressed: () async => onPressed(),
+            child: Text(
+              title,
+              style: TextStyle(color: Theme.of(context).primaryColorDark),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+// SliverAppBar(
+//   pinned: true,
+//   snap: false,
+//   // backgroundColor: Colors.transparent,
+//   floating: false,
+//   // brightness: ,
+//   expandedHeight: 280,
+//   flexibleSpace: FlexibleSpaceBar(
+//     centerTitle: true,
+//     title: Text(
+//       '@${usuario.name}',
+//       style: Theme.of(context).textTheme.titleMedium?.copyWith(
+//         fontSize: 16,
+//         shadows: [
+//           Shadow(
+//               color: Theme.of(context).primaryColor, blurRadius: 10)
+//         ],
+//       ),
+//     ),
+//     // collapseMode: CollapseMode.none,
+//     background: Image.network(
+//       usuario.imageUrls[0],
+//       fit: BoxFit.fitWidth,
+//       alignment: Alignment.center,
+//     ),
+//   ),
+// ),
+// actions: <Widget>[
+//   TextButton(
+//     onPressed: () => Navigator.pop(context, 'Cancel'),
+//     child: const Text('Cancel'),
+//   ),
+//   TextButton(
+//     onPressed: () => Navigator.pop(context, 'OK'),
+//     child: const Text('OK'),
+//   ),
+// ],
+// Fluttertoast.showToast(
+//     msg: "Tab a visitanos",
+//     toastLength: Toast.LENGTH_SHORT,
+//     gravity: ToastGravity.BOTTOM,
+//     timeInSecForIosWeb: 1,
+//     backgroundColor: Colors.grey,
+//     textColor: Colors.white,
+//     fontSize: 16.0);
 
 class PagesVisit extends StatelessWidget {
   const PagesVisit({Key? key}) : super(key: key);

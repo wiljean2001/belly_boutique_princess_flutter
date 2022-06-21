@@ -1,16 +1,16 @@
-import 'package:bely_boutique_princess/models/models.dart';
+import 'package:flutter/material.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../blocs/blocs.dart';
+
+import '../../../config/responsive.dart';
+import '../../../generated/l10n.dart';
 import 'package:bely_boutique_princess/screens/user/product_screen.dart';
 import 'package:bely_boutique_princess/screens/user/search/product_search_delegate.dart';
 import 'package:bely_boutique_princess/widgets/Custom_loading_screen.dart';
 import 'package:bely_boutique_princess/widgets/custom_card_product.dart';
 import 'package:bely_boutique_princess/widgets/custom_sliver_app_bar.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../blocs/blocs.dart';
-import 'package:flutter/material.dart';
-
-import '../../../generated/assets.dart';
-import '../../../generated/l10n.dart';
+import 'package:bely_boutique_princess/models/models.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({
@@ -62,7 +62,7 @@ class _HomeViewState extends State<HomeView> {
                 // isShowProducts?
                 SliverGrid.count(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.75,
+                  childAspectRatio: Responsive.isMobile(context) ? 0.75 : 1,
                   children: state.products.isNotEmpty
                       ? state.products
                           .map(

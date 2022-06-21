@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../blocs/blocs.dart';
+import '../../../config/responsive.dart';
 import '../../../generated/l10n.dart';
 import '../../../utils/validators.dart';
 import '/cubit/signup/signup_cubit.dart';
@@ -14,7 +15,7 @@ import '../../../widgets/custom_button_gradiant.dart';
 class RegisterForm extends StatefulWidget {
   final TabController tabController;
 
-  RegisterForm({Key? key, required this.tabController}) : super(key: key);
+  const RegisterForm({Key? key, required this.tabController}) : super(key: key);
 
   @override
   State<RegisterForm> createState() => _RegisterFormState();
@@ -40,6 +41,9 @@ class _RegisterFormState extends State<RegisterForm> {
                 TextFormField(
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.emailAddress,
+                  style: Responsive.isMobile(context)
+                      ? null
+                      : Theme.of(context).textTheme.headline6,
                   decoration: InputDecoration(
                     // border: OutlineInputBorder(),
                     labelText: S.of(context).email,
@@ -57,6 +61,9 @@ class _RegisterFormState extends State<RegisterForm> {
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.text,
                   obscureText: noShowPass,
+                  style: Responsive.isMobile(context)
+                      ? null
+                      : Theme.of(context).textTheme.headline6,
                   decoration: InputDecoration(
                     // border: OutlineInputBorder(),
                     labelText: S.of(context).password,
@@ -81,28 +88,27 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
                 // const SizedBox(height: 10),
                 CustomButtonGradiant(
-                  height: 45,
-                  width: 150,
+                  height: Responsive.isMobile(context) ? 45 : 55,
+                  width: Responsive.isMobile(context) ? 150 : 220,
                   icon: const Icon(
                     Icons.check,
                     color: Colors.white,
                   ),
                   text: Text(
                     S.of(context).bttn_register,
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
+                    style: Responsive.isMobile(context)
+                        ? Theme.of(context).textTheme.headline6?.copyWith(
+                              color: Colors.white,
+                            )
+                        : Theme.of(context).textTheme.headline5?.copyWith(
+                              color: Colors.white,
+                            ),
                   ),
                   onPressed: () async {
                     // validator form
-                    if (!_formKeyReg.currentState!.validate()) {
-                      return;
-                    }
-
+                    if (!_formKeyReg.currentState!.validate()) return;
                     // SignUp
                     await _contextRegister.signUpWithCredentials();
-                    print(_contextRegister.state);
-
                     User user = User(
                       // created a empty user
                       id: _contextRegister.state.user!.uid,
@@ -130,7 +136,14 @@ class _RegisterFormState extends State<RegisterForm> {
                     TextButton(
                       onPressed: () => widget.tabController
                           .animateTo(widget.tabController.index - 1),
-                      child: Text(S.of(context).bttn_go_back),
+                      child: Text(
+                        S.of(context).bttn_go_back,
+                        style: Responsive.isMobile(context)
+                            ? null
+                            : Theme.of(context).textTheme.headline6?.copyWith(
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                      ),
                     ),
                   ],
                 ),
@@ -155,15 +168,3 @@ class _RegisterFormState extends State<RegisterForm> {
     );
   }
 }
-
-/**
- * await showDialog(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: Text(S.of(context).register_error_title),
-                          content: Text(S.of(context).register_error_desc),
-                        ),
-                      );
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, '/', (route) => false);
- */

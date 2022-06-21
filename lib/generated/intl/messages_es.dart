@@ -39,12 +39,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "bttn_start": MessageLookupByLibrary.simpleMessage("Empezar"),
         "description_app": MessageLookupByLibrary.simpleMessage(
             "Esta es una tienda que se dedica a vender vestidos para las princesas de casa."),
+        "description_login": MessageLookupByLibrary.simpleMessage(
+            "Iniciar sesión con una cuenta existente de Bely Boutique Princess."),
         "email": MessageLookupByLibrary.simpleMessage("Correo electrónico"),
         "error_desc": MessageLookupByLibrary.simpleMessage("Algo salió mal"),
         "error_title": MessageLookupByLibrary.simpleMessage("Error"),
         "gender": MessageLookupByLibrary.simpleMessage("Sexo"),
         "gender_female": MessageLookupByLibrary.simpleMessage("Femenino"),
         "gender_male": MessageLookupByLibrary.simpleMessage("Masculino"),
+        "image_no_selected":
+            MessageLookupByLibrary.simpleMessage("Imagen no seleccionada."),
+        "image_uploading":
+            MessageLookupByLibrary.simpleMessage("Subiendo imagen..."),
         "menu_appbar_item1": MessageLookupByLibrary.simpleMessage("Visitanos"),
         "menu_appbar_item2":
             MessageLookupByLibrary.simpleMessage("Configuracion"),
@@ -67,8 +73,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Agregar producto"),
         "title_dashboard_screen":
             MessageLookupByLibrary.simpleMessage("Dashboard"),
+        "title_picture_screen":
+            MessageLookupByLibrary.simpleMessage("Seleccionar foto de perfil"),
         "title_products": MessageLookupByLibrary.simpleMessage("Productos"),
-        "title_register": MessageLookupByLibrary.simpleMessage("Registrar"),
+        "title_register_screen":
+            MessageLookupByLibrary.simpleMessage("Registrar"),
         "title_show_as_user":
             MessageLookupByLibrary.simpleMessage("Vista de usuario"),
         "title_show_categories_screen":
@@ -80,6 +89,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Actualizar categoría"),
         "title_update_product_screen":
             MessageLookupByLibrary.simpleMessage("Actualizar producto"),
+        "title_user_error_location":
+            MessageLookupByLibrary.simpleMessage("Ubicación no valido"),
+        "title_user_error_name":
+            MessageLookupByLibrary.simpleMessage("Nombre invalido"),
         "title_user_location":
             MessageLookupByLibrary.simpleMessage("Ubicación"),
         "title_user_location_desc":

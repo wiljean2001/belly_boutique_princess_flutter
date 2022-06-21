@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../config/responsive.dart';
 import '../../../generated/l10n.dart';
 import '../../../utils/show_alert.dart';
 import '../../../widgets/custom_button_gradiant.dart';
@@ -24,64 +25,56 @@ class PicturesScreen extends StatelessWidget {
           );
         }
         if (state is OnboardingLoaded) {
-          // var images = state.user.image;
-          // var imageCount = images.length;
           return SingleChildScrollView(
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50),
+              padding: EdgeInsets.symmetric(
+                vertical: Responsive.isMobile(context) ? 50 : 100,
+                horizontal: Responsive.isMobile(context) ? 30 : 60,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.max,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Seleccionar foto de perfil',
-                        style: Theme.of(context).textTheme.titleLarge,
+                        S.of(context).title_picture_screen,
+                        style: Responsive.isMobile(context)
+                            ? Theme.of(context).textTheme.titleLarge
+                            : Theme.of(context).textTheme.headline5,
                       ),
                       const SizedBox(height: 20),
                       SizedBox(
-                        height: 350,
+                        height: Responsive.isMobile(context) ? 350 : 700,
                         width: MediaQuery.of(context).size.width,
                         child: (state.user.image.isNotEmpty)
                             ? CustomImageContainer(imageUrl: state.user.image)
                             : const CustomImageContainer(),
-                        // child: GridView.builder(
-                        //   gridDelegate:
-                        //       const SliverGridDelegateWithFixedCrossAxisCount(
-                        //     crossAxisCount: 2,
-                        //     childAspectRatio: 0.66,
-                        //   ),
-                        //   itemCount: 1,
-                        //   itemBuilder: (BuildContext context, int index) {
-                        //     return (imageCount > index)
-                        //         ? CustomImageContainer(imageUrl: images[index])
-                        //         : const CustomImageContainer();
-                        //   },
-                        // ),
                       ),
                     ],
                   ),
                   //
                   CustomButtonGradiant(
-                    height: 45,
-                    width: 150,
+                    height: Responsive.isMobile(context) ? 45 : 55,
+                    width: Responsive.isMobile(context) ? 150 : 220,
                     icon: const Icon(
                       Icons.check,
                       color: Colors.white,
                     ),
                     text: Text(
                       S.of(context).bttn_register,
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
+                      style: Responsive.isMobile(context)
+                          ? Theme.of(context).textTheme.headline6?.copyWith(
+                                color: Colors.white,
+                              )
+                          : Theme.of(context).textTheme.headline5?.copyWith(
+                                color: Colors.white,
+                              ),
                     ),
                     onPressed: () async {
                       if (state.user.image.isEmpty) {
                         ShowAlert.showErrorSnackBar(context,
-                            message: 'Imagen no seleccionada.');
+                            message: S.of(context).image_no_selected);
                         return;
                       }
                       Navigator.pushNamedAndRemoveUntil(
@@ -99,3 +92,19 @@ class PicturesScreen extends StatelessWidget {
     );
   }
 }
+
+          // var images = state.user.image;
+          // var imageCount = images.length;
+          // child: GridView.builder(
+                        //   gridDelegate:
+                        //       const SliverGridDelegateWithFixedCrossAxisCount(
+                        //     crossAxisCount: 2,
+                        //     childAspectRatio: 0.66,
+                        //   ),
+                        //   itemCount: 1,
+                        //   itemBuilder: (BuildContext context, int index) {
+                        //     return (imageCount > index)
+                        //         ? CustomImageContainer(imageUrl: images[index])
+                        //         : const CustomImageContainer();
+                        //   },
+                        // ),

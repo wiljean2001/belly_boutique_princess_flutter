@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../config/responsive.dart';
+
 class CustomCardProduct extends StatelessWidget {
   const CustomCardProduct({
     Key? key,
@@ -34,8 +36,10 @@ class CustomCardProduct extends StatelessWidget {
         splashColor: Theme.of(context).primaryColor,
         highlightColor: Theme.of(context).primaryColor,
         child: Container(
-          height: 200,
-          width: 150,
+          constraints: BoxConstraints(
+            maxHeight: Responsive.isMobile(context) ? 200 : 250,
+            maxWidth: Responsive.isMobile(context) ? 150 : 250,
+          ),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
               boxShadow: [
@@ -46,6 +50,7 @@ class CustomCardProduct extends StatelessWidget {
               ],
               color: Colors.white),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               // isShowFavorite
               //     ? Padding(
@@ -66,7 +71,9 @@ class CustomCardProduct extends StatelessWidget {
               //     tag: imgPath.substring(0, 20),
               //     child: Container(
               Container(
-                height: 150.0,
+                constraints: BoxConstraints(
+                  maxHeight: Responsive.isMobile(context) ? 150.0 : 250,
+                ),
                 // width: 150.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -88,31 +95,18 @@ class CustomCardProduct extends StatelessWidget {
                           color: const Color(0xFFEBEBEB), height: 1.0))
                   : const SizedBox(),
               isShowAdd
-                  ? Padding(
-                      padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          if (!added) ...[
-                            const Icon(Icons.shopping_basket,
-                                color: Color(0xFFD17E50), size: 12.0),
-                            const Text('Add to cart',
-                                style: TextStyle(
-                                    color: Color(0xFFD17E50), fontSize: 12.0))
-                          ],
-                          if (added) ...[
-                            const Icon(Icons.remove_circle_outline,
-                                color: Color(0xFFD17E50), size: 12.0),
-                            const Text('3',
-                                style: TextStyle(
-                                    color: Color(0xFFD17E50),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12.0)),
-                            const Icon(Icons.add_circle_outline,
-                                color: Color(0xFFD17E50), size: 12.0),
-                          ],
-                        ],
-                      ),
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // Count restant
+                        const Text('¡Quedan '),
+                        Text(
+                          '20',
+                          style:
+                              TextStyle(color: Theme.of(context).primaryColor),
+                        ),
+                        const Text(' disponibles!'),
+                      ],
                     )
                   : const SizedBox(),
             ],
@@ -122,3 +116,22 @@ class CustomCardProduct extends StatelessWidget {
     );
   }
 }
+
+// if (!added) ...[
+                      //   const Icon(Icons.shopping_basket,
+                      //       color: Color(0xFFD17E50), size: 12.0),
+                      //   const Text('Add to cart',
+                      //       style: TextStyle(
+                      //           color: Color(0xFFD17E50), fontSize: 12.0))
+                      // ],
+                      // if (added) ...[
+                      //   const Icon(Icons.remove_circle_outline,
+                      //       color: Color(0xFFD17E50), size: 12.0),
+                      //   const Text('3',
+                      //       style: TextStyle(
+                      //           color: Color(0xFFD17E50),
+                      //           fontWeight: FontWeight.bold,
+                      //           fontSize: 12.0)),
+                      //   const Icon(Icons.add_circle_outline,
+                      //       color: Color(0xFFD17E50), size: 12.0),
+                      // ],

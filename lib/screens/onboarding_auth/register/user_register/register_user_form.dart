@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../blocs/blocs.dart';
+import '../../../../config/responsive.dart';
 import '../../../../generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,30 +16,23 @@ class RegisterUserForm extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<RegisterUserForm> createState() =>
-      _RegisterUserFormState(tabController);
+  State<RegisterUserForm> createState() => _RegisterUserFormState();
 }
 
 class _RegisterUserFormState extends State<RegisterUserForm> {
   String? dropdownValue;
-  final TabController tabController;
   // String? name;
   final GlobalKey<FormState> _formKeyUser = GlobalKey<FormState>();
 
-  _RegisterUserFormState(this.tabController);
-
   @override
   Widget build(BuildContext context) {
-    // final listGender = <String>[
-    //   S.of(context).gender_male, // male
-    //   S.of(context).gender_female, // female
-    // ];
     return BlocBuilder<OnboardingBloc, OnboardingState>(
       builder: (context, state) {
         if (state is OnboardingLoaded) {
+          DateTime? picked;
           // date picker
           Future<void> _showDatePicker() async {
-            final DateTime? picked = await showDatePicker(
+            picked = await showDatePicker(
               context: context,
               initialDate: DateTime((DateTime.now().year - 18)),
               firstDate: DateTime(1900),
@@ -51,7 +45,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                 ? context.read<OnboardingBloc>().add(
                       UpdateUser(
                         user: state.user.copyWith(
-                          dateOfBirth: Timestamp.fromDate(picked),
+                          dateOfBirth: Timestamp.fromDate(picked!),
                         ),
                       ),
                     )
@@ -68,6 +62,9 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                   TextFormField(
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.name,
+                    style: Responsive.isMobile(context)
+                        ? null
+                        : Theme.of(context).textTheme.headline6,
                     decoration: InputDecoration(
                       // border: OutlineInputBorder(),
                       labelText: S.of(context).title_user_name_desc,
@@ -77,7 +74,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       text: name!,
                       minCaracter: 3,
                       maxCarater: 50,
-                      messageError: 'Nombre invalido',
+                      messageError: S.of(context).title_user_error_name,
                     ),
                     onChanged: (value) {
                       context.read<OnboardingBloc>().add(
@@ -89,6 +86,9 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                   TextFormField(
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.name,
+                    style: Responsive.isMobile(context)
+                        ? null
+                        : Theme.of(context).textTheme.headline6,
                     decoration: InputDecoration(
                       // border: OutlineInputBorder(),
                       labelText: S.of(context).title_user_location_desc,
@@ -99,16 +99,83 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       text: location!,
                       minCaracter: 5,
                       maxCarater: 100,
-                      messageError: 'Ubicación no valido',
+                      messageError: S.of(context).title_user_error_location,
                     ),
                     onChanged: (value) {
                       context.read<OnboardingBloc>().add(
                             UpdateUser(
-                                user: state.user.copyWith(location: value)),
+                              user: state.user.copyWith(location: value),
+                            ),
                           );
                       // name = value;
                     },
                   ),
+                  // Intertar mas secciones
+                  // const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.date_range, size: 45),
+                      const SizedBox(width: 25),
+                      Expanded(
+                        child: MaterialButton(
+                          height: 55,
+                          child: Text(
+                            S.of(context).bttn_date_birth,
+                            style: Responsive.isMobile(context)
+                                ? null
+                                : Theme.of(context).textTheme.headline6,
+                          ),
+                          onPressed: _showDatePicker,
+                          color: const Color.fromARGB(225, 242, 203, 208),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  //
+                  CustomButtonGradiant(
+                    height: Responsive.isMobile(context) ? 45 : 55,
+                    width: Responsive.isMobile(context) ? 150 : 220,
+                    icon: const Icon(
+                      Icons.check,
+                      color: Colors.white,
+                    ),
+                    text: Text(
+                      S.of(context).bttn_register,
+                      style: Responsive.isMobile(context)
+                          ? Theme.of(context).textTheme.headline6?.copyWith(
+                                color: Colors.white,
+                              )
+                          : Theme.of(context).textTheme.headline5?.copyWith(
+                                color: Colors.white,
+                              ),
+                    ),
+                    onPressed: () async {
+                      if (!_formKeyUser.currentState!.validate() &&
+                          picked == null) return;
+                      widget.tabController.animateTo(
+                        widget.tabController.index + 1,
+                        curve: Curves.elasticIn,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        } else {
+          return Text(S.of(context).error_desc);
+        }
+      },
+    );
+  }
+}
+// final listGender = <String>[
+    //   S.of(context).gender_male, // male
+    //   S.of(context).gender_female, // female
+    // ];
                   // Genero
                   // SizedBox(
                   //   width: double.infinity,
@@ -150,56 +217,3 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                   //     },
                   //   ),
                   // ),
-
-                  // Intertar mas secciones
-
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.date_range, size: 45),
-                      Expanded(
-                        child: MaterialButton(
-                          elevation: 10,
-                          child: Text(S.of(context).bttn_date_birth),
-                          onPressed: _showDatePicker,
-                          color: Colors.white.withOpacity(0.8),
-                        ),
-                      ),
-                      const SizedBox(width: 25),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  //
-                  CustomButtonGradiant(
-                    height: 45,
-                    width: 150,
-                    icon: const Icon(
-                      Icons.check,
-                      color: Colors.white,
-                    ),
-                    text: Text(
-                      S.of(context).bttn_register,
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    onPressed: () async {
-                      if (!_formKeyUser.currentState!.validate()) {
-                        return;
-                      }
-                      tabController.animateTo(tabController.index + 1);
-                    },
-                  ),
-                ],
-              ),
-            ),
-          );
-        } else {
-          return Text(S.of(context).error_desc);
-        }
-      },
-    );
-  }
-}

@@ -44,7 +44,9 @@ class _LoginScreenState extends State<LoginScreen> {
               mode: 2,
               //curved widget with logo
               chield: Container(
-                padding: const EdgeInsets.symmetric(vertical: 45),
+                padding: EdgeInsets.symmetric(
+                  vertical: Responsive.isMobile(context) ? 45 : 80,
+                ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
@@ -57,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 width: double.infinity,
                 constraints: BoxConstraints(
-                  maxHeight: Responsive.isMobile(context) ? 355 : 400,
+                  maxHeight: Responsive.isMobile(context) ? 355 : 500,
                 ),
                 child: const Image(
                   image: AssetImage(Assets.imagesLogoCoronaTexto),
@@ -76,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     : 700,
               ),
               margin: EdgeInsets.only(
-                top: Responsive.isMobile(context) ? 355 : 400,
+                top: Responsive.isMobile(context) ? 355 : 500,
               ),
               height: Responsive.isMobile(context) ? 350 : 400,
               // constraints: BoxConstraints(ma),

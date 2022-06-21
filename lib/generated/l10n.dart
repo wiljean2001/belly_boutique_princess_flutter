@@ -210,6 +210,16 @@ class S {
     );
   }
 
+  /// `Iniciar sesión con una cuenta existente de Bely Boutique Princess.`
+  String get description_login {
+    return Intl.message(
+      'Iniciar sesión con una cuenta existente de Bely Boutique Princess.',
+      name: 'description_login',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Empezar`
   String get bttn_start {
     return Intl.message(
@@ -291,10 +301,10 @@ class S {
   }
 
   /// `Registrar`
-  String get title_register {
+  String get title_register_screen {
     return Intl.message(
       'Registrar',
-      name: 'title_register',
+      name: 'title_register_screen',
       desc: '',
       args: [],
     );
@@ -370,6 +380,16 @@ class S {
     );
   }
 
+  /// `Ubicación no valido`
+  String get title_user_error_location {
+    return Intl.message(
+      'Ubicación no valido',
+      name: 'title_user_error_location',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Nombre`
   String get title_user_name {
     return Intl.message(
@@ -390,21 +410,21 @@ class S {
     );
   }
 
-  /// `Sexo`
-  String get gender {
+  /// `Nombre invalido`
+  String get title_user_error_name {
     return Intl.message(
-      'Sexo',
-      name: 'gender',
+      'Nombre invalido',
+      name: 'title_user_error_name',
       desc: '',
       args: [],
     );
   }
 
-  /// `Masculino`
-  String get gender_male {
+  /// `Sexo`
+  String get gender {
     return Intl.message(
-      'Masculino',
-      name: 'gender_male',
+      'Sexo',
+      name: 'gender',
       desc: '',
       args: [],
     );
@@ -430,6 +450,36 @@ class S {
     );
   }
 
+  /// `Seleccionar foto de perfil`
+  String get title_picture_screen {
+    return Intl.message(
+      'Seleccionar foto de perfil',
+      name: 'title_picture_screen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Imagen no seleccionada.`
+  String get image_no_selected {
+    return Intl.message(
+      'Imagen no seleccionada.',
+      name: 'image_no_selected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subiendo imagen...`
+  String get image_uploading {
+    return Intl.message(
+      'Subiendo imagen...',
+      name: 'image_uploading',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// ` // ADMIN BOARDING SCREEN `
   String get COMMENT3 {
     return Intl.message(
@@ -445,6 +495,16 @@ class S {
     return Intl.message(
       'Administración',
       name: 'title_admin_screen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Masculino`
+  String get gender_male {
+    return Intl.message(
+      'Masculino',
+      name: 'gender_male',
       desc: '',
       args: [],
     );
