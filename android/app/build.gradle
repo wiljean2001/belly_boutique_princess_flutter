@@ -44,7 +44,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.belyboutique.belly_boutique_princess"
+        applicationId "com.belyboutique.bely_boutique_princess"
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         // multiDexEnable true

@@ -18,16 +18,14 @@ class UpdateCategories extends CategoryEvent {
   List<Object> get props => [categories];
 }
 
-
 class AddCategory extends CategoryEvent {
   final Category category;
+  final XFile image;
 
-  const AddCategory({
-    required this.category,
-  });
+  const AddCategory({required this.category, required this.image});
 
   @override
-  List<Object> get props => [category];
+  List<Object> get props => [category, image];
 }
 
 class UpdateCategory extends CategoryEvent {

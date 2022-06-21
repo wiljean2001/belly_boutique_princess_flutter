@@ -36,8 +36,6 @@ class ProductRepository extends BaseProductRepository {
     await _firebaseFirestore.collection('products').doc(id).set(
           product.toMap(),
         );
-    print('ID');
-    print(id);
     return id;
   }
 

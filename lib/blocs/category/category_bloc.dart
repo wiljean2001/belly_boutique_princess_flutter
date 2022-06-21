@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:image_picker/image_picker.dart';
+import '../../repositories/storage/storage_repository.dart';
 import '/models/models.dart';
 import '/repositories/category/category_repository.dart';
 
@@ -10,10 +12,14 @@ part 'category_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   final CategoryRepository _categoryRepository;
+  final StorageRepository _storageRepository;
   StreamSubscription? _categorySubscription;
 
-  CategoryBloc({required CategoryRepository categoryRepository})
-      : _categoryRepository = categoryRepository,
+  CategoryBloc({
+    required CategoryRepository categoryRepository,
+    required StorageRepository storageRepository,
+  })  : _categoryRepository = categoryRepository,
+        _storageRepository = storageRepository,
         super(CategoryLoading()) {
     on<LoadCategories>(_onLoadCategories);
     on<UpdateCategories>(_onUpdateCategories);
@@ -49,7 +55,12 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   ) async {
     final state = this.state;
     if (state is CategoryLoaded) {
-      await _categoryRepository.createCategory(event.category);
+      await _categoryRepository.createCategory(event.category).then(
+            (categoryId) async => await _storageRepository.uploadImageCategory(
+              event.image,
+              categoryId,
+            ),
+          );
     }
     add(LoadCategories());
   }

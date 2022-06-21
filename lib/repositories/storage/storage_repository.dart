@@ -67,4 +67,29 @@ class StorageRepository extends BaseStorageRepository {
     print(downloadURL);
     return downloadURL;
   }
+
+  @override
+  Future<String> getDownloadURLCategory(
+      String imageName, String categoryId) async {
+    String downloadURL =
+        await storage.ref('categories/$categoryId/$imageName').getDownloadURL();
+    return downloadURL;
+  }
+
+  @override
+  Future<void> uploadImageCategory(XFile image, String categoryId) async {
+    try {
+      await storage
+          .ref('categories/$categoryId/${image.name}')
+          .putFile(File(image.path))
+          .then(
+            (p0) => CategoryRepository().updateCategoryPicture(
+              image.name,
+              categoryId,
+            ),
+          );
+    } catch (err) {
+      print(err);
+    }
+  }
 }

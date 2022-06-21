@@ -28,7 +28,7 @@ class AddProduct extends ProductEvent {
   });
 
   @override
-  List<Object> get props => [product];
+  List<Object> get props => [product, images];
 }
 
 class UpdateProduct extends ProductEvent {

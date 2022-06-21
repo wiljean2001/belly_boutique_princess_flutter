@@ -1,4 +1,4 @@
-# belly_boutique_princess_flutter
+# bely_boutique_princess
 
 A Flutter project.
 

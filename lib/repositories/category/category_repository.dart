@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../storage/storage_repository.dart';
 import '/models/category_model.dart';
 import '/repositories/category/base_category_repository.dart';
 
@@ -20,10 +21,12 @@ class CategoryRepository extends BaseCategoryRepository {
   }
 
   @override
-  Future<void> createCategory(Category category) async {
-    await _firebaseFirestore.collection('categories').doc().set(
+  Future<String> createCategory(Category category) async {
+    String id = _firebaseFirestore.collection('categories').doc().id;
+    await _firebaseFirestore.collection('categories').doc(id).set(
           category.toMap(),
         );
+    return id;
   }
 
   @override
@@ -36,22 +39,19 @@ class CategoryRepository extends BaseCategoryRepository {
           (value) => print('Category document updated.'),
         );
   }
-/**
- * 
-  @override
-  Future<void> createUser(User user) async {
-    await _firebaseFirestore.collection('users').doc(user.id).set(user.toMap());
-  }
 
   @override
-  Future<void> updateUser(User user) async {
-    return _firebaseFirestore
-        .collection('users')
-        .doc(user.id)
-        .update(user.toMap())
-        .then(
-          (value) => print('User document updated.'),
-        );
+  Future<void> updateCategoryPicture(
+    String imageName,
+    String categoryId,
+  ) async {
+    String downloadUrl = await StorageRepository().getDownloadURLCategory(
+      imageName,
+      categoryId,
+    );
+
+    return _firebaseFirestore.collection('categories').doc(categoryId).update(
+      {'imageUrl': downloadUrl},
+    );
   }
- */
 }

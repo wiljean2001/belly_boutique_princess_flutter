@@ -1,12 +1,12 @@
 import 'package:bely_boutique_princess/blocs/blocs.dart';
 import 'package:bely_boutique_princess/models/category_model.dart';
-import 'package:bely_boutique_princess/utils/show_alert.dart';
+import 'package:bely_boutique_princess/widgets/custom_image_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../config/constrants.dart';
 import '../../../generated/l10n.dart';
-import '../../../widgets/custom_appbar.dart';
 import '../../../widgets/custom_sliver_app_bar.dart';
 
 class CreateCategoryScreen extends StatelessWidget {
@@ -64,6 +64,7 @@ class FormCreateCategory extends StatelessWidget {
   }) : super(key: key);
 
   String? nameCategory;
+  XFile? xfile;
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _keyForm = GlobalKey<FormState>();
@@ -98,6 +99,16 @@ class FormCreateCategory extends StatelessWidget {
             ),
           ),
           Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: kPaddingS, vertical: kPaddingS),
+            child: CustomImageContainer(
+              onPressed: (XFile _file) {
+                print('imagen');
+                xfile = _file;
+              },
+            ),
+          ),
+          Padding(
             padding:
                 EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.6),
             child: MaterialButton(
@@ -106,12 +117,12 @@ class FormCreateCategory extends StatelessWidget {
               splashColor: Theme.of(context).primaryColorLight,
               elevation: 10,
               onPressed: () async {
-                if (!_keyForm.currentState!.validate()) return;
+                if (!_keyForm.currentState!.validate() && xfile == null) return;
 
                 Category categoria =
                     Category(name: nameCategory!, imageUrl: '');
                 BlocProvider.of<CategoryBloc>(context).add(
-                  AddCategory(category: categoria),
+                  AddCategory(category: categoria, image: xfile!),
                 );
                 // ShowToast.showMessage(
                 //     msg: '¡Categoría agregada exitósamente!.');

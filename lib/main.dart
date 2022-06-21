@@ -136,6 +136,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => CategoryBloc(
               categoryRepository: CategoryRepository(),
+              storageRepository: context.read<StorageRepository>(),
             )..add(LoadCategories()),
           ),
           BlocProvider(

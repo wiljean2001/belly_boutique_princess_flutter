@@ -7,14 +7,21 @@ import '../config/responsive.dart';
 import '../generated/l10n.dart';
 import '../utils/show_alert.dart';
 
-class CustomImageContainer extends StatelessWidget {
-  const CustomImageContainer({
+class CustomImageContainer extends StatefulWidget {
+  CustomImageContainer({
     Key? key,
     this.imageUrl,
+    this.onPressed,
   }) : super(key: key);
 
-  final String? imageUrl;
+  String? imageUrl;
+  final Function(XFile file)? onPressed;
 
+  @override
+  State<CustomImageContainer> createState() => _CustomImageContainerState();
+}
+
+class _CustomImageContainerState extends State<CustomImageContainer> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,7 +36,7 @@ class CustomImageContainer extends StatelessWidget {
             color: Theme.of(context).primaryColor,
           ),
         ),
-        child: (imageUrl == null)
+        child: (widget.imageUrl == null)
             ? Align(
                 alignment: Alignment.bottomRight,
                 child: IconButton(
@@ -53,18 +60,23 @@ class CustomImageContainer extends StatelessWidget {
                     }
 
                     if (_image != null) {
-                      ShowAlert.showAlertSnackBar(
-                        context,
-                        message: S.of(context).image_uploading,
-                      );
-                      BlocProvider.of<OnboardingBloc>(context).add(
-                        UpdateUserImages(image: _image),
-                      );
+                      if (widget.onPressed == null) {
+                        ShowAlert.showAlertSnackBar(
+                          context,
+                          message: S.of(context).image_uploading,
+                        );
+                        BlocProvider.of<OnboardingBloc>(context).add(
+                          UpdateUserImages(image: _image),
+                        );
+                      } else {
+                        widget.onPressed!(_image);
+                        widget.imageUrl = _image.path;
+                      }
                     }
                   },
                 ),
               )
-            : Image.network(imageUrl!, fit: BoxFit.cover),
+            : Image.network(widget.imageUrl!, fit: BoxFit.cover),
       ),
     );
   }

@@ -49,7 +49,7 @@ class PicturesScreen extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         child: (state.user.image.isNotEmpty)
                             ? CustomImageContainer(imageUrl: state.user.image)
-                            : const CustomImageContainer(),
+                            : CustomImageContainer(),
                       ),
                     ],
                   ),
